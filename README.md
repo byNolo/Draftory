@@ -4,7 +4,7 @@ Draftory is an expandable sports drafting and simulation platform. MLB comes
 first: draft historical hitters and eventually simulate a 162-game season using
 plate-appearance events. This repository currently contains the development
 foundation and Lahman data preparation: a React shell, a local Worker health
-endpoint, a seeded Rust single-game simulator, and a reproducible offline Python pipeline.
+endpoint, a seeded Rust game/season simulator, and a reproducible offline Python pipeline.
 
 Scope and statistical decisions live in the [project plan](docs/PROJECT_PLAN.md),
 [architecture](docs/ARCHITECTURE.md), [data specification](docs/DATA_SPEC.md), and
@@ -97,6 +97,7 @@ supported mechanics and scoring limitations. Replay the shared synthetic game:
 ```sh
 cargo run -p baseball-sim --example replay -- data/fixtures/simulation-input.synthetic.json data/fixtures/simulation-script.synthetic.json
 cargo run -p baseball-sim --example simulate -- crates/baseball-sim/tests/fixtures/lahman-modern-game.json
+cargo run --locked --release --example season -- crates/baseball-sim/tests/fixtures/season-modern-2024.json
 ```
 
 The second command uses a small attributed Judge/Soto fixture with repeated players
@@ -114,6 +115,13 @@ cargo build --locked --workspace --target wasm32-unknown-unknown
 ```
 
 The WASM build is not a WASM runtime execution test.
+
+M4 adds bounded, seeded 162-game seasons and an offline Python-driven historical
+comparison workflow. The season fixture uses verified 2024 NYA/CHA starting
+orders, held fixed for a synthetic schedule; it does not reproduce an MLB season.
+See [season and calibration workflow](docs/SIMULATION_FOUNDATION.md#season-simulation-and-calibration-m4)
+and the [calibration report](data/validation/season-calibration-v1.md) for source
+splits, supported contextual mechanics, measured biases and benchmarks.
 
 ## Python
 
@@ -148,5 +156,5 @@ See [Lahman source findings](docs/LAHMAN_SOURCE_REVIEW.md) for the initial files
 fields and join hazards. The [data foundation](docs/LAHMAN_DATA_FOUNDATION.md)
 documents measured coverage, working commands, profile semantics and remaining
 questions. The [Rust foundation](docs/SIMULATION_FOUNDATION.md) now implements
-scripted and sampled single-game mechanics. Season simulation, historical calibration
-and permanent D1 tables remain deferred.
+scripted and sampled games plus season orchestration. Historical calibration is
+an ongoing measured process; permanent D1 tables remain deferred.

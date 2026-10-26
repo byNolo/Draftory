@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://draftory.example/contracts/season-result.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "engineVersion",
+    "input",
+    "wins",
+    "losses",
+    "runsScored",
+    "runsAllowed",
+    "runDifferential",
+    "team",
+    "opponentTotals",
+    "games"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "engineVersion": {
+      "type": "string"
+    },
+    "input": {
+      "$ref": "https://draftory.example/contracts/season-input.schema.json"
+    },
+    "wins": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "losses": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "runsScored": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "runsAllowed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "runDifferential": {
+      "type": "integer"
+    },
+    "team": {
+      "$ref": "https://draftory.example/contracts/simulation-result.schema.json#/$defs/teamBox"
+    },
+    "opponentTotals": {
+      "$ref": "https://draftory.example/contracts/simulation-result.schema.json#/$defs/stats"
+    },
+    "games": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "gameNumber",
+          "opponentId",
+          "userHome",
+          "seed",
+          "score",
+          "won",
+          "innings",
+          "plateAppearances",
+          "lineScore",
+          "teams"
+        ],
+        "properties": {
+          "gameNumber": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          "opponentId": {
+            "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/id"
+          },
+          "userHome": {
+            "type": "boolean"
+          },
+          "seed": {
+            "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/properties/seed"
+          },
+          "score": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "won": {
+            "type": "boolean"
+          },
+          "innings": {
+            "type": "integer",
+            "minimum": 9,
+            "maximum": 65535
+          },
+          "plateAppearances": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000000
+          },
+          "lineScore": {
+            "$ref": "https://draftory.example/contracts/simulation-result.schema.json#/properties/lineScore"
+          },
+          "teams": {
+            "type": "array",
+            "items": {
+              "$ref": "https://draftory.example/contracts/simulation-result.schema.json#/$defs/teamBox"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "eventLog": {
+            "$ref": "https://draftory.example/contracts/simulation-result.schema.json#/properties/eventLog"
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 1000
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "input": {
+            "properties": {
+              "detail": {
+                "const": "events"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "games": {
+            "items": {
+              "required": ["eventLog"]
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "games": {
+            "items": {
+              "not": {
+                "required": ["eventLog"]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

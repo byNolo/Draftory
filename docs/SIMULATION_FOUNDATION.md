@@ -3,7 +3,8 @@
 The original foundation review below records the scripted milestone. Statistical
 integration is now implemented in [M3](#statistical-integration-m3); its explicit
 research policies supersede the earlier deferred adapter/sampling gate. The
-historical data contract and baseball mechanics remain unchanged.
+historical data contract remains unchanged. M4 below adds opt-in contextual
+mechanics and seasons while preserving the legacy rules and replay behavior.
 
 ## Statistical review and proposed contract (written before implementation)
 
@@ -307,9 +308,9 @@ uv run draftory-data profile --source-dir ../raw/lahman-2025 --player judgeaa01 
 uv run draftory-data profile --source-dir ../raw/lahman-2025 --player sotoju01 --leagues AL NL --start-year 2025 --end-year 2025 --output ../processed/soto2025.json
 $j = '../processed/judge2025.json'
 $s = '../processed/soto2025.json'
-$away = @($j,$s,$j,$s,$j,$s,$j,$s,$j)
-$home = @($s,$j,$s,$j,$s,$j,$s,$j,$s)
-uv run draftory-data prepare-game --source-dir ../raw/lahman-2025 --away-profiles $away --home-profiles $home --contact-policy ordinary-out-proxy-v1 --seed 2025 --detail events --output ../processed/modern-game.json
+$awayProfiles = @($j,$s,$j,$s,$j,$s,$j,$s,$j)
+$homeProfiles = @($s,$j,$s,$j,$s,$j,$s,$j,$s)
+uv run draftory-data prepare-game --source-dir ../raw/lahman-2025 --away-profiles $awayProfiles --home-profiles $homeProfiles --contact-policy ordinary-out-proxy-v1 --seed 2025 --detail events --output ../processed/modern-game.json
 ```
 
 Each team requires exactly nine **ordered** profile paths. Repeated players are
@@ -341,3 +342,166 @@ Finite mechanics invariants remain covered by the scripted suite. Statistical
 tests verify normalization and frequency convergence to prepared weights; they do
 **not** establish historical scoring accuracy. WASM compilation passes; actual
 WASM execution parity remains untested and no browser bindings are introduced.
+
+## Season simulation and calibration (M4)
+
+M4 adds `season.rs`, a bounded single-user season layer, and `contextual.rs`, a
+small empirical transition resolver. Python owns the narrow Retrosheet import,
+source/lineup joins, transition fitting and analysis. Rust remains pure portable
+computation. No application/database or browser code is involved. Source choices,
+target availability, uncertainty, biases and measurements are in the
+[calibration report](../data/validation/season-calibration-v1.md), with the frozen
+[evaluation plan](../data/validation/m4-evaluation-plan.md).
+
+### New mechanics and compatibility
+
+Game input **1.2.0**, `contextual-nine-inning-v1` rules and
+`retrosheet-contextual-v1` advancement are an explicit opt-in combination. The
+foundation game-end/walk-off/empty-extra-inning rules are retained. Inputs 1.0/1.1
+and all scripted synthetic fixtures retain their prior event semantics and RNG
+behavior. Results record engine version 0.4.0; legacy golden changes only update
+that package version. New profile preparation is `lahman-contact-adapter-v1`.
+
+v1.2 preserves the descriptive residual as **`otherContact`**, with zero legacy
+`battedBallOut` weight. Singles/doubles/triples/HR/BB/HBP/SO retain their meanings.
+The nine-field prepared vector includes the explicit zero legacy slot and sums
+to 1,000,000. The M3 conditioning and rational smoothing/rounding math is reused;
+historical totals remain unchanged. An independently versioned transition model
+splits residual contact using source observations, not an invented player-level
+error or choice statistic. Prepared IDs and transformation versions change.
+
+`retrosheet-contact-transitions-v1` contains 72 ordered cells: single, double,
+otherContact × outs 0..2 × base mask 0..7. Each cell stores observed sample count,
+fallback status and integer-weighted joint destinations for batter/three runners.
+Destinations are 0=out, 1..3=base, 4=run, 5=absent. Joint choices avoid independent
+advancement coins placing runners on the same base or passing another runner.
+Per-runner RBI flags preserve credit when a walk-off truncates would-be scorers.
+
+The fitter uses only full regular-season parsed plays in innings 1–8 of 2022–2023.
+It excludes SH/SF and non-PA events. Modern `othout` includes force outs where the
+**batter reaches safely**; the fitter checks actual pre/post identities and outs,
+not just the category name. Errors use `roe` plus safe batter destinations;
+fielder choices include observed safe choices and force-out replacements. These
+league conditional transitions are estimates for every player, not observed
+individual batter frequencies. Walk/HBP, SO, triples and HR keep their existing
+deterministic resolution. Strikeout reaches on dropped thirds remain unsupported.
+
+Supported improvements are safe advancement on singles/doubles, single-out
+advancement, safe error reaches, fielder choices and eligible first-base ground
+double plays with fewer than two outs. Double plays remove the first-base runner
+and batter, hold other runners and award no RBI or runs. This deliberately omits
+occasional advances/runs on a zero-out double play, while forbidding runs on an
+inning-ending force play. All supported third outs clear bases and strand the
+remaining runners. `AB-H` is no longer a count of team outs.
+
+Running outs on hits, extra batter advancement on a hit, complex contact plays,
+third-out timing plays and uncertain records retain a counted conservative proxy.
+Ordinary terminal contact outs use the established stranding behavior. No source
+records are deleted to hide unsupported mass. Cells with fewer than 50 observations
+fall back entirely to the conservative policy and are listed in the fit audit.
+This is an explicit accuracy limitation, not a full Retrosheet rules interpreter.
+SH/SF still require separate contextual models; steals, caught stealing, pickoffs,
+wild pitches/passed balls/balks and automatic extra-inning runners remain absent.
+
+Rust validates cell order, coverage, weight sums, presence masks, runner order,
+collisions, legal retirements, reach classifications and RBI/scoring consistency.
+The same SplitMix64 stream samples PA and contextual choice, with one additional
+unbiased ticket only when that cell has multiple choices. Events/summary consume
+identical draws. An event trace records the cell-local `transitionIndex`; replay
+each play using `Game::apply_contextual_event(event, index)` or `apply_event` for
+non-contextual plays. Direct `apply_event` cannot silently resolve ambiguous contact.
+The legacy `replay_game` event-only API remains unchanged for legacy inputs.
+
+Box scores add optional nonzero `groundedIntoDoublePlays`, `reachedOnError` and
+`fieldersChoices`; they describe simulated choices, not complete official-source
+category counts. Runs without RBI are possible. Runner conservation remains
+`PA = outs + runs + LOB` after a completed game; hits, AB and RBI still derive from
+the actual modeled appearances. Nothing samples independent batting averages.
+
+### Season contract and schedule
+
+`SeasonInput` v1.0 includes one user lineup, 1..30 opponents, prepared profile
+pool (at most 279), common game configuration/context, source-kind labels,
+summary/events detail, canonical u64 seed and a default length of 162 (1..1000).
+Kinds distinguish observed fixed lineups, reconstructed fixed lineups and synthetic
+opponents. These labels do not claim authentic complete rosters or schedules.
+
+`round-robin-season-v1` sorts opponents by bytewise ID, then pairs away/home games
+against each opponent in sequence, cycling to the configured length. The user is
+away in zero-based game 0, home in game 1. Profile pools are resolved/sorted by ID;
+batting order stays explicit. All opponents are validated even if a short season
+does not reach them. Duplicate team/profile IDs, unresolved references, unsupported
+versions and invalid matchups fail before play.
+
+Season validation also compares canonical player IDs from profile provenance:
+different batter-instance or team-stint profile IDs cannot put the same person on
+both sides of one game. The historical calibration producer excludes such traded-
+player matchups (`exclude-shared-player-identities-v1`), retaining 27..29 opponents
+per user in this snapshot. The lineup audit lists exclusions and shared IDs. A
+player may occur on different opponent teams in different games; the restriction
+is matchup-local. Synthetic schedules still do not reproduce the MLB schedule.
+Explicitly synthetic parameter templates may be reused for multiple distinct
+batter instances; their provenance ID is not treated as a real person's identity.
+Historical/reconstructed kinds retain the identity guard. Do not label a historical
+lineup synthetic to imply an authentic roster with duplicate people.
+
+`splitmix64-index-v1` derives zero-based game `i` directly as the first SplitMix64
+output from state `seasonSeed + i * 0x9e3779b97f4a7c15`, modulo 2^64. Each game
+then initializes its own SplitMix64 with that derived seed. Prior game length or
+event logging cannot change later seeds; the first 1,000 derived seeds are unique.
+This is a reproducible stream design, not a proof of statistical independence.
+Any schedule/seed/transition algorithm change requires a new corresponding version.
+
+`simulate_season` returns the immutable root input once, W–L, scored/allowed runs,
+differential, team/user-batter totals, opponent totals and every game's seed,
+score, boxes and inning lines. Scores and boxes use **user/opponent** ordering;
+inning lines and event halves retain away/home. Summary omits event logs. Events
+retains all traces and has higher bounded memory use. `SeasonInput::game_input(i)`
+reconstructs a game for inspection. A failed or safety-aborted game propagates
+`SeasonError::GameFailed { game_number, source }`; no incomplete season is returned
+as a win/loss record. There are no standings, rotations, substitutions or playoffs.
+
+### Reproduce data, calibration and benchmarks
+
+From `data/pipeline` (raw/prepared outputs are ignored):
+
+```sh
+uv run python -m draftory_data.calibration fetch --retrosheet-dir ../raw/retrosheet-m4
+uv run python -m draftory_data.calibration prepare --source-dir ../raw/lahman-2025 --retrosheet-dir ../raw/retrosheet-m4 --output-dir ../processed/m4
+```
+
+This verifies both source locks, writes targets, observed lineup selections and
+their full source/profile audits, fits transitions, then writes thirty season
+inputs for each of 2022–2025. Eligible starting orders are selected by descending
+observed frequency, ties by IDs; every hitter must have a complete, team-specific
+season profile with at least 50 PA. The first eligible pattern is used. A clearly
+labeled PA-ranked reconstruction is only a fallback; insufficient teams fail.
+`People.retroID` crosswalks are restricted to players active in that year, avoiding
+ambiguous unrelated historical IDs. No lineup is assumed to start all real games.
+
+From the repository root:
+
+```sh
+cargo build --locked --release --examples
+cargo run --locked --release --example season -- crates/baseball-sim/tests/fixtures/season-modern-2024.json
+cargo run --locked --release --example measure_season -- data/processed/m4/example-season-2024.json 1000 summary
+cargo run --locked --release --example measure_season -- data/processed/m4/example-season-2024.json 1000 events
+```
+
+Then from `data/pipeline` (on Unix omit `.exe`):
+
+```sh
+uv run python -m draftory_data.calibration run --input-dir ../processed/m4 --runner ../../target/release/examples/calibrate.exe --repetitions 20 --output-dir ../processed/m4/results
+uv run pytest tests --lahman-source=../raw/lahman-2025 --retrosheet-source=../raw/retrosheet-m4
+```
+
+`calibrate` reads JSON before timing and emits compact per-season analysis rows.
+Its baseline mode explicitly maps unresolved contact back to the M3 out proxy
+with a diagnostic model/ID/flag, preserving PA probabilities for a mechanics-only
+comparison. Python reports historical targets, repeat variation, score histograms,
+inning means, weak/average/strong terciles and W–L/run-differential relationships.
+Source team-season batting counts are cross-checked against Lahman without repair.
+Calibration fits 2022–2023; 2024 is development validation; 2025 is final holdout.
+The test is retrospective and conditional on known season profiles, not a forecast.
+The frozen plan defines training-derived diagnostic bands and requires reporting
+failures. Passing a band cannot establish complete historical accuracy.

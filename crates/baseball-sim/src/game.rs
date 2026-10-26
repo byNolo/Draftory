@@ -109,6 +109,8 @@ pub struct PlayRecord {
     pub outs_on_play: u8,
     pub scored_batter_ids: Vec<String>,
     pub state_after: GameSnapshot,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub transition_index: Option<usize>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -205,6 +207,23 @@ impl Game {
     }
 
     pub fn apply_event(&mut self, event: PlateAppearance) -> Result<PlayRecord, EngineError> {
+        self.apply_play(event, None)
+    }
+
+    /// Replay a contextual choice by its index in the current event/base/out cell.
+    pub fn apply_contextual_event(
+        &mut self,
+        event: PlateAppearance,
+        index: usize,
+    ) -> Result<PlayRecord, EngineError> {
+        self.apply_play(event, Some(index))
+    }
+
+    fn apply_play(
+        &mut self,
+        event: PlateAppearance,
+        transition_index: Option<usize>,
+    ) -> Result<PlayRecord, EngineError> {
         match self.state.status {
             GameStatus::Final => return Err(EngineError::GameFinished),
             GameStatus::Aborted => {
@@ -221,15 +240,53 @@ impl Game {
         let batter_index = usize::from(self.state.next_batter[team]);
         let batter_id = self.input.team(side).lineup[batter_index].id.clone();
         let occupied_before = self.state.bases.iter().flatten().count();
-        let play = resolve_bases(
-            &self.state.bases,
-            self.state.outs,
-            Runner {
-                batter_id: batter_id.clone(),
-            },
-            event,
-            self.input.config.advancement_policy,
-        )?;
+        let transition = if let Some(kind) = crate::ContextEvent::from_event(event) {
+            if let Some(model) = &self.input.config.contextual_model {
+                let index = transition_index.ok_or_else(|| {
+                    EngineError::InvalidInput("Contextual event requires a transition index".into())
+                })?;
+                Some(
+                    model
+                        .cell(kind, self.state.outs, crate::base_mask(&self.state.bases))
+                        .choices
+                        .get(index)
+                        .ok_or_else(|| {
+                            EngineError::InvalidInput("Transition index outside cell".into())
+                        })?
+                        .clone(),
+                )
+            } else {
+                None
+            }
+        } else {
+            None
+        };
+        if transition_index.is_some() && transition.is_none() {
+            return Err(EngineError::InvalidInput(
+                "Unexpected contextual transition".into(),
+            ));
+        }
+        let play = if let Some(t) = &transition {
+            crate::resolve_transition(
+                &self.state.bases,
+                self.state.outs,
+                Runner {
+                    batter_id: batter_id.clone(),
+                },
+                event,
+                t,
+            )?
+        } else {
+            resolve_bases(
+                &self.state.bases,
+                self.state.outs,
+                Runner {
+                    batter_id: batter_id.clone(),
+                },
+                event,
+                crate::AdvancementPolicy::ConservativeOutsV1,
+            )?
+        };
         let walk_off = inning >= 9
             && half == Half::Bottom
             && self.state.score[1] + play.scorers.len() as u32 > self.state.score[0];
@@ -251,7 +308,30 @@ impl Game {
             }
         }
         self.stats[team][batter_index].record(credited_event);
-        self.stats[team][batter_index].runs_batted_in += runs;
+        let rbi = if let Some(t) = &transition {
+            play.scorers
+                .iter()
+                .take(runs as usize)
+                .filter(|s| t.rbi[usize::from(s.origin_base)])
+                .count() as u32
+        } else {
+            runs
+        };
+        self.stats[team][batter_index].runs_batted_in += rbi;
+        if play.outs_on_play == 2 {
+            self.stats[team][batter_index].grounded_into_double_plays += 1;
+        }
+        if let Some(t) = &transition {
+            match t.reach {
+                Some(crate::ContactReach::Error) => {
+                    self.stats[team][batter_index].reached_on_error += 1
+                }
+                Some(crate::ContactReach::FieldersChoice) => {
+                    self.stats[team][batter_index].fielders_choices += 1
+                }
+                None => {}
+            }
+        }
         let scored_batter_ids: Vec<String> = play
             .scorers
             .iter()
@@ -281,7 +361,8 @@ impl Game {
         }
         if walk_off {
             // Includes uncredited would-be scorers; game ended before they could score.
-            self.left_on_base[team] += occupied_before as u32 + 1 - runs;
+            self.left_on_base[team] +=
+                occupied_before as u32 + 1 - runs - u32::from(play.outs_on_play);
             self.clear_bases();
             self.state.status = GameStatus::Final;
         } else if self.state.outs == 3 {
@@ -304,6 +385,7 @@ impl Game {
             outs_on_play: play.outs_on_play,
             scored_batter_ids,
             state_after: self.state.clone(),
+            transition_index,
         };
         if let Some(log) = &mut self.event_log {
             log.push(record.clone());

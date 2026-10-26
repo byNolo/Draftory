@@ -176,6 +176,21 @@
           "type": "integer",
           "minimum": 0,
           "maximum": 4294967295
+        },
+        "groundedIntoDoublePlays": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "reachedOnError": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "fieldersChoices": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
         }
       }
     },
@@ -377,6 +392,11 @@
         },
         "stateAfter": {
           "$ref": "#/$defs/state"
+        },
+        "transitionIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 127
         }
       }
     }

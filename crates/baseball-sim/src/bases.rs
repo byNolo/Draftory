@@ -54,6 +54,11 @@ pub fn resolve_bases(
     }
     match policy {
         AdvancementPolicy::ConservativeOutsV1 => {}
+        AdvancementPolicy::RetrosheetContextualV1 => {
+            return Err(EngineError::InvalidInput(
+                "Contextual advancement requires a transition model".into(),
+            ));
+        }
     }
     let mut play = BasePlay {
         bases: bases.clone(),
@@ -61,6 +66,11 @@ pub fn resolve_bases(
         outs_on_play: 0,
     };
     match event {
+        PlateAppearance::OtherContact => {
+            return Err(EngineError::InvalidInput(
+                "Unresolved contact requires a transition".into(),
+            ));
+        }
         PlateAppearance::Strikeout | PlateAppearance::BattedBallOut => {
             play.outs_on_play = 1;
         }

@@ -5,15 +5,19 @@
 //! versioned language-neutral contracts and `docs/SIMULATION_FOUNDATION.md`.
 
 mod bases;
+mod contextual;
 mod contract;
 mod game;
 mod sampling;
+mod season;
 mod stats;
 
 pub use bases::{BasePlay, Bases, Runner, ScoringRunner, resolve_bases};
+pub use contextual::*;
 pub use contract::*;
 pub use game::*;
 pub use sampling::*;
+pub use season::*;
 pub use stats::*;
 
 /// Engine package version recorded in every completed result.

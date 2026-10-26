@@ -19,7 +19,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     input.detail = Detail::Summary;
     let distribution = OutcomeDistribution::new(&input.profiles[0].weights)?;
     let mut rng = SplitMix64::new(input.seed.parse()?);
-    let mut observed = [0_u32; 8];
+    let mut observed = [0_u32; 9];
     let start = Instant::now();
     for _ in 0..draws {
         observed[black_box(distribution.sample_index(&mut rng))] += 1;
@@ -41,7 +41,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .iter()
         .enumerate()
         .map(|(i, name)| {
-            serde_json::json!({"outcome":name, "weight":weights[name], "observed":observed[i],
+            serde_json::json!({"outcome":name, "weight":weights.get(name).unwrap_or(&serde_json::json!(0)), "observed":observed[i],
             "observedProbability":f64::from(observed[i])/f64::from(draws)})
         })
         .collect();

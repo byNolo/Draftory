@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "Retrosheet official modern calibration snapshot",
+  "observedDate": "2026-10-25",
+  "trainingYears": [2022, 2023],
+  "holdoutYears": [2025],
+  "files": [
+    {
+      "name": "gl2022.zip",
+      "url": "https://www.retrosheet.org/gamelogs/gl2022.zip",
+      "sizeBytes": 475414,
+      "sha256": "c1d5416ed28b172c70fb88e8afdfbccfddddd204d9dcb8e326c4052b3d2d7aa2"
+    },
+    {
+      "name": "gl2023.zip",
+      "url": "https://www.retrosheet.org/gamelogs/gl2023.zip",
+      "sizeBytes": 473397,
+      "sha256": "c1461a3ed965c428406f288201b7021fcf051e5b43cca9143c8f1f0b78c072e1"
+    },
+    {
+      "name": "gl2024.zip",
+      "url": "https://www.retrosheet.org/gamelogs/gl2024.zip",
+      "sizeBytes": 465881,
+      "sha256": "3089e0a895e70a6fd244d31fe822bc4d856d0987458e86b5acc5df1aa297d250"
+    },
+    {
+      "name": "2022plays.zip",
+      "url": "https://www.retrosheet.org/downloads/plays/2022plays.zip",
+      "sizeBytes": 7359198,
+      "sha256": "0bdcee514475b6d1031437145eeb9e034a3e70eafd4befddc6ea0e304b1764d3"
+    },
+    {
+      "name": "2023plays.zip",
+      "url": "https://www.retrosheet.org/downloads/plays/2023plays.zip",
+      "sizeBytes": 7498178,
+      "sha256": "0129befd7944f60a858e5fdc265a44ed20afaa568679b37fca1083e3c083b20e"
+    },
+    {
+      "name": "glfields.txt",
+      "url": "https://www.retrosheet.org/gamelogs/glfields.txt",
+      "sizeBytes": 6559,
+      "sha256": "399aea2c74af36da766bb38c97455c641730eb37d53c9d4948c5929931f9cc98"
+    },
+    {
+      "name": "plays.html",
+      "url": "https://www.retrosheet.org/downloads/plays.html",
+      "sizeBytes": 28758,
+      "sha256": "6f04119df235a743bca8043c9b834165a374ed0d364a49a855e002c8fedd8b10"
+    },
+    {
+      "name": "gl2025.zip",
+      "url": "https://www.retrosheet.org/gamelogs/gl2025.zip",
+      "sizeBytes": 466269,
+      "sha256": "f8a36120bc5f6925ffc914f964167f745e61a3421be9318e2ee24a576392693a"
+    }
+  ],
+  "developmentValidationYears": [2024]
+}

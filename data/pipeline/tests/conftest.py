@@ -42,6 +42,9 @@ def dataset():
 
 def pytest_addoption(parser):
     parser.addoption(
+        "--retrosheet-source", help="Verified M4 Retrosheet snapshot for optional integration tests"
+    )
+    parser.addoption(
         "--lahman-source", help="Run offline integration tests against a verified release"
     )
 

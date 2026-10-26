@@ -30,7 +30,7 @@ pub struct GameInput {
 }
 
 // Optional means absent; explicit null must not bypass the strict JSON contract.
-fn present<'de, D, T>(deserializer: D) -> Result<Option<T>, D::Error>
+pub(crate) fn present<'de, D, T>(deserializer: D) -> Result<Option<T>, D::Error>
 where
     D: serde::Deserializer<'de>,
     T: Deserialize<'de>,
@@ -50,6 +50,12 @@ pub struct GameConfig {
     pub advancement_policy: AdvancementPolicy,
     pub max_innings: u16,
     pub max_plate_appearances: u32,
+    #[serde(
+        default,
+        deserialize_with = "present",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub contextual_model: Option<crate::ContextualModel>,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -57,6 +63,8 @@ pub struct GameConfig {
 pub enum AdvancementPolicy {
     #[serde(rename = "conservative-outs-v1")]
     ConservativeOutsV1,
+    #[serde(rename = "retrosheet-contextual-v1")]
+    RetrosheetContextualV1,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -141,6 +149,12 @@ pub struct OutcomeWeights {
     pub hit_by_pitch: u32,
     pub strikeout: u32,
     pub batted_ball_out: u32,
+    #[serde(
+        default,
+        deserialize_with = "present",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub other_contact: Option<u32>,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -154,6 +168,7 @@ pub enum PlateAppearance {
     HitByPitch,
     Strikeout,
     BattedBallOut,
+    OtherContact,
 }
 
 // Serde unit variants ignore residual fields even with deny_unknown_fields.
@@ -169,6 +184,7 @@ enum StrictPlateAppearance {
     HitByPitch {},
     Strikeout {},
     BattedBallOut {},
+    OtherContact {},
 }
 
 impl From<StrictPlateAppearance> for PlateAppearance {
@@ -182,6 +198,7 @@ impl From<StrictPlateAppearance> for PlateAppearance {
             StrictPlateAppearance::HitByPitch {} => Self::HitByPitch,
             StrictPlateAppearance::Strikeout {} => Self::Strikeout,
             StrictPlateAppearance::BattedBallOut {} => Self::BattedBallOut,
+            StrictPlateAppearance::OtherContact {} => Self::OtherContact,
         }
     }
 }
@@ -224,13 +241,38 @@ impl GameInput {
 
     pub fn validate(&self) -> Result<(), EngineError> {
         let invalid = |message: &str| EngineError::InvalidInput(message.to_owned());
-        if ![INPUT_SCHEMA_VERSION, SAMPLED_INPUT_SCHEMA_VERSION]
-            .contains(&self.schema_version.as_str())
-            || self.rules_version != RULES_VERSION
+        if ![
+            INPUT_SCHEMA_VERSION,
+            SAMPLED_INPUT_SCHEMA_VERSION,
+            crate::CONTEXT_INPUT_SCHEMA_VERSION,
+        ]
+        .contains(&self.schema_version.as_str())
         {
             return Err(invalid("Unsupported input schema or rules version"));
         }
-        let sampled = self.schema_version == SAMPLED_INPUT_SCHEMA_VERSION;
+        let contextual = self.schema_version == crate::CONTEXT_INPUT_SCHEMA_VERSION;
+        if contextual {
+            if self.rules_version != crate::CONTEXT_RULES_VERSION
+                || self.config.advancement_policy != AdvancementPolicy::RetrosheetContextualV1
+            {
+                return Err(invalid(
+                    "Contextual inputs require contextual rules and advancement policy",
+                ));
+            }
+            self.config
+                .contextual_model
+                .as_ref()
+                .ok_or_else(|| invalid("Missing contextual model"))?
+                .validate()?;
+        } else if self.rules_version != RULES_VERSION
+            || self.config.contextual_model.is_some()
+            || self.config.advancement_policy != AdvancementPolicy::ConservativeOutsV1
+        {
+            return Err(invalid(
+                "Legacy inputs require their original rules and policy",
+            ));
+        }
+        let sampled = self.schema_version != INPUT_SCHEMA_VERSION;
         if sampled {
             if self.sampling.as_ref().map(|s| s.rng_version.as_str()) != Some(crate::RNG_VERSION)
                 || self.pitching_environment.mode != PitchingMode::LeagueAverage
@@ -266,6 +308,17 @@ impl GameInput {
         }
         let mut profile_ids = BTreeSet::new();
         for profile in &self.profiles {
+            if contextual {
+                if profile.weights.other_contact.is_none() || profile.weights.batted_ball_out != 0 {
+                    return Err(invalid(
+                        "Contextual profiles require otherContact and zero legacy out mass",
+                    ));
+                }
+            } else if profile.weights.other_contact.is_some() {
+                return Err(invalid(
+                    "Legacy profiles cannot contain unresolved contact mass",
+                ));
+            }
             if sampled {
                 let Some(p) = &profile.provenance else {
                     return Err(invalid("Sampled profiles require provenance"));
@@ -307,6 +360,7 @@ impl GameInput {
                 w.hit_by_pitch,
                 w.strikeout,
                 w.batted_ball_out,
+                w.other_contact.unwrap_or(0),
             ];
             if weights.iter().map(|&v| u64::from(v)).sum::<u64>() != u64::from(WEIGHT_SCALE) {
                 return Err(invalid("Prepared outcome weights must sum to 1000000"));
@@ -335,7 +389,7 @@ impl GameInput {
     }
 }
 
-fn valid_id(id: &str) -> bool {
+pub(crate) fn valid_id(id: &str) -> bool {
     let valid_first = id.as_bytes().first().is_some_and(u8::is_ascii_alphanumeric);
     valid_first
         && id.len() <= 128

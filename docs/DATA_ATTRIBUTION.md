@@ -1,5 +1,23 @@
 # Historical data attribution
 
+## Retrosheet calibration data
+
+The information used here was obtained free of charge from and is copyrighted by
+Retrosheet. Interested parties may contact Retrosheet at [www.retrosheet.org](https://www.retrosheet.org/).
+
+M4 uses official Retrosheet 2022–2025 regular-season game logs and 2022–2023 parsed
+plays. The pinned `retrosheet-m4.lock.json` records official URLs, observed hashes
+and the training/development/final-holdout split. The official
+[game-log source and data-use notice](https://www.retrosheet.org/gamelogs/index.html)
+and [parsed-play documentation](https://www.retrosheet.org/downloads/plays.html)
+are preserved with the ignored raw snapshot. Retrosheet permits data/product use
+subject to its required notice; it does not use Lahman's CC BY-SA license.
+Keep this notice with redistributed calibration tables and products using them.
+Derived transition probabilities and fixed-lineup experiments are Draftory
+transformations, not Retrosheet's predictions or historical game records.
+
+## SABR Lahman
+
 Draftory's Lahman adapter uses the official
 [SABR Lahman Baseball Database](https://sabr.org/lahman-database/), 2025 release,
 created by Sean Lahman and maintained by SABR, with annual updates by Bryan Walko.

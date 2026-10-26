@@ -6,7 +6,7 @@ use crate::{
 };
 
 pub const RNG_VERSION: &str = "splitmix64-v1";
-pub const OUTCOME_NAMES: [&str; 8] = [
+pub const OUTCOME_NAMES: [&str; 9] = [
     "single",
     "double",
     "triple",
@@ -15,8 +15,9 @@ pub const OUTCOME_NAMES: [&str; 8] = [
     "hitByPitch",
     "strikeout",
     "battedBallOut",
+    "otherContact",
 ];
-const EVENTS: [PlateAppearance; 8] = [
+const EVENTS: [PlateAppearance; 9] = [
     PlateAppearance::Single,
     PlateAppearance::Double,
     PlateAppearance::Triple,
@@ -25,6 +26,7 @@ const EVENTS: [PlateAppearance; 8] = [
     PlateAppearance::HitByPitch,
     PlateAppearance::Strikeout,
     PlateAppearance::BattedBallOut,
+    PlateAppearance::OtherContact,
 ];
 
 /// SplitMix64, wrapping u64 arithmetic. Every u64 seed (including zero) is valid.
@@ -46,7 +48,7 @@ impl SplitMix64 {
         z ^ (z >> 31)
     }
 
-    fn ticket(&mut self) -> u32 {
+    pub(crate) fn ticket(&mut self) -> u32 {
         // Discard the incomplete residue interval rather than introducing modulo bias.
         let bound = u64::from(WEIGHT_SCALE);
         let threshold = bound.wrapping_neg() % bound;
@@ -62,7 +64,7 @@ impl SplitMix64 {
 /// Validated once, then sampled without allocation, floats, parsing or I/O.
 #[derive(Clone, Copy)]
 pub struct OutcomeDistribution {
-    cumulative: [u32; 8],
+    cumulative: [u32; 9],
 }
 
 impl OutcomeDistribution {
@@ -76,13 +78,14 @@ impl OutcomeDistribution {
             w.hit_by_pitch,
             w.strikeout,
             w.batted_ball_out,
+            w.other_contact.unwrap_or(0),
         ];
         if values.iter().map(|&x| u64::from(x)).sum::<u64>() != u64::from(WEIGHT_SCALE) {
             return Err(EngineError::InvalidInput(
                 "Weights must sum to 1000000".into(),
             ));
         }
-        let mut cumulative = [0; 8];
+        let mut cumulative = [0; 9];
         let mut sum = 0;
         for (i, value) in values.iter().enumerate() {
             sum += value;
@@ -108,7 +111,12 @@ impl OutcomeDistribution {
 /// Scripted replay remains available for both versions and never consumes RNG.
 pub fn simulate_game(input: GameInput) -> Result<GameResult, EngineError> {
     input.validate()?;
-    if input.schema_version != SAMPLED_INPUT_SCHEMA_VERSION {
+    if ![
+        SAMPLED_INPUT_SCHEMA_VERSION,
+        crate::CONTEXT_INPUT_SCHEMA_VERSION,
+    ]
+    .contains(&input.schema_version.as_str())
+    {
         return Err(EngineError::InvalidInput(
             "Sampling requires input v1.1".into(),
         ));
@@ -130,12 +138,33 @@ pub fn simulate_game(input: GameInput) -> Result<GameResult, EngineError> {
             })
         });
     let mut rng = SplitMix64::new(input.seed.parse().expect("validated seed"));
+    let context_model = input.config.contextual_model.clone();
     let mut game = Game::new(input)?;
     while game.snapshot().status == GameStatus::InProgress {
         let state = game.snapshot();
         let side = state.half.batting_side().index();
         let distribution = ordered[side][usize::from(state.next_batter[side])];
-        game.apply_event(distribution.sample(&mut rng))?;
+        let event = distribution.sample(&mut rng);
+        if let (Some(model), Some(kind)) = (&context_model, crate::ContextEvent::from_event(event))
+        {
+            let cell = model.cell(kind, state.outs, crate::base_mask(&state.bases));
+            let index = if cell.choices.len() == 1 {
+                0
+            } else {
+                let ticket = rng.ticket();
+                let mut cumulative = 0;
+                cell.choices
+                    .iter()
+                    .position(|c| {
+                        cumulative += c.weight;
+                        ticket < cumulative
+                    })
+                    .expect("validated transition distribution")
+            };
+            game.apply_contextual_event(event, index)?;
+        } else {
+            game.apply_event(event)?;
+        }
     }
     game.result()
 }
@@ -165,6 +194,7 @@ mod tests {
             hit_by_pitch: 0,
             strikeout: WEIGHT_SCALE,
             batted_ball_out: 0,
+            other_contact: None,
         };
         let d = OutcomeDistribution::new(&w).unwrap();
         let mut rng = SplitMix64::new(42);
@@ -203,10 +233,11 @@ mod tests {
             hit_by_pitch: 15000,
             strikeout: 240000,
             batted_ball_out: 400000,
+            other_contact: None,
         };
         let distribution = OutcomeDistribution::new(&w).unwrap();
         let mut rng = SplitMix64::new(2025);
-        let mut counts = [0_u32; 8];
+        let mut counts = [0_u32; 9];
         for _ in 0..1_000_000 {
             counts[distribution.sample_index(&mut rng)] += 1;
         }

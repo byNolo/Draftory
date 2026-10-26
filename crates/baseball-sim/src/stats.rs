@@ -2,9 +2,19 @@ use serde::{Deserialize, Serialize};
 
 use crate::PlateAppearance;
 
+fn is_zero(value: &u32) -> bool {
+    *value == 0
+}
+
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct StatLine {
+    #[serde(default, skip_serializing_if = "is_zero")]
+    pub reached_on_error: u32,
+    #[serde(default, skip_serializing_if = "is_zero")]
+    pub fielders_choices: u32,
+    #[serde(default, skip_serializing_if = "is_zero")]
+    pub grounded_into_double_plays: u32,
     pub plate_appearances: u32,
     pub at_bats: u32,
     pub hits: u32,
@@ -34,7 +44,8 @@ impl StatLine {
             | PlateAppearance::Triple
             | PlateAppearance::HomeRun
             | PlateAppearance::Strikeout
-            | PlateAppearance::BattedBallOut => self.at_bats += 1,
+            | PlateAppearance::BattedBallOut
+            | PlateAppearance::OtherContact => self.at_bats += 1,
         }
         match event {
             PlateAppearance::Single => self.singles += 1,
@@ -44,12 +55,16 @@ impl StatLine {
             PlateAppearance::Strikeout => self.strikeouts += 1,
             PlateAppearance::Walk { .. }
             | PlateAppearance::HitByPitch
-            | PlateAppearance::BattedBallOut => {}
+            | PlateAppearance::BattedBallOut
+            | PlateAppearance::OtherContact => {}
         }
         self.hits = self.singles + self.doubles + self.triples + self.home_runs;
     }
 
     pub(crate) fn add(&mut self, other: &Self) {
+        self.grounded_into_double_plays += other.grounded_into_double_plays;
+        self.reached_on_error += other.reached_on_error;
+        self.fielders_choices += other.fielders_choices;
         self.plate_appearances += other.plate_appearances;
         self.at_bats += other.at_bats;
         self.hits += other.hits;

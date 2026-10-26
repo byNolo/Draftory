@@ -1,0 +1,3791 @@
+{
+  "config": {
+    "advancementPolicy": "retrosheet-contextual-v1",
+    "contextualModel": {
+      "cells": [
+        {
+          "baseMask": 0,
+          "choices": [
+            {
+              "destinations": [1, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 1000000
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 11520,
+          "outs": 0
+        },
+        {
+          "baseMask": 1,
+          "choices": [
+            {
+              "destinations": [1, 2, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 758684
+            },
+            {
+              "destinations": [1, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 240951
+            },
+            {
+              "destinations": [1, 4, 5, 5],
+              "rbi": [false, true, false, false],
+              "weight": 365
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 2735,
+          "outs": 0
+        },
+        {
+          "baseMask": 2,
+          "choices": [
+            {
+              "destinations": [1, 5, 2, 5],
+              "rbi": [false, false, false, false],
+              "weight": 51345
+            },
+            {
+              "destinations": [1, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "weight": 640587
+            },
+            {
+              "destinations": [1, 5, 4, 5],
+              "rbi": [false, false, false, false],
+              "weight": 7335
+            },
+            {
+              "destinations": [1, 5, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 300733
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 818,
+          "outs": 0
+        },
+        {
+          "baseMask": 3,
+          "choices": [
+            {
+              "destinations": [1, 2, 3, 5],
+              "rbi": [false, false, false, false],
+              "weight": 611446
+            },
+            {
+              "destinations": [1, 2, 4, 5],
+              "rbi": [false, false, false, false],
+              "weight": 1506
+            },
+            {
+              "destinations": [1, 2, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 239458
+            },
+            {
+              "destinations": [1, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "weight": 4518
+            },
+            {
+              "destinations": [1, 3, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 143072
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 664,
+          "outs": 0
+        },
+        {
+          "baseMask": 4,
+          "choices": [
+            {
+              "destinations": [1, 5, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 25210
+            },
+            {
+              "destinations": [1, 5, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 974790
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 119,
+          "outs": 0
+        },
+        {
+          "baseMask": 5,
+          "choices": [
+            {
+              "destinations": [1, 2, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 7463
+            },
+            {
+              "destinations": [1, 2, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 753731
+            },
+            {
+              "destinations": [1, 3, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 235075
+            },
+            {
+              "destinations": [1, 4, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 3731
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 268,
+          "outs": 0
+        },
+        {
+          "baseMask": 6,
+          "choices": [
+            {
+              "destinations": [1, 5, 2, 3],
+              "rbi": [false, false, false, false],
+              "weight": 25478
+            },
+            {
+              "destinations": [1, 5, 2, 4],
+              "rbi": [false, false, false, true],
+              "weight": 25478
+            },
+            {
+              "destinations": [1, 5, 3, 4],
+              "rbi": [false, false, false, true],
+              "weight": 687898
+            },
+            {
+              "destinations": [1, 5, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 261146
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 157,
+          "outs": 0
+        },
+        {
+          "baseMask": 7,
+          "choices": [
+            {
+              "destinations": [1, 2, 3, 4],
+              "rbi": [false, false, false, true],
+              "weight": 556123
+            },
+            {
+              "destinations": [1, 2, 4, 4],
+              "rbi": [false, false, false, true],
+              "weight": 15306
+            },
+            {
+              "destinations": [1, 2, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 255102
+            },
+            {
+              "destinations": [1, 3, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 173469
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 196,
+          "outs": 0
+        },
+        {
+          "baseMask": 0,
+          "choices": [
+            {
+              "destinations": [1, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 1000000
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 8207,
+          "outs": 1
+        },
+        {
+          "baseMask": 1,
+          "choices": [
+            {
+              "destinations": [1, 2, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 740645
+            },
+            {
+              "destinations": [1, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 258779
+            },
+            {
+              "destinations": [1, 4, 5, 5],
+              "rbi": [false, true, false, false],
+              "weight": 576
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 3474,
+          "outs": 1
+        },
+        {
+          "baseMask": 2,
+          "choices": [
+            {
+              "destinations": [1, 5, 2, 5],
+              "rbi": [false, false, false, false],
+              "weight": 34538
+            },
+            {
+              "destinations": [1, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "weight": 529317
+            },
+            {
+              "destinations": [1, 5, 4, 5],
+              "rbi": [false, false, false, false],
+              "weight": 8032
+            },
+            {
+              "destinations": [1, 5, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 428113
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 1245,
+          "outs": 1
+        },
+        {
+          "baseMask": 3,
+          "choices": [
+            {
+              "destinations": [1, 2, 3, 5],
+              "rbi": [false, false, false, false],
+              "weight": 474932
+            },
+            {
+              "destinations": [1, 2, 4, 5],
+              "rbi": [false, false, false, false],
+              "weight": 3646
+            },
+            {
+              "destinations": [1, 2, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 298997
+            },
+            {
+              "destinations": [1, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "weight": 2735
+            },
+            {
+              "destinations": [1, 3, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 218778
+            },
+            {
+              "destinations": [1, 4, 4, 5],
+              "rbi": [false, true, true, false],
+              "weight": 912
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 1097,
+          "outs": 1
+        },
+        {
+          "baseMask": 4,
+          "choices": [
+            {
+              "destinations": [1, 5, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 13100
+            },
+            {
+              "destinations": [1, 5, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 986900
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 458,
+          "outs": 1
+        },
+        {
+          "baseMask": 5,
+          "choices": [
+            {
+              "destinations": [1, 2, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 1678
+            },
+            {
+              "destinations": [1, 2, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 770134
+            },
+            {
+              "destinations": [1, 3, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 221476
+            },
+            {
+              "destinations": [1, 4, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 5034
+            },
+            {
+              "destinations": [1, 4, 5, 4],
+              "rbi": [false, true, false, true],
+              "weight": 1678
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 596,
+          "outs": 1
+        },
+        {
+          "baseMask": 6,
+          "choices": [
+            {
+              "destinations": [1, 5, 2, 3],
+              "rbi": [false, false, false, false],
+              "weight": 4695
+            },
+            {
+              "destinations": [1, 5, 2, 4],
+              "rbi": [false, false, false, true],
+              "weight": 23474
+            },
+            {
+              "destinations": [1, 5, 3, 4],
+              "rbi": [false, false, false, true],
+              "weight": 549296
+            },
+            {
+              "destinations": [1, 5, 4, 4],
+              "rbi": [false, false, false, true],
+              "weight": 4695
+            },
+            {
+              "destinations": [1, 5, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 417840
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 426,
+          "outs": 1
+        },
+        {
+          "baseMask": 7,
+          "choices": [
+            {
+              "destinations": [1, 2, 3, 4],
+              "rbi": [false, false, false, true],
+              "weight": 550685
+            },
+            {
+              "destinations": [1, 2, 4, 4],
+              "rbi": [false, false, false, true],
+              "weight": 2740
+            },
+            {
+              "destinations": [1, 2, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 249315
+            },
+            {
+              "destinations": [1, 3, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 194520
+            },
+            {
+              "destinations": [1, 4, 4, 4],
+              "rbi": [false, true, true, true],
+              "weight": 2740
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 365,
+          "outs": 1
+        },
+        {
+          "baseMask": 0,
+          "choices": [
+            {
+              "destinations": [1, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 1000000
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 6489,
+          "outs": 2
+        },
+        {
+          "baseMask": 1,
+          "choices": [
+            {
+              "destinations": [1, 2, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 665946
+            },
+            {
+              "destinations": [1, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 326638
+            },
+            {
+              "destinations": [1, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 1545
+            },
+            {
+              "destinations": [1, 4, 5, 5],
+              "rbi": [false, true, false, false],
+              "weight": 5871
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 3236,
+          "outs": 2
+        },
+        {
+          "baseMask": 2,
+          "choices": [
+            {
+              "destinations": [1, 5, 2, 5],
+              "rbi": [false, false, false, false],
+              "weight": 2018
+            },
+            {
+              "destinations": [1, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "weight": 156691
+            },
+            {
+              "destinations": [1, 5, 4, 5],
+              "rbi": [false, false, false, false],
+              "weight": 10087
+            },
+            {
+              "destinations": [1, 5, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 831204
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 1487,
+          "outs": 2
+        },
+        {
+          "baseMask": 3,
+          "choices": [
+            {
+              "destinations": [1, 2, 3, 5],
+              "rbi": [false, false, false, false],
+              "weight": 171765
+            },
+            {
+              "destinations": [1, 2, 4, 5],
+              "rbi": [false, false, false, false],
+              "weight": 784
+            },
+            {
+              "destinations": [1, 2, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 440000
+            },
+            {
+              "destinations": [1, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "weight": 7059
+            },
+            {
+              "destinations": [1, 3, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 376470
+            },
+            {
+              "destinations": [1, 4, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 2353
+            },
+            {
+              "destinations": [1, 4, 4, 5],
+              "rbi": [false, true, true, false],
+              "weight": 1569
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 1275,
+          "outs": 2
+        },
+        {
+          "baseMask": 4,
+          "choices": [
+            {
+              "destinations": [1, 5, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 3401
+            },
+            {
+              "destinations": [1, 5, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 996599
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 588,
+          "outs": 2
+        },
+        {
+          "baseMask": 5,
+          "choices": [
+            {
+              "destinations": [1, 2, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 1506
+            },
+            {
+              "destinations": [1, 2, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 679217
+            },
+            {
+              "destinations": [1, 3, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 313253
+            },
+            {
+              "destinations": [1, 4, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 1506
+            },
+            {
+              "destinations": [1, 4, 5, 4],
+              "rbi": [false, true, false, true],
+              "weight": 4518
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 664,
+          "outs": 2
+        },
+        {
+          "baseMask": 6,
+          "choices": [
+            {
+              "destinations": [1, 5, 2, 3],
+              "rbi": [false, false, false, false],
+              "weight": 2770
+            },
+            {
+              "destinations": [1, 5, 3, 4],
+              "rbi": [false, false, false, true],
+              "weight": 168975
+            },
+            {
+              "destinations": [1, 5, 4, 4],
+              "rbi": [false, false, false, true],
+              "weight": 2770
+            },
+            {
+              "destinations": [1, 5, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 825485
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 361,
+          "outs": 2
+        },
+        {
+          "baseMask": 7,
+          "choices": [
+            {
+              "destinations": [1, 2, 3, 4],
+              "rbi": [false, false, false, true],
+              "weight": 165939
+            },
+            {
+              "destinations": [1, 2, 4, 4],
+              "rbi": [false, false, false, true],
+              "weight": 4367
+            },
+            {
+              "destinations": [1, 2, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 427948
+            },
+            {
+              "destinations": [1, 3, 4, 4],
+              "rbi": [false, false, false, true],
+              "weight": 2183
+            },
+            {
+              "destinations": [1, 3, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 393013
+            },
+            {
+              "destinations": [1, 4, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 4367
+            },
+            {
+              "destinations": [1, 4, 4, 4],
+              "rbi": [false, true, true, true],
+              "weight": 2183
+            }
+          ],
+          "event": "single",
+          "fallback": false,
+          "observations": 458,
+          "outs": 2
+        },
+        {
+          "baseMask": 0,
+          "choices": [
+            {
+              "destinations": [2, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 1000000
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 3711,
+          "outs": 0
+        },
+        {
+          "baseMask": 1,
+          "choices": [
+            {
+              "destinations": [2, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 705189
+            },
+            {
+              "destinations": [2, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 4717
+            },
+            {
+              "destinations": [2, 4, 5, 5],
+              "rbi": [false, true, false, false],
+              "weight": 290094
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 848,
+          "outs": 0
+        },
+        {
+          "baseMask": 2,
+          "choices": [
+            {
+              "destinations": [2, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "weight": 83700
+            },
+            {
+              "destinations": [2, 5, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 916300
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 227,
+          "outs": 0
+        },
+        {
+          "baseMask": 3,
+          "choices": [
+            {
+              "destinations": [2, 3, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 743119
+            },
+            {
+              "destinations": [2, 4, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 4587
+            },
+            {
+              "destinations": [2, 4, 4, 5],
+              "rbi": [false, true, true, false],
+              "weight": 252294
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 218,
+          "outs": 0
+        },
+        {
+          "baseMask": 4,
+          "choices": [
+            {
+              "destinations": [2, 5, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 1000000
+            }
+          ],
+          "event": "double",
+          "fallback": true,
+          "observations": 35,
+          "outs": 0
+        },
+        {
+          "baseMask": 5,
+          "choices": [
+            {
+              "destinations": [2, 3, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 716216
+            },
+            {
+              "destinations": [2, 4, 5, 4],
+              "rbi": [false, true, false, true],
+              "weight": 283784
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 74,
+          "outs": 0
+        },
+        {
+          "baseMask": 6,
+          "choices": [
+            {
+              "destinations": [2, 5, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 1000000
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 56,
+          "outs": 0
+        },
+        {
+          "baseMask": 7,
+          "choices": [
+            {
+              "destinations": [2, 3, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 685714
+            },
+            {
+              "destinations": [2, 4, 4, 4],
+              "rbi": [false, true, true, true],
+              "weight": 314286
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 70,
+          "outs": 0
+        },
+        {
+          "baseMask": 0,
+          "choices": [
+            {
+              "destinations": [2, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 1000000
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 2596,
+          "outs": 1
+        },
+        {
+          "baseMask": 1,
+          "choices": [
+            {
+              "destinations": [2, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 701261
+            },
+            {
+              "destinations": [2, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 970
+            },
+            {
+              "destinations": [2, 4, 5, 5],
+              "rbi": [false, true, false, false],
+              "weight": 297769
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 1031,
+          "outs": 1
+        },
+        {
+          "baseMask": 2,
+          "choices": [
+            {
+              "destinations": [2, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "weight": 33505
+            },
+            {
+              "destinations": [2, 5, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 966495
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 388,
+          "outs": 1
+        },
+        {
+          "baseMask": 3,
+          "choices": [
+            {
+              "destinations": [2, 3, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 655738
+            },
+            {
+              "destinations": [2, 4, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 10929
+            },
+            {
+              "destinations": [2, 4, 4, 5],
+              "rbi": [false, true, true, false],
+              "weight": 333333
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 366,
+          "outs": 1
+        },
+        {
+          "baseMask": 4,
+          "choices": [
+            {
+              "destinations": [2, 5, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 1000000
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 137,
+          "outs": 1
+        },
+        {
+          "baseMask": 5,
+          "choices": [
+            {
+              "destinations": [2, 3, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 706250
+            },
+            {
+              "destinations": [2, 4, 5, 4],
+              "rbi": [false, true, false, true],
+              "weight": 293750
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 160,
+          "outs": 1
+        },
+        {
+          "baseMask": 6,
+          "choices": [
+            {
+              "destinations": [2, 5, 3, 4],
+              "rbi": [false, false, false, true],
+              "weight": 50847
+            },
+            {
+              "destinations": [2, 5, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 949153
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 118,
+          "outs": 1
+        },
+        {
+          "baseMask": 7,
+          "choices": [
+            {
+              "destinations": [2, 3, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 703947
+            },
+            {
+              "destinations": [2, 4, 4, 4],
+              "rbi": [false, true, true, true],
+              "weight": 296053
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 152,
+          "outs": 1
+        },
+        {
+          "baseMask": 0,
+          "choices": [
+            {
+              "destinations": [2, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 1000000
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 2025,
+          "outs": 2
+        },
+        {
+          "baseMask": 1,
+          "choices": [
+            {
+              "destinations": [2, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 409853
+            },
+            {
+              "destinations": [2, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 8386
+            },
+            {
+              "destinations": [2, 4, 5, 5],
+              "rbi": [false, true, false, false],
+              "weight": 581761
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 954,
+          "outs": 2
+        },
+        {
+          "baseMask": 2,
+          "choices": [
+            {
+              "destinations": [2, 5, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 1000000
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 467,
+          "outs": 2
+        },
+        {
+          "baseMask": 3,
+          "choices": [
+            {
+              "destinations": [2, 3, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 386878
+            },
+            {
+              "destinations": [2, 4, 4, 5],
+              "rbi": [false, true, true, false],
+              "weight": 613122
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 442,
+          "outs": 2
+        },
+        {
+          "baseMask": 4,
+          "choices": [
+            {
+              "destinations": [2, 5, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 1000000
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 213,
+          "outs": 2
+        },
+        {
+          "baseMask": 5,
+          "choices": [
+            {
+              "destinations": [2, 3, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 421052
+            },
+            {
+              "destinations": [2, 4, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 4785
+            },
+            {
+              "destinations": [2, 4, 5, 4],
+              "rbi": [false, true, false, true],
+              "weight": 574163
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 209,
+          "outs": 2
+        },
+        {
+          "baseMask": 6,
+          "choices": [
+            {
+              "destinations": [2, 5, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 1000000
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 120,
+          "outs": 2
+        },
+        {
+          "baseMask": 7,
+          "choices": [
+            {
+              "destinations": [2, 3, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 472050
+            },
+            {
+              "destinations": [2, 4, 4, 4],
+              "rbi": [false, true, true, true],
+              "weight": 527950
+            }
+          ],
+          "event": "double",
+          "fallback": false,
+          "observations": 161,
+          "outs": 2
+        },
+        {
+          "baseMask": 0,
+          "choices": [
+            {
+              "destinations": [0, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 984580
+            },
+            {
+              "destinations": [1, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 13240
+            },
+            {
+              "destinations": [2, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 1891
+            },
+            {
+              "destinations": [3, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 289
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 38068,
+          "outs": 0
+        },
+        {
+          "baseMask": 1,
+          "choices": [
+            {
+              "destinations": [0, 0, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 224428
+            },
+            {
+              "destinations": [0, 1, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 512408
+            },
+            {
+              "destinations": [0, 2, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 88488
+            },
+            {
+              "destinations": [0, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 968
+            },
+            {
+              "destinations": [0, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 121
+            },
+            {
+              "destinations": [1, 0, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 149861
+            },
+            {
+              "destinations": [1, 2, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 4600
+            },
+            {
+              "destinations": [1, 2, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 9442
+            },
+            {
+              "destinations": [1, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 1574
+            },
+            {
+              "destinations": [1, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 3389
+            },
+            {
+              "destinations": [1, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 121
+            },
+            {
+              "destinations": [2, 0, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1816
+            },
+            {
+              "destinations": [2, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 363
+            },
+            {
+              "destinations": [2, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2058
+            },
+            {
+              "destinations": [2, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 242
+            },
+            {
+              "destinations": [3, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 121
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 8261,
+          "outs": 0
+        },
+        {
+          "baseMask": 2,
+          "choices": [
+            {
+              "destinations": [0, 5, 2, 5],
+              "rbi": [false, false, false, false],
+              "weight": 536696
+            },
+            {
+              "destinations": [0, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "weight": 422304
+            },
+            {
+              "destinations": [0, 5, 4, 5],
+              "rbi": [false, false, false, false],
+              "weight": 820
+            },
+            {
+              "destinations": [0, 5, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 410
+            },
+            {
+              "destinations": [1, 5, 0, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 17220
+            },
+            {
+              "destinations": [1, 5, 2, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 4510
+            },
+            {
+              "destinations": [1, 5, 2, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1230
+            },
+            {
+              "destinations": [1, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 6970
+            },
+            {
+              "destinations": [1, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 3280
+            },
+            {
+              "destinations": [1, 5, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 820
+            },
+            {
+              "destinations": [2, 5, 0, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1230
+            },
+            {
+              "destinations": [2, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 2050
+            },
+            {
+              "destinations": [2, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 410
+            },
+            {
+              "destinations": [2, 5, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 1640
+            },
+            {
+              "destinations": [2, 5, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 410
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 2439,
+          "outs": 0
+        },
+        {
+          "baseMask": 3,
+          "choices": [
+            {
+              "destinations": [0, 0, 2, 5],
+              "rbi": [false, false, false, false],
+              "weight": 212225
+            },
+            {
+              "destinations": [0, 1, 2, 5],
+              "rbi": [false, false, false, false],
+              "weight": 371149
+            },
+            {
+              "destinations": [0, 1, 3, 5],
+              "rbi": [false, false, false, false],
+              "weight": 118337
+            },
+            {
+              "destinations": [0, 2, 3, 5],
+              "rbi": [false, false, false, false],
+              "weight": 111003
+            },
+            {
+              "destinations": [0, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "weight": 489
+            },
+            {
+              "destinations": [1, 0, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 122738
+            },
+            {
+              "destinations": [1, 0, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 3912
+            },
+            {
+              "destinations": [1, 2, 0, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 29340
+            },
+            {
+              "destinations": [1, 2, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 5379
+            },
+            {
+              "destinations": [1, 2, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 14181
+            },
+            {
+              "destinations": [1, 2, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1467
+            },
+            {
+              "destinations": [1, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1467
+            },
+            {
+              "destinations": [1, 4, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 489
+            },
+            {
+              "destinations": [2, 0, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1467
+            },
+            {
+              "destinations": [2, 3, 0, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 489
+            },
+            {
+              "destinations": [2, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 2445
+            },
+            {
+              "destinations": [2, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2445
+            },
+            {
+              "destinations": [2, 4, 0, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 489
+            },
+            {
+              "destinations": [3, 0, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 489
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 2045,
+          "outs": 0
+        },
+        {
+          "baseMask": 4,
+          "choices": [
+            {
+              "destinations": [0, 5, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 794643
+            },
+            {
+              "destinations": [0, 5, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 183036
+            },
+            {
+              "destinations": [1, 5, 5, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 17857
+            },
+            {
+              "destinations": [1, 5, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 4464
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 224,
+          "outs": 0
+        },
+        {
+          "baseMask": 5,
+          "choices": [
+            {
+              "destinations": [0, 0, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 220859
+            },
+            {
+              "destinations": [0, 1, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 316973
+            },
+            {
+              "destinations": [0, 1, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 2045
+            },
+            {
+              "destinations": [0, 2, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 36810
+            },
+            {
+              "destinations": [0, 2, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 100204
+            },
+            {
+              "destinations": [1, 0, 5, 3],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 26585
+            },
+            {
+              "destinations": [1, 0, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 179959
+            },
+            {
+              "destinations": [1, 2, 5, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 51125
+            },
+            {
+              "destinations": [1, 2, 5, 3],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 2045
+            },
+            {
+              "destinations": [1, 2, 5, 3],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 6135
+            },
+            {
+              "destinations": [1, 2, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 2045
+            },
+            {
+              "destinations": [1, 2, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 20450
+            },
+            {
+              "destinations": [1, 3, 5, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2045
+            },
+            {
+              "destinations": [1, 3, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 2045
+            },
+            {
+              "destinations": [1, 3, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 8180
+            },
+            {
+              "destinations": [2, 3, 5, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 16360
+            },
+            {
+              "destinations": [2, 3, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 2045
+            },
+            {
+              "destinations": [2, 3, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2045
+            },
+            {
+              "destinations": [2, 3, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 2045
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 489,
+          "outs": 0
+        },
+        {
+          "baseMask": 6,
+          "choices": [
+            {
+              "destinations": [0, 5, 2, 3],
+              "rbi": [false, false, false, false],
+              "weight": 625000
+            },
+            {
+              "destinations": [0, 5, 2, 4],
+              "rbi": [false, false, false, true],
+              "weight": 80000
+            },
+            {
+              "destinations": [0, 5, 3, 4],
+              "rbi": [false, false, false, true],
+              "weight": 175000
+            },
+            {
+              "destinations": [1, 5, 0, 3],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 5000
+            },
+            {
+              "destinations": [1, 5, 0, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 22500
+            },
+            {
+              "destinations": [1, 5, 2, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 17500
+            },
+            {
+              "destinations": [1, 5, 2, 3],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 5000
+            },
+            {
+              "destinations": [1, 5, 2, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 7500
+            },
+            {
+              "destinations": [1, 5, 2, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 5000
+            },
+            {
+              "destinations": [1, 5, 3, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 25000
+            },
+            {
+              "destinations": [1, 5, 3, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 10000
+            },
+            {
+              "destinations": [1, 5, 3, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 7500
+            },
+            {
+              "destinations": [2, 5, 3, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 10000
+            },
+            {
+              "destinations": [2, 5, 3, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 2500
+            },
+            {
+              "destinations": [2, 5, 4, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 2500
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 400,
+          "outs": 0
+        },
+        {
+          "baseMask": 7,
+          "choices": [
+            {
+              "destinations": [0, 0, 2, 3],
+              "rbi": [false, false, false, false],
+              "weight": 222749
+            },
+            {
+              "destinations": [0, 1, 2, 3],
+              "rbi": [false, false, false, false],
+              "weight": 343602
+            },
+            {
+              "destinations": [0, 1, 3, 4],
+              "rbi": [false, false, false, true],
+              "weight": 2370
+            },
+            {
+              "destinations": [0, 2, 3, 4],
+              "rbi": [false, false, false, true],
+              "weight": 75829
+            },
+            {
+              "destinations": [0, 3, 4, 4],
+              "rbi": [false, false, false, false],
+              "weight": 2370
+            },
+            {
+              "destinations": [1, 0, 3, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 149289
+            },
+            {
+              "destinations": [1, 0, 4, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 11848
+            },
+            {
+              "destinations": [1, 2, 0, 3],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2370
+            },
+            {
+              "destinations": [1, 2, 0, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2370
+            },
+            {
+              "destinations": [1, 2, 0, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 30806
+            },
+            {
+              "destinations": [1, 2, 3, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 130332
+            },
+            {
+              "destinations": [1, 2, 3, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 11848
+            },
+            {
+              "destinations": [1, 2, 3, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 2370
+            },
+            {
+              "destinations": [1, 2, 3, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 7109
+            },
+            {
+              "destinations": [1, 2, 4, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2369
+            },
+            {
+              "destinations": [1, 3, 4, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 2369
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 422,
+          "outs": 0
+        },
+        {
+          "baseMask": 0,
+          "choices": [
+            {
+              "destinations": [0, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 985845
+            },
+            {
+              "destinations": [1, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 11796
+            },
+            {
+              "destinations": [2, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 2323
+            },
+            {
+              "destinations": [3, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 36
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 27552,
+          "outs": 1
+        },
+        {
+          "baseMask": 1,
+          "choices": [
+            {
+              "destinations": [0, 0, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 222892
+            },
+            {
+              "destinations": [0, 1, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 521825
+            },
+            {
+              "destinations": [0, 2, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 94608
+            },
+            {
+              "destinations": [0, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 1481
+            },
+            {
+              "destinations": [0, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 99
+            },
+            {
+              "destinations": [1, 0, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 136283
+            },
+            {
+              "destinations": [1, 2, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 4444
+            },
+            {
+              "destinations": [1, 2, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 9974
+            },
+            {
+              "destinations": [1, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 1086
+            },
+            {
+              "destinations": [1, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2963
+            },
+            {
+              "destinations": [1, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 99
+            },
+            {
+              "destinations": [2, 0, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2469
+            },
+            {
+              "destinations": [2, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 691
+            },
+            {
+              "destinations": [2, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 691
+            },
+            {
+              "destinations": [2, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 99
+            },
+            {
+              "destinations": [2, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 197
+            },
+            {
+              "destinations": [3, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 99
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 10126,
+          "outs": 1
+        },
+        {
+          "baseMask": 2,
+          "choices": [
+            {
+              "destinations": [0, 5, 2, 5],
+              "rbi": [false, false, false, false],
+              "weight": 564712
+            },
+            {
+              "destinations": [0, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "weight": 393832
+            },
+            {
+              "destinations": [0, 5, 4, 5],
+              "rbi": [false, false, true, false],
+              "weight": 758
+            },
+            {
+              "destinations": [1, 5, 0, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 16431
+            },
+            {
+              "destinations": [1, 5, 2, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 3286
+            },
+            {
+              "destinations": [1, 5, 2, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1264
+            },
+            {
+              "destinations": [1, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 10617
+            },
+            {
+              "destinations": [1, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1264
+            },
+            {
+              "destinations": [1, 5, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 2275
+            },
+            {
+              "destinations": [2, 5, 0, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2275
+            },
+            {
+              "destinations": [2, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 506
+            },
+            {
+              "destinations": [2, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 505
+            },
+            {
+              "destinations": [2, 5, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 2022
+            },
+            {
+              "destinations": [3, 5, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 253
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 3956,
+          "outs": 1
+        },
+        {
+          "baseMask": 3,
+          "choices": [
+            {
+              "destinations": [0, 0, 2, 5],
+              "rbi": [false, false, false, false],
+              "weight": 227519
+            },
+            {
+              "destinations": [0, 1, 2, 5],
+              "rbi": [false, false, false, false],
+              "weight": 412243
+            },
+            {
+              "destinations": [0, 1, 3, 5],
+              "rbi": [false, false, false, false],
+              "weight": 79632
+            },
+            {
+              "destinations": [0, 2, 3, 5],
+              "rbi": [false, false, false, false],
+              "weight": 99675
+            },
+            {
+              "destinations": [0, 2, 4, 5],
+              "rbi": [false, false, false, false],
+              "weight": 271
+            },
+            {
+              "destinations": [0, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "weight": 812
+            },
+            {
+              "destinations": [1, 0, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 128115
+            },
+            {
+              "destinations": [1, 0, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2979
+            },
+            {
+              "destinations": [1, 0, 4, 5],
+              "rbi": [false, false, true, false],
+              "reach": "fieldersChoice",
+              "weight": 542
+            },
+            {
+              "destinations": [1, 2, 0, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 18147
+            },
+            {
+              "destinations": [1, 2, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 4334
+            },
+            {
+              "destinations": [1, 2, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 15168
+            },
+            {
+              "destinations": [1, 2, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 542
+            },
+            {
+              "destinations": [1, 2, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 271
+            },
+            {
+              "destinations": [1, 3, 0, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 542
+            },
+            {
+              "destinations": [1, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 1625
+            },
+            {
+              "destinations": [1, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 3521
+            },
+            {
+              "destinations": [2, 0, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1625
+            },
+            {
+              "destinations": [2, 3, 0, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 271
+            },
+            {
+              "destinations": [2, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 1083
+            },
+            {
+              "destinations": [2, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1083
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 3692,
+          "outs": 1
+        },
+        {
+          "baseMask": 4,
+          "choices": [
+            {
+              "destinations": [0, 5, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 604775
+            },
+            {
+              "destinations": [0, 5, 5, 4],
+              "rbi": [false, false, false, false],
+              "weight": 1326
+            },
+            {
+              "destinations": [0, 5, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 194960
+            },
+            {
+              "destinations": [1, 5, 5, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 90186
+            },
+            {
+              "destinations": [1, 5, 5, 3],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 5305
+            },
+            {
+              "destinations": [1, 5, 5, 3],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1326
+            },
+            {
+              "destinations": [1, 5, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 3979
+            },
+            {
+              "destinations": [1, 5, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 3979
+            },
+            {
+              "destinations": [1, 5, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 10610
+            },
+            {
+              "destinations": [1, 5, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 49072
+            },
+            {
+              "destinations": [2, 5, 5, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 19894
+            },
+            {
+              "destinations": [2, 5, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 2652
+            },
+            {
+              "destinations": [2, 5, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 3979
+            },
+            {
+              "destinations": [2, 5, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 5305
+            },
+            {
+              "destinations": [3, 5, 5, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1326
+            },
+            {
+              "destinations": [3, 5, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 1326
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 754,
+          "outs": 1
+        },
+        {
+          "baseMask": 5,
+          "choices": [
+            {
+              "destinations": [0, 0, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 324913
+            },
+            {
+              "destinations": [0, 1, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 285714
+            },
+            {
+              "destinations": [0, 1, 5, 4],
+              "rbi": [false, false, false, false],
+              "weight": 1742
+            },
+            {
+              "destinations": [0, 2, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 12195
+            },
+            {
+              "destinations": [0, 2, 5, 4],
+              "rbi": [false, false, false, false],
+              "weight": 871
+            },
+            {
+              "destinations": [0, 2, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 103659
+            },
+            {
+              "destinations": [0, 3, 5, 4],
+              "rbi": [false, false, false, true],
+              "weight": 1742
+            },
+            {
+              "destinations": [0, 4, 5, 4],
+              "rbi": [false, false, false, false],
+              "weight": 871
+            },
+            {
+              "destinations": [1, 0, 5, 3],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 6098
+            },
+            {
+              "destinations": [1, 0, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1742
+            },
+            {
+              "destinations": [1, 0, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 166376
+            },
+            {
+              "destinations": [1, 2, 5, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 35714
+            },
+            {
+              "destinations": [1, 2, 5, 3],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 871
+            },
+            {
+              "destinations": [1, 2, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 871
+            },
+            {
+              "destinations": [1, 2, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 3484
+            },
+            {
+              "destinations": [1, 2, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 27875
+            },
+            {
+              "destinations": [1, 3, 5, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 871
+            },
+            {
+              "destinations": [1, 3, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 5227
+            },
+            {
+              "destinations": [2, 0, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 871
+            },
+            {
+              "destinations": [2, 0, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 5227
+            },
+            {
+              "destinations": [2, 3, 5, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 4356
+            },
+            {
+              "destinations": [2, 3, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1742
+            },
+            {
+              "destinations": [2, 3, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 1742
+            },
+            {
+              "destinations": [2, 3, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 4355
+            },
+            {
+              "destinations": [3, 4, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 871
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 1148,
+          "outs": 1
+        },
+        {
+          "baseMask": 6,
+          "choices": [
+            {
+              "destinations": [0, 5, 2, 3],
+              "rbi": [false, false, false, false],
+              "weight": 485294
+            },
+            {
+              "destinations": [0, 5, 2, 4],
+              "rbi": [false, false, false, true],
+              "weight": 78431
+            },
+            {
+              "destinations": [0, 5, 3, 4],
+              "rbi": [false, false, false, false],
+              "weight": 2451
+            },
+            {
+              "destinations": [0, 5, 3, 4],
+              "rbi": [false, false, false, true],
+              "weight": 220588
+            },
+            {
+              "destinations": [0, 5, 4, 4],
+              "rbi": [false, false, false, true],
+              "weight": 1226
+            },
+            {
+              "destinations": [0, 5, 4, 4],
+              "rbi": [false, false, true, true],
+              "weight": 1226
+            },
+            {
+              "destinations": [1, 5, 0, 3],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 4902
+            },
+            {
+              "destinations": [1, 5, 0, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 9804
+            },
+            {
+              "destinations": [1, 5, 2, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 34314
+            },
+            {
+              "destinations": [1, 5, 2, 3],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 2451
+            },
+            {
+              "destinations": [1, 5, 2, 3],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2451
+            },
+            {
+              "destinations": [1, 5, 2, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1226
+            },
+            {
+              "destinations": [1, 5, 2, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 1226
+            },
+            {
+              "destinations": [1, 5, 2, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 4902
+            },
+            {
+              "destinations": [1, 5, 3, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 87010
+            },
+            {
+              "destinations": [1, 5, 3, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 4902
+            },
+            {
+              "destinations": [1, 5, 3, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 4902
+            },
+            {
+              "destinations": [1, 5, 3, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 25735
+            },
+            {
+              "destinations": [1, 5, 4, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 3676
+            },
+            {
+              "destinations": [1, 5, 4, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 2451
+            },
+            {
+              "destinations": [2, 5, 0, 3],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2451
+            },
+            {
+              "destinations": [2, 5, 3, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 11029
+            },
+            {
+              "destinations": [2, 5, 3, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1226
+            },
+            {
+              "destinations": [2, 5, 3, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 1225
+            },
+            {
+              "destinations": [2, 5, 4, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1225
+            },
+            {
+              "destinations": [2, 5, 4, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2451
+            },
+            {
+              "destinations": [2, 5, 4, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 1225
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 816,
+          "outs": 1
+        },
+        {
+          "baseMask": 7,
+          "choices": [
+            {
+              "destinations": [0, 0, 2, 3],
+              "rbi": [false, false, false, false],
+              "weight": 313853
+            },
+            {
+              "destinations": [0, 1, 2, 3],
+              "rbi": [false, false, false, false],
+              "weight": 290043
+            },
+            {
+              "destinations": [0, 1, 2, 4],
+              "rbi": [false, false, false, true],
+              "weight": 1082
+            },
+            {
+              "destinations": [0, 2, 3, 4],
+              "rbi": [false, false, false, false],
+              "weight": 2165
+            },
+            {
+              "destinations": [0, 2, 3, 4],
+              "rbi": [false, false, false, true],
+              "weight": 101732
+            },
+            {
+              "destinations": [1, 0, 3, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 149351
+            },
+            {
+              "destinations": [1, 0, 4, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 6494
+            },
+            {
+              "destinations": [1, 2, 0, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 8658
+            },
+            {
+              "destinations": [1, 2, 3, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 70346
+            },
+            {
+              "destinations": [1, 2, 3, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 1082
+            },
+            {
+              "destinations": [1, 2, 3, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 6494
+            },
+            {
+              "destinations": [1, 2, 3, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 4329
+            },
+            {
+              "destinations": [1, 2, 3, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 17316
+            },
+            {
+              "destinations": [1, 2, 4, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1082
+            },
+            {
+              "destinations": [1, 2, 4, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1082
+            },
+            {
+              "destinations": [1, 2, 4, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 1082
+            },
+            {
+              "destinations": [1, 2, 4, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 3247
+            },
+            {
+              "destinations": [1, 3, 0, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 2165
+            },
+            {
+              "destinations": [1, 3, 4, 0],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1082
+            },
+            {
+              "destinations": [1, 3, 4, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1082
+            },
+            {
+              "destinations": [1, 3, 4, 4],
+              "rbi": [false, false, false, true],
+              "reach": "error",
+              "weight": 1082
+            },
+            {
+              "destinations": [1, 3, 4, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 4329
+            },
+            {
+              "destinations": [2, 0, 4, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 8658
+            },
+            {
+              "destinations": [2, 3, 0, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 1082
+            },
+            {
+              "destinations": [2, 3, 4, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1082
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 924,
+          "outs": 1
+        },
+        {
+          "baseMask": 0,
+          "choices": [
+            {
+              "destinations": [0, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 984391
+            },
+            {
+              "destinations": [1, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 13085
+            },
+            {
+              "destinations": [2, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 2384
+            },
+            {
+              "destinations": [3, 5, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 140
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 21398,
+          "outs": 2
+        },
+        {
+          "baseMask": 1,
+          "choices": [
+            {
+              "destinations": [0, 1, 5, 5],
+              "rbi": [false, false, false, false],
+              "weight": 987197
+            },
+            {
+              "destinations": [1, 2, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 5864
+            },
+            {
+              "destinations": [1, 2, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2150
+            },
+            {
+              "destinations": [1, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 2346
+            },
+            {
+              "destinations": [1, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 293
+            },
+            {
+              "destinations": [1, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 293
+            },
+            {
+              "destinations": [2, 3, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 782
+            },
+            {
+              "destinations": [2, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 880
+            },
+            {
+              "destinations": [3, 4, 5, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 195
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 10232,
+          "outs": 2
+        },
+        {
+          "baseMask": 2,
+          "choices": [
+            {
+              "destinations": [0, 5, 2, 5],
+              "rbi": [false, false, false, false],
+              "weight": 984087
+            },
+            {
+              "destinations": [1, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 8150
+            },
+            {
+              "destinations": [1, 5, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 388
+            },
+            {
+              "destinations": [1, 5, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 5240
+            },
+            {
+              "destinations": [2, 5, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 1941
+            },
+            {
+              "destinations": [3, 5, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 194
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 5153,
+          "outs": 2
+        },
+        {
+          "baseMask": 3,
+          "choices": [
+            {
+              "destinations": [0, 1, 2, 5],
+              "rbi": [false, false, false, false],
+              "weight": 984062
+            },
+            {
+              "destinations": [1, 2, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 6603
+            },
+            {
+              "destinations": [1, 2, 3, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 2049
+            },
+            {
+              "destinations": [1, 2, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 1594
+            },
+            {
+              "destinations": [1, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 2732
+            },
+            {
+              "destinations": [1, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 228
+            },
+            {
+              "destinations": [2, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 2049
+            },
+            {
+              "destinations": [2, 3, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 228
+            },
+            {
+              "destinations": [2, 4, 4, 5],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 455
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 4392,
+          "outs": 2
+        },
+        {
+          "baseMask": 4,
+          "choices": [
+            {
+              "destinations": [0, 5, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 988199
+            },
+            {
+              "destinations": [1, 5, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 10262
+            },
+            {
+              "destinations": [2, 5, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 1026
+            },
+            {
+              "destinations": [3, 5, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 513
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 1949,
+          "outs": 2
+        },
+        {
+          "baseMask": 5,
+          "choices": [
+            {
+              "destinations": [0, 1, 5, 3],
+              "rbi": [false, false, false, false],
+              "weight": 986534
+            },
+            {
+              "destinations": [1, 2, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 7481
+            },
+            {
+              "destinations": [1, 2, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 1496
+            },
+            {
+              "destinations": [1, 2, 5, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 499
+            },
+            {
+              "destinations": [1, 3, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 998
+            },
+            {
+              "destinations": [2, 3, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 1995
+            },
+            {
+              "destinations": [2, 4, 5, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 997
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 2005,
+          "outs": 2
+        },
+        {
+          "baseMask": 6,
+          "choices": [
+            {
+              "destinations": [0, 5, 2, 3],
+              "rbi": [false, false, false, false],
+              "weight": 988772
+            },
+            {
+              "destinations": [1, 5, 3, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 5240
+            },
+            {
+              "destinations": [1, 5, 4, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 4491
+            },
+            {
+              "destinations": [2, 5, 4, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 1497
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 1336,
+          "outs": 2
+        },
+        {
+          "baseMask": 7,
+          "choices": [
+            {
+              "destinations": [0, 1, 2, 3],
+              "rbi": [false, false, false, false],
+              "weight": 986346
+            },
+            {
+              "destinations": [1, 2, 3, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 5202
+            },
+            {
+              "destinations": [1, 2, 3, 4],
+              "rbi": [false, false, false, false],
+              "reach": "fieldersChoice",
+              "weight": 650
+            },
+            {
+              "destinations": [1, 2, 3, 4],
+              "rbi": [false, false, false, true],
+              "reach": "fieldersChoice",
+              "weight": 1300
+            },
+            {
+              "destinations": [1, 3, 4, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 3251
+            },
+            {
+              "destinations": [2, 3, 4, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 1951
+            },
+            {
+              "destinations": [2, 4, 4, 4],
+              "rbi": [false, false, false, false],
+              "reach": "error",
+              "weight": 1300
+            }
+          ],
+          "event": "otherContact",
+          "fallback": false,
+          "observations": 1538,
+          "outs": 2
+        }
+      ],
+      "id": "transitions:d2206ab52b6a0bb9a7dec86168fb868dd19acd33720df47ad14945b494ba18cb",
+      "modelVersion": "retrosheet-contact-transitions-v1",
+      "sourceId": "retrosheet:1f725399cff54a7c924f4d71cd1dedbdc393f025b4a6ef3b3dded2ea3fe7a017"
+    },
+    "maxInnings": 100,
+    "maxPlateAppearances": 10000
+  },
+  "detail": "summary",
+  "gameSchemaVersion": "1.2.0",
+  "games": 162,
+  "modelVersion": "round-robin-season-v1",
+  "opponentSetKind": "observedFixedLineups",
+  "opponents": [
+    {
+      "id": "2024.CHA",
+      "lineup": [
+        {
+          "id": "2024.CHA:lahman:julksco01",
+          "profileId": "prepared:1636cf01aac057bf1b4ff611679ca2338933e8dfab204e2c86f26e06a5b54314"
+        },
+        {
+          "id": "2024.CHA:lahman:roberlu01",
+          "profileId": "prepared:e0b9dc0635c1a2acbc141e97764ce489e75371696b71d699da5b532d5615fb90"
+        },
+        {
+          "id": "2024.CHA:lahman:beninan01",
+          "profileId": "prepared:d5f4aa29c6a97c107af5f408b2418a4b907da3946037f850f8395aad35017796"
+        },
+        {
+          "id": "2024.CHA:lahman:vaughan01",
+          "profileId": "prepared:9239dd3e1cb51b5098c77662678ab87fd05c8f0dee4c4998522fe35c9140f5fa"
+        },
+        {
+          "id": "2024.CHA:lahman:sheetga01",
+          "profileId": "prepared:32b18f97ea2c53bfe5c12ebcc3d04618af3b2398f30482b6da7dc8f956fca8f7"
+        },
+        {
+          "id": "2024.CHA:lahman:leeko01",
+          "profileId": "prepared:a3b5f7e09f5f9330826ebe3b387843a1cb14ae61bedf32738c8686f6f54fd2c3"
+        },
+        {
+          "id": "2024.CHA:lahman:sosale01",
+          "profileId": "prepared:8ffc49fb36e86a8313fcadaee2d2bb47de8bbf97492d19bc0305af40632e3be3"
+        },
+        {
+          "id": "2024.CHA:lahman:vargami01",
+          "profileId": "prepared:80c076e40f0089ebe0957ffe7b17c34054dca4062326ab802da7686b933f6184"
+        },
+        {
+          "id": "2024.CHA:lahman:amayaja01",
+          "profileId": "prepared:6bbfa48c1e399233a9bbfb780b6f85bf008f9efeb23a358732a3b8a520f88183"
+        }
+      ]
+    }
+  ],
+  "pitchingEnvironment": {
+    "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+    "mode": "leagueAverage"
+  },
+  "profiles": [
+    {
+      "id": "prepared:1636cf01aac057bf1b4ff611679ca2338933e8dfab204e2c86f26e06a5b54314",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:julksco01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:87a912561f514bfb5d72d305057254604711eca0dfd8f33b0865be2eb5eae015",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 189,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 40209,
+        "hitByPitch": 5749,
+        "homeRun": 23274,
+        "otherContact": 457548,
+        "single": 143502,
+        "strikeout": 246476,
+        "triple": 1984,
+        "walk": 81258
+      }
+    },
+    {
+      "id": "prepared:1cd5322847186f440d36733731eaf2e3b88d71a5da7c3a1f13b31d67ad271e7f",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:wellsau01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:b2e53192a320eb6dd0680e8ea1feefc94d7663ba2a7c6e6c4ffd1e87264c72d2",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 414,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 43907,
+        "hitByPitch": 11946,
+        "homeRun": 31423,
+        "otherContact": 457970,
+        "single": 128085,
+        "strikeout": 218775,
+        "triple": 2918,
+        "walk": 104976
+      }
+    },
+    {
+      "id": "prepared:2749b16cce24895c156f212ac93321f214b14976b450a1a6e730fe26741b458c",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:torregl01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:c77381b51317d0bb3485d8b2c992c013acf60e24588dc4a2a9ae161943a9b051",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 665,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 40463,
+        "hitByPitch": 6107,
+        "homeRun": 24586,
+        "otherContact": 457929,
+        "single": 162264,
+        "strikeout": 212358,
+        "triple": 892,
+        "walk": 95401
+      }
+    },
+    {
+      "id": "prepared:2b56daf2c9102f009073e556a237a2c241f7d8b6c9e4d17086a638024bca3927",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:rizzoan01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:f6b267933678ab30487235a7096c2a1d674547a1b15a382f2b16cd9f6d50ad55",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 375,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 35945,
+        "hitByPitch": 19626,
+        "homeRun": 24488,
+        "otherContact": 500129,
+        "single": 149538,
+        "strikeout": 192977,
+        "triple": 1342,
+        "walk": 75955
+      }
+    },
+    {
+      "id": "prepared:32b18f97ea2c53bfe5c12ebcc3d04618af3b2398f30482b6da7dc8f956fca8f7",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:sheetga01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:24c950b035e54e17b29e50e95756fa2d87c8e305994b5af75a5c9d7767d8c089",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 501,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 46717,
+        "hitByPitch": 8931,
+        "homeRun": 22964,
+        "otherContact": 475000,
+        "single": 141370,
+        "strikeout": 217192,
+        "triple": 2536,
+        "walk": 85290
+      }
+    },
+    {
+      "id": "prepared:6527ccb77f515c76651bf317542e5919f38c8e02b00e4e4293e2629ac4d15b6c",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:verdual01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:2d9d5634662c6dac32efac02fdb353c755355dc5c47756a4284e05d7d7e4b002",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 621,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 45257,
+        "hitByPitch": 3966,
+        "homeRun": 23500,
+        "otherContact": 528806,
+        "single": 144230,
+        "strikeout": 171067,
+        "triple": 2182,
+        "walk": 80992
+      }
+    },
+    {
+      "id": "prepared:65c9abc4c4550ea60913ca3961e43b7b79669d9b1915c7605d5e0f52425ecf6d",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:sotoju01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:c7974a06ba0f913dac195d3d4676c650728414261bd9db1c7a82611409523eae",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 713,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 43569,
+        "hitByPitch": 6856,
+        "homeRun": 51773,
+        "otherContact": 420778,
+        "single": 130544,
+        "strikeout": 181035,
+        "triple": 5251,
+        "walk": 160194
+      }
+    },
+    {
+      "id": "prepared:6bbfa48c1e399233a9bbfb780b6f85bf008f9efeb23a358732a3b8a520f88183",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:amayaja01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:6d99dde0d3df88d07e9414aaea66cb4269b4bb6933121ad1adc4ab5be3c25f77",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 71,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 35439,
+        "hitByPitch": 8253,
+        "homeRun": 22279,
+        "otherContact": 437376,
+        "single": 146416,
+        "strikeout": 271636,
+        "triple": 2847,
+        "walk": 75754
+      }
+    },
+    {
+      "id": "prepared:80c076e40f0089ebe0957ffe7b17c34054dca4062326ab802da7686b933f6184",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:vargami01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:4c102307089fbc3a8b87cdfe279fcbbbd73fa419ddec519f69376108efd5989e",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 157,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 32613,
+        "hitByPitch": 14777,
+        "homeRun": 22586,
+        "otherContact": 483364,
+        "single": 105868,
+        "strikeout": 244096,
+        "triple": 2162,
+        "walk": 94534
+      }
+    },
+    {
+      "id": "prepared:8ffc49fb36e86a8313fcadaee2d2bb47de8bbf97492d19bc0305af40632e3be3",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:sosale01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:18e3d0691eb74ca4ef0ef194400c75a6fd785fa78dea7f973a26a88b4f5dade2",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 369,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 38156,
+        "hitByPitch": 9246,
+        "homeRun": 24786,
+        "otherContact": 488656,
+        "single": 170889,
+        "strikeout": 216598,
+        "triple": 1356,
+        "walk": 50313
+      }
+    },
+    {
+      "id": "prepared:9239dd3e1cb51b5098c77662678ab87fd05c8f0dee4c4998522fe35c9140f5fa",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:vaughan01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:9a7e8e74d7e2afd188af041ba58eaef1f5e49fecdead62935cd4833870ab85b6",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 619,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 47434,
+        "hitByPitch": 10116,
+        "homeRun": 30760,
+        "otherContact": 478578,
+        "single": 145802,
+        "strikeout": 218179,
+        "triple": 2173,
+        "walk": 66958
+      }
+    },
+    {
+      "id": "prepared:92d3fc7721c298cb4192cf6107eae0bcdc312a6fd4a98e02253671287cb0c95e",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:volpean01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:05068224929f16394394497ed89775dffe69863537741554b1dafc04973f190a",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 688,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 40317,
+        "hitByPitch": 7056,
+        "homeRun": 20411,
+        "otherContact": 472878,
+        "single": 155942,
+        "strikeout": 228328,
+        "triple": 8810,
+        "walk": 66258
+      }
+    },
+    {
+      "id": "prepared:9b67ab15fcdb919470b9df068d755305ec82dfac439294a42c028f96fb39ba8b",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:judgeaa01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:7fd53ce7d8fecf98943e5d5edd8fbd6ce181fe408486825c076589132af31218",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 703,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 49509,
+        "hitByPitch": 12472,
+        "homeRun": 71100,
+        "otherContact": 332361,
+        "single": 126159,
+        "strikeout": 240422,
+        "triple": 1965,
+        "walk": 166012
+      }
+    },
+    {
+      "id": "prepared:a3b5f7e09f5f9330826ebe3b387843a1cb14ae61bedf32738c8686f6f54fd2c3",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:leeko01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:4c7bbd4d8719dc4788e40f3e0222827046ec0ede7aee657c8b3cb4304e7a78d4",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 394,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 38054,
+        "hitByPitch": 3765,
+        "homeRun": 30366,
+        "otherContact": 450385,
+        "single": 135823,
+        "strikeout": 282177,
+        "triple": 2983,
+        "walk": 56447
+      }
+    },
+    {
+      "id": "prepared:d5f4aa29c6a97c107af5f408b2418a4b907da3946037f850f8395aad35017796",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:beninan01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:d75434ebba64a57cf20d4c04f1b7ad0d2f76cda192d0066e169807d5fb2239bb",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 522,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 39778,
+        "hitByPitch": 4491,
+        "homeRun": 36223,
+        "otherContact": 505680,
+        "single": 135841,
+        "strikeout": 196909,
+        "triple": 1069,
+        "walk": 80009
+      }
+    },
+    {
+      "id": "prepared:ded16054a4878f0b47ee88c02f682c903aabdf3159383af78f0b00b387da73b1",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:stantmi03",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:54553850c58479dc93710b6bac38e3e636a291beb6e5c9cffc814aa292307f53",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 459,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 43538,
+        "hitByPitch": 6442,
+        "homeRun": 50312,
+        "otherContact": 408655,
+        "single": 119723,
+        "strikeout": 287161,
+        "triple": 1171,
+        "walk": 82998
+      }
+    },
+    {
+      "id": "prepared:e0b9dc0635c1a2acbc141e97764ce489e75371696b71d699da5b532d5615fb90",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:roberlu01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:26436372dca8e9d2c833315e969f3817ac71274ea153502f761adc0bbfa4d352",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 424,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 44309,
+        "hitByPitch": 6797,
+        "homeRun": 32164,
+        "otherContact": 410123,
+        "single": 134309,
+        "strikeout": 299594,
+        "triple": 1237,
+        "walk": 71467
+      }
+    },
+    {
+      "id": "prepared:fc8395df191dd7fc794a3ef78991b83d779067a9dbd74c9fc9377084fbb68c57",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:cabreos01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:d6ae23d02f690738a44d8ba132721388e43cab39ceceba20eb042330d4667bee",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 326,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 37596,
+        "hitByPitch": 6183,
+        "homeRun": 26924,
+        "otherContact": 486791,
+        "single": 160714,
+        "strikeout": 208355,
+        "triple": 1467,
+        "walk": 71970
+      }
+    }
+  ],
+  "rulesVersion": "contextual-nine-inning-v1",
+  "sampling": { "rngVersion": "splitmix64-v1" },
+  "schemaVersion": "1.0.0",
+  "seed": "20261025",
+  "seedDerivationVersion": "splitmix64-index-v1",
+  "userLineupKind": "observedFixedLineups",
+  "userTeam": {
+    "id": "2024.NYA",
+    "lineup": [
+      {
+        "id": "2024.NYA:lahman:volpean01",
+        "profileId": "prepared:92d3fc7721c298cb4192cf6107eae0bcdc312a6fd4a98e02253671287cb0c95e"
+      },
+      {
+        "id": "2024.NYA:lahman:sotoju01",
+        "profileId": "prepared:65c9abc4c4550ea60913ca3961e43b7b79669d9b1915c7605d5e0f52425ecf6d"
+      },
+      {
+        "id": "2024.NYA:lahman:judgeaa01",
+        "profileId": "prepared:9b67ab15fcdb919470b9df068d755305ec82dfac439294a42c028f96fb39ba8b"
+      },
+      {
+        "id": "2024.NYA:lahman:verdual01",
+        "profileId": "prepared:6527ccb77f515c76651bf317542e5919f38c8e02b00e4e4293e2629ac4d15b6c"
+      },
+      {
+        "id": "2024.NYA:lahman:stantmi03",
+        "profileId": "prepared:ded16054a4878f0b47ee88c02f682c903aabdf3159383af78f0b00b387da73b1"
+      },
+      {
+        "id": "2024.NYA:lahman:rizzoan01",
+        "profileId": "prepared:2b56daf2c9102f009073e556a237a2c241f7d8b6c9e4d17086a638024bca3927"
+      },
+      {
+        "id": "2024.NYA:lahman:torregl01",
+        "profileId": "prepared:2749b16cce24895c156f212ac93321f214b14976b450a1a6e730fe26741b458c"
+      },
+      {
+        "id": "2024.NYA:lahman:wellsau01",
+        "profileId": "prepared:1cd5322847186f440d36733731eaf2e3b88d71a5da7c3a1f13b31d67ad271e7f"
+      },
+      {
+        "id": "2024.NYA:lahman:cabreos01",
+        "profileId": "prepared:fc8395df191dd7fc794a3ef78991b83d779067a9dbd74c9fc9377084fbb68c57"
+      }
+    ]
+  }
+}

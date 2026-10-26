@@ -34,7 +34,8 @@ jobs:
       - run: chmod +x target/release/examples/season
       - run: npm run build:pilot
       - run: npm run types:api
-      - run: git diff --exit-code -- services/api/worker-configuration.d.ts
+      # The mounted workspace belongs to the host runner, not container root.
+      - run: git -c safe.directory="$GITHUB_WORKSPACE" diff --exit-code -- services/api/worker-configuration.d.ts
       - run: npm run typecheck
       - run: npm run lint
       - run: npm run format:check

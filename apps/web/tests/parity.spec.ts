@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { fixture, nativeResult, session } from './helpers';
+import { fixture, largeFixture, nativeResult, session } from './helpers';
 
 for (const seed of ['0', '9007199254740993', '18446744073709551615']) {
   test(`native/browser full-season parity, summary/events, seed ${seed}`, async ({
@@ -27,6 +27,20 @@ for (const seed of ['0', '9007199254740993', '18446744073709551615']) {
       // box, runner, credited event, transition index and engine/model version.
       expect(actual).toEqual(expected);
       expect(actual.input.seed).toBe(seed);
+      const compact = await browser.evaluate(
+        (worker, request) => worker.send(request),
+        {
+          type: 'simulate' as const,
+          requestId: `compact-${detail}`,
+          inputJson: JSON.stringify(input),
+          output: 'summary' as const,
+        },
+      );
+      expect(compact.type).toBe('result');
+      if (compact.type !== 'result') throw new Error(JSON.stringify(compact));
+      expect(compact.summary).toEqual(response.summary);
+      expect(compact).not.toHaveProperty('resultJson');
+      expect(compact.timings.resultJsonBytes).toBeLessThan(300);
       if (detail === 'events')
         expect(
           actual.games.every(
@@ -41,6 +55,46 @@ for (const seed of ['0', '9007199254740993', '18446744073709551615']) {
     await browser.evaluate((worker) => worker.terminate());
   });
 }
+
+test('29 synthetic opponents and 270 profiles preserve exact full/native results', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const worker = await session(page);
+  const input = {
+    ...largeFixture(),
+    seed: '18446744073709551615',
+    detail: 'events',
+  };
+  expect(input.opponents).toHaveLength(29);
+  expect(input.profiles).toHaveLength(270);
+  const expected = nativeResult(input);
+  const response = await worker.evaluate(
+    (instance, request) => instance.send(request),
+    {
+      type: 'simulate' as const,
+      requestId: 'capacity',
+      inputJson: JSON.stringify(input),
+      output: 'full' as const,
+    },
+  );
+  expect(response.type).toBe('result');
+  if (response.type !== 'result') throw new Error(JSON.stringify(response));
+  expect(JSON.parse(response.resultJson!)).toEqual(expected);
+  const compact = await worker.evaluate(
+    (instance, request) => instance.send(request),
+    {
+      type: 'simulate' as const,
+      requestId: 'capacity-compact',
+      inputJson: JSON.stringify(input),
+      output: 'summary' as const,
+    },
+  );
+  expect(compact.type).toBe('result');
+  if (compact.type !== 'result') throw new Error(JSON.stringify(compact));
+  expect(compact.summary).toEqual(response.summary);
+  await worker.evaluate((instance) => instance.terminate());
+});
 
 test('structured errors, aborts and recovery; initialization runs once', async ({
   page,

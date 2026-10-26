@@ -13,8 +13,10 @@
   },
   "scripts": {
     "build:wasm": "node scripts/build-wasm.mjs",
-    "test:browser": "playwright test --project chromium",
-    "bench:browser": "playwright test --project performance",
+    "test:browser": "playwright test --project chromium --project firefox --project webkit --project mobile-chromium --project mobile-webkit --project deployment",
+    "test:edge": "playwright test --project edge",
+    "bench:browser": "playwright test --project performance-chromium --project performance-firefox --project performance-webkit",
+    "bench:edge": "playwright test --project performance-edge",
     "dev:web": "npm run dev --workspace @draftory/web",
     "dev:api": "npm run dev --workspace @draftory/api",
     "build": "npm run build --workspaces --if-present",

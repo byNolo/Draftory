@@ -15,6 +15,12 @@ export interface WorkerTimings {
   initializationMs: number;
   // Includes JSON decode, core simulation, JSON encode and WASM string copies.
   wasmCallMs: number;
+  inputParsingMs: number;
+  simulationMs: number;
+  serializationMs: number;
+  resultJsonBytes: number;
+  wasmMemoryBeforeBytes: number;
+  wasmMemoryAfterBytes: number;
   resultProcessingMs: number;
   workerTotalMs: number;
 }
@@ -38,11 +44,24 @@ export type WorkerRequest =
       type: 'simulate';
       requestId: string;
       inputJson: string;
-      output: 'summary' | 'full';
+      // summaryBaseline keeps the M5A full-serialization path as a benchmark control.
+      output: 'summary' | 'full' | 'summaryBaseline';
     };
 
 export type WorkerResponse =
-  | { type: 'ready'; requestId: string; initializationMs: number }
+  | {
+      type: 'ready';
+      requestId: string;
+      initializationMs: number;
+      wasmMemoryBytes: number;
+      resources: {
+        name: string;
+        duration: number;
+        transferSize: number;
+        encodedBodySize: number;
+        decodedBodySize: number;
+      }[];
+    }
   | {
       type: 'result';
       requestId: string;

@@ -1,5 +1,9 @@
 # Browser season integration (M5A)
 
+M5B extends this foundation with a compact Rust summary path, phase/memory
+instrumentation, additional browsers and local Pages delivery tests. See
+[current M5B commands and measurement definitions](BROWSER_VALIDATION.md).
+
 React now runs the existing 162-game simulator in a dedicated module Web Worker.
 This is a developer harness, with no API/data retrieval, drafting or final game UI.
 The [M4 calibration limitations](../data/validation/season-calibration-v1.md) still
@@ -12,12 +16,12 @@ historical accuracy. No simulation rules, statistical policies or RNG versions c
 `crates/sim-wasm` is a separate, small adapter because it isolates wasm-bindgen
 and runtime JSON serialization from the portable engine. This follows the optional
 adapter layout in [architecture](ARCHITECTURE.md); the core remains unchanged.
-The adapter is 0.1.0, the engine 0.4.0, season input/result 1.0.0 and contextual
+The initial adapter was 0.1.0 (M5B is 0.2.0), the engine is 0.4.0, season input/result 1.0.0 and contextual
 game input 1.2.0. Existing contracts, source fixtures and goldens are reused.
 Actual browser parity, measurements and compatibility limits are recorded in the
 [M5A execution report](../data/validation/browser-wasm-v1.md).
 
-The only WASM export is `simulate_season_json(string) -> string`, throwing a JSON
+The full-result WASM export is `simulate_season_json(string) -> string`, throwing a JSON
 error string on failure. Native `simulate_json` exercises the identical
 parse/validate/simulate/serialize path. Errors distinguish `invalidJson`
 (including wrong JSON types), `invalidInput`, `gameFailed` (with game number),
@@ -82,14 +86,14 @@ npm run build:wasm
 npm run typecheck
 npm run lint
 npm run build
-npx playwright install chromium
+npx playwright install chromium firefox webkit
 npm run test:browser
 npm run bench:browser
 ```
 
-Playwright starts a local Vite preview on port 4173 and stops it afterward. Linux
-hosts may need `npx playwright install --with-deps chromium`. To use an installed
-Edge instead, set `PLAYWRIGHT_CHANNEL=msedge` in the shell; no remote browser service
+Playwright now starts local Pages on port 4173 and stops it afterward. Linux
+hosts may need `npx playwright install --with-deps chromium firefox webkit`. To use an installed
+Edge, run `npm run test:edge` / `npm run bench:edge`; no remote browser service
 is required. Tests never need raw historical downloads or Cloudflare resources.
 
 ## Correctness and performance scope

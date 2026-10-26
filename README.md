@@ -130,13 +130,18 @@ parity against native release output, including complete event traces:
 cargo build --locked --release --examples
 npm run build:wasm
 npm run build
-npx playwright install chromium
+npx playwright install chromium firefox webkit
 npm run test:browser
 npm run bench:browser
 ```
 
 Browser tests use the production Vite build. Detailed measurement scope and browser
-compatibility are documented in [the M5A guide](docs/BROWSER_WASM.md).
+compatibility are documented in [the M5B guide](docs/BROWSER_VALIDATION.md).
+`test:browser` covers Chromium, Firefox, WebKit, mobile emulation and a local
+deployment-change test. Installed Edge is optional via `npm run test:edge`;
+`npm run bench:edge` measures that browser. Tests use local Pages and the production
+headers without provisioning resources. Phone LAN smoke-test instructions and
+the limits of emulation are in the M5B guide.
 
 M4 adds bounded, seeded 162-game seasons and an offline Python-driven historical
 comparison workflow. The season fixture uses verified 2024 NYA/CHA starting

@@ -110,6 +110,9 @@ export default function App() {
         {(status === 'stopped' || status === 'error') && (
           <button onClick={restart}>Restart worker</button>
         )}
+        {status === 'error' && (
+          <button onClick={() => window.location.reload()}>Reload app</button>
+        )}
       </div>
       {initializationMs !== undefined && (
         <p>WASM initialization: {initializationMs.toFixed(2)} ms</p>

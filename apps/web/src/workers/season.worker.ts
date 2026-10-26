@@ -1,5 +1,9 @@
 /// <reference lib="webworker" />
-import init, { simulate_season_json } from '../wasm/sim_wasm';
+import init, {
+  simulate_season_json,
+  simulate_season_summary_json,
+  last_run_measurements,
+} from '../wasm/sim_wasm';
 import wasmUrl from '../wasm/sim_wasm_bg.wasm?url';
 import type {
   SeasonSummary,
@@ -11,11 +15,12 @@ import type {
 const scope = self as unknown as DedicatedWorkerGlobalScope;
 let initialization: Promise<number> | undefined;
 let busy = false;
+let memory: WebAssembly.Memory;
 
 function initialize() {
   initialization ??= (async () => {
     const start = performance.now();
-    await init({ module_or_path: wasmUrl });
+    memory = (await init({ module_or_path: wasmUrl })).memory;
     return performance.now() - start;
   })();
   return initialization;
@@ -76,12 +81,42 @@ scope.onmessage = async ({ data }: MessageEvent<WorkerRequest>) => {
       return;
     }
     if (data.type === 'initialize') {
-      send({ type: 'ready', requestId: data.requestId, initializationMs });
+      send({
+        type: 'ready',
+        requestId: data.requestId,
+        initializationMs,
+        wasmMemoryBytes: memory.buffer.byteLength,
+        resources: (
+          performance.getEntriesByType(
+            'resource',
+          ) as PerformanceResourceTiming[]
+        ).map(
+          ({
+            name,
+            duration,
+            transferSize,
+            encodedBodySize,
+            decodedBodySize,
+          }) => ({
+            name,
+            duration,
+            transferSize,
+            encodedBodySize,
+            decodedBodySize,
+          }),
+        ),
+      });
       return;
     }
     const callStart = performance.now();
-    const resultJson = simulate_season_json(data.inputJson);
+    const wasmMemoryBeforeBytes = memory.buffer.byteLength;
+    const compact = data.output === 'summary';
+    const resultJson = compact
+      ? simulate_season_summary_json(data.inputJson)
+      : simulate_season_json(data.inputJson);
     const wasmCallMs = performance.now() - callStart;
+    const [inputParsingMs, simulationMs, serializationMs, resultJsonBytes] =
+      last_run_measurements();
     const processingStart = performance.now();
     // Rust validates and serializes this payload. JS projects fields, never computes stats.
     const result = JSON.parse(resultJson) as Omit<
@@ -91,17 +126,19 @@ scope.onmessage = async ({ data }: MessageEvent<WorkerRequest>) => {
       input: { seed: string };
       games: unknown[];
     };
-    const summary: SeasonSummary = {
-      engineVersion: result.engineVersion,
-      schemaVersion: result.schemaVersion,
-      seed: result.input.seed,
-      games: result.games.length,
-      wins: result.wins,
-      losses: result.losses,
-      runsScored: result.runsScored,
-      runsAllowed: result.runsAllowed,
-      runDifferential: result.runDifferential,
-    };
+    const summary: SeasonSummary = compact
+      ? (result as unknown as SeasonSummary)
+      : {
+          engineVersion: result.engineVersion,
+          schemaVersion: result.schemaVersion,
+          seed: result.input.seed,
+          games: result.games.length,
+          wins: result.wins,
+          losses: result.losses,
+          runsScored: result.runsScored,
+          runsAllowed: result.runsAllowed,
+          runDifferential: result.runDifferential,
+        };
     send({
       type: 'result',
       requestId: data.requestId,
@@ -109,6 +146,12 @@ scope.onmessage = async ({ data }: MessageEvent<WorkerRequest>) => {
       timings: {
         initializationMs,
         wasmCallMs,
+        inputParsingMs,
+        simulationMs,
+        serializationMs,
+        resultJsonBytes,
+        wasmMemoryBeforeBytes,
+        wasmMemoryAfterBytes: memory.buffer.byteLength,
         resultProcessingMs: performance.now() - processingStart,
         workerTotalMs: performance.now() - start,
       },

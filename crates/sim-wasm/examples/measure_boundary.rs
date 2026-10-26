@@ -9,17 +9,26 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         return Err("Repetitions must be 1..1000".into());
     }
     let mut samples = Vec::new();
+    let mut stages = Vec::new();
     let mut bytes = 0;
+    let compact = match args.get(3).map(String::as_str).unwrap_or("full") {
+        "summary" => true,
+        "full" => false,
+        _ => return Err("Output must be summary or full".into()),
+    };
     for _ in 0..repetitions {
         let start = Instant::now();
-        let result = sim_wasm::simulate_json(black_box(&input))?;
+        let result = sim_wasm::simulate_measured(black_box(&input), compact, || {
+            start.elapsed().as_secs_f64() * 1000.0
+        })?;
         samples.push(start.elapsed().as_secs_f64() * 1000.0);
-        bytes = black_box(result.len());
+        stages.push(result.measurements);
+        bytes = black_box(result.result_json.len());
     }
     println!(
         "{}",
         serde_json::json!({"engineVersion":baseball_sim::ENGINE_VERSION,
-        "repetitions":repetitions,"boundaryMs":samples,"resultJsonBytes":bytes})
+        "repetitions":repetitions,"boundaryMs":samples,"stages":stages,"resultJsonBytes":bytes})
     );
     Ok(())
 }

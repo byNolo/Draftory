@@ -14,6 +14,37 @@ export const fixture = JSON.parse(
 export const artifacts = resolve(root, 'target/browser-parity');
 mkdirSync(artifacts, { recursive: true });
 
+// Capacity fixture only, not 30 real rosters: explicitly synthetic opponents reuse
+// verified parameter templates with distinct instance/profile IDs. No new data/model.
+export function largeFixture() {
+  const value = structuredClone(fixture);
+  const byId = new Map(
+    value.profiles.map((profile: { id: string }) => [profile.id, profile]),
+  );
+  value.profiles = value.userTeam.lineup.map((batter: { profileId: string }) =>
+    structuredClone(byId.get(batter.profileId)),
+  );
+  const template = value.opponents[0];
+  value.opponentSetKind = 'synthetic';
+  value.opponents = Array.from({ length: 29 }, (_, index) => {
+    const id = `capacity-team-${String(index).padStart(2, '0')}`;
+    return {
+      id,
+      lineup: template.lineup.map(
+        (batter: { profileId: string }, slot: number) => {
+          const profile = structuredClone(byId.get(batter.profileId)) as {
+            id: string;
+          };
+          profile.id = `${id}:profile-${slot}`;
+          value.profiles.push(profile);
+          return { id: `${id}:batter-${slot}`, profileId: profile.id };
+        },
+      ),
+    };
+  });
+  return value;
+}
+
 export function workerUrl() {
   const filename = readdirSync(resolve(root, 'apps/web/dist/assets')).find(
     (file) => /^season\.worker-.*\.js$/.test(file),
@@ -45,21 +76,41 @@ export async function session(page: Page) {
   return page.evaluateHandle((url) => {
     const createdAt = performance.now();
     const worker = new Worker(url, { type: 'module' });
-    const pending = new Map<string, (value: WorkerResponse) => void>();
+    const pending = new Map<
+      string,
+      {
+        resolve: (value: WorkerResponse) => void;
+        reject: (error: Error) => void;
+      }
+    >();
+    let failed: Error | undefined;
+    const fail = (error: Error) => {
+      failed = error;
+      for (const entry of pending.values()) entry.reject(error);
+      pending.clear();
+    };
+    worker.onerror = (event) => {
+      event.preventDefault();
+      fail(new Error(event.message || 'Test worker failed'));
+    };
+    worker.onmessageerror = () =>
+      fail(new Error('Test worker response could not be decoded'));
     worker.onmessage = ({ data }: MessageEvent<WorkerResponse>) => {
-      pending.get(data.requestId)?.(data);
+      pending.get(data.requestId)?.resolve(data);
       pending.delete(data.requestId);
     };
     return {
       createdAt,
       send(request: WorkerRequest): Promise<WorkerResponse> {
-        return new Promise((resolve) => {
-          pending.set(request.requestId, resolve);
+        if (failed) return Promise.reject(failed);
+        return new Promise((resolve, reject) => {
+          pending.set(request.requestId, { resolve, reject });
           worker.postMessage(request);
         });
       },
       terminate() {
         worker.terminate();
+        fail(new Error('Test worker terminated'));
       },
     };
   }, workerUrl());

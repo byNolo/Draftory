@@ -33,7 +33,7 @@ jobs:
       - run: npm run format:check
       - run: npm run build
       - run: cargo build --locked --release --examples
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run test:browser
       - run: npm run check:api
       - run: npm run d1:check --workspace @draftory/api

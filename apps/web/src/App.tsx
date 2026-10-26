@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import fixtureJson from '../../../crates/baseball-sim/tests/fixtures/season-modern-2024.json?raw';
 import { SeasonClient } from './workers/season-client';
 import type { SeasonSuccess } from './workers/protocol';
+import PublishedSeason from './mlb/PublishedSeason';
 
 export default function App() {
   const client = useRef<SeasonClient | null>(null);
@@ -41,22 +42,34 @@ export default function App() {
     };
   }, [generation]);
 
-  async function run() {
+  async function simulateInput(inputJson: string) {
     const instance = client.current;
-    if (!instance || status !== 'ready') return;
+    if (!instance || status !== 'ready')
+      throw new Error('Simulation worker is not ready');
     const start = performance.now();
     setStatus('running');
     setError('');
     setResult(undefined);
     try {
-      const response = await instance.simulate(fixtureJson);
-      if (client.current !== instance) return;
+      const response = await instance.simulate(inputJson);
+      if (client.current !== instance)
+        throw new Error('Simulation worker was replaced');
       setResult({ ...response, endToEndMs: performance.now() - start });
       setStatus('ready');
+      return response;
     } catch (reason) {
-      if (client.current !== instance) return;
+      if (client.current !== instance) throw reason;
       setError(String(reason));
       setStatus('error');
+      throw reason;
+    }
+  }
+
+  async function run() {
+    try {
+      await simulateInput(fixtureJson);
+    } catch {
+      /* Rendered by simulateInput. */
     }
   }
 
@@ -78,7 +91,7 @@ export default function App() {
   return (
     <main>
       <h1>Draftory</h1>
-      <p>Browser simulation test · M5A</p>
+      <p>Browser simulation and published data test · M6B</p>
       <p>
         Bundled M4 fixture: 2024 NYA versus CHA, fixed historical starting
         orders, 162-game synthetic schedule. Season schema 1.0.0; seed{' '}
@@ -146,6 +159,7 @@ export default function App() {
           </dl>
         </section>
       )}
+      <PublishedSeason disabled={status !== 'ready'} simulate={simulateInput} />
       <p className="attribution">
         Data: SABR Lahman (CC BY-SA 3.0) and Retrosheet. The information used
         here was obtained free of charge from and is copyrighted by Retrosheet.

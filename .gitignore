@@ -21,6 +21,7 @@ target/
 
 # Reproducible WASM bindings and browser test output
 apps/web/src/wasm/
+apps/web/src/generated/
 playwright-report/
 test-results/
 

@@ -26,6 +26,7 @@ jobs:
       - run: rustup target add wasm32-unknown-unknown
       - run: cargo install wasm-bindgen-cli --version 0.2.105 --locked --root target/wasm-tools
       - run: npm run build:wasm
+      - run: npm run build:pilot
       - run: npm run types:api
       - run: git diff --exit-code -- services/api/worker-configuration.d.ts
       - run: npm run typecheck
@@ -36,8 +37,19 @@ jobs:
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run test:browser
       - run: npm run test:api
+      - run: npm run test:data-client
+      - run: npm run test:integration
       - run: npm run check:api
       - run: npm run d1:check --workspace @draftory/api
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-test-diagnostics
+          path: |
+            test-results/
+            target/api-test-results/
+            target/m6b-test-results/
+          retention-days: 7
 
   rust:
     runs-on: ubuntu-latest

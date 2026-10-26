@@ -60,6 +60,17 @@ test('catalog, seasons and immutable dataset include provenance and policy versi
   expect(body.source.source).toBe('synthetic-test-only');
   expect(body.policy.version).toBe('modern-neutral-v1');
   expect(body.attribution.license).toBe('CC-BY-SA-3.0');
+  const compact = await request.get(`/api/datasets/${DATASET}?view=simulation`);
+  expect(compact.headers()['cache-control']).toContain('immutable');
+  const simulation = (await compact.json()).dataset;
+  expect(simulation.contextId).toBe(body.context.id);
+  expect(simulation.context).toBeUndefined();
+  const { context, ...rest } = body;
+  expect(context.id).toBe(simulation.contextId);
+  expect(simulation).toEqual({ ...rest, contextId: context.id });
+  expect(
+    (await request.get(`/api/datasets/${DATASET}?view=unknown`)).status(),
+  ).toBe(400);
   expect(
     (await (await request.get('/api/datasets?season=2024')).json()).datasets,
   ).toEqual([]);

@@ -22,6 +22,16 @@ test('new deployment revalidates HTML, retains an active worker, and recovers st
   const generated = resolve(root, 'target/browser-site') + sep;
   if (!current.startsWith(generated) || !next.startsWith(generated))
     throw new Error('Test deployment must stay in generated target directory');
+  function replaceAssets(source: string) {
+    const sourceAssets = resolve(source, 'assets');
+    const assets = resolve(current, 'assets');
+    // Keep the watched directory alive (Windows disables a removed directory's
+    // watcher). Replace files, then wait for Wrangler's manifest below.
+    cpSync(sourceAssets, assets, { recursive: true });
+    const keep = new Set(readdirSync(sourceAssets));
+    for (const name of readdirSync(assets))
+      if (!keep.has(name)) rmSync(resolve(assets, name), { force: true });
+  }
   // Build the same source without minification: genuine new Vite worker/JS hashes,
   // with identical WASM/engine semantics. No source or production output is edited.
   const require = createRequire(resolve(root, 'apps/web/package.json'));
@@ -57,10 +67,7 @@ test('new deployment revalidates HTML, retains an active worker, and recovers st
     const waiting = staleTab.waitForRequest(`**${oldWorker}`);
     await staleTab.goto('http://127.0.0.1:4173/');
     await waiting;
-    rmSync(resolve(current, 'assets'), { recursive: true });
-    cpSync(resolve(next, 'assets'), resolve(current, 'assets'), {
-      recursive: true,
-    });
+    replaceAssets(next);
     writeFileSync(
       resolve(current, 'index.html'),
       readFileSync(resolve(next, 'index.html')),
@@ -68,7 +75,9 @@ test('new deployment revalidates HTML, retains an active worker, and recovers st
     await expect
       .poll(async () => request.get('/').then((response) => response.text()))
       .not.toBe(beforeHtml);
-    expect((await request.get(oldWorker)).status()).toBe(404);
+    await expect
+      .poll(async () => (await request.get(oldWorker)).status())
+      .toBe(404);
     await oldTab.getByRole('button', { name: 'Simulate 162 games' }).click();
     await expect(
       oldTab.getByRole('region', { name: 'Season result' }),
@@ -85,7 +94,7 @@ test('new deployment revalidates HTML, retains an active worker, and recovers st
     release();
     await oldTab.close();
     await staleTab.close();
-    rmSync(resolve(current, 'assets'), { recursive: true, force: true });
+    replaceAssets(resolve(root, 'apps/web/dist'));
     cpSync(resolve(root, 'apps/web/dist'), current, { recursive: true });
   }
 });

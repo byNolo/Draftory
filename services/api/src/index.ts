@@ -220,10 +220,17 @@ export default {
         );
       }
       if (path.startsWith('/api/datasets/')) {
-        parameters(url, []);
+        parameters(url, ['view']);
+        const view = url.searchParams.get('view');
+        if (view !== null && view !== 'simulation')
+          throw new ApiError(
+            400,
+            'invalidParameter',
+            'Unsupported dataset view',
+          );
         const row = await data.dataset(
           identifier(path.slice('/api/datasets/'.length), 'dataset'),
-          true,
+          view !== 'simulation',
         );
         return json(
           { schemaVersion: '1.0.0', dataset: datasetDocument(row) },

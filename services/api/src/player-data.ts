@@ -53,7 +53,7 @@ export class PlayerData {
     const row = await this.db
       .prepare(
         `SELECT d.id, d.source_id, d.year,
-      ${includeContext ? 'd.metadata_json' : "json_remove(d.metadata_json, '$.context')"} AS metadata_json,
+      ${includeContext ? 'd.metadata_json' : "json_set(json_remove(d.metadata_json, '$.context'), '$.contextId', json_extract(d.metadata_json, '$.context.id'))"} AS metadata_json,
       s.attribution_json FROM mlb_datasets d
       JOIN mlb_publications p ON p.dataset_id=d.id JOIN mlb_sources s ON s.id=d.source_id WHERE d.id=?`,
       )

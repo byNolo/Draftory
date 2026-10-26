@@ -1,5 +1,10 @@
 # Browser compatibility and static delivery (M5B)
 
+M6B adds [published profile loading](PLAYER_DATA_BROWSER.md) and an isolated
+Wrangler/D1 integration suite. Its [measurements](../data/validation/player-data-browser-v1.md)
+separate selective data loading from assembly and WASM execution. The tests below
+continue to exercise the offline fixture and static delivery independently.
+
 M5B extends the [M5A adapter](BROWSER_WASM.md) without changing the portable engine,
 season/game contracts, historical data, rules, or RNG. The adapter is now 0.2.0;
 the engine remains 0.4.0. Measured results and known limits are recorded in
@@ -29,9 +34,16 @@ command excludes Edge and includes deployment. Benchmarks use four separate
 `performance-*` projects, with Edge optional. No additional test framework is used.
 
 Tests copy production artifacts into ignored `target/browser-site/current` and
-serve them through **local Wrangler Pages dev**, including the actual `_headers`
+serve them through **local Wrangler Workers Static Assets**, including the actual `_headers`
 rules. The empty benchmark document exists only in that generated copy. No cloud
 project, binding, account login, data integration or deployment is required.
+
+The M6B review replaced legacy Pages dev after Linux CI returned 502 for
+`/_headers` (`ENOTDIR` while checking `_headers/index.html`). The current asset
+runtime excludes reserved configuration files and preserves strict 404 assertions.
+Deployment tests replace files inside the watched directory and wait for the new
+manifest, avoiding watcher invalidation on Windows. No production resources or
+application routing changes are involved.
 
 All established seed/detail parity comparisons remain exact. The compact response
 is compared to the full result, including maximum-u64 seeds. A capacity fixture
@@ -120,7 +132,7 @@ workers and fetches; only `'wasm-unsafe-eval'` permits WASM compilation. General
 `'unsafe-eval'`, inline scripts, blob workers and cross-origin isolation are not
 needed. The worker response also receives the CSP; the document's `worker-src`
 alone does not govern WASM compilation inside the worker. MIME checks enforce
-`application/wasm` and JavaScript types on the real local Pages responses.
+`application/wasm` and JavaScript types on the real local Cloudflare responses.
 
 The top-level `404.html` prevents missing hashed assets from being returned as SPA
 HTML. There is no client-side routing in this harness. If routing is added later,

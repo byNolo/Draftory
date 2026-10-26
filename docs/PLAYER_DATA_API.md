@@ -7,6 +7,13 @@ read-only retrieval from D1. Rust and React are unchanged. This follows the exis
 prices, authentication, cloud resources, new statistical model or recalibration.
 [Measured local results](../data/validation/player-data-v1.md).
 
+M6B connects this API to the existing browser simulator; see
+[browser data loading](PLAYER_DATA_BROWSER.md). Dataset details now optionally
+accept `?view=simulation`: the same metadata without the large `context` audit,
+plus its opaque `contextId`. The default response retains the audit unchanged.
+Neither representation is a Retrosheet transition model. Publication IDs, stored
+data and profile payloads are unchanged.
+
 ## Storage decisions
 
 The [first migration](../infra/d1/migrations/0001_mlb_player_data.sql) uses SQLite

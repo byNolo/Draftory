@@ -3,7 +3,7 @@ import { readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { workerUrl } from './helpers';
 
-test('Pages local runtime serves hashed assets with MIME, cache and worker CSP headers', async ({
+test('Cloudflare local runtime serves hashed assets with MIME, cache and worker CSP headers', async ({
   request,
   page,
 }) => {
@@ -25,6 +25,8 @@ test('Pages local runtime serves hashed assets with MIME, cache and worker CSP h
     expect(headers['cross-origin-opener-policy']).toBeUndefined();
     if (filename.endsWith('.wasm'))
       expect(headers['content-type']).toContain('application/wasm');
+    if (filename.endsWith('.json'))
+      expect(headers['content-type']).toContain('application/json');
     if (filename.endsWith('.js'))
       expect(headers['content-type']).toMatch(
         /(?:application|text)\/javascript/,

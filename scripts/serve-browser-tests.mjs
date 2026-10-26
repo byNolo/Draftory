@@ -1,4 +1,4 @@
-// Local Pages runtime only: the test origin serves copied production artifacts.
+// Local Cloudflare Static Assets runtime: copied production artifacts only.
 // The empty benchmark document is test-only and never enters apps/web/dist.
 import { cpSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve, sep } from 'node:path';
@@ -16,13 +16,25 @@ writeFileSync(
   resolve(current, '__bench.html'),
   '<!doctype html><html lang="en"><title>Worker benchmark</title></html>',
 );
+// The legacy Pages dev filesystem lookup throws ENOTDIR for /_headers on Linux.
+// Use the current asset runtime, retaining the real headers and strict 404 checks.
+const config = resolve(parent, 'wrangler.json');
+writeFileSync(
+  config,
+  JSON.stringify({
+    name: 'draftory-browser-tests',
+    compatibility_date: '2026-10-26',
+    assets: { directory: current, not_found_handling: '404-page' },
+  }),
+);
 const child = spawn(
   process.execPath,
   [
     'node_modules/wrangler/bin/wrangler.js',
-    'pages',
     'dev',
-    current,
+    '--local',
+    '--config',
+    config,
     '--ip',
     '127.0.0.1',
     '--port',

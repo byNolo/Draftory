@@ -6,6 +6,7 @@ node_modules/
 dist/
 target/
 apps/web/src/wasm/
+apps/web/src/generated/
 playwright-report/
 test-results/
 .venv/

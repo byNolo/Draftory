@@ -4,6 +4,51 @@
   "title": "MLB player-data API envelopes v1.0.0",
   "description": "HTTP JSON contracts. Prepared profiles reuse the Rust input definition; semantic IDs, weight sums and compatibility are enforced by the producer and API.",
   "$defs": {
+    "simulationDatasetResponse": {
+      "description": "GET /api/datasets/:id?view=simulation. Same published metadata with the large context audit replaced by its opaque contextId. This is a representation change, not a new publication.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "dataset"],
+      "properties": {
+        "schemaVersion": { "const": "1.0.0" },
+        "dataset": {
+          "type": "object",
+          "required": [
+            "id",
+            "schemaVersion",
+            "sport",
+            "year",
+            "sourceId",
+            "policy",
+            "contextId",
+            "inputSchemaVersion",
+            "modelVersion",
+            "profileType",
+            "aggregation",
+            "profileCount"
+          ],
+          "not": { "required": ["context"] },
+          "properties": {
+            "id": { "$ref": "#/$defs/datasetId" },
+            "schemaVersion": { "const": "1.0.0" },
+            "sport": { "const": "mlb" },
+            "year": { "type": "integer" },
+            "sourceId": { "type": "string" },
+            "policy": {
+              "type": "object",
+              "required": ["id"],
+              "properties": { "id": { "type": "string" } }
+            },
+            "contextId": { "type": "string" },
+            "inputSchemaVersion": { "type": "string" },
+            "modelVersion": { "type": "string" },
+            "profileType": { "type": "string" },
+            "aggregation": { "type": "string" },
+            "profileCount": { "type": "integer", "minimum": 1 }
+          }
+        }
+      }
+    },
     "datasetId": { "type": "string", "pattern": "^dataset:[a-f0-9]{64}$" },
     "profileId": { "type": "string", "pattern": "^prepared:[a-f0-9]{64}$" },
     "playerId": { "type": "string", "pattern": "^lahman:[a-z0-9]{1,32}$" },

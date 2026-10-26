@@ -15,6 +15,7 @@ export default tseslint.config(
       '**/.venv/**',
       'target/**',
       'apps/web/src/wasm/**',
+      'apps/web/src/generated/**',
       'playwright-report/**',
       'test-results/**',
     ],

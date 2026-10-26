@@ -3,8 +3,9 @@
 Draftory is an expandable sports drafting and simulation platform. MLB comes
 first: draft historical hitters and eventually simulate a 162-game season using
 plate-appearance events. This repository currently contains the development
-foundation and Lahman data preparation: a React browser simulation harness, a local Worker health
-endpoint, a seeded Rust game/season simulator, and a reproducible offline Python pipeline.
+foundation and Lahman data preparation: a React browser simulation harness, a
+local Worker API serving published player profiles, a seeded Rust game/season
+simulator, and a reproducible offline Python pipeline.
 
 Scope and statistical decisions live in the [project plan](docs/PROJECT_PLAN.md),
 [architecture](docs/ARCHITECTURE.md), [data specification](docs/DATA_SPEC.md), and
@@ -23,13 +24,13 @@ data/pipeline/           Lahman acquisition, normalization, profiles and prepara
 data/fixtures/           Small synthetic shared fixtures
 data/validation/         Measured source quality reports
 contracts/              Language-neutral schemas and version conventions
-infra/d1/migrations/    Migration location; no SQL tables yet
+infra/d1/migrations/    Versioned local player-data schema
 docs/                   Planning documents and foundation/data-source reports
 .github/workflows/      Independent JavaScript, Rust, and Python checks
 ```
 
-Python prepares data offline; the Worker will serve compact artifacts; Rust
-processes preloaded inputs; React will display results. Rust remains independent
+Python prepares data offline; the Worker serves published profiles; Rust
+processes preloaded inputs; React displays results. Rust remains independent
 of all host services. WASM runs through a thin adapter in a dedicated browser Web Worker.
 
 ## Prerequisites
@@ -54,6 +55,7 @@ rustup target add wasm32-unknown-unknown
 cargo install wasm-bindgen-cli --version 0.2.105 --locked --root target/wasm-tools
 npm run build:wasm
 npm run types:api
+npm run build:pilot
 npm run dev:web
 ```
 
@@ -79,8 +81,11 @@ npm run test:api
 The API tests populate an isolated synthetic database automatically. For the real
 2024 subset, follow the [export/import and API guide](docs/PLAYER_DATA_API.md).
 Measured counts, storage and query findings are in the
-[M6A report](data/validation/player-data-v1.md). The web harness still uses its
-bundled fixture; React/API integration is a later milestone.
+[M6A report](data/validation/player-data-v1.md). The harness also loads nine real
+2024 profiles through the local API and simulates using the verified M4 opponent
+and transition model. See the [M6B workflow](docs/PLAYER_DATA_BROWSER.md) for setup,
+caching, compatibility and integration tests, and the
+[M6B report](data/validation/player-data-browser-v1.md) for measurements.
 
 ```sh
 npm run build
@@ -195,4 +200,4 @@ fields and join hazards. The [data foundation](docs/LAHMAN_DATA_FOUNDATION.md)
 documents measured coverage, working commands, profile semantics and remaining
 questions. The [Rust foundation](docs/SIMULATION_FOUNDATION.md) now implements
 scripted and sampled games plus season orchestration. Historical calibration is
-an ongoing measured process; permanent D1 tables remain deferred.
+an ongoing measured process; application tables beyond the M6A player publication remain deferred.

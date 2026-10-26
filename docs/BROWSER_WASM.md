@@ -5,7 +5,8 @@ instrumentation, additional browsers and local Pages delivery tests. See
 [current M5B commands and measurement definitions](BROWSER_VALIDATION.md).
 
 React now runs the existing 162-game simulator in a dedicated module Web Worker.
-This is a developer harness, with no API/data retrieval, drafting or final game UI.
+The original path is a developer harness using the bundled fixture. M6B adds
+optional [published profile loading](PLAYER_DATA_BROWSER.md), without drafting or final game UI.
 The [M4 calibration limitations](../data/validation/season-calibration-v1.md) still
 apply: excessive hits/PA/GDP, compressed scoring variance, fixed orders, neutral
 pitching, and no automatic extra-inning runner. Browser parity does not establish
@@ -149,3 +150,9 @@ game mechanics, backend integration or a draft interface.
 Tool references: [wasm-bindgen CLI](https://wasm-bindgen.github.io/wasm-bindgen/reference/cli.html),
 [Vite Web Workers](https://vite.dev/guide/features.html#web-workers), and
 [Playwright browsers](https://playwright.dev/docs/browsers).
+
+## Published player inputs
+
+The M6B [browser data workflow](PLAYER_DATA_BROWSER.md) adds selective API loading
+and compatibility-checked MLB season assembly before the existing worker boundary.
+The bundled fixture and native/WASM parity path remain available.

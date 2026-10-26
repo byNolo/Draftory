@@ -16,6 +16,10 @@ jobs:
   javascript:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # Match @playwright/test exactly; browsers and OS libraries are preinstalled.
+    container:
+      image: mcr.microsoft.com/playwright:v1.58.2-noble
+      options: --init --ipc=host
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -23,7 +27,9 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: rustup target add wasm32-unknown-unknown
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
       - run: cargo install wasm-bindgen-cli --version 0.2.105 --locked --root target/wasm-tools
       - run: npm run build:wasm
       - run: npm run build:pilot
@@ -34,7 +40,6 @@ jobs:
       - run: npm run format:check
       - run: npm run build
       - run: cargo build --locked --release --examples
-      - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run test:browser
       - run: npm run test:api
       - run: npm run test:data-client

@@ -45,6 +45,12 @@ Deployment tests replace files inside the watched directory and wait for the new
 manifest, avoiding watcher invalidation on Windows. No production resources or
 application routing changes are involved.
 
+Linux JavaScript CI runs in the official `mcr.microsoft.com/playwright:v1.58.2-noble`
+image, matching the locked Playwright package. It contains browser binaries and
+OS libraries, avoiding runtime APT downloads from the runner's package mirror.
+Rust tooling is installed in that job for native/WASM parity. Keep the image tag
+and `@playwright/test` version aligned when upgrading. Local commands are unchanged.
+
 All established seed/detail parity comparisons remain exact. The compact response
 is compared to the full result, including maximum-u64 seeds. A capacity fixture
 constructs 29 explicitly **synthetic** opponents and 270 distinct profile records

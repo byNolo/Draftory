@@ -169,6 +169,10 @@ strict 404, MIME, cache, CSP and deployment-recovery assertions. Deployment test
 preserve the watched assets directory and wait for manifest updates. This changes
 only local test infrastructure; historical measurements above used Pages dev.
 CI saves test diagnostics on failure without uploading databases or raw datasets.
+The initial review CI attempts timed out while APT downloaded browser system
+libraries from the Azure Ubuntu mirror, before tests started. JavaScript CI now
+uses the official Playwright 1.58.2 Noble image with preinstalled browsers and OS
+libraries, matching the locked package; it does not skip browser execution.
 
 ## Scope and remaining work
 

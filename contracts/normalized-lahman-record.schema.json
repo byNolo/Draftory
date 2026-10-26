@@ -1,0 +1,586 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Draftory normalized Lahman record v1.0.0",
+  "description": "Each JSONL file selects its documented record definition. Raw anomalies and nulls are retained.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/player"
+    },
+    {
+      "$ref": "#/$defs/team"
+    },
+    {
+      "$ref": "#/$defs/franchise"
+    },
+    {
+      "$ref": "#/$defs/battingStint"
+    },
+    {
+      "$ref": "#/$defs/seasonBatting"
+    },
+    {
+      "$ref": "#/$defs/teamSeasonBatting"
+    },
+    {
+      "$ref": "#/$defs/appearance"
+    },
+    {
+      "$ref": "#/$defs/fielding"
+    }
+  ],
+  "$defs": {
+    "player": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "player_id",
+        "source_id",
+        "display_name",
+        "facts",
+        "source_row"
+      ],
+      "properties": {
+        "player_id": {
+          "type": "string",
+          "pattern": "^lahman:"
+        },
+        "source_id": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "facts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["string", "integer", "number", "null"]
+          }
+        },
+        "source_row": {
+          "type": "integer",
+          "minimum": 2
+        }
+      }
+    },
+    "team": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "year",
+        "team_id",
+        "league_id",
+        "franchise_id",
+        "facts",
+        "source_row"
+      ],
+      "properties": {
+        "year": {
+          "type": "integer"
+        },
+        "team_id": {
+          "type": "string"
+        },
+        "league_id": {
+          "type": "string"
+        },
+        "franchise_id": {
+          "type": "string"
+        },
+        "facts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["string", "integer", "number", "null"]
+          }
+        },
+        "source_row": {
+          "type": "integer",
+          "minimum": 2
+        }
+      }
+    },
+    "franchise": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["franchID", "franchName", "active", "NAassoc"],
+      "properties": {
+        "franchID": {
+          "type": "string"
+        },
+        "franchName": {
+          "type": ["string", "null"]
+        },
+        "active": {
+          "type": ["string", "null"]
+        },
+        "NAassoc": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "battingStint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "player_id",
+        "year",
+        "team_id",
+        "league_id",
+        "stint",
+        "counts",
+        "source_row",
+        "quality_flags"
+      ],
+      "properties": {
+        "player_id": {
+          "type": "string",
+          "pattern": "^lahman:"
+        },
+        "year": {
+          "type": "integer"
+        },
+        "team_id": {
+          "type": "string"
+        },
+        "league_id": {
+          "type": "string"
+        },
+        "stint": {
+          "type": "integer"
+        },
+        "counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "G",
+            "AB",
+            "R",
+            "H",
+            "2B",
+            "3B",
+            "HR",
+            "RBI",
+            "SB",
+            "CS",
+            "BB",
+            "SO",
+            "IBB",
+            "HBP",
+            "SH",
+            "SF",
+            "GIDP"
+          ],
+          "properties": {
+            "G": {
+              "type": ["integer", "null"]
+            },
+            "AB": {
+              "type": ["integer", "null"]
+            },
+            "R": {
+              "type": ["integer", "null"]
+            },
+            "H": {
+              "type": ["integer", "null"]
+            },
+            "2B": {
+              "type": ["integer", "null"]
+            },
+            "3B": {
+              "type": ["integer", "null"]
+            },
+            "HR": {
+              "type": ["integer", "null"]
+            },
+            "RBI": {
+              "type": ["integer", "null"]
+            },
+            "SB": {
+              "type": ["integer", "null"]
+            },
+            "CS": {
+              "type": ["integer", "null"]
+            },
+            "BB": {
+              "type": ["integer", "null"]
+            },
+            "SO": {
+              "type": ["integer", "null"]
+            },
+            "IBB": {
+              "type": ["integer", "null"]
+            },
+            "HBP": {
+              "type": ["integer", "null"]
+            },
+            "SH": {
+              "type": ["integer", "null"]
+            },
+            "SF": {
+              "type": ["integer", "null"]
+            },
+            "GIDP": {
+              "type": ["integer", "null"]
+            }
+          }
+        },
+        "source_row": {
+          "type": "integer",
+          "minimum": 2
+        },
+        "quality_flags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "seasonBatting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "player_id",
+        "year",
+        "team_ids",
+        "league_ids",
+        "counts",
+        "source_rows",
+        "quality_flags"
+      ],
+      "properties": {
+        "player_id": {
+          "type": "string",
+          "pattern": "^lahman:"
+        },
+        "year": {
+          "type": "integer"
+        },
+        "team_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "league_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "G",
+            "AB",
+            "R",
+            "H",
+            "2B",
+            "3B",
+            "HR",
+            "RBI",
+            "SB",
+            "CS",
+            "BB",
+            "SO",
+            "IBB",
+            "HBP",
+            "SH",
+            "SF",
+            "GIDP"
+          ],
+          "properties": {
+            "G": {
+              "type": ["integer", "null"]
+            },
+            "AB": {
+              "type": ["integer", "null"]
+            },
+            "R": {
+              "type": ["integer", "null"]
+            },
+            "H": {
+              "type": ["integer", "null"]
+            },
+            "2B": {
+              "type": ["integer", "null"]
+            },
+            "3B": {
+              "type": ["integer", "null"]
+            },
+            "HR": {
+              "type": ["integer", "null"]
+            },
+            "RBI": {
+              "type": ["integer", "null"]
+            },
+            "SB": {
+              "type": ["integer", "null"]
+            },
+            "CS": {
+              "type": ["integer", "null"]
+            },
+            "BB": {
+              "type": ["integer", "null"]
+            },
+            "SO": {
+              "type": ["integer", "null"]
+            },
+            "IBB": {
+              "type": ["integer", "null"]
+            },
+            "HBP": {
+              "type": ["integer", "null"]
+            },
+            "SH": {
+              "type": ["integer", "null"]
+            },
+            "SF": {
+              "type": ["integer", "null"]
+            },
+            "GIDP": {
+              "type": ["integer", "null"]
+            }
+          }
+        },
+        "source_rows": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 2
+          }
+        },
+        "quality_flags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "teamSeasonBatting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "player_id",
+        "year",
+        "team_ids",
+        "league_ids",
+        "counts",
+        "source_rows",
+        "quality_flags",
+        "team_id",
+        "league_id"
+      ],
+      "properties": {
+        "player_id": {
+          "type": "string",
+          "pattern": "^lahman:"
+        },
+        "year": {
+          "type": "integer"
+        },
+        "team_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "league_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "G",
+            "AB",
+            "R",
+            "H",
+            "2B",
+            "3B",
+            "HR",
+            "RBI",
+            "SB",
+            "CS",
+            "BB",
+            "SO",
+            "IBB",
+            "HBP",
+            "SH",
+            "SF",
+            "GIDP"
+          ],
+          "properties": {
+            "G": {
+              "type": ["integer", "null"]
+            },
+            "AB": {
+              "type": ["integer", "null"]
+            },
+            "R": {
+              "type": ["integer", "null"]
+            },
+            "H": {
+              "type": ["integer", "null"]
+            },
+            "2B": {
+              "type": ["integer", "null"]
+            },
+            "3B": {
+              "type": ["integer", "null"]
+            },
+            "HR": {
+              "type": ["integer", "null"]
+            },
+            "RBI": {
+              "type": ["integer", "null"]
+            },
+            "SB": {
+              "type": ["integer", "null"]
+            },
+            "CS": {
+              "type": ["integer", "null"]
+            },
+            "BB": {
+              "type": ["integer", "null"]
+            },
+            "SO": {
+              "type": ["integer", "null"]
+            },
+            "IBB": {
+              "type": ["integer", "null"]
+            },
+            "HBP": {
+              "type": ["integer", "null"]
+            },
+            "SH": {
+              "type": ["integer", "null"]
+            },
+            "SF": {
+              "type": ["integer", "null"]
+            },
+            "GIDP": {
+              "type": ["integer", "null"]
+            }
+          }
+        },
+        "source_rows": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 2
+          }
+        },
+        "quality_flags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "team_id": {
+          "type": "string"
+        },
+        "league_id": {
+          "type": "string"
+        }
+      }
+    },
+    "appearance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "player_id",
+        "year",
+        "team_id",
+        "league_id",
+        "positions",
+        "facts",
+        "source_row"
+      ],
+      "properties": {
+        "player_id": {
+          "type": "string",
+          "pattern": "^lahman:"
+        },
+        "year": {
+          "type": "integer"
+        },
+        "team_id": {
+          "type": "string"
+        },
+        "league_id": {
+          "type": "string"
+        },
+        "positions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["integer", "null"]
+          }
+        },
+        "facts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["string", "integer", "number", "null"]
+          }
+        },
+        "source_row": {
+          "type": "integer",
+          "minimum": 2
+        }
+      }
+    },
+    "fielding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "player_id",
+        "year",
+        "team_id",
+        "league_id",
+        "stint",
+        "position",
+        "facts",
+        "source_table",
+        "source_row"
+      ],
+      "properties": {
+        "player_id": {
+          "type": "string",
+          "pattern": "^lahman:"
+        },
+        "year": {
+          "type": "integer"
+        },
+        "team_id": {
+          "type": "string"
+        },
+        "league_id": {
+          "type": "string"
+        },
+        "stint": {
+          "type": "integer"
+        },
+        "position": {
+          "type": "string"
+        },
+        "facts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["string", "integer", "number", "null"]
+          }
+        },
+        "source_table": {
+          "enum": ["Fielding.csv", "FieldingOFsplit.csv"]
+        },
+        "source_row": {
+          "type": "integer",
+          "minimum": 2
+        }
+      }
+    }
+  }
+}

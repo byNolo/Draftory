@@ -1,9 +1,12 @@
 [project]
 name = "draftory-data"
-version = "0.1.0"
+version = "0.2.0"
 description = "Offline historical data preparation for Draftory"
 requires-python = ">=3.12"
 dependencies = []
+
+[project.scripts]
+draftory-data = "draftory_data.cli:main"
 
 [build-system]
 requires = ["hatchling>=1.27,<2"]

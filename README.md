@@ -3,8 +3,8 @@
 Draftory is an expandable sports drafting and simulation platform. MLB comes
 first: draft historical hitters and eventually simulate a 162-game season using
 plate-appearance events. This repository currently contains the development
-foundation only: a React shell, a local Worker health endpoint, a portable Rust
-library shell, and an offline Python package with provenance-contract tests.
+foundation and Lahman data preparation: a React shell, a local Worker health
+endpoint, a portable Rust library shell, and a reproducible offline Python pipeline.
 
 Scope and statistical decisions live in the [project plan](docs/PROJECT_PLAN.md),
 [architecture](docs/ARCHITECTURE.md), [data specification](docs/DATA_SPEC.md), and
@@ -18,8 +18,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the branch, validation and pull-reque
 apps/web/                React + TypeScript + Vite presentation
 services/api/            Cloudflare Worker HTTP boundary and local D1 config
 crates/baseball-sim/     Dependency-free portable Rust library
-data/pipeline/           uv-managed Python package (src layout) and pytest
+data/pipeline/           uv-managed Lahman acquisition, normalization and profiles
 data/fixtures/           Small synthetic shared fixtures
+data/validation/         Measured source quality reports
 contracts/              Language-neutral schemas and version conventions
 infra/d1/migrations/    Migration location; no SQL tables yet
 docs/                   Planning documents and foundation/data-source reports
@@ -109,23 +110,27 @@ uv run ruff format --check .
 uv run pytest
 ```
 
-Use `uv add` / `uv add --dev` to change dependencies and review `uv.lock`. There
-are no runtime ingestion dependencies or source downloads yet. Provenance schema
-tests exercise a clearly synthetic manifest, including rejection cases.
+Use `uv add` / `uv add --dev` to change dependencies and review `uv.lock`. The
+pipeline has no third-party runtime dependencies. Synthetic tests run without
+downloads; optional integration tests verify the official pinned release locally.
+See the [Lahman data workflow](docs/LAHMAN_DATA_FOUNDATION.md) for acquisition,
+normalization, profile generation, contracts and statistical limitations.
 
-## Foundation decisions and next milestone
+## Foundation and data milestones
 
-This delivery is **Milestone 1: Repository Foundation** in the request, equivalent
-to **M0** in the existing plan. The requested next milestone, Lahman Data Import,
-corresponds to the plan's **M1**. The original numbering is preserved.
+Repository Foundation is **M0** in the plan. The requested **Milestone 2: Lahman
+Data Foundation** covers the plan's M1 import and the explicitly requested
+preliminary profile aggregation from M2. The original planning documents and
+their numbering are preserved.
 
 The proposed top-level layout is retained. npm workspaces handle JavaScript, a
 Cargo workspace handles Rust, and uv manages the offline Python package. No
-monorepo task orchestrator or universal sport interface is needed. Empty feature,
-validation and adapter packages are deferred. The only initial shared schema is
-acquisition provenance; statistical and simulation schemas remain undecided.
+monorepo task orchestrator or universal sport interface is needed. Empty feature
+and adapter packages are deferred. Versioned schemas now cover normalized facts,
+output manifests and descriptive batting profiles; simulation contracts remain
+undecided.
 
 See [Lahman source findings](docs/LAHMAN_SOURCE_REVIEW.md) for the initial files,
-fields, join hazards and follow-up questions. The next reviewed milestone should
-pin and inspect one official release, measure coverage, then test one player-year
-aggregation before designing permanent tables. No import pipeline is implemented.
+fields and join hazards. The [data foundation](docs/LAHMAN_DATA_FOUNDATION.md)
+documents measured coverage, working commands, profile semantics and remaining
+questions. Rust simulation and permanent D1 tables remain deferred.

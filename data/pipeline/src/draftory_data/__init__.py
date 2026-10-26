@@ -1,1 +1,1 @@
-"""Offline Lahman/Retrosheet ingestion and analysis package; no imports implemented yet."""
+"""Offline, versioned Lahman facts and descriptive batting profiles for Draftory."""

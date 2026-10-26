@@ -3,6 +3,10 @@
 Reviewed 2026-10-25. No dataset downloaded or imported, no field coverage measured,
 and no statistical model selected.
 
+This is the original foundation review. Subsequent measured findings and commands
+are in [LAHMAN_DATA_FOUNDATION.md](LAHMAN_DATA_FOUNDATION.md) and the
+[data-quality report](../data/validation/lahman-2025-data-quality-report.md).
+
 ## Source inspected
 
 The [official SABR page](https://sabr.org/lahman-database/) advertises the 2025

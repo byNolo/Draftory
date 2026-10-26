@@ -1,0 +1,16 @@
+docs/PROJECT_PLAN.md
+docs/ARCHITECTURE.md
+docs/DATA_SPEC.md
+docs/SIMULATION_SPEC.md
+node_modules/
+dist/
+target/
+.venv/
+.wrangler/
+**/worker-configuration.d.ts
+Cargo.lock
+**/uv.lock
+data/raw/
+data/interim/
+data/processed/
+data/generated/

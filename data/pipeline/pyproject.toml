@@ -1,0 +1,33 @@
+[project]
+name = "draftory-data"
+version = "0.1.0"
+description = "Offline historical data preparation for Draftory"
+requires-python = ">=3.12"
+dependencies = []
+
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3,<9",
+    "ruff>=0.14,<0.15",
+    "jsonschema>=4.23,<5",
+    # Enables jsonschema's optional date-time FormatChecker.
+    "rfc3339-validator>=0.1.4,<0.2",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/draftory_data"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-config --strict-markers"

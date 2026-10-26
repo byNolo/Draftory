@@ -1,0 +1,16 @@
+{
+  "name": "@draftory/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --local --ip 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "types": "wrangler types --env-interface Env",
+    "check": "wrangler deploy --dry-run --outdir dist",
+    "d1:check": "wrangler d1 execute DB --local --command \"SELECT 1 AS ok\""
+  },
+  "devDependencies": {
+    "wrangler": "^4.45.0"
+  }
+}

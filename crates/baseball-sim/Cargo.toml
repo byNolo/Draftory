@@ -1,0 +1,10 @@
+[package]
+name = "baseball-sim"
+description = "Portable baseball simulation core for Draftory"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true

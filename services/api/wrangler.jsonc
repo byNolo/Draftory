@@ -1,0 +1,16 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "draftory-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-25",
+  "workers_dev": false,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "draftory-local",
+      // Local-only sentinel, not a provisioned Cloudflare database.
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "../../infra/d1/migrations",
+    },
+  ],
+}

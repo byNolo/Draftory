@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "0.1.0",
+  "source": "synthetic-test-only",
+  "release": "fixture-v1",
+  "url": "https://example.invalid/synthetic.zip",
+  "retrievedAt": "2026-10-25T00:00:00Z",
+  "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "files": [
+    {
+      "path": "synthetic.csv",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ]
+}

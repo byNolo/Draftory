@@ -1,5 +1,10 @@
 # Rust simulation foundation — contract decision and implementation scope
 
+The original foundation review below records the scripted milestone. Statistical
+integration is now implemented in [M3](#statistical-integration-m3); its explicit
+research policies supersede the earlier deferred adapter/sampling gate. The
+historical data contract and baseball mechanics remain unchanged.
+
 ## Statistical review and proposed contract (written before implementation)
 
 The v1 Python descriptive profile remains unchanged. It separates raw totals,
@@ -181,3 +186,158 @@ versioned PRNG, integer sampling conversion and model/pitching interaction, with
 native/WASM execution golden tests. Preserve the current scripted tests as the
 mechanics oracle. No such adapter, sampler, season loop or next milestone is
 implemented here.
+
+## Statistical integration (M3)
+
+Python now owns `draftory_data.simulation`: validation and preparation of existing
+descriptive profiles. Rust owns a separate `sampling` module and `simulate_game`.
+No services, database, frontend, roster system or season orchestration were added.
+The native `simulate` and `measure` examples own file/terminal/time measurement I/O;
+the library still has no host services or floating-point sampling branches.
+
+### Taxonomy and deliberate approximation
+
+| Historical category        | Prepared event/policy                                                           |
+| -------------------------- | ------------------------------------------------------------------------------- |
+| Singles/doubles/triples/HR | Corresponding mutually exclusive hit type                                       |
+| BB, including IBB          | One generic walk; sampled `intentional: false`; never add IBB again             |
+| HBP, SO                    | Corresponding event; missing values reject preparation                          |
+| `otherAtBat = AB - H - SO` | Unresolved contact; strict policy rejects it                                    |
+| SH/SF                      | Condition on no sacrifice; report both excluded masses and retained denominator |
+
+Lahman cannot separate errors, fielder choices, double plays and ordinary contact
+outs from this residual. The adapter therefore **defaults to rejection**. The CLI
+requires explicit `--contact-policy ordinary-out-proxy-v1` to use a lossy research
+approximation: all retained residual contact receives the engine's single-out,
+runners-hold event. This is not a claim that the historical residual counts outs.
+Its conditional proxy mass is recorded separately from historical facts. No
+unobserved error or double-play frequency is invented. This minimal policy avoids
+expanding scoring mechanics around unidentifiable probabilities; a supported
+error/choice/multiple-out taxonomy with defensible frequencies remains necessary
+for calibration. A zero-prior vector can retain genuine zero probabilities.
+
+SH/SF are removed **before** smoothing, separately for player and league. Every
+remaining rate is divided by its retained mass; the companion records this
+conditioning rather than silently dropping PA. Thus simulated PA and AB do not
+reproduce original denominators, and sacrifice RBIs are absent. Historical
+profiles/totals remain intact in the audit. Walk intent is not inferred from
+context; moving observed IBB into generic BB creates another explicit bias.
+IBB appear as zero in simulated box scores, not as an assertion about source data.
+
+### Preparation, policy and pitching context
+
+`lahman-pa-adapter-v1` accepts existing aggregate, arithmetic season-rate mean and
+component-median profiles, including season, team, franchise and year filters.
+It reproduces each input against the verified pinned release using the existing
+profile producer, comparing the complete canonical object and its hash. A modified
+field, missing category, unsupported version, null, inconsistent count or altered
+probability cannot pass by merely recalculating a user-supplied hash. This offline
+step intentionally requires the verified source directory. Python has no new
+runtime dependencies; historical producer/schema semantics remain unchanged.
+
+Initial `modern-neutral-v1` defaults (all included in its content-derived ID):
+
+- AL/NL seasons in 2000..2025. The recorded-season window can be configured within
+  1954..2025; actual required-field completeness is always checked. There is no
+  assertion that all records in the wider window are usable.
+- Any excluded selected season or insufficient profile rejects preparation. Select
+  a complete year range rather than silently simulating a partial career.
+- Minimum confidence proxy: 50 PA. Aggregate profiles use pooled PA; equal-season
+  mean/median use the **smallest included season PA**, so a large season cannot
+  conceal a tiny season carrying equal influence. This is conservative confidence
+  weighting, not a statistical effective-sample-size estimate.
+- Shrinkage: `N/(N+K) * player + K/(N+K) * league`, with `K=200` prior PA. `N`
+  includes original SH/SF opportunities; it is the confidence proxy, not the
+  conditional simulated denominator. Set `--prior-pa 0` to disable smoothing.
+  The threshold and prior strength are provisional engineering choices, not fitted
+  hyperparameters. Shrinkage stabilizes small samples but understates genuine
+  extremes; minimum rejection alone would leave noisy accepted samples untouched.
+
+The default league baseline pools verified, complete, positive-PA AL/NL
+player-seasons in 2025, weighted by opportunities, with every stint included once.
+Any bad/missing stint excludes the whole player-season. Exclusions list exact
+missing fields, source rows, quality flags or zero PA. No minimum-player PA filter
+is imposed on the league pool. Context years are configurable inside the policy
+window; its source, years, counts and exclusions are hashed into `contextId`.
+
+This `leagueAverage` environment means a common neutral opponent: prepared batter
+rates apply directly, shrunk toward that reference pool. **Do not multiply by
+league rates again.** It models neither an individual pitcher nor a log5 matchup.
+Using a different year's baseline does not adjust the batter's era, park or league;
+even same-year profiles are not park-neutral. The fixture contains elite hitters
+repeated across batting slots, so its scores are not league scoring expectations.
+
+### Contracts, determinism and sampling
+
+Input v1.1 adds a required `sampling: {rngVersion: "splitmix64-v1"}` plus opaque
+per-profile provenance (`playerId`, source-profile/source/policy/context IDs and
+transformation version). Provenance context must match the game's context. Source
+release text and checksum remain in the companion audit, linked by `sourceId`.
+v1.0 scripted inputs remain unchanged. Result v1.0 still echoes the complete
+input; package/engine version is now 0.3.0. Summary/events modes consume identical
+random draws. A sampled event log can be replayed through the existing scripted
+API to obtain the same result.
+
+Prepared weights total exactly 1,000,000. Python interprets serialized decimal
+rates as exact rational numbers, blends rationally, floors scaled weights and
+distributes remainders by descending fraction, ties in this order: single,
+double, triple, homeRun, walk, hitByPitch, strikeout, battedBallOut. Each conversion
+error is less than one millionth; the audit records the maximum. True zeros do not
+gain tickets from rounding (smoothing can intentionally supply prior mass).
+
+Rust uses [Vigna's public-domain SplitMix64 reference](https://prng.di.unimi.it/splitmix64.c),
+with state initially equal to the canonical decimal u64 seed; zero is valid.
+Every draw increments state by `0x9e3779b97f4a7c15`, then uses the reference
+xor-shifts and wrapping multiplications. Golden output tests freeze this sequence.
+To select a ticket, reject raw draws below `(-1_000_000 mod 2^64) % 1_000_000`
+and then take `% 1_000_000`. Cumulative half-open intervals in the fixed order
+above select an event. This eliminates modulo bias and skips zero-weight events.
+Rejection can consume extra raw draws; the algorithm/version and seed define that
+behavior. No random base advancement was added. SplitMix64 is not cryptographic
+and is not an anti-cheat or parallel-stream design. Future algorithm/mapping
+changes require new version identifiers and goldens.
+
+### Run preparation, games and measurements
+
+Fetch/verify and produce profiles using [the data workflow](LAHMAN_DATA_FOUNDATION.md).
+For example, from `data/pipeline`, in PowerShell:
+
+```powershell
+uv run draftory-data profile --source-dir ../raw/lahman-2025 --player judgeaa01 --leagues AL NL --start-year 2025 --end-year 2025 --output ../processed/judge2025.json
+uv run draftory-data profile --source-dir ../raw/lahman-2025 --player sotoju01 --leagues AL NL --start-year 2025 --end-year 2025 --output ../processed/soto2025.json
+$j = '../processed/judge2025.json'
+$s = '../processed/soto2025.json'
+$away = @($j,$s,$j,$s,$j,$s,$j,$s,$j)
+$home = @($s,$j,$s,$j,$s,$j,$s,$j,$s)
+uv run draftory-data prepare-game --source-dir ../raw/lahman-2025 --away-profiles $away --home-profiles $home --contact-policy ordinary-out-proxy-v1 --seed 2025 --detail events --output ../processed/modern-game.json
+```
+
+Each team requires exactly nine **ordered** profile paths. Repeated players are
+allowed for boundary testing and receive distinct batter-instance IDs. This is
+not roster validation. The output is standard input v1.1 plus a sibling
+`modern-game.preparation.json` audit v1.0 (full historical profiles, source, policy,
+context and per-profile mappings). `inputId` hashes the canonical game input;
+prepared IDs hash prepared metadata/weights. Keep both artifacts together.
+
+From the repository root, no raw data is needed to run the small verified fixture:
+
+```sh
+cargo run --locked --release --example simulate -- crates/baseball-sim/tests/fixtures/lahman-modern-game.json
+cargo run --locked --release --example measure -- crates/baseball-sim/tests/fixtures/lahman-modern-game.json 10000000 5000
+```
+
+The benchmark parses once, samples the first profile, then times one complete
+summary game and repeated games using seeds 0..4999. Timed games include input
+cloning, validation, distribution setup, state transitions and result allocation;
+JSON parsing/serialization, file I/O and statistical preparation are outside those
+loops. Detailed tracing is excluded from the game benchmark. There is no claim of
+steady-state latency from a single first-call timing. Measurements are descriptive,
+not tests or performance gates. Reorder the profile array to measure another
+profile without altering lineup references.
+
+See [sampling validation and measurements](../data/validation/plate-appearance-sampling-v1.md)
+for expected/observed frequencies, sample game, native timing, memory and checks.
+Finite mechanics invariants remain covered by the scripted suite. Statistical
+tests verify normalization and frequency convergence to prepared weights; they do
+**not** establish historical scoring accuracy. WASM compilation passes; actual
+WASM execution parity remains untested and no browser bindings are introduced.

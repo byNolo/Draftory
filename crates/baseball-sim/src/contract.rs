@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 use crate::EngineError;
 
 pub const INPUT_SCHEMA_VERSION: &str = "1.0.0";
+pub const SAMPLED_INPUT_SCHEMA_VERSION: &str = "1.1.0";
 pub const RULES_VERSION: &str = "foundation-nine-inning-v1";
 pub const WEIGHT_SCALE: u32 = 1_000_000;
 pub const MAX_PLATE_APPEARANCES: u32 = 1_000_000;
@@ -20,6 +21,27 @@ pub struct GameInput {
     pub pitching_environment: PitchingEnvironment,
     pub teams: Teams,
     pub profiles: Vec<PreparedBatterProfile>,
+    #[serde(
+        default,
+        deserialize_with = "present",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sampling: Option<SamplingConfig>,
+}
+
+// Optional means absent; explicit null must not bypass the strict JSON contract.
+fn present<'de, D, T>(deserializer: D) -> Result<Option<T>, D::Error>
+where
+    D: serde::Deserializer<'de>,
+    T: Deserialize<'de>,
+{
+    T::deserialize(deserializer).map(Some)
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct SamplingConfig {
+    pub rng_version: String,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -55,6 +77,7 @@ pub struct PitchingEnvironment {
 #[serde(rename_all = "camelCase")]
 pub enum PitchingMode {
     ScriptedNeutral,
+    LeagueAverage,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -86,6 +109,24 @@ pub struct PreparedBatterProfile {
     pub sample_opportunities: u32,
     pub weights: OutcomeWeights,
     pub quality_flags: Vec<String>,
+    #[serde(
+        default,
+        deserialize_with = "present",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub provenance: Option<ProfileProvenance>,
+}
+
+/// Opaque producer metadata. Statistical preparation remains outside this crate.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct ProfileProvenance {
+    pub player_id: String,
+    pub source_profile_id: String,
+    pub source_id: String,
+    pub transformation_version: String,
+    pub policy_id: String,
+    pub context_id: String,
 }
 
 /// Prepared, resolved categories only. Never reinterpret historical otherAtBat as an out.
@@ -183,8 +224,26 @@ impl GameInput {
 
     pub fn validate(&self) -> Result<(), EngineError> {
         let invalid = |message: &str| EngineError::InvalidInput(message.to_owned());
-        if self.schema_version != INPUT_SCHEMA_VERSION || self.rules_version != RULES_VERSION {
+        if ![INPUT_SCHEMA_VERSION, SAMPLED_INPUT_SCHEMA_VERSION]
+            .contains(&self.schema_version.as_str())
+            || self.rules_version != RULES_VERSION
+        {
             return Err(invalid("Unsupported input schema or rules version"));
+        }
+        let sampled = self.schema_version == SAMPLED_INPUT_SCHEMA_VERSION;
+        if sampled {
+            if self.sampling.as_ref().map(|s| s.rng_version.as_str()) != Some(crate::RNG_VERSION)
+                || self.pitching_environment.mode != PitchingMode::LeagueAverage
+            {
+                return Err(invalid(
+                    "Sampled v1.1 input requires supported RNG and league-average context",
+                ));
+            }
+        } else if self.sampling.is_some()
+            || self.pitching_environment.mode != PitchingMode::ScriptedNeutral
+            || self.profiles.iter().any(|p| p.provenance.is_some())
+        {
+            return Err(invalid("v1.0 accepts scripted inputs only"));
         }
         if self.seed.is_empty()
             || (self.seed.len() > 1 && self.seed.starts_with('0'))
@@ -207,6 +266,25 @@ impl GameInput {
         }
         let mut profile_ids = BTreeSet::new();
         for profile in &self.profiles {
+            if sampled {
+                let Some(p) = &profile.provenance else {
+                    return Err(invalid("Sampled profiles require provenance"));
+                };
+                if [
+                    &p.player_id,
+                    &p.source_profile_id,
+                    &p.source_id,
+                    &p.transformation_version,
+                    &p.policy_id,
+                    &p.context_id,
+                ]
+                .iter()
+                .any(|id| !valid_id(id))
+                    || p.context_id != self.pitching_environment.context_id
+                {
+                    return Err(invalid("Invalid or mismatched profile provenance"));
+                }
+            }
             if !valid_id(&profile.id)
                 || !valid_id(&profile.model_version)
                 || !profile_ids.insert(profile.id.as_str())

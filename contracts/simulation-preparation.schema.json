@@ -1,0 +1,566 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "transformationVersion",
+    "inputId",
+    "policy",
+    "context",
+    "profiles"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "transformationVersion": {
+      "const": "lahman-pa-adapter-v1"
+    },
+    "inputId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "contact_policy",
+        "min_pa",
+        "prior_pa",
+        "min_year",
+        "max_year"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "const": "modern-neutral-v1"
+        },
+        "contact_policy": {
+          "enum": ["reject", "ordinary-out-proxy-v1"]
+        },
+        "min_pa": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "prior_pa": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "min_year": {
+          "type": "integer",
+          "minimum": 1954,
+          "maximum": 2025
+        },
+        "max_year": {
+          "type": "integer",
+          "minimum": 1954,
+          "maximum": 2025
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version",
+        "source",
+        "startYear",
+        "endYear",
+        "leagues",
+        "policyId",
+        "opportunities",
+        "includedPlayerSeasons",
+        "excludedPlayerSeasons",
+        "historicalOutcomeCounts",
+        "historicalProbabilities",
+        "mappedProbabilities",
+        "mapping"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "const": "league-average-v1"
+        },
+        "source": {
+          "$ref": "https://draftory.example/contracts/batting-profile.schema.json#/properties/source"
+        },
+        "startYear": {
+          "type": "integer"
+        },
+        "endYear": {
+          "type": "integer"
+        },
+        "leagues": {
+          "const": ["AL", "NL"]
+        },
+        "policyId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "opportunities": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "includedPlayerSeasons": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "excludedPlayerSeasons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["playerId", "year", "sourceRows", "reasons"],
+            "properties": {
+              "playerId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "year": {
+                "type": "integer"
+              },
+              "sourceRows": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "reasons": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        },
+        "historicalOutcomeCounts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "single",
+            "double",
+            "triple",
+            "homeRun",
+            "walk",
+            "hitByPitch",
+            "strikeout",
+            "otherAtBat",
+            "sacrificeHit",
+            "sacrificeFly"
+          ],
+          "properties": {
+            "single": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "double": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "triple": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "homeRun": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "walk": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "hitByPitch": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "strikeout": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "otherAtBat": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "sacrificeHit": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "sacrificeFly": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "historicalProbabilities": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "single",
+            "double",
+            "triple",
+            "homeRun",
+            "walk",
+            "hitByPitch",
+            "strikeout",
+            "otherAtBat",
+            "sacrificeHit",
+            "sacrificeFly"
+          ],
+          "properties": {
+            "single": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "double": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "triple": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "homeRun": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "walk": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "hitByPitch": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "strikeout": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "otherAtBat": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "sacrificeHit": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "sacrificeFly": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        },
+        "mappedProbabilities": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "single",
+            "double",
+            "triple",
+            "homeRun",
+            "walk",
+            "hitByPitch",
+            "strikeout",
+            "battedBallOut"
+          ],
+          "properties": {
+            "single": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "double": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "triple": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "homeRun": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "walk": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "hitByPitch": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "strikeout": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "battedBallOut": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        },
+        "mapping": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "historicalSacrificeHitMass",
+            "historicalSacrificeFlyMass",
+            "excludedSacrificeMass",
+            "retainedMass",
+            "conditionalContactProxyMass"
+          ],
+          "properties": {
+            "historicalSacrificeHitMass": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "historicalSacrificeFlyMass": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "excludedSacrificeMass": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "retainedMass": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "conditionalContactProxyMass": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        }
+      }
+    },
+    "profiles": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 18,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "preparedProfile",
+          "historicalProfile",
+          "effectiveSamplePa",
+          "playerBlendWeight",
+          "mapping",
+          "mappedProbabilities",
+          "smoothedProbabilities",
+          "maxRoundingError"
+        ],
+        "properties": {
+          "preparedProfile": {
+            "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/profile"
+          },
+          "historicalProfile": {
+            "$ref": "https://draftory.example/contracts/batting-profile.schema.json"
+          },
+          "effectiveSamplePa": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "playerBlendWeight": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "mapping": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "historicalSacrificeHitMass",
+              "historicalSacrificeFlyMass",
+              "excludedSacrificeMass",
+              "retainedMass",
+              "conditionalContactProxyMass"
+            ],
+            "properties": {
+              "historicalSacrificeHitMass": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "historicalSacrificeFlyMass": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "excludedSacrificeMass": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "retainedMass": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "conditionalContactProxyMass": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          "mappedProbabilities": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "single",
+              "double",
+              "triple",
+              "homeRun",
+              "walk",
+              "hitByPitch",
+              "strikeout",
+              "battedBallOut"
+            ],
+            "properties": {
+              "single": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "double": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "triple": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "homeRun": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "walk": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "hitByPitch": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "strikeout": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "battedBallOut": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          "smoothedProbabilities": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "single",
+              "double",
+              "triple",
+              "homeRun",
+              "walk",
+              "hitByPitch",
+              "strikeout",
+              "battedBallOut"
+            ],
+            "properties": {
+              "single": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "double": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "triple": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "homeRun": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "walk": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "hitByPitch": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "strikeout": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "battedBallOut": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          },
+          "maxRoundingError": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1e-6
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://draftory.example/contracts/simulation-preparation.schema.json",
+  "title": "Draftory offline simulation preparation audit v1.0.0",
+  "description": "Companion audit, not consumed by Rust. Historical facts remain separate from modeled probabilities."
+}

@@ -166,3 +166,16 @@ fn invalid_input_never_constructs_an_engine() {
         Err(EngineError::InvalidInput(_))
     ));
 }
+
+#[test]
+fn optional_sampling_metadata_cannot_be_explicit_null() {
+    for pointer in ["sampling", "provenance"] {
+        let mut value = input_value();
+        if pointer == "sampling" {
+            value["sampling"] = Value::Null;
+        } else {
+            value["profiles"][0]["provenance"] = Value::Null;
+        }
+        assert!(!valid(value));
+    }
+}

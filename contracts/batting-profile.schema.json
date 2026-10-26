@@ -866,5 +866,6 @@
         }
       }
     }
-  ]
+  ],
+  "$id": "https://draftory.example/contracts/batting-profile.schema.json"
 }

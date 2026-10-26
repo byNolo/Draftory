@@ -4,7 +4,7 @@ Draftory is an expandable sports drafting and simulation platform. MLB comes
 first: draft historical hitters and eventually simulate a 162-game season using
 plate-appearance events. This repository currently contains the development
 foundation and Lahman data preparation: a React shell, a local Worker health
-endpoint, a deterministic Rust game-state engine, and a reproducible offline Python pipeline.
+endpoint, a seeded Rust single-game simulator, and a reproducible offline Python pipeline.
 
 Scope and statistical decisions live in the [project plan](docs/PROJECT_PLAN.md),
 [architecture](docs/ARCHITECTURE.md), [data specification](docs/DATA_SPEC.md), and
@@ -17,8 +17,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the branch, validation and pull-reque
 ```text
 apps/web/                React + TypeScript + Vite presentation
 services/api/            Cloudflare Worker HTTP boundary and local D1 config
-crates/baseball-sim/     Portable scripted baseball game engine and native example
-data/pipeline/           uv-managed Lahman acquisition, normalization and profiles
+crates/baseball-sim/     Portable scripted/sampled baseball engine and native examples
+data/pipeline/           Lahman acquisition, normalization, profiles and preparation
 data/fixtures/           Small synthetic shared fixtures
 data/validation/         Measured source quality reports
 contracts/              Language-neutral schemas and version conventions
@@ -88,14 +88,21 @@ cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace
 ```
 
-The library validates prepared inputs and resolves scripted single-game events.
-It does not sample historical profiles or simulate seasons. See the
+The library validates prepared inputs and runs scripted or seeded sampled games.
+Python prepares historical profiles with an explicit, uncalibrated research policy.
+See the
 [simulation foundation](docs/SIMULATION_FOUNDATION.md) for contract review,
 supported mechanics and scoring limitations. Replay the shared synthetic game:
 
 ```sh
 cargo run -p baseball-sim --example replay -- data/fixtures/simulation-input.synthetic.json data/fixtures/simulation-script.synthetic.json
+cargo run -p baseball-sim --example simulate -- crates/baseball-sim/tests/fixtures/lahman-modern-game.json
 ```
+
+The second command uses a small attributed Judge/Soto fixture with repeated players
+to exercise the boundary, not authentic team rosters. See the
+[statistical integration workflow](docs/SIMULATION_FOUNDATION.md#statistical-integration-m3)
+for preparation commands, model limitations, RNG version and benchmark usage.
 
 The native example owns file/terminal I/O; the core has none. To build both targets
 without adding browser bindings:
@@ -135,11 +142,11 @@ The proposed top-level layout is retained. npm workspaces handle JavaScript, a
 Cargo workspace handles Rust, and uv manages the offline Python package. No
 monorepo task orchestrator or universal sport interface is needed. Empty feature
 and adapter packages are deferred. Versioned schemas now cover normalized facts,
-output manifests, descriptive batting profiles and the scripted simulation boundary.
+output manifests, descriptive batting profiles and the prepared simulation boundary.
 
 See [Lahman source findings](docs/LAHMAN_SOURCE_REVIEW.md) for the initial files,
 fields and join hazards. The [data foundation](docs/LAHMAN_DATA_FOUNDATION.md)
 documents measured coverage, working commands, profile semantics and remaining
 questions. The [Rust foundation](docs/SIMULATION_FOUNDATION.md) now implements
-scripted single-game mechanics. Statistical sampling, season simulation and
-permanent D1 tables remain deferred.
+scripted and sampled single-game mechanics. Season simulation, historical calibration
+and permanent D1 tables remain deferred.

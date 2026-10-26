@@ -29,7 +29,22 @@ Rust enforces semantic constraints JSON Schema cannot express, including weight
 sums, u64 seed range, unique identities and profile references. Synthetic input,
 event script and golden result are validated by Python and consumed by Rust.
 See [simulation foundation](../docs/SIMULATION_FOUNDATION.md) for rules, advancement
-policy, API usage and the statistical conversion work that remains deferred.
+policy and API usage.
+
+Statistical integration adds input **v1.1.0**, requiring `sampling.rngVersion`,
+`leagueAverage` pitching context and per-profile opaque provenance. Scripted v1.0
+inputs remain accepted unchanged; they cannot opt into sampling. The same eight
+events and result v1.0 envelope remain in use. A result echoes its complete input,
+including the v1.1 metadata needed to replay sampling. Scripted replay can also
+apply an event trace to a v1.1 input without consuming randomness.
+
+`simulation-preparation.schema.json` v1.0 describes the offline companion audit:
+original descriptive profiles, source release/lock, configurable policy, league
+context, excluded sacrifice mass, contact approximation, smoothing and rounding.
+It references the existing historical/prepared schemas rather than duplicating
+those definitions. Rust never consumes the Lahman-specific audit. Content IDs
+link prepared profiles to that audit. See the
+[statistical integration policy](../docs/SIMULATION_FOUNDATION.md#statistical-integration-m3).
 
 See [the data workflow](../docs/LAHMAN_DATA_FOUNDATION.md) for field semantics,
 canonical profile hashes, examples and restrictions on simulation use. The source

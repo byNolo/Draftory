@@ -1,0 +1,164 @@
+{
+  "config": {
+    "advancementPolicy": "conservative-outs-v1",
+    "maxInnings": 100,
+    "maxPlateAppearances": 10000
+  },
+  "detail": "events",
+  "pitchingEnvironment": {
+    "contextId": "context:d518eb03b78388c4c3f8d4d20bfb37d7bdcf556e11c99fe474c2fdd558af4f0e",
+    "mode": "leagueAverage"
+  },
+  "profiles": [
+    {
+      "id": "prepared:65c7d5a0997a7dff83c5e9b35525aab9a3d0beb963018ec103ec058bb19d7b34",
+      "modelVersion": "lahman-pa-adapter-v1",
+      "provenance": {
+        "contextId": "context:d518eb03b78388c4c3f8d4d20bfb37d7bdcf556e11c99fe474c2fdd558af4f0e",
+        "playerId": "lahman:judgeaa01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:a83eac0dee72f15e2f42d93533bb80b8fdc58ee5e39187c47f527d648f09e070",
+        "transformationVersion": "lahman-pa-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ordinary-out-contact-proxy",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing"
+      ],
+      "sampleOpportunities": 679,
+      "weights": {
+        "battedBallOut": 336405,
+        "double": 44223,
+        "hitByPitch": 10471,
+        "homeRun": 68027,
+        "single": 140887,
+        "strikeout": 235023,
+        "triple": 3089,
+        "walk": 161875
+      }
+    },
+    {
+      "id": "prepared:a568b23dc1502f7a453f5c9e4a39a32c243078f0333cf81c1e14e6f5dcfff942",
+      "modelVersion": "lahman-pa-adapter-v1",
+      "provenance": {
+        "contextId": "context:d518eb03b78388c4c3f8d4d20bfb37d7bdcf556e11c99fe474c2fdd558af4f0e",
+        "playerId": "lahman:sotoju01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:d40cc6e0735e9da5e6ae68b7a75d8f821441578d0bcf1d09518884f2e18ec2dd",
+        "transformationVersion": "lahman-pa-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ordinary-out-contact-proxy",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing"
+      ],
+      "sampleOpportunities": 714,
+      "weights": {
+        "battedBallOut": 418433,
+        "double": 31463,
+        "hitByPitch": 5646,
+        "homeRun": 54343,
+        "single": 128810,
+        "strikeout": 200520,
+        "triple": 1864,
+        "walk": 158921
+      }
+    }
+  ],
+  "rulesVersion": "foundation-nine-inning-v1",
+  "sampling": { "rngVersion": "splitmix64-v1" },
+  "schemaVersion": "1.1.0",
+  "seed": "2025",
+  "teams": {
+    "away": {
+      "id": "away",
+      "lineup": [
+        {
+          "id": "away-batter-1",
+          "profileId": "prepared:65c7d5a0997a7dff83c5e9b35525aab9a3d0beb963018ec103ec058bb19d7b34"
+        },
+        {
+          "id": "away-batter-2",
+          "profileId": "prepared:a568b23dc1502f7a453f5c9e4a39a32c243078f0333cf81c1e14e6f5dcfff942"
+        },
+        {
+          "id": "away-batter-3",
+          "profileId": "prepared:65c7d5a0997a7dff83c5e9b35525aab9a3d0beb963018ec103ec058bb19d7b34"
+        },
+        {
+          "id": "away-batter-4",
+          "profileId": "prepared:a568b23dc1502f7a453f5c9e4a39a32c243078f0333cf81c1e14e6f5dcfff942"
+        },
+        {
+          "id": "away-batter-5",
+          "profileId": "prepared:65c7d5a0997a7dff83c5e9b35525aab9a3d0beb963018ec103ec058bb19d7b34"
+        },
+        {
+          "id": "away-batter-6",
+          "profileId": "prepared:a568b23dc1502f7a453f5c9e4a39a32c243078f0333cf81c1e14e6f5dcfff942"
+        },
+        {
+          "id": "away-batter-7",
+          "profileId": "prepared:65c7d5a0997a7dff83c5e9b35525aab9a3d0beb963018ec103ec058bb19d7b34"
+        },
+        {
+          "id": "away-batter-8",
+          "profileId": "prepared:a568b23dc1502f7a453f5c9e4a39a32c243078f0333cf81c1e14e6f5dcfff942"
+        },
+        {
+          "id": "away-batter-9",
+          "profileId": "prepared:65c7d5a0997a7dff83c5e9b35525aab9a3d0beb963018ec103ec058bb19d7b34"
+        }
+      ]
+    },
+    "home": {
+      "id": "home",
+      "lineup": [
+        {
+          "id": "home-batter-1",
+          "profileId": "prepared:a568b23dc1502f7a453f5c9e4a39a32c243078f0333cf81c1e14e6f5dcfff942"
+        },
+        {
+          "id": "home-batter-2",
+          "profileId": "prepared:65c7d5a0997a7dff83c5e9b35525aab9a3d0beb963018ec103ec058bb19d7b34"
+        },
+        {
+          "id": "home-batter-3",
+          "profileId": "prepared:a568b23dc1502f7a453f5c9e4a39a32c243078f0333cf81c1e14e6f5dcfff942"
+        },
+        {
+          "id": "home-batter-4",
+          "profileId": "prepared:65c7d5a0997a7dff83c5e9b35525aab9a3d0beb963018ec103ec058bb19d7b34"
+        },
+        {
+          "id": "home-batter-5",
+          "profileId": "prepared:a568b23dc1502f7a453f5c9e4a39a32c243078f0333cf81c1e14e6f5dcfff942"
+        },
+        {
+          "id": "home-batter-6",
+          "profileId": "prepared:65c7d5a0997a7dff83c5e9b35525aab9a3d0beb963018ec103ec058bb19d7b34"
+        },
+        {
+          "id": "home-batter-7",
+          "profileId": "prepared:a568b23dc1502f7a453f5c9e4a39a32c243078f0333cf81c1e14e6f5dcfff942"
+        },
+        {
+          "id": "home-batter-8",
+          "profileId": "prepared:65c7d5a0997a7dff83c5e9b35525aab9a3d0beb963018ec103ec058bb19d7b34"
+        },
+        {
+          "id": "home-batter-9",
+          "profileId": "prepared:a568b23dc1502f7a453f5c9e4a39a32c243078f0333cf81c1e14e6f5dcfff942"
+        }
+      ]
+    }
+  }
+}

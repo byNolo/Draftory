@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://draftory.example/contracts/simulation-input.schema.json",
-  "title": "Draftory single-game simulation input v1.0.0",
+  "title": "Draftory single-game simulation input v1.0/v1.1",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -16,7 +16,7 @@
   ],
   "properties": {
     "schemaVersion": {
-      "const": "1.0.0"
+      "enum": ["1.0.0", "1.1.0"]
     },
     "rulesVersion": {
       "const": "foundation-nine-inning-v1"
@@ -61,7 +61,7 @@
           "$ref": "#/$defs/id"
         },
         "mode": {
-          "const": "scriptedNeutral"
+          "enum": ["scriptedNeutral", "leagueAverage"]
         }
       }
     },
@@ -85,6 +85,16 @@
       },
       "minItems": 1,
       "maxItems": 18
+    },
+    "sampling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rngVersion"],
+      "properties": {
+        "rngVersion": {
+          "const": "splitmix64-v1"
+        }
+      }
     }
   },
   "$defs": {
@@ -152,7 +162,7 @@
           "maximum": 1000000
         }
       },
-      "description": "All eight integer weights must sum to 1000000; enforced by engine validation. No sampling in this milestone."
+      "description": "All eight integer weights sum to 1000000; engine validation enforces the sum."
     },
     "profile": {
       "type": "object",
@@ -187,6 +197,9 @@
             "maxLength": 128
           },
           "maxItems": 32
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
         }
       }
     },
@@ -258,7 +271,88 @@
     },
     "side": {
       "enum": ["away", "home"]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "playerId",
+        "sourceProfileId",
+        "sourceId",
+        "transformationVersion",
+        "policyId",
+        "contextId"
+      ],
+      "properties": {
+        "playerId": {
+          "$ref": "#/$defs/id"
+        },
+        "sourceProfileId": {
+          "$ref": "#/$defs/id"
+        },
+        "sourceId": {
+          "$ref": "#/$defs/id"
+        },
+        "transformationVersion": {
+          "$ref": "#/$defs/id"
+        },
+        "policyId": {
+          "$ref": "#/$defs/id"
+        },
+        "contextId": {
+          "$ref": "#/$defs/id"
+        }
+      }
     }
   },
-  "description": "Prepared profiles only; no Lahman field names or unresolved categories. Engine additionally validates unique team/batter/profile IDs, profile references, seed range, and weight sum."
+  "description": "Prepared profiles only; no Lahman field names or unresolved categories. Engine additionally validates unique team/batter/profile IDs, profile references, seed range, and weight sum.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": {
+            "const": "1.1.0"
+          }
+        }
+      },
+      "then": {
+        "required": ["sampling"],
+        "properties": {
+          "pitchingEnvironment": {
+            "properties": {
+              "mode": {
+                "const": "leagueAverage"
+              }
+            }
+          },
+          "profiles": {
+            "items": {
+              "required": ["provenance"]
+            }
+          }
+        }
+      },
+      "else": {
+        "not": {
+          "required": ["sampling"]
+        },
+        "properties": {
+          "pitchingEnvironment": {
+            "properties": {
+              "mode": {
+                "const": "scriptedNeutral"
+              }
+            }
+          },
+          "profiles": {
+            "items": {
+              "not": {
+                "required": ["provenance"]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

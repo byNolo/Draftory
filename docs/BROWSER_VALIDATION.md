@@ -52,6 +52,8 @@ The Rust job builds native/WASM test artifacts on the normal runner; JavaScript
 downloads them and restores the native executable permission for parity tests.
 The browser container needs no Rust compiler or APT installation. Keep the image tag
 and `@playwright/test` version aligned when upgrading. Local commands are unchanged.
+Browser test steps use `HOME=/root` because the container runs as root and Firefox
+requires its home directory to belong to that user; GitHub's mounted home does not.
 
 All established seed/detail parity comparisons remain exact. The compact response
 is compared to the full result, including maximum-u64 seeds. A capacity fixture

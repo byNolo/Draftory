@@ -41,9 +41,13 @@ jobs:
       - run: npm run format:check
       - run: npm run build
       - run: npm run test:browser
+        env:
+          HOME: /root
       - run: npm run test:api
       - run: npm run test:data-client
       - run: npm run test:integration
+        env:
+          HOME: /root
       - run: npm run check:api
       - run: npm run d1:check --workspace @draftory/api
       - uses: actions/upload-artifact@v4

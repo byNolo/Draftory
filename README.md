@@ -4,7 +4,7 @@ Draftory is an expandable sports drafting and simulation platform. MLB comes
 first: draft historical hitters and eventually simulate a 162-game season using
 plate-appearance events. This repository currently contains the development
 foundation and Lahman data preparation: a React shell, a local Worker health
-endpoint, a portable Rust library shell, and a reproducible offline Python pipeline.
+endpoint, a deterministic Rust game-state engine, and a reproducible offline Python pipeline.
 
 Scope and statistical decisions live in the [project plan](docs/PROJECT_PLAN.md),
 [architecture](docs/ARCHITECTURE.md), [data specification](docs/DATA_SPEC.md), and
@@ -17,7 +17,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the branch, validation and pull-reque
 ```text
 apps/web/                React + TypeScript + Vite presentation
 services/api/            Cloudflare Worker HTTP boundary and local D1 config
-crates/baseball-sim/     Dependency-free portable Rust library
+crates/baseball-sim/     Portable scripted baseball game engine and native example
 data/pipeline/           uv-managed Lahman acquisition, normalization and profiles
 data/fixtures/           Small synthetic shared fixtures
 data/validation/         Measured source quality reports
@@ -27,8 +27,8 @@ docs/                   Planning documents and foundation/data-source reports
 .github/workflows/      Independent JavaScript, Rust, and Python checks
 ```
 
-Python will prepare data offline; the Worker will serve compact artifacts; Rust
-will simulate preloaded inputs; React will display results. Rust remains independent
+Python prepares data offline; the Worker will serve compact artifacts; Rust
+processes preloaded inputs; React will display results. Rust remains independent
 of all host services. WASM will use a thin adapter in a browser Web Worker later.
 
 ## Prerequisites
@@ -88,17 +88,25 @@ cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace
 ```
 
-The library exposes engine package metadata only; simulation modules and native
-runner are deferred until they have behavior. Cargo's built-in unit/doc test
-harness is ready, with no engine tests yet. To verify target portability without
-adding browser bindings:
+The library validates prepared inputs and resolves scripted single-game events.
+It does not sample historical profiles or simulate seasons. See the
+[simulation foundation](docs/SIMULATION_FOUNDATION.md) for contract review,
+supported mechanics and scoring limitations. Replay the shared synthetic game:
+
+```sh
+cargo run -p baseball-sim --example replay -- data/fixtures/simulation-input.synthetic.json data/fixtures/simulation-script.synthetic.json
+```
+
+The native example owns file/terminal I/O; the core has none. To build both targets
+without adding browser bindings:
 
 ```sh
 rustup target add wasm32-unknown-unknown
-cargo check --workspace --target wasm32-unknown-unknown
+cargo build --locked --workspace
+cargo build --locked --workspace --target wasm32-unknown-unknown
 ```
 
-This is a compile check, not a WASM runtime or determinism test.
+The WASM build is not a WASM runtime execution test.
 
 ## Python
 
@@ -127,10 +135,11 @@ The proposed top-level layout is retained. npm workspaces handle JavaScript, a
 Cargo workspace handles Rust, and uv manages the offline Python package. No
 monorepo task orchestrator or universal sport interface is needed. Empty feature
 and adapter packages are deferred. Versioned schemas now cover normalized facts,
-output manifests and descriptive batting profiles; simulation contracts remain
-undecided.
+output manifests, descriptive batting profiles and the scripted simulation boundary.
 
 See [Lahman source findings](docs/LAHMAN_SOURCE_REVIEW.md) for the initial files,
 fields and join hazards. The [data foundation](docs/LAHMAN_DATA_FOUNDATION.md)
 documents measured coverage, working commands, profile semantics and remaining
-questions. Rust simulation and permanent D1 tables remain deferred.
+questions. The [Rust foundation](docs/SIMULATION_FOUNDATION.md) now implements
+scripted single-game mechanics. Statistical sampling, season simulation and
+permanent D1 tables remain deferred.

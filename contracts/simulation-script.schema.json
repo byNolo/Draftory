@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://draftory.example/contracts/simulation-script.schema.json",
+  "title": "Draftory scripted plate appearances v1.0.0",
+  "type": "array",
+  "items": {
+    "$ref": "simulation-input.schema.json#/$defs/plateAppearance"
+  },
+  "maxItems": 1000000,
+  "description": "Exactly one complete game; exhausted/trailing events and safety aborts are errors."
+}

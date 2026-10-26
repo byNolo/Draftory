@@ -1,0 +1,551 @@
+{
+  "schemaVersion": "1.0.0",
+  "engineVersion": "0.2.0",
+  "input": {
+    "schemaVersion": "1.0.0",
+    "rulesVersion": "foundation-nine-inning-v1",
+    "seed": "18446744073709551615",
+    "config": {
+      "advancementPolicy": "conservative-outs-v1",
+      "maxInnings": 12,
+      "maxPlateAppearances": 1000
+    },
+    "detail": "summary",
+    "pitchingEnvironment": {
+      "contextId": "synthetic-neutral-v1",
+      "mode": "scriptedNeutral"
+    },
+    "teams": {
+      "away": {
+        "id": "away",
+        "lineup": [
+          {
+            "id": "away-batter-1",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "away-batter-2",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "away-batter-3",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "away-batter-4",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "away-batter-5",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "away-batter-6",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "away-batter-7",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "away-batter-8",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "away-batter-9",
+            "profileId": "synthetic-prepared-v1"
+          }
+        ]
+      },
+      "home": {
+        "id": "home",
+        "lineup": [
+          {
+            "id": "home-batter-1",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "home-batter-2",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "home-batter-3",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "home-batter-4",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "home-batter-5",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "home-batter-6",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "home-batter-7",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "home-batter-8",
+            "profileId": "synthetic-prepared-v1"
+          },
+          {
+            "id": "home-batter-9",
+            "profileId": "synthetic-prepared-v1"
+          }
+        ]
+      }
+    },
+    "profiles": [
+      {
+        "id": "synthetic-prepared-v1",
+        "modelVersion": "synthetic-eight-events-v1",
+        "sampleOpportunities": 1000,
+        "weights": {
+          "single": 125000,
+          "double": 125000,
+          "triple": 125000,
+          "homeRun": 125000,
+          "walk": 125000,
+          "hitByPitch": 125000,
+          "strikeout": 125000,
+          "battedBallOut": 125000
+        },
+        "qualityFlags": ["synthetic-test-only", "uncalibrated"]
+      }
+    ]
+  },
+  "winner": "home",
+  "score": [1, 2],
+  "lineScore": [
+    {
+      "inning": 1,
+      "away": 1,
+      "home": 0
+    },
+    {
+      "inning": 2,
+      "away": 0,
+      "home": 0
+    },
+    {
+      "inning": 3,
+      "away": 0,
+      "home": 0
+    },
+    {
+      "inning": 4,
+      "away": 0,
+      "home": 0
+    },
+    {
+      "inning": 5,
+      "away": 0,
+      "home": 0
+    },
+    {
+      "inning": 6,
+      "away": 0,
+      "home": 0
+    },
+    {
+      "inning": 7,
+      "away": 0,
+      "home": 0
+    },
+    {
+      "inning": 8,
+      "away": 0,
+      "home": 0
+    },
+    {
+      "inning": 9,
+      "away": 0,
+      "home": 2
+    }
+  ],
+  "teams": [
+    {
+      "teamId": "away",
+      "totals": {
+        "plateAppearances": 28,
+        "atBats": 28,
+        "hits": 1,
+        "singles": 0,
+        "doubles": 0,
+        "triples": 0,
+        "homeRuns": 1,
+        "walks": 0,
+        "intentionalWalks": 0,
+        "hitByPitch": 0,
+        "strikeouts": 27,
+        "runs": 1,
+        "runsBattedIn": 1
+      },
+      "outsRecorded": 27,
+      "leftOnBase": 0,
+      "batters": [
+        {
+          "batterId": "away-batter-1",
+          "stats": {
+            "plateAppearances": 4,
+            "atBats": 4,
+            "hits": 1,
+            "singles": 0,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 1,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 3,
+            "runs": 1,
+            "runsBattedIn": 1
+          }
+        },
+        {
+          "batterId": "away-batter-2",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 3,
+            "hits": 0,
+            "singles": 0,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 3,
+            "runs": 0,
+            "runsBattedIn": 0
+          }
+        },
+        {
+          "batterId": "away-batter-3",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 3,
+            "hits": 0,
+            "singles": 0,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 3,
+            "runs": 0,
+            "runsBattedIn": 0
+          }
+        },
+        {
+          "batterId": "away-batter-4",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 3,
+            "hits": 0,
+            "singles": 0,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 3,
+            "runs": 0,
+            "runsBattedIn": 0
+          }
+        },
+        {
+          "batterId": "away-batter-5",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 3,
+            "hits": 0,
+            "singles": 0,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 3,
+            "runs": 0,
+            "runsBattedIn": 0
+          }
+        },
+        {
+          "batterId": "away-batter-6",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 3,
+            "hits": 0,
+            "singles": 0,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 3,
+            "runs": 0,
+            "runsBattedIn": 0
+          }
+        },
+        {
+          "batterId": "away-batter-7",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 3,
+            "hits": 0,
+            "singles": 0,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 3,
+            "runs": 0,
+            "runsBattedIn": 0
+          }
+        },
+        {
+          "batterId": "away-batter-8",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 3,
+            "hits": 0,
+            "singles": 0,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 3,
+            "runs": 0,
+            "runsBattedIn": 0
+          }
+        },
+        {
+          "batterId": "away-batter-9",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 3,
+            "hits": 0,
+            "singles": 0,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 3,
+            "runs": 0,
+            "runsBattedIn": 0
+          }
+        }
+      ]
+    },
+    {
+      "teamId": "home",
+      "totals": {
+        "plateAppearances": 28,
+        "atBats": 27,
+        "hits": 3,
+        "singles": 2,
+        "doubles": 1,
+        "triples": 0,
+        "homeRuns": 0,
+        "walks": 1,
+        "intentionalWalks": 1,
+        "hitByPitch": 0,
+        "strikeouts": 24,
+        "runs": 2,
+        "runsBattedIn": 2
+      },
+      "outsRecorded": 24,
+      "leftOnBase": 2,
+      "batters": [
+        {
+          "batterId": "home-batter-1",
+          "stats": {
+            "plateAppearances": 4,
+            "atBats": 4,
+            "hits": 1,
+            "singles": 0,
+            "doubles": 1,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 3,
+            "runs": 0,
+            "runsBattedIn": 2
+          }
+        },
+        {
+          "batterId": "home-batter-2",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 3,
+            "hits": 0,
+            "singles": 0,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 3,
+            "runs": 0,
+            "runsBattedIn": 0
+          }
+        },
+        {
+          "batterId": "home-batter-3",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 3,
+            "hits": 0,
+            "singles": 0,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 3,
+            "runs": 0,
+            "runsBattedIn": 0
+          }
+        },
+        {
+          "batterId": "home-batter-4",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 3,
+            "hits": 0,
+            "singles": 0,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 3,
+            "runs": 0,
+            "runsBattedIn": 0
+          }
+        },
+        {
+          "batterId": "home-batter-5",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 3,
+            "hits": 0,
+            "singles": 0,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 3,
+            "runs": 0,
+            "runsBattedIn": 0
+          }
+        },
+        {
+          "batterId": "home-batter-6",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 3,
+            "hits": 0,
+            "singles": 0,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 3,
+            "runs": 0,
+            "runsBattedIn": 0
+          }
+        },
+        {
+          "batterId": "home-batter-7",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 2,
+            "hits": 0,
+            "singles": 0,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 1,
+            "intentionalWalks": 1,
+            "hitByPitch": 0,
+            "strikeouts": 2,
+            "runs": 1,
+            "runsBattedIn": 0
+          }
+        },
+        {
+          "batterId": "home-batter-8",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 3,
+            "hits": 1,
+            "singles": 1,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 2,
+            "runs": 1,
+            "runsBattedIn": 0
+          }
+        },
+        {
+          "batterId": "home-batter-9",
+          "stats": {
+            "plateAppearances": 3,
+            "atBats": 3,
+            "hits": 1,
+            "singles": 1,
+            "doubles": 0,
+            "triples": 0,
+            "homeRuns": 0,
+            "walks": 0,
+            "intentionalWalks": 0,
+            "hitByPitch": 0,
+            "strikeouts": 2,
+            "runs": 0,
+            "runsBattedIn": 0
+          }
+        }
+      ]
+    }
+  ],
+  "finalState": {
+    "inning": 9,
+    "half": "bottom",
+    "outs": 0,
+    "bases": [null, null, null],
+    "nextBatter": [1, 1],
+    "score": [1, 2],
+    "plateAppearances": 56,
+    "status": "final",
+    "abortReason": null
+  }
+}

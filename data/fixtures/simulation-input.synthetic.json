@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0.0",
+  "rulesVersion": "foundation-nine-inning-v1",
+  "seed": "18446744073709551615",
+  "config": {
+    "advancementPolicy": "conservative-outs-v1",
+    "maxInnings": 12,
+    "maxPlateAppearances": 1000
+  },
+  "detail": "summary",
+  "pitchingEnvironment": {
+    "contextId": "synthetic-neutral-v1",
+    "mode": "scriptedNeutral"
+  },
+  "teams": {
+    "away": {
+      "id": "away",
+      "lineup": [
+        {
+          "id": "away-batter-1",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "away-batter-2",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "away-batter-3",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "away-batter-4",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "away-batter-5",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "away-batter-6",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "away-batter-7",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "away-batter-8",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "away-batter-9",
+          "profileId": "synthetic-prepared-v1"
+        }
+      ]
+    },
+    "home": {
+      "id": "home",
+      "lineup": [
+        {
+          "id": "home-batter-1",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "home-batter-2",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "home-batter-3",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "home-batter-4",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "home-batter-5",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "home-batter-6",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "home-batter-7",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "home-batter-8",
+          "profileId": "synthetic-prepared-v1"
+        },
+        {
+          "id": "home-batter-9",
+          "profileId": "synthetic-prepared-v1"
+        }
+      ]
+    }
+  },
+  "profiles": [
+    {
+      "id": "synthetic-prepared-v1",
+      "modelVersion": "synthetic-eight-events-v1",
+      "sampleOpportunities": 1000,
+      "weights": {
+        "single": 125000,
+        "double": 125000,
+        "triple": 125000,
+        "homeRun": 125000,
+        "walk": 125000,
+        "hitByPitch": 125000,
+        "strikeout": 125000,
+        "battedBallOut": 125000
+      },
+      "qualityFlags": ["synthetic-test-only", "uncalibrated"]
+    }
+  ]
+}

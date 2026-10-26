@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://draftory.example/contracts/simulation-input.schema.json",
+  "title": "Draftory single-game simulation input v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "rulesVersion",
+    "seed",
+    "config",
+    "detail",
+    "pitchingEnvironment",
+    "teams",
+    "profiles"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "rulesVersion": {
+      "const": "foundation-nine-inning-v1"
+    },
+    "seed": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$",
+      "not": {
+        "pattern": "[^0-9]"
+      },
+      "description": "Canonical decimal u64, range 0..18446744073709551615; range checked by engine. Unused by scripted resolution."
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["advancementPolicy", "maxInnings", "maxPlateAppearances"],
+      "properties": {
+        "advancementPolicy": {
+          "const": "conservative-outs-v1"
+        },
+        "maxInnings": {
+          "type": "integer",
+          "minimum": 9,
+          "maximum": 65535
+        },
+        "maxPlateAppearances": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        }
+      }
+    },
+    "detail": {
+      "enum": ["summary", "events"]
+    },
+    "pitchingEnvironment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contextId", "mode"],
+      "properties": {
+        "contextId": {
+          "$ref": "#/$defs/id"
+        },
+        "mode": {
+          "const": "scriptedNeutral"
+        }
+      }
+    },
+    "teams": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["away", "home"],
+      "properties": {
+        "away": {
+          "$ref": "#/$defs/team"
+        },
+        "home": {
+          "$ref": "#/$defs/team"
+        }
+      }
+    },
+    "profiles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/profile"
+      },
+      "minItems": 1,
+      "maxItems": 18
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$",
+      "not": {
+        "pattern": "[^A-Za-z0-9._:-]"
+      }
+    },
+    "outcomeWeights": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "single",
+        "double",
+        "triple",
+        "homeRun",
+        "walk",
+        "hitByPitch",
+        "strikeout",
+        "battedBallOut"
+      ],
+      "properties": {
+        "single": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "double": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "triple": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "homeRun": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "walk": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "hitByPitch": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "strikeout": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "battedBallOut": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        }
+      },
+      "description": "All eight integer weights must sum to 1000000; enforced by engine validation. No sampling in this milestone."
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "modelVersion",
+        "sampleOpportunities",
+        "weights",
+        "qualityFlags"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "modelVersion": {
+          "$ref": "#/$defs/id"
+        },
+        "sampleOpportunities": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "weights": {
+          "$ref": "#/$defs/outcomeWeights"
+        },
+        "qualityFlags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "maxItems": 32
+        }
+      }
+    },
+    "batter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "profileId"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "profileId": {
+          "$ref": "#/$defs/id"
+        }
+      }
+    },
+    "team": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "lineup"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "lineup": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/batter"
+          },
+          "minItems": 9,
+          "maxItems": 9
+        }
+      }
+    },
+    "plateAppearance": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind"],
+          "properties": {
+            "kind": {
+              "enum": [
+                "single",
+                "double",
+                "triple",
+                "homeRun",
+                "hitByPitch",
+                "strikeout",
+                "battedBallOut"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "intentional"],
+          "properties": {
+            "kind": {
+              "const": "walk"
+            },
+            "intentional": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "side": {
+      "enum": ["away", "home"]
+    }
+  },
+  "description": "Prepared profiles only; no Lahman field names or unresolved categories. Engine additionally validates unique team/batter/profile IDs, profile references, seed range, and weight sum."
+}

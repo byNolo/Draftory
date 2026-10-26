@@ -20,6 +20,17 @@ The data foundation adds:
 - `batting-profile.schema.json`: preliminary descriptive profiles, explicit
   aggregation/filter requests, sample lineage and insufficient-data results.
 
+The Rust foundation adds `simulation-input.schema.json`,
+`simulation-script.schema.json`, and `simulation-result.schema.json` v1.0.0.
+Shared event/profile definitions live in the input schema and are referenced by
+the script/result schemas. The example-domain `$id` values are identifiers;
+validators register these local files and never need to fetch that domain.
+Rust enforces semantic constraints JSON Schema cannot express, including weight
+sums, u64 seed range, unique identities and profile references. Synthetic input,
+event script and golden result are validated by Python and consumed by Rust.
+See [simulation foundation](../docs/SIMULATION_FOUNDATION.md) for rules, advancement
+policy, API usage and the statistical conversion work that remains deferred.
+
 See [the data workflow](../docs/LAHMAN_DATA_FOUNDATION.md) for field semantics,
 canonical profile hashes, examples and restrictions on simulation use. The source
 is an official folder, so the pipeline uses its own v1 acquisition receipt and

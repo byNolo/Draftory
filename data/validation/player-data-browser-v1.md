@@ -173,6 +173,10 @@ The initial review CI attempts timed out while APT downloaded browser system
 libraries from the Azure Ubuntu mirror, before tests started. JavaScript CI now
 uses the official Playwright 1.58.2 Noble image with preinstalled browsers and OS
 libraries, matching the locked package; it does not skip browser execution.
+Native release and WASM binaries/bindings are built once in the Rust job and
+transferred as short-lived test artifacts to the browser container. Executable
+permissions are restored explicitly after download; neither raw data nor local
+databases enter those artifacts.
 
 ## Scope and remaining work
 

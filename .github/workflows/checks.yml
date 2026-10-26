@@ -14,6 +14,7 @@ permissions:
 
 jobs:
   javascript:
+    needs: rust
     runs-on: ubuntu-latest
     timeout-minutes: 20
     # Match @playwright/test exactly; browsers and OS libraries are preinstalled.
@@ -27,11 +28,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/download-artifact@v4
         with:
-          targets: wasm32-unknown-unknown
-      - run: cargo install wasm-bindgen-cli --version 0.2.105 --locked --root target/wasm-tools
-      - run: npm run build:wasm
+          name: simulation-builds
+      - run: chmod +x target/release/examples/season
       - run: npm run build:pilot
       - run: npm run types:api
       - run: git diff --exit-code -- services/api/worker-configuration.d.ts
@@ -39,7 +39,6 @@ jobs:
       - run: npm run lint
       - run: npm run format:check
       - run: npm run build
-      - run: cargo build --locked --release --examples
       - run: npm run test:browser
       - run: npm run test:api
       - run: npm run test:data-client
@@ -58,7 +57,7 @@ jobs:
 
   rust:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - run: rustup component add rustfmt clippy
@@ -68,6 +67,17 @@ jobs:
       - run: cargo test --locked --workspace
       - run: cargo build --locked --workspace
       - run: cargo build --locked --workspace --target wasm32-unknown-unknown
+      - run: cargo build --locked --release --examples
+      - run: cargo install wasm-bindgen-cli --version 0.2.105 --locked --root target/wasm-tools
+      - run: node scripts/build-wasm.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: simulation-builds
+          path: |
+            target/release/examples/season
+            apps/web/src/wasm/
+          if-no-files-found: error
+          retention-days: 1
 
   python:
     runs-on: ubuntu-latest

@@ -48,7 +48,9 @@ application routing changes are involved.
 Linux JavaScript CI runs in the official `mcr.microsoft.com/playwright:v1.58.2-noble`
 image, matching the locked Playwright package. It contains browser binaries and
 OS libraries, avoiding runtime APT downloads from the runner's package mirror.
-Rust tooling is installed in that job for native/WASM parity. Keep the image tag
+The Rust job builds native/WASM test artifacts on the normal runner; JavaScript
+downloads them and restores the native executable permission for parity tests.
+The browser container needs no Rust compiler or APT installation. Keep the image tag
 and `@playwright/test` version aligned when upgrading. Local commands are unchanged.
 
 All established seed/detail parity comparisons remain exact. The compact response

@@ -1,11 +1,12 @@
 # D1 migrations
 
-No application tables yet. Add numbered SQL migrations only after Lahman source
-exploration and schema review. Wrangler resolves this directory from
-`services/api/wrangler.jsonc`.
+`0001_mlb_player_data.sql` adds the M6A selected-player data foundation after
+Lahman exploration. Wrangler resolves this directory from
+`services/api/wrangler.jsonc`. See [the data API guide](../../../docs/PLAYER_DATA_API.md)
+for schema decisions, deterministic exports and the local import workflow.
 
-From the repository root, `npm run d1:check --workspace @draftory/api` executes
-`SELECT 1` against local D1 without creating application tables. All database
-commands during foundation work must use `--local`. The configured all-zero ID
-is a local sentinel; no cloud database exists and this configuration is not
-ready for deployment.
+Run `npm run d1:migrate --workspace @draftory/api` to apply pending migrations
+locally. `npm run d1:check --workspace @draftory/api` executes `SELECT 1`.
+The all-zero database ID remains a local sentinel; no cloud database has been
+provisioned. Use `--local` for all imports. Production deployment needs separate
+approval and a deliberately configured database.

@@ -35,6 +35,7 @@ jobs:
       - run: cargo build --locked --release --examples
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run test:browser
+      - run: npm run test:api
       - run: npm run check:api
       - run: npm run d1:check --workspace @draftory/api
 

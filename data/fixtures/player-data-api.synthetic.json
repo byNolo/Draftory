@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0.0",
+  "datasetId": "dataset:582776b91caf3e25d4deb2c59a4106a56c2743bd71d9b26538778c82171923f7",
+  "profiles": [
+    {
+      "id": "prepared:97cb5fc59ba4bb2204a482a0095a9540aaaf064e548a4f2d706f61af4bd1a9d3",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:2699b33f3ea7e7088ea6c88b60a6b91ddc7a9da0c4c85af7e67fe89cdc04ed99",
+        "playerId": "lahman:synthetic01",
+        "policyId": "policy:9c55038b84cad7279a78d5fb31108ad146b59fe2085b5fa799647703aa05c0d2",
+        "sourceId": "source:675fc0f7bd64609bb07b1decb3aaa78e0d04bfc1c64bb3cf586472f8bb1ee386",
+        "sourceProfileId": "sha256:f34619d5e709db6b76015ea8a3ed63fcaa4302f1c754b56e34780ca2b3c68923",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 200,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 100000,
+        "hitByPitch": 0,
+        "homeRun": 100000,
+        "otherContact": 400000,
+        "single": 200000,
+        "strikeout": 200000,
+        "triple": 0,
+        "walk": 0
+      }
+    },
+    {
+      "id": "prepared:e82d7a48c128bbbe3eeb7345cadb69b6928b144412e90ac82e73f06126101520",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:2699b33f3ea7e7088ea6c88b60a6b91ddc7a9da0c4c85af7e67fe89cdc04ed99",
+        "playerId": "lahman:synthetic02",
+        "policyId": "policy:9c55038b84cad7279a78d5fb31108ad146b59fe2085b5fa799647703aa05c0d2",
+        "sourceId": "source:675fc0f7bd64609bb07b1decb3aaa78e0d04bfc1c64bb3cf586472f8bb1ee386",
+        "sourceProfileId": "sha256:79c6d4b21c493dec8e43368ca8c433d1a289c8482db0da886b0ae604f305e77f",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 100,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 100000,
+        "hitByPitch": 0,
+        "homeRun": 100000,
+        "otherContact": 400000,
+        "single": 200000,
+        "strikeout": 200000,
+        "triple": 0,
+        "walk": 0
+      }
+    }
+  ]
+}

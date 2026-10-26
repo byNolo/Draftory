@@ -67,9 +67,20 @@ In a second terminal:
 npm run dev:api
 ```
 
-`GET http://127.0.0.1:8787/api/health` returns a JSON health response. This is a
-liveness check, not database readiness. Other paths return 404, other methods on
-the health route return 405. The web shell does not call the API yet.
+`GET http://127.0.0.1:8787/api/health` returns a JSON liveness response.
+M6A adds read-only season/dataset catalogs, player/position metadata, and bounded
+single/batch prepared-profile retrieval. Apply local migrations before data routes:
+
+```sh
+npm run d1:migrate --workspace @draftory/api
+npm run test:api
+```
+
+The API tests populate an isolated synthetic database automatically. For the real
+2024 subset, follow the [export/import and API guide](docs/PLAYER_DATA_API.md).
+Measured counts, storage and query findings are in the
+[M6A report](data/validation/player-data-v1.md). The web harness still uses its
+bundled fixture; React/API integration is a later milestone.
 
 ```sh
 npm run build
@@ -83,7 +94,7 @@ npm run d1:check --workspace @draftory/api
 `check:api` bundles the Worker with `wrangler deploy --dry-run`; it does not deploy.
 The D1 check executes `SELECT 1` locally. Its all-zero database ID is a local-only
 sentinel. Wrangler persists local state under `services/api/.wrangler/`. There are
-no migrations to apply or application tables. See [migration notes](infra/d1/migrations/README.md).
+versioned player-data migrations. See [migration notes](infra/d1/migrations/README.md).
 `worker-configuration.d.ts` is generated and checked in; regenerate it after config
 or Wrangler updates with `npm run types:api`.
 

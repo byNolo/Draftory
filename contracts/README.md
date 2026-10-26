@@ -19,6 +19,13 @@ every game's result. Structural schemas do not replace engine validation of
 transition legality, weight sums, version combinations or aggregate consistency.
 
 Language-neutral JSON Schema is the source of truth for exchanged artifacts.
+M6A adds `player-data-api.schema.json` v1.0.0 for profile, bounded batch,
+player-page and error envelopes. It references the existing prepared profile
+definition instead of changing Rust inputs. The committed synthetic SQL/JSON pair
+is checked by Python and consumed by local Worker/D1 tests. Dataset configuration,
+SQL import manifests and remaining route envelopes are documented in the
+[player data guide](../docs/PLAYER_DATA_API.md).
+
 `source-manifest.schema.json` v0.1.0 defines acquisition provenance: original
 archive URL, UTC retrieval timestamp, release label, archive SHA-256 and extracted
 file SHA-256 values. Retain upstream readme and license files alongside raw inputs

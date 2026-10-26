@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import sqlite3
 import sys
 from pathlib import Path
 from urllib.error import URLError
@@ -9,6 +10,7 @@ from urllib.error import URLError
 from .inspection import inspect_source, write_inspection
 from .normalize import Dataset
 from .profiles import ProfileRequest, generate_profile
+from .publication import export_publication
 from .simulation import PreparationPolicy, league_context, prepare_game
 from .source import DataError, canonical_bytes, fetch, verify_source
 
@@ -16,6 +18,14 @@ from .source import DataError, canonical_bytes, fetch, verify_source
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(prog="draftory-data")
     commands = result.add_subparsers(dest="command", required=True)
+    publish = commands.add_parser("export-d1")
+    publish.add_argument("--source-dir", type=Path, required=True)
+    publish.add_argument("--year", type=int, required=True)
+    publish.add_argument("--output-dir", type=Path, required=True)
+    publish.add_argument("--migrations-dir", type=Path, required=True)
+    publish.add_argument("--contact-policy", choices=["ordinary-out-proxy-v1"], required=True)
+    publish.add_argument("--min-pa", type=int, default=50)
+    publish.add_argument("--prior-pa", type=int, default=200)
     prepare = commands.add_parser("prepare-game")
     prepare.add_argument("--source-dir", type=Path, required=True)
     prepare.add_argument("--away-profiles", nargs=9, type=Path, required=True)
@@ -62,7 +72,26 @@ def main(argv: list[str] | None = None) -> int:
             output = verify_source(args.source_dir)
         else:
             dataset = Dataset.load(args.source_dir)
-            if args.command == "prepare-game":
+            if args.command == "export-d1":
+                policy = PreparationPolicy(args.contact_policy, args.min_pa, args.prior_pa)
+                summary = export_publication(
+                    dataset, args.year, policy, args.output_dir, args.migrations_dir
+                )
+                output = {
+                    key: summary[key]
+                    for key in (
+                        "schemaVersion",
+                        "datasetId",
+                        "rowCounts",
+                        "sqlBytes",
+                        "sqlSha256",
+                        "preparedPayloadBytes",
+                        "sqlitePageBytes",
+                    )
+                }
+                output["excludedPlayerCount"] = len(summary["excludedPlayers"])
+                output["manifest"] = str(args.output_dir / "manifest.json")
+            elif args.command == "prepare-game":
                 policy = PreparationPolicy(
                     args.contact_policy, args.min_pa, args.prior_pa, args.min_year, args.max_year
                 )
@@ -107,7 +136,7 @@ def main(argv: list[str] | None = None) -> int:
                     args.output.write_bytes(canonical_bytes(output) + b"\n")
         print(canonical_bytes(output).decode("utf-8"))
         return 3 if output.get("status") == "insufficient_data" else 0
-    except (DataError, OSError, URLError, json.JSONDecodeError) as error:
+    except (DataError, OSError, URLError, json.JSONDecodeError, sqlite3.Error) as error:
         print(f"draftory-data: {error}", file=sys.stderr)
         return 2
 

@@ -3,7 +3,7 @@
 Draftory is an expandable sports drafting and simulation platform. MLB comes
 first: draft historical hitters and eventually simulate a 162-game season using
 plate-appearance events. This repository currently contains the development
-foundation and Lahman data preparation: a React shell, a local Worker health
+foundation and Lahman data preparation: a React browser simulation harness, a local Worker health
 endpoint, a seeded Rust game/season simulator, and a reproducible offline Python pipeline.
 
 Scope and statistical decisions live in the [project plan](docs/PROJECT_PLAN.md),
@@ -18,6 +18,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the branch, validation and pull-reque
 apps/web/                React + TypeScript + Vite presentation
 services/api/            Cloudflare Worker HTTP boundary and local D1 config
 crates/baseball-sim/     Portable scripted/sampled baseball engine and native examples
+crates/sim-wasm/         Thin JSON/wasm-bindgen adapter; no baseball rules
 data/pipeline/           Lahman acquisition, normalization, profiles and preparation
 data/fixtures/           Small synthetic shared fixtures
 data/validation/         Measured source quality reports
@@ -29,13 +30,15 @@ docs/                   Planning documents and foundation/data-source reports
 
 Python prepares data offline; the Worker will serve compact artifacts; Rust
 processes preloaded inputs; React will display results. Rust remains independent
-of all host services. WASM will use a thin adapter in a browser Web Worker later.
+of all host services. WASM runs through a thin adapter in a dedicated browser Web Worker.
 
 ## Prerequisites
 
 - Node.js 22.13+ on the 22 LTS line, or Node.js 24+; npm 10+.
 - Rust 1.85+ with Cargo, rustfmt and Clippy (`rustup component add rustfmt clippy`).
   Native Windows builds require the appropriate MSVC linker and Windows SDK.
+- For the web harness: `wasm32-unknown-unknown` and wasm-bindgen CLI **0.2.105**
+  (matching the adapter's pinned dependency); setup commands below.
 - [uv](https://docs.astral.sh/uv/getting-started/installation/); Python 3.12
   (uv can download it automatically).
 
@@ -47,11 +50,18 @@ from the repository root unless another directory is shown.
 
 ```sh
 npm ci
+rustup target add wasm32-unknown-unknown
+cargo install wasm-bindgen-cli --version 0.2.105 --locked --root target/wasm-tools
+npm run build:wasm
 npm run types:api
 npm run dev:web
 ```
 
-Open the Vite URL printed in the terminal. In a second terminal:
+Open the Vite URL printed in the terminal. The developer harness runs the bundled
+162-game fixture entirely in a Web Worker and displays the record, runs and timings.
+It is not a calibrated game or final UI. Rebuild WASM after Rust adapter/core changes.
+See [browser integration](docs/BROWSER_WASM.md) for parity tests and instrumentation.
+In a second terminal:
 
 ```sh
 npm run dev:api
@@ -105,8 +115,7 @@ to exercise the boundary, not authentic team rosters. See the
 [statistical integration workflow](docs/SIMULATION_FOUNDATION.md#statistical-integration-m3)
 for preparation commands, model limitations, RNG version and benchmark usage.
 
-The native example owns file/terminal I/O; the core has none. To build both targets
-without adding browser bindings:
+The native example owns file/terminal I/O; the core has none. To build both targets:
 
 ```sh
 rustup target add wasm32-unknown-unknown
@@ -114,7 +123,20 @@ cargo build --locked --workspace
 cargo build --locked --workspace --target wasm32-unknown-unknown
 ```
 
-The WASM build is not a WASM runtime execution test.
+Compilation alone is not a WASM runtime execution test. M5A runs real-browser
+parity against native release output, including complete event traces:
+
+```sh
+cargo build --locked --release --examples
+npm run build:wasm
+npm run build
+npx playwright install chromium
+npm run test:browser
+npm run bench:browser
+```
+
+Browser tests use the production Vite build. Detailed measurement scope and browser
+compatibility are documented in [the M5A guide](docs/BROWSER_WASM.md).
 
 M4 adds bounded, seeded 162-game seasons and an offline Python-driven historical
 comparison workflow. The season fixture uses verified 2024 NYA/CHA starting

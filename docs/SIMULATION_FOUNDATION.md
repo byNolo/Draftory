@@ -5,6 +5,8 @@ integration is now implemented in [M3](#statistical-integration-m3); its explici
 research policies supersede the earlier deferred adapter/sampling gate. The
 historical data contract remains unchanged. M4 below adds opt-in contextual
 mechanics and seasons while preserving the legacy rules and replay behavior.
+M5A adds a separate [browser/WASM adapter and developer harness](BROWSER_WASM.md);
+the milestone records below retain their original scope and assumptions.
 
 ## Statistical review and proposed contract (written before implementation)
 

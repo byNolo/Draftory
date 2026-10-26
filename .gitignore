@@ -19,6 +19,11 @@ build/
 # Rust
 target/
 
+# Reproducible WASM bindings and browser test output
+apps/web/src/wasm/
+playwright-report/
+test-results/
+
 # Cloudflare, local secrets and databases
 .wrangler/
 .dev.vars*

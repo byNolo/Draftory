@@ -15,7 +15,7 @@ permissions:
 jobs:
   javascript:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -23,12 +23,18 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: rustup target add wasm32-unknown-unknown
+      - run: cargo install wasm-bindgen-cli --version 0.2.105 --locked --root target/wasm-tools
+      - run: npm run build:wasm
       - run: npm run types:api
       - run: git diff --exit-code -- services/api/worker-configuration.d.ts
       - run: npm run typecheck
       - run: npm run lint
       - run: npm run format:check
       - run: npm run build
+      - run: cargo build --locked --release --examples
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
       - run: npm run check:api
       - run: npm run d1:check --workspace @draftory/api
 

@@ -5,6 +5,9 @@ docs/SIMULATION_SPEC.md
 node_modules/
 dist/
 target/
+apps/web/src/wasm/
+playwright-report/
+test-results/
 .venv/
 .wrangler/
 **/worker-configuration.d.ts

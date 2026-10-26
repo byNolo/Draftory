@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/baseball-sim"]
+members = ["crates/baseball-sim", "crates/sim-wasm"]
 resolver = "2"
 
 [workspace.package]

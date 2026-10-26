@@ -12,6 +12,9 @@
     "npm": ">=10"
   },
   "scripts": {
+    "build:wasm": "node scripts/build-wasm.mjs",
+    "test:browser": "playwright test --project chromium",
+    "bench:browser": "playwright test --project performance",
     "dev:web": "npm run dev --workspace @draftory/web",
     "dev:api": "npm run dev --workspace @draftory/api",
     "build": "npm run build --workspaces --if-present",
@@ -24,6 +27,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "1.58.2",
     "eslint": "^10.13.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react-hooks": "^7.0.0",

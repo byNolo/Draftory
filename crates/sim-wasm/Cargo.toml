@@ -1,0 +1,21 @@
+[package]
+name = "sim-wasm"
+description = "Thin JSON/WebAssembly boundary for the portable Draftory engine"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[lints]
+workspace = true
+
+[dependencies]
+baseball-sim = { path = "../baseball-sim" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "=0.2.105"

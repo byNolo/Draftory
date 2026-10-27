@@ -56,8 +56,12 @@ export function workerUrl() {
   return `/assets/${filename}`;
 }
 
+let nativeInputOrdinal = 0;
 export function nativeResult(input: typeof fixture) {
-  const path = resolve(artifacts, 'input.json');
+  const path = resolve(
+    artifacts,
+    `input-${process.pid}-${nativeInputOrdinal++}.json`,
+  );
   writeFileSync(path, JSON.stringify(input));
   const binary = resolve(
     root,

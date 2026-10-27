@@ -3,6 +3,7 @@ import fixtureJson from '../../../crates/baseball-sim/tests/fixtures/season-mode
 import { SeasonClient } from './workers/season-client';
 import type { SeasonSuccess } from './workers/protocol';
 import PublishedSeason from './mlb/PublishedSeason';
+import DraftPlaytest from './mlb/draft/DraftPlaytest';
 
 export default function App() {
   const client = useRef<SeasonClient | null>(null);
@@ -160,6 +161,7 @@ export default function App() {
         </section>
       )}
       <PublishedSeason disabled={status !== 'ready'} simulate={simulateInput} />
+      <DraftPlaytest disabled={status !== 'ready'} simulate={simulateInput} />
       <p className="attribution">
         Data: SABR Lahman (CC BY-SA 3.0) and Retrosheet. The information used
         here was obtained free of charge from and is copyrighted by Retrosheet.

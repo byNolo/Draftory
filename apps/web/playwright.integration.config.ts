@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  testMatch: '**/integration.spec.ts',
+  testMatch: ['**/integration.spec.ts', '**/draft-browser.spec.ts'],
   outputDir: '../../target/m6b-test-results',
   workers: 1,
   timeout: 60_000,
@@ -18,7 +18,7 @@ export default defineConfig({
       command: 'node scripts/serve-integration-api.mjs',
       cwd: '../..',
       url: 'http://127.0.0.1:4176/api/health',
-      timeout: 120_000,
+      timeout: process.env.M6B_IMPORT_SQL ? 300_000 : 120_000,
       reuseExistingServer: false,
     },
     {

@@ -182,6 +182,19 @@ downloads; optional integration tests verify the official pinned release locally
 See the [Lahman data workflow](docs/LAHMAN_DATA_FOUNDATION.md) for acquisition,
 normalization, profile generation, contracts and statistical limitations.
 
+M7A adds an offline [valuation and eligibility research workflow](docs/PLAYER_VALUATION_RESEARCH.md)
+over the verified 2024 publication and unchanged native simulator. Its
+[measured report](data/validation/valuation-eligibility-v1.md) compares eligibility,
+offensive value, illustrative prices and random-offer feasibility. These are
+research outputs; draft rules and prices remain provisional.
+
+M7B adds a randomized MLB draft playtest below the existing harnesses: 90 credits,
+nine positions and up to three safe choices per round. Drafting loads a compact
+static catalog; simulating the finished roster requires the compatible local
+player-data API/import. See [draft setup and replay](docs/MLB_DRAFT.md) and
+[playtest results](data/validation/draft-engine-v1.md). Rules and prices remain
+versioned experiments, without accounts or server sessions.
+
 ## Foundation and data milestones
 
 Repository Foundation is **M0** in the plan. The requested **Milestone 2: Lahman

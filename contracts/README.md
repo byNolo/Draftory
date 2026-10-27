@@ -1,5 +1,10 @@
 # Shared contracts
 
+M7B adds `mlb-draft-catalog.schema.json` v1.0.0 for the compact static offer
+publication: source/dataset/policy identities, fixed experimental prices,
+nullable position games and default eligibility. It contains no simulation
+probabilities. See [draft workflow](../docs/MLB_DRAFT.md).
+
 M4 extends game input with **v1.2.0**, retaining v1.0/v1.1 behavior. It adds
 `contextual-nine-inning-v1`, `retrosheet-contextual-v1`, and an explicit
 `otherContact` weight/event. v1.2 requires zero legacy `battedBallOut` mass and

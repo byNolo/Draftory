@@ -1,0 +1,117 @@
+# Offline MLB valuation and eligibility research (M7A)
+
+This is an analysis tool, not the draft game. Python reads the immutable M6A
+publication and calls the existing native Rust calibration example. It neither
+changes prepared profiles nor implements baseball transitions in Python. There
+are no new dependencies, database schemas, API routes, browser features or
+production prices. The existing architecture is retained.
+
+Read the [measured report](../data/validation/valuation-eligibility-v1.md) and
+[compact results](../data/validation/valuation-eligibility-v1.json) before using
+the numbers. Statistical values and hypothetical currency quotes are separate.
+
+## Reproduce
+
+From the repository root, first prepare the pinned 2024 publication using the
+[M6A export instructions](PLAYER_DATA_API.md#reproducible-export-and-local-import).
+No D1 instance or Worker is needed: research loads the generated SQL into an
+in-memory SQLite database using the existing migrations.
+
+```sh
+uv sync --locked --project data/pipeline
+cargo build --locked --release -p baseball-sim --example calibrate
+uv run --project data/pipeline python -m draftory_data.valuation --publication-dir data/processed/d1-2024 --output-dir data/processed/m7a --repetitions 8 --draft-trials 500
+```
+
+This performs 2,045,088 native games and 94 draft experiment configurations. It
+can take several minutes. Generated inputs and observations stay in ignored
+`data/processed/m7a/`; no raw datasets or complete publication are checked in.
+Use the same command with `--reuse-native` to verify and reuse native observations
+while recalculating eligibility, prices and draft experiments. A cache with a
+different input, executable hash, repetition count or research version fails
+explicitly; changed rows fail their checksum. Remove that output directory or
+choose a new one to intentionally regenerate with a newly built executable.
+
+The runner path defaults to `target/release/examples/calibrate[.exe]`;
+`--runner` overrides it. Binary hashes differ across platforms/toolchains: compare
+inputs, versions, seeds and deterministic run counts across builds, not binary
+hashes. A different `--repetitions` changes the experiment size and uncertainty;
+cache reuse requires the same count and does not append repetitions.
+
+## Measurements and outputs
+
+The loader verifies SQL SHA-256, the publication content ID, profile digests,
+source/policy/context compatibility, complete sample opportunities and membership
+counts. Original batting stints are aggregated once per player. Position games
+are summed across teams; any unknown contribution keeps that position unknown.
+Missing, zero and positive observations remain distinct. Generic OF never implies
+LF/CF/RF unless the named broad-OF sensitivity policy explicitly requests it.
+
+Two synthetic experiments reuse the unchanged M4 fixture and contextual model:
+
+- **Homogeneous offense:** nine unique batter-instance IDs use the candidate's
+  profile template. Measure team runs/game; this includes nonlinear lineup effects.
+- **Single-slot marginal offense:** replace slot five of nine reference templates
+  with the candidate; subtract the paired reference team's runs/162 games.
+
+The reference is the actual published profile nearest the PA-weighted mean
+prepared probability vector by L1 distance, excluding the opponent's identities.
+It is not a validated league-average or replacement-level hitter. The fixture's
+CHA opponent, neutral pitching, schedule, transitions and rules remain fixed.
+Template reuse is labeled `userLineupKind: synthetic`, never a legal draft roster.
+
+Inputs are batched in publication order, 30 candidates per batch. The unchanged
+runner sorts team IDs, then generates season seeds with
+`season_game_seed(20261025, repeat * batch_length + sorted_team_index)`. Separate
+reference/homogeneous/marginal calls use matching seeds. Streams repeat across
+batches; results across different players are therefore not independent samples.
+Batch size/order and actual seeds are recorded. Error bars are sample standard
+deviation / sqrt(repetitions) across paired season differences, not confidence
+about real player skill or model accuracy. No individual simulated PA or outs
+are available in this compact runner output: do not relabel the results per
+600 candidate PA or per 27 outs.
+
+Outputs (research schema `1.0.0`, `mlb-valuation-research-v1`):
+
+| File                                   | Contents                                                                                                                                                               |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `research.json`                        | All 526 records, source/policy/context/model IDs, binary/fixture hashes, eight seeds and deltas per player, policy/price distributions and all draft experiments       |
+| `rankings.csv`                         | Descending marginal point estimates, profile IDs, historical PA/OPS, smoothing weight, direct on-base probability mass, uncertainty, homogeneous value and eligibility |
+| `summary.json`                         | Compact review subset: all policy counts, selected distributions, examples/outliers and tabular experiment results                                                     |
+| `native/*.input.json`, `native/*.json` | Synthetic native inputs, checksummed deterministic observations and cache identity                                                                                     |
+
+The checked-in compact JSON is `summary.json` formatted by Prettier. Its draft
+table has explicit `columns` and `rows`. Full input/output audits remain available
+locally. `preparedDirectOnBaseMass` sums direct single/double/triple/HR/BB/HBP
+weights; it is not predicted official OBP because unresolved contact can produce
+errors or force choices. `rawComparableDirectOnBaseMass` excludes SH/SF from its
+denominator to match preparation; `raw.OBP` retains the historical display formula.
+
+The offline offer analysis uses Python's MT19937, independently of Rust's RNG:
+the integer seed is SHA-256 of canonical `[20261027, configuration]`. Each case
+records its seed/version, offers, selection policy, order and trial count. Offers
+contain up to three distinct identities; selected identities are excluded from
+all subsequent slots. Unselected offers may recur. Tiers are per-position thirds
+of the value-sorted eligible pool, frozen before selections. A reserve-aware agent
+maximizes the marginal point estimate among choices that leave an affordable
+distinct-player completion. Completion costs use exact minimum-cost matching,
+including identity overlap, rather than independent slot minima. A protected
+case inserts a cheapest-completion candidate when no safe offer exists; this is
+an experimental rule, not implemented gameplay. Its guarantee assumes the agent
+only chooses safe options. See the report for denominators and limitations.
+
+## Validation
+
+```sh
+uv run --project data/pipeline ruff check data/pipeline
+uv run --project data/pipeline ruff format --check data/pipeline
+uv run --project data/pipeline pytest data/pipeline/tests
+```
+
+Tests use synthetic source/publication fixtures, brute-force assignment checks,
+overlapping eligibility, budget traps, price monotonicity, null propagation,
+tampering, and native cache/parity checks. The native integration test skips with
+an explicit reason when the release `calibrate` executable has not been built.
+Run it after building to exercise real paired native measurements. Existing
+source integration tests also accept `--lahman-source data/raw/lahman-2025` and
+`--retrosheet-source data/raw/retrosheet-m4` from the repository root.

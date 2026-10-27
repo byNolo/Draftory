@@ -39,3 +39,29 @@ dd {
 .attribution {
   font-size: 0.85rem;
 }
+
+.draft-settings,
+.draft-offers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+.draft-settings label {
+  display: grid;
+}
+.draft-settings input {
+  min-width: 0;
+  font: inherit;
+}
+.draft-offers article {
+  border: 1px solid #a7b8ac;
+  padding: 0.75rem;
+}
+pre {
+  max-width: 100%;
+  overflow: auto;
+}
+code {
+  overflow-wrap: anywhere;
+}

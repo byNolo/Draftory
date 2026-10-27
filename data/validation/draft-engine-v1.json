@@ -1,0 +1,233 @@
+{
+  "catalogBytes": 135552,
+  "catalogGzipBytes": 37710,
+  "catalogId": "draft-catalog:95602e268bcd87ff6f5640525e3cfc1936eff28ae57a3d715a2f990ba689f9f8",
+  "datasetId": "dataset:1fba260824fe05abec3c5950cd184caa0d314b41f1253bc782f97b678bb28add",
+  "desktopViewportClickTiming": {
+    "chromium": {
+      "actionMs": [
+        72.35770000000002, 74.13860000000022, 65.13400000000001,
+        76.88660000000027, 83.3417999999997, 78.49369999999999,
+        55.67020000000002, 71.87300000000005, 73.54349999999977
+      ],
+      "scope": "Single nine-pick desktop viewport playtest; Playwright click wall time including automation/rendering; not engine timing or physical mobile performance",
+      "viewport": "390x844 desktop browser emulation"
+    },
+    "firefox": {
+      "actionMs": [
+        445.0232999999989, 936.4854000000014, 454.03060000000005,
+        712.0018999999993, 350.65740000000005, 117.05879999999888,
+        122.50690000000031, 102.60030000000006, 182.85999999999876
+      ],
+      "scope": "Single nine-pick desktop viewport playtest; Playwright click wall time including automation/rendering; not engine timing or physical mobile performance",
+      "viewport": "390x844 desktop browser emulation"
+    },
+    "webkit": {
+      "actionMs": [
+        255.10830000000078, 243.6235999999999, 232.02820000000065,
+        515.9344999999994, 313.40480000000025, 330.9847, 428.6100999999999,
+        287.59409999999934, 250.5109999999995
+      ],
+      "scope": "Single nine-pick desktop viewport playtest; Playwright click wall time including automation/rendering; not engine timing or physical mobile performance",
+      "viewport": "390x844 desktop browser emulation"
+    }
+  },
+  "draftSeedRange": "0..4294967295",
+  "freshEngineTiming": {
+    "draftMs": {
+      "max": 223.1934000000183,
+      "median": 47.007199999992736,
+      "min": 17.828200000018114,
+      "n": 100,
+      "p25": 39.607300000003306,
+      "p75": 67.86619999998948,
+      "p95": 166.73610000000917
+    },
+    "firstOfferMs": {
+      "max": 84.98780000000261,
+      "median": 15.315100000007078,
+      "min": 4.79769999999553,
+      "n": 100,
+      "p25": 12.089999999996508,
+      "p75": 20.50789999999688,
+      "p95": 44.74969999998575
+    },
+    "scope": "100 fresh engines; parsed catalog in memory; first offered player; no branch warming, network or React",
+    "selectionMs": {
+      "max": 64.33929999999236,
+      "median": 3.5142000000050757,
+      "min": 0.12230000001727603,
+      "n": 900,
+      "p25": 2.1054000000003725,
+      "p75": 5.311900000000605,
+      "p95": 12.357400000008056
+    }
+  },
+  "limitations": [
+    "Desktop Windows measurements under concurrent checks; fresh memo caches with warmed JS runtime.",
+    "Price and balance settings are experimental; guarantees do not imply fun or uniform rosters.",
+    "Physical Android/iOS and hosted network performance untested."
+  ],
+  "mainPlaytests": [
+    {
+      "budget": 25,
+      "completed": 100,
+      "distinctRosters": 39,
+      "medianDraftMs": 5.604599999999664,
+      "multipleChoiceRate": 0.38222222222222224,
+      "p95DraftMs": 19.756199999999808,
+      "strategy": "first",
+      "threeChoiceRate": 0.24555555555555555,
+      "trials": 100
+    },
+    {
+      "budget": 25,
+      "completed": 100,
+      "distinctRosters": 18,
+      "medianDraftMs": 6.5406999999959226,
+      "multipleChoiceRate": 0.3333333333333333,
+      "p95DraftMs": 15.291799999999057,
+      "strategy": "expensive",
+      "threeChoiceRate": 0.2222222222222222,
+      "trials": 100
+    },
+    {
+      "budget": 25,
+      "completed": 100,
+      "distinctRosters": 41,
+      "medianDraftMs": 5.7083999999995285,
+      "multipleChoiceRate": 0.4677777777777778,
+      "p95DraftMs": 14.090800000001764,
+      "strategy": "cheap",
+      "threeChoiceRate": 0.29555555555555557,
+      "trials": 100
+    },
+    {
+      "budget": 60,
+      "completed": 100,
+      "distinctRosters": 100,
+      "medianDraftMs": 6.603199999994104,
+      "multipleChoiceRate": 0.9288888888888889,
+      "p95DraftMs": 17.682700000001205,
+      "strategy": "first",
+      "threeChoiceRate": 0.89,
+      "trials": 100
+    },
+    {
+      "budget": 60,
+      "completed": 100,
+      "distinctRosters": 100,
+      "medianDraftMs": 5.169299999997747,
+      "multipleChoiceRate": 0.7077777777777777,
+      "p95DraftMs": 9.86779999999635,
+      "strategy": "expensive",
+      "threeChoiceRate": 0.6655555555555556,
+      "trials": 100
+    },
+    {
+      "budget": 60,
+      "completed": 100,
+      "distinctRosters": 100,
+      "medianDraftMs": 7.827900000011141,
+      "multipleChoiceRate": 1,
+      "p95DraftMs": 14.535299999995914,
+      "strategy": "cheap",
+      "threeChoiceRate": 1,
+      "trials": 100
+    },
+    {
+      "budget": 90,
+      "completed": 100,
+      "distinctRosters": 100,
+      "medianDraftMs": 6.75180000000546,
+      "multipleChoiceRate": 1,
+      "p95DraftMs": 21.941699999995762,
+      "strategy": "first",
+      "threeChoiceRate": 1,
+      "trials": 100
+    },
+    {
+      "budget": 90,
+      "completed": 100,
+      "distinctRosters": 100,
+      "medianDraftMs": 5.549100000003818,
+      "multipleChoiceRate": 0.9988888888888889,
+      "p95DraftMs": 11.64419999999518,
+      "strategy": "expensive",
+      "threeChoiceRate": 0.9977777777777778,
+      "trials": 100
+    },
+    {
+      "budget": 90,
+      "completed": 100,
+      "distinctRosters": 100,
+      "medianDraftMs": 9.027900000000955,
+      "multipleChoiceRate": 1,
+      "p95DraftMs": 31.623200000016368,
+      "strategy": "cheap",
+      "threeChoiceRate": 1,
+      "trials": 100
+    },
+    {
+      "budget": 120,
+      "completed": 100,
+      "distinctRosters": 100,
+      "medianDraftMs": 7.936600000000908,
+      "multipleChoiceRate": 1,
+      "p95DraftMs": 19.477799999978743,
+      "strategy": "first",
+      "threeChoiceRate": 1,
+      "trials": 100
+    },
+    {
+      "budget": 120,
+      "completed": 100,
+      "distinctRosters": 100,
+      "medianDraftMs": 7.619699999981094,
+      "multipleChoiceRate": 1,
+      "p95DraftMs": 18.584599999972852,
+      "strategy": "expensive",
+      "threeChoiceRate": 1,
+      "trials": 100
+    },
+    {
+      "budget": 120,
+      "completed": 100,
+      "distinctRosters": 100,
+      "medianDraftMs": 10.72640000001411,
+      "multipleChoiceRate": 1,
+      "p95DraftMs": 31.269700000004377,
+      "strategy": "cheap",
+      "threeChoiceRate": 1,
+      "trials": 100
+    }
+  ],
+  "realPublicationParity": {
+    "chromium": {
+      "apiRequests": 2,
+      "losses": 81,
+      "requestedProfileCount": 9,
+      "runs": 593,
+      "wins": 81
+    },
+    "firefox": {
+      "apiRequests": 2,
+      "losses": 81,
+      "requestedProfileCount": 9,
+      "runs": 593,
+      "wins": 81
+    },
+    "webkit": {
+      "apiRequests": 2,
+      "losses": 81,
+      "requestedProfileCount": 9,
+      "runs": 593,
+      "wins": 81
+    }
+  },
+  "researchMeasurementSha256": "d450086adca34294ca61c6de5f3e06dca25b875545c5c8ea55c36993540431a6",
+  "rngVersion": "mulberry32-rejection-v1",
+  "rulesVersion": "mlb-protected-draft-v1",
+  "schemaVersion": "1.0.0",
+  "simulationSeedRange": "0..18446744073709551615"
+}

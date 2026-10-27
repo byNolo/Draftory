@@ -1,7 +1,14 @@
 // Default CI uses existing verified M4 prepared profiles with explicitly test-only
 // identity labels/source-row placeholders. Real validation imports an M6A artifact.
 import { execFileSync, spawn } from 'node:child_process';
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import {
+  closeSync,
+  mkdirSync,
+  openSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
 import { resolve, sep } from 'node:path';
 import { canonical, digest, pilotArtifact } from './build-pilot.mjs';
 
@@ -130,21 +137,29 @@ execFileSync(
   ],
   options,
 );
-execFileSync(
-  process.execPath,
-  [
-    cli,
-    'd1',
-    'execute',
-    'DB',
-    '--local',
-    '--persist-to',
-    state,
-    '--file',
-    source,
-    ...common,
-  ],
-  options,
+const importLog = openSync(resolve(state, 'import.log'), 'w');
+try {
+  execFileSync(
+    process.execPath,
+    [
+      cli,
+      'd1',
+      'execute',
+      'DB',
+      '--local',
+      '--persist-to',
+      state,
+      '--file',
+      source,
+      ...common,
+    ],
+    { ...options, stdio: ['ignore', importLog, 'inherit'] },
+  );
+} finally {
+  closeSync(importLog);
+}
+console.log(
+  `Local SQL import complete; details: ${resolve(state, 'import.log')}`,
 );
 const child = spawn(
   process.execPath,

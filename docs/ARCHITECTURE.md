@@ -41,6 +41,13 @@ Season summary, player lines, per-game scores, optional replay records -> React
 
 **Ownership:** Python owns imports and projections; D1 stores normalized/queryable records; Worker owns API and draft state; Rust owns baseball rules and simulation; React owns presentation. None of the Rust simulation logic should depend on Cloudflare or the DOM.
 
+**M7B developer-playtest adjustment:** ephemeral draft state lives locally in a
+pure MLB TypeScript module, separate from React. A versioned static catalog
+supplies metadata/prices; the Worker supplies selected simulation profiles.
+Server-owned sessions remain a future option. This avoids premature session
+endpoints/storage for a casual prototype with no verification requirement.
+See [draft rules and replay](MLB_DRAFT.md).
+
 ## 3. Proposed repository layout
 
 ```text

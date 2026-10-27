@@ -18,3 +18,5 @@ data/raw/
 data/interim/
 data/processed/
 data/generated/
+# Canonical, checksummed static publications retain compact producer bytes.
+data/publications/*.json

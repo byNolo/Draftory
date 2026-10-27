@@ -28,7 +28,7 @@ export interface Pilot {
   season: Omit<SeasonInput, 'profiles' | 'userTeam' | 'seed'>;
   opponentProfiles: PreparedProfile[];
 }
-function canonical(value: unknown): unknown {
+export function canonical(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(canonical);
   if (value && typeof value === 'object')
     return Object.fromEntries(
@@ -38,7 +38,7 @@ function canonical(value: unknown): unknown {
     );
   return value;
 }
-async function hash(value: unknown) {
+export async function hash(value: unknown) {
   if (!crypto.subtle)
     throw new DataError(
       'unsupportedEnvironment',
@@ -164,6 +164,7 @@ export async function assembleSeason(
   supplied: PreparedProfile[],
   pilot: Pilot,
   seed: string,
+  mode: 'pilot' | 'draft' = 'pilot',
 ): Promise<SeasonInput> {
   pilot = await parsePilot(pilot);
   validateDataset(dataset, pilot);
@@ -175,9 +176,11 @@ export async function assembleSeason(
   requireMatch(
     players.length === 9 &&
       new Set(players.map((p) => p.id)).size === 9 &&
-      pilot.userPlayerIds.every(
-        (id, i) => players[i].id === id && players[i].year === dataset.year,
-      ),
+      players.every((p) => p.year === dataset.year) &&
+      (mode === 'draft' ||
+        pilot.userPlayerIds.every(
+          (id, i) => players[i].id === id && players[i].year === dataset.year,
+        )),
     'User player identities/year/order do not match pilot',
   );
   const profiles = new Map<string, PreparedProfile>();
@@ -192,8 +195,9 @@ export async function assembleSeason(
     profiles.set(p.id, p);
   }
   const used = new Set<string>();
+  const userTeamId = mode === 'draft' ? 'draft:2024' : pilot.userTeamId;
   const userTeam = {
-    id: pilot.userTeamId,
+    id: userTeamId,
     lineup: players.map((p) => {
       const profile = profiles.get(p.profileId);
       requireMatch(
@@ -201,7 +205,7 @@ export async function assembleSeason(
         'A selected profile is missing or belongs to another player',
       );
       used.add(p.profileId);
-      return { id: `${pilot.userTeamId}:${p.id}`, profileId: p.profileId };
+      return { id: `${userTeamId}:${p.id}`, profileId: p.profileId };
     }),
   };
   const userIds = new Set(players.map((p) => p.id));
@@ -213,7 +217,7 @@ export async function assembleSeason(
     const identities = team.lineup.map((b) => {
       const p = profiles.get(b.profileId);
       requireMatch(
-        p && !userIds.has(p.provenance.playerId),
+        p && (mode === 'draft' || !userIds.has(p.provenance.playerId)),
         'Missing opponent profile or overlapping player identity',
       );
       used.add(p.id);
@@ -226,6 +230,7 @@ export async function assembleSeason(
   }
   const input = {
     ...structuredClone(pilot.season),
+    ...(mode === 'draft' ? { userLineupKind: 'synthetic' } : {}),
     seed,
     userTeam,
     profiles: [...profiles.values()]

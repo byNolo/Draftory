@@ -1,12 +1,15 @@
 # Draftory
 
-Draftory is an expandable sports drafting and simulation platform. MLB comes
-first: draft historical hitters and eventually simulate a 162-game season using
-plate-appearance events. This repository currently contains the development
-foundation and Lahman data preparation: a React browser simulation harness, a
-local Worker API serving published player profiles, a seeded Rust game/season
-simulator, and a reproducible offline Python pipeline.
+Draftory is an expandable sports drafting and simulation platform. The first
+playable game drafts nine real 2024 MLB hitters within 90 fictional credits and
+simulates a 162-game season in a Rust/WASM Web Worker. Review your record and
+individual batting totals, replay a season or start another draft. Prices and
+the simulation remain experimental; results are not real-world predictions.
 
+The repository also includes a local Cloudflare Worker player API, a reproducible
+offline Python pipeline and an independently testable native Rust simulator.
+See [the playable game guide](docs/MLB_GAME.md) and
+[M7C validation](data/validation/mlb-game-v1.md).
 Scope and statistical decisions live in the [project plan](docs/PROJECT_PLAN.md),
 [architecture](docs/ARCHITECTURE.md), [data specification](docs/DATA_SPEC.md), and
 [simulation specification](docs/SIMULATION_SPEC.md).
@@ -21,7 +24,7 @@ services/api/            Cloudflare Worker HTTP boundary and local D1 config
 crates/baseball-sim/     Portable scripted/sampled baseball engine and native examples
 crates/sim-wasm/         Thin JSON/wasm-bindgen adapter; no baseball rules
 data/pipeline/           Lahman acquisition, normalization, profiles and preparation
-data/fixtures/           Small synthetic shared fixtures
+data/fixtures/           Small synthetic and verified historical test excerpts
 data/validation/         Measured source quality reports
 contracts/              Language-neutral schemas and version conventions
 infra/d1/migrations/    Versioned local player-data schema
@@ -43,8 +46,9 @@ of all host services. WASM runs through a thin adapter in a dedicated browser We
 - [uv](https://docs.astral.sh/uv/getting-started/installation/); Python 3.12
   (uv can download it automatically).
 
-No Cloudflare account, cloud resources, paid services or historical datasets are
-required for local development. Lockfiles pin dependencies; use the commands below
+No Cloudflare account, cloud resources or paid services are required. The
+playable game needs the locally imported verified 2024 publication; diagnostic
+fixture runs and ordinary CI do not need the raw historical datasets. Lockfiles pin dependencies; use the commands below
 from the repository root unless another directory is shown.
 
 ## JavaScript and local API
@@ -59,9 +63,9 @@ npm run build:pilot
 npm run dev:web
 ```
 
-Open the Vite URL printed in the terminal. The developer harness runs the bundled
-162-game fixture entirely in a Web Worker and displays the record, runs and timings.
-It is not a calibrated game or final UI. Rebuild WASM after Rust adapter/core changes.
+Open the Vite URL printed in the terminal for the game. First import the verified
+2024 publication following the API instructions below. Open `/dev` for the
+diagnostic harness, whose bundled 162-game fixture works without that import. Rebuild WASM after Rust adapter/core changes.
 See [browser integration](docs/BROWSER_WASM.md) for parity tests and instrumentation.
 In a second terminal:
 

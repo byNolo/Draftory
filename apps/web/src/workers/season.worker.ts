@@ -1,12 +1,14 @@
 /// <reference lib="webworker" />
 import init, {
   simulate_season_json,
+  simulate_season_batting_json,
   simulate_season_summary_json,
   last_run_measurements,
 } from '../wasm/sim_wasm';
 import wasmUrl from '../wasm/sim_wasm_bg.wasm?url';
 import type {
   SeasonSummary,
+  SeasonBatting,
   WorkerFailure,
   WorkerRequest,
   WorkerResponse,
@@ -110,10 +112,13 @@ scope.onmessage = async ({ data }: MessageEvent<WorkerRequest>) => {
     }
     const callStart = performance.now();
     const wasmMemoryBeforeBytes = memory.buffer.byteLength;
-    const compact = data.output === 'summary';
-    const resultJson = compact
-      ? simulate_season_summary_json(data.inputJson)
-      : simulate_season_json(data.inputJson);
+    const compact = data.output === 'summary' || data.output === 'batting';
+    const resultJson =
+      data.output === 'batting'
+        ? simulate_season_batting_json(data.inputJson)
+        : compact
+          ? simulate_season_summary_json(data.inputJson)
+          : simulate_season_json(data.inputJson);
     const wasmCallMs = performance.now() - callStart;
     const [inputParsingMs, simulationMs, serializationMs, resultJsonBytes] =
       last_run_measurements();
@@ -142,7 +147,20 @@ scope.onmessage = async ({ data }: MessageEvent<WorkerRequest>) => {
     send({
       type: 'result',
       requestId: data.requestId,
-      summary,
+      summary: {
+        engineVersion: summary.engineVersion,
+        schemaVersion: summary.schemaVersion,
+        seed: summary.seed,
+        games: summary.games,
+        wins: summary.wins,
+        losses: summary.losses,
+        runsScored: summary.runsScored,
+        runsAllowed: summary.runsAllowed,
+        runDifferential: summary.runDifferential,
+      },
+      ...(data.output === 'batting'
+        ? { batting: (result as unknown as { batting: SeasonBatting }).batting }
+        : {}),
       timings: {
         initializationMs,
         wasmCallMs,

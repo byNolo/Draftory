@@ -28,6 +28,9 @@ test('new deployment revalidates HTML, retains an active worker, and recovers st
     // Keep the watched directory alive (Windows disables a removed directory's
     // watcher). Replace files, then wait for Wrangler's manifest below.
     cpSync(sourceAssets, assets, { recursive: true });
+    cpSync(resolve(source, 'dev'), resolve(current, 'dev'), {
+      recursive: true,
+    });
     const keep = new Set(readdirSync(sourceAssets));
     for (const name of readdirSync(assets))
       if (!keep.has(name)) rmSync(resolve(assets, name), { force: true });
@@ -57,7 +60,7 @@ test('new deployment revalidates HTML, retains an active worker, and recovers st
     release = resolveGate;
   });
   try {
-    await oldTab.goto('http://127.0.0.1:4173/');
+    await oldTab.goto('http://127.0.0.1:4173/dev');
     await expect(oldTab.getByRole('status')).toHaveText('Ready');
     // Explicit uncached/unfetched old worker, not a claim about a browser cache hit.
     await staleTab.route(`**${oldWorker}`, async (route) => {
@@ -65,7 +68,7 @@ test('new deployment revalidates HTML, retains an active worker, and recovers st
       await route.continue();
     });
     const waiting = staleTab.waitForRequest(`**${oldWorker}`);
-    await staleTab.goto('http://127.0.0.1:4173/');
+    await staleTab.goto('http://127.0.0.1:4173/dev');
     await waiting;
     replaceAssets(next);
     writeFileSync(

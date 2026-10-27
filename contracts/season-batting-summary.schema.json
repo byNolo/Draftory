@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://draftory.example/contracts/season-batting-summary.schema.json",
+  "title": "Draftory compact season batting projection v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "engineVersion",
+    "seed",
+    "games",
+    "wins",
+    "losses",
+    "runsScored",
+    "runsAllowed",
+    "runDifferential",
+    "batting"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "engineVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "seed": {
+      "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/properties/seed"
+    },
+    "games": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "wins": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "losses": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "runsScored": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "runsAllowed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "runDifferential": {
+      "type": "integer"
+    },
+    "batting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "teamId", "totals", "batters"],
+      "properties": {
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "teamId": {
+          "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/id"
+        },
+        "totals": {
+          "$ref": "https://draftory.example/contracts/simulation-result.schema.json#/$defs/stats"
+        },
+        "batters": {
+          "$ref": "https://draftory.example/contracts/simulation-result.schema.json#/$defs/teamBox/properties/batters"
+        }
+      }
+    }
+  }
+}

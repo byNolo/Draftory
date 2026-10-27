@@ -1,5 +1,9 @@
 # Browser season integration (M5A)
 
+M7C: the playable game is now at `/`; the diagnostic harness described below
+is at `/dev`. See [the game guide](MLB_GAME.md) for current gameplay and result
+projection behavior.
+
 M5B extends this foundation with a compact Rust summary path, phase/memory
 instrumentation, additional browsers and local Pages delivery tests. See
 [current M5B commands and measurement definitions](BROWSER_VALIDATION.md).

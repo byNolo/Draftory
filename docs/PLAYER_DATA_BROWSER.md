@@ -1,5 +1,9 @@
 # Published profiles in the browser (M6B)
 
+M7C: the playable game is now at `/`; the diagnostic harness described below
+is at `/dev`. See [the game guide](MLB_GAME.md) for current gameplay and result
+projection behavior.
+
 The developer harness now exercises local **D1 → Worker API → React → WASM →
 162-game result**. The bundled M4 fixture remains the default offline option.
 Nothing loads from the player API until a dataset is requested. No cloud resources

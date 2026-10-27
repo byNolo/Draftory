@@ -20,7 +20,7 @@ async function captureInputs(page: Page) {
   });
 }
 async function preparedPage(page: Page) {
-  await page.goto('/');
+  await page.goto('/dev');
   await expect(page.getByRole('status')).toHaveText('Ready');
   await page.getByRole('button', { name: 'Load published datasets' }).click();
   await expect(
@@ -209,7 +209,7 @@ test('API errors recover by retry; invalid seed stays outside WASM; clear cache 
       }),
     }),
   );
-  await page.goto('/');
+  await page.goto('/dev');
   await expect(page.getByRole('status')).toHaveText('Ready');
   await page.getByRole('button', { name: 'Load published datasets' }).click();
   await expect(page.getByRole('alert')).toContainText('Temporary test failure');
@@ -270,7 +270,7 @@ test('API errors recover by retry; invalid seed stays outside WASM; clear cache 
 test('incompatible dataset or unavailable shared context is visible and retryable', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('/dev');
   await page.getByRole('button', { name: 'Load published datasets' }).click();
   await expect(
     page.getByRole('button', { name: 'Load pilot data', exact: true }),

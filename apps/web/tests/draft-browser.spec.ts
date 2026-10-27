@@ -28,7 +28,7 @@ test('protected draft UI replays on mobile layout without downloading simulation
   page.on('request', (r) => {
     if (new URL(r.url()).pathname.startsWith('/api/')) api.push(r.url());
   });
-  await page.goto('/');
+  await page.goto('/dev');
   const { first, actionMs } = await finish(page);
   const saved = JSON.parse(
     (await page.getByTestId('draft-json').textContent()) ?? '{}',
@@ -66,7 +66,7 @@ test('catalog load errors and infeasible budgets are visible and retryable', asy
   await page.route('**/assets/mlb-draft-2024-*.json', (route) =>
     route.fulfill({ status: 503, body: 'Unavailable' }),
   );
-  await page.goto('/');
+  await page.goto('/dev');
   await page.getByRole('button', { name: 'Start / replay draft' }).click();
   await expect(page.getByRole('alert')).toContainText(
     'Offer catalog unavailable',
@@ -105,7 +105,7 @@ test('real published draft retrieves nine profiles and matches complete native/W
       return Reflect.apply(original, this, [message, ...args]);
     };
   });
-  await page.goto('/');
+  await page.goto('/dev');
   await expect(page.getByRole('status')).toHaveText('Ready');
   await finish(page);
   expect(requests).toEqual([]);

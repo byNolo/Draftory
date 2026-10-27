@@ -87,3 +87,10 @@ documents into a final simulation contract yet. Add sport-specific schemas and
 cross-language fixtures when consumers exist. Breaking artifact changes require
 a schema version bump and coordinated fixture/consumer updates; producer, source,
 model and rules versions remain separate concepts.
+
+M7C adds `season-batting-summary.schema.json` v1.0.0, a compact projection
+of the existing Rust season result. Its `batting` field carries only team ID,
+team totals and the nine batter boxes, reusing existing counter definitions.
+Full result and summary transports remain supported; input, game events and
+opponent boxes are omitted from this projection. The projection has its own
+version and does not change engine, rules, RNG or season-result versions.

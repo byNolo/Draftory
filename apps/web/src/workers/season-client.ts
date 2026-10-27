@@ -76,7 +76,7 @@ export class SeasonClient {
 
   async simulate(
     inputJson: string,
-    output: 'summary' | 'full' = 'summary',
+    output: 'summary' | 'full' | 'batting' = 'summary',
   ): Promise<SeasonSuccess> {
     const start = performance.now();
     const response = await this.request({

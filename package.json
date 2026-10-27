@@ -14,7 +14,7 @@
   "scripts": {
     "build:pilot": "node scripts/build-pilot.mjs",
     "test:data-client": "node scripts/build-pilot.mjs && playwright test --config apps/web/playwright.unit.config.ts",
-    "test:integration": "playwright test --config apps/web/playwright.integration.config.ts --project chromium --project firefox --project webkit",
+    "test:integration": "playwright test --config apps/web/playwright.integration.config.ts --project chromium --project firefox --project webkit --project mobile-chromium --project mobile-webkit",
     "test:integration:edge": "playwright test --config apps/web/playwright.integration.config.ts --project edge",
     "test:api": "playwright test --config services/api/playwright.config.ts",
     "build:wasm": "node scripts/build-wasm.mjs",

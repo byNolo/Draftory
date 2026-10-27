@@ -244,7 +244,7 @@ def test_malformed_or_duplicate_game_logs_are_rejected(tmp_path, bad):
 
 
 def test_schemas_and_historical_season_fixture():
-    for name in ("contextual-model", "season-input", "season-result"):
+    for name in ("contextual-model", "season-input", "season-result", "season-batting-summary"):
         Draft202012Validator.check_schema(SCHEMAS[name])
     value = fixture()
     validate("season-input", value)
@@ -345,3 +345,33 @@ def test_duplicate_native_batch_rows_are_not_accepted_as_repeated_seasons(tmp_pa
     with pytest.raises(DataError, match="duplicated"):
         run(tmp_path, tmp_path / "runner", 2, tmp_path / "output")
     assert not (tmp_path / "output/calibration.json").exists()
+
+
+def test_compact_batting_contract_preserves_boxes_without_input_or_event_traces():
+    golden = json.loads((ROOT / "data/fixtures/simulation-result.synthetic.json").read_text())
+    box = golden["teams"][0]
+    projection = {
+        "schemaVersion": "1.0.0",
+        "engineVersion": "0.4.0",
+        "seed": "18446744073709551615",
+        "games": 162,
+        "wins": 81,
+        "losses": 81,
+        "runsScored": box["totals"]["runs"],
+        "runsAllowed": 0,
+        "runDifferential": box["totals"]["runs"],
+        "batting": {
+            "schemaVersion": "1.0.0",
+            "teamId": box["teamId"],
+            "totals": box["totals"],
+            "batters": box["batters"],
+        },
+    }
+    validate("season-batting-summary", projection)
+    for field, value in (("input", {}), ("eventLog", []), ("seed", 123), ("games", 0)):
+        invalid = {**projection, field: value}
+        with pytest.raises(ValidationError):
+            validate("season-batting-summary", invalid)
+    projection["batting"]["batters"] = box["batters"][:8]
+    with pytest.raises(ValidationError):
+        validate("season-batting-summary", projection)

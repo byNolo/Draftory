@@ -1,0 +1,1479 @@
+{
+  "schemaVersion": "1.0.0",
+  "sourceSqlSha256": "4dab2562d2b4344cd7499bb6ea54f899b4ba3fe95f1f859c3772d6d7f695828d",
+  "dataset": {
+    "id": "dataset:1fba260824fe05abec3c5950cd184caa0d314b41f1253bc782f97b678bb28add",
+    "schemaVersion": "1.0.0",
+    "sport": "mlb",
+    "year": 2024,
+    "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+    "inputSchemaVersion": "1.2.0",
+    "modelVersion": "lahman-contact-adapter-v1",
+    "profileType": "season",
+    "aggregation": "aggregate",
+    "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+    "profileCount": 526,
+    "policy": {
+      "id": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f"
+    }
+  },
+  "players": [
+    {
+      "id": "lahman:smithwi05",
+      "displayName": "Will Smith",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "smithwi05",
+        "birthYear": 1995,
+        "retroID": "smitw003",
+        "throws": "R"
+      },
+      "profileId": "prepared:d6687ca250b5a2f926c7938b9720b82fd3ef9ae19df754de97bb6cf3f8e63539",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "LAN",
+          "leagueId": "NL",
+          "teamName": "Los Angeles Dodgers",
+          "counts": {
+            "2B": 24,
+            "3B": 2,
+            "AB": 476,
+            "BB": 51,
+            "CS": 1,
+            "G": 128,
+            "GIDP": 8,
+            "H": 118,
+            "HBP": 9,
+            "HR": 20,
+            "IBB": 6,
+            "R": 77,
+            "RBI": 75,
+            "SB": 1,
+            "SF": 8,
+            "SH": 0,
+            "SO": 105
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:perezsa02",
+      "displayName": "Salvador Perez",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "perezsa02",
+        "birthYear": 1990,
+        "retroID": "peres002",
+        "throws": "R"
+      },
+      "profileId": "prepared:a7f8f00585fc80d6459320a1acfea38252389f89414a3c30da1c01b8ffdd781d",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "KCA",
+          "leagueId": "AL",
+          "teamName": "Kansas City Royals",
+          "counts": {
+            "2B": 28,
+            "3B": 0,
+            "AB": 590,
+            "BB": 44,
+            "CS": 0,
+            "G": 158,
+            "GIDP": 17,
+            "H": 160,
+            "HBP": 11,
+            "HR": 27,
+            "IBB": 9,
+            "R": 58,
+            "RBI": 104,
+            "SB": 0,
+            "SF": 6,
+            "SH": 0,
+            "SO": 129
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:murphse01",
+      "displayName": "Sean Murphy",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "murphse01",
+        "birthYear": 1994,
+        "retroID": "murps001",
+        "throws": "R"
+      },
+      "profileId": "prepared:eda00dada1f532d9fdf56f28bdf8f847665f07507628a00be0270b02ea27fa2d",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "ATL",
+          "leagueId": "NL",
+          "teamName": "Atlanta Braves",
+          "counts": {
+            "2B": 5,
+            "3B": 1,
+            "AB": 233,
+            "BB": 27,
+            "CS": 0,
+            "G": 72,
+            "GIDP": 7,
+            "H": 45,
+            "HBP": 3,
+            "HR": 10,
+            "IBB": 1,
+            "R": 19,
+            "RBI": 25,
+            "SB": 0,
+            "SF": 1,
+            "SH": 0,
+            "SO": 67
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:baezja01",
+      "displayName": "Javier Baez",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "baezja01",
+        "birthYear": 1992,
+        "retroID": "baezj001",
+        "throws": "R"
+      },
+      "profileId": "prepared:68158287bd182d559bff7fbdcdfc85d7ccb16c4ccfbe294dcc6b03e8e75f2e1a",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "DET",
+          "leagueId": "AL",
+          "teamName": "Detroit Tigers",
+          "counts": {
+            "2B": 12,
+            "3B": 0,
+            "AB": 272,
+            "BB": 12,
+            "CS": 1,
+            "G": 80,
+            "GIDP": 10,
+            "H": 50,
+            "HBP": 2,
+            "HR": 6,
+            "IBB": 1,
+            "R": 25,
+            "RBI": 37,
+            "SB": 8,
+            "SF": 3,
+            "SH": 0,
+            "SO": 69
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:hamilda03",
+      "displayName": "David Hamilton",
+      "metadata": {
+        "bats": "L",
+        "bbrefID": "hamilda03",
+        "birthYear": 1997,
+        "retroID": "hamid002",
+        "throws": "R"
+      },
+      "profileId": "prepared:3d467b13bd9b83e0ff40e10f379adece2737b97dd71057d5867397e4eaa422c2",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "BOS",
+          "leagueId": "AL",
+          "teamName": "Boston Red Sox",
+          "counts": {
+            "2B": 17,
+            "3B": 1,
+            "AB": 294,
+            "BB": 22,
+            "CS": 4,
+            "G": 98,
+            "GIDP": 1,
+            "H": 73,
+            "HBP": 1,
+            "HR": 8,
+            "IBB": 0,
+            "R": 47,
+            "RBI": 28,
+            "SB": 33,
+            "SF": 0,
+            "SH": 0,
+            "SO": 80
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:perdoge01",
+      "displayName": "Geraldo Perdomo",
+      "metadata": {
+        "bats": "B",
+        "bbrefID": "perdoge01",
+        "birthYear": 1999,
+        "retroID": "perdg001",
+        "throws": "R"
+      },
+      "profileId": "prepared:4577445d35f80af0c0398d7e9a388a57819ef26408bf9fcab22ce6f610a6fdf0",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "ARI",
+          "leagueId": "NL",
+          "teamName": "Arizona Diamondbacks",
+          "counts": {
+            "2B": 21,
+            "3B": 2,
+            "AB": 337,
+            "BB": 36,
+            "CS": 1,
+            "G": 98,
+            "GIDP": 5,
+            "H": 92,
+            "HBP": 3,
+            "HR": 3,
+            "IBB": 0,
+            "R": 61,
+            "RBI": 37,
+            "SB": 9,
+            "SF": 5,
+            "SH": 7,
+            "SO": 58
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:margoma01",
+      "displayName": "Manuel Margot",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "margoma01",
+        "birthYear": 1994,
+        "retroID": "margm001",
+        "throws": "R"
+      },
+      "profileId": "prepared:db13eaf51f1f168f543b148be284844e795b2764c8f0b33aea82b3b16fc985b1",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "MIN",
+          "leagueId": "AL",
+          "teamName": "Minnesota Twins",
+          "counts": {
+            "2B": 17,
+            "3B": 1,
+            "AB": 315,
+            "BB": 21,
+            "CS": 0,
+            "G": 129,
+            "GIDP": 10,
+            "H": 75,
+            "HBP": 3,
+            "HR": 4,
+            "IBB": 0,
+            "R": 37,
+            "RBI": 31,
+            "SB": 5,
+            "SF": 3,
+            "SH": 1,
+            "SO": 54
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:thomaal01",
+      "displayName": "Alek Thomas",
+      "metadata": {
+        "bats": "L",
+        "bbrefID": "thomaal01",
+        "birthYear": 2000,
+        "retroID": "thoma004",
+        "throws": "L"
+      },
+      "profileId": "prepared:8250383662f52cc8437fdd680a7a204f263187d3e0f5d5383e8c34fe12c3b503",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "ARI",
+          "leagueId": "NL",
+          "teamName": "Arizona Diamondbacks",
+          "counts": {
+            "2B": 5,
+            "3B": 1,
+            "AB": 95,
+            "BB": 7,
+            "CS": 1,
+            "G": 39,
+            "GIDP": 7,
+            "H": 18,
+            "HBP": 0,
+            "HR": 3,
+            "IBB": 0,
+            "R": 13,
+            "RBI": 17,
+            "SB": 4,
+            "SF": 0,
+            "SH": 1,
+            "SO": 17
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:camerda01",
+      "displayName": "Daz Cameron",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "camerda01",
+        "birthYear": 1997,
+        "retroID": "camed001",
+        "throws": "R"
+      },
+      "profileId": "prepared:dda8a5f27f12109117ae59b0789e2465fedf5ca65d20e55b2c18aa74b36e2b04",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "OAK",
+          "leagueId": "AL",
+          "teamName": "Oakland Athletics",
+          "counts": {
+            "2B": 5,
+            "3B": 1,
+            "AB": 170,
+            "BB": 13,
+            "CS": 0,
+            "G": 66,
+            "GIDP": 3,
+            "H": 34,
+            "HBP": 1,
+            "HR": 5,
+            "IBB": 0,
+            "R": 22,
+            "RBI": 15,
+            "SB": 5,
+            "SF": 2,
+            "SH": 0,
+            "SO": 51
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:rizzoan01",
+      "displayName": "Anthony Rizzo",
+      "metadata": {
+        "bats": "L",
+        "bbrefID": "rizzoan01",
+        "birthYear": 1989,
+        "retroID": "rizza001",
+        "throws": "L"
+      },
+      "profileId": "prepared:78a6a39d225cc30802468b516e337e772530e851ffeef218ede50d9d9dd34728",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "NYA",
+          "leagueId": "AL",
+          "teamName": "New York Yankees",
+          "counts": {
+            "2B": 12,
+            "3B": 0,
+            "AB": 337,
+            "BB": 27,
+            "CS": 0,
+            "G": 92,
+            "GIDP": 7,
+            "H": 77,
+            "HBP": 9,
+            "HR": 8,
+            "IBB": 0,
+            "R": 38,
+            "RBI": 35,
+            "SB": 0,
+            "SF": 2,
+            "SH": 0,
+            "SO": 65
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:bellico01",
+      "displayName": "Cody Bellinger",
+      "metadata": {
+        "bats": "L",
+        "bbrefID": "bellico01",
+        "birthYear": 1995,
+        "retroID": "bellc002",
+        "throws": "L"
+      },
+      "profileId": "prepared:88028d1547270b3750390b9e5a4c2fd01323edf3b48b3255e3a421dfedf2ae34",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "CHN",
+          "leagueId": "NL",
+          "teamName": "Chicago Cubs",
+          "counts": {
+            "2B": 23,
+            "3B": 3,
+            "AB": 516,
+            "BB": 45,
+            "CS": 2,
+            "G": 130,
+            "GIDP": 10,
+            "H": 137,
+            "HBP": 3,
+            "HR": 18,
+            "IBB": 7,
+            "R": 72,
+            "RBI": 78,
+            "SB": 9,
+            "SF": 5,
+            "SH": 0,
+            "SO": 89
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:lemahdj01",
+      "displayName": "DJ LeMahieu",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "lemahdj01",
+        "birthYear": 1988,
+        "retroID": "lemad001",
+        "throws": "R"
+      },
+      "profileId": "prepared:62f3771e5e6e7968c6e037ed1b9bbbd4412a9e570aef29ed30e82cbe4b92fed7",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "NYA",
+          "leagueId": "AL",
+          "teamName": "New York Yankees",
+          "counts": {
+            "2B": 5,
+            "3B": 0,
+            "AB": 201,
+            "BB": 19,
+            "CS": 1,
+            "G": 67,
+            "GIDP": 13,
+            "H": 41,
+            "HBP": 1,
+            "HR": 2,
+            "IBB": 0,
+            "R": 19,
+            "RBI": 26,
+            "SB": 0,
+            "SF": 6,
+            "SH": 1,
+            "SO": 35
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:grissva01",
+      "displayName": "Vaughn Grissom",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "grissva01",
+        "birthYear": 2001,
+        "retroID": "grisv001",
+        "throws": "R"
+      },
+      "profileId": "prepared:72ffe57f90cce4652a9a02bc5c2dd286b91e665d988e39dabc54a4961a4b3b8e",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "BOS",
+          "leagueId": "AL",
+          "teamName": "Boston Red Sox",
+          "counts": {
+            "2B": 3,
+            "3B": 0,
+            "AB": 105,
+            "BB": 7,
+            "CS": 0,
+            "G": 31,
+            "GIDP": 3,
+            "H": 20,
+            "HBP": 1,
+            "HR": 0,
+            "IBB": 0,
+            "R": 10,
+            "RBI": 6,
+            "SB": 2,
+            "SF": 1,
+            "SH": 0,
+            "SO": 24
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:garcilu04",
+      "displayName": "Luis Garcia",
+      "metadata": {
+        "bats": "L",
+        "bbrefID": "garcilu04",
+        "birthYear": 2000,
+        "retroID": "garcl006",
+        "throws": "R"
+      },
+      "profileId": "prepared:d04753366a3ab0b8b8a8de8bba88c5b5b5e45979e039a02274c86e3a63e388b0",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "WAS",
+          "leagueId": "NL",
+          "teamName": "Washington Nationals",
+          "counts": {
+            "2B": 25,
+            "3B": 1,
+            "AB": 500,
+            "BB": 27,
+            "CS": 5,
+            "G": 140,
+            "GIDP": 12,
+            "H": 141,
+            "HBP": 0,
+            "HR": 18,
+            "IBB": 2,
+            "R": 58,
+            "RBI": 70,
+            "SB": 22,
+            "SF": 1,
+            "SH": 0,
+            "SO": 86
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:alexabl01",
+      "displayName": "Blaze Alexander",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "alexabl01",
+        "birthYear": 1999,
+        "retroID": "alexb001",
+        "throws": "R"
+      },
+      "profileId": "prepared:d58b20d0f27c1b9ab0d7e3a1c9aa6fd3ae6fd03240b6736a780f51b5b4ef05e8",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "ARI",
+          "leagueId": "NL",
+          "teamName": "Arizona Diamondbacks",
+          "counts": {
+            "2B": 7,
+            "3B": 0,
+            "AB": 166,
+            "BB": 15,
+            "CS": 1,
+            "G": 61,
+            "GIDP": 1,
+            "H": 41,
+            "HBP": 3,
+            "HR": 3,
+            "IBB": 0,
+            "R": 19,
+            "RBI": 21,
+            "SB": 3,
+            "SF": 0,
+            "SH": 1,
+            "SO": 49
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:smithjo09",
+      "displayName": "Josh Smith",
+      "metadata": {
+        "bats": "L",
+        "bbrefID": "smithjo11",
+        "birthYear": 1997,
+        "retroID": "smitj007",
+        "throws": "R"
+      },
+      "profileId": "prepared:9fd9be2f66e545f6150dcaed78c56145e92d0e80e7c303be6660af66651282e4",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "TEX",
+          "leagueId": "AL",
+          "teamName": "Texas Rangers",
+          "counts": {
+            "2B": 30,
+            "3B": 1,
+            "AB": 523,
+            "BB": 46,
+            "CS": 2,
+            "G": 149,
+            "GIDP": 6,
+            "H": 135,
+            "HBP": 18,
+            "HR": 13,
+            "IBB": 1,
+            "R": 67,
+            "RBI": 62,
+            "SB": 11,
+            "SF": 3,
+            "SH": 2,
+            "SO": 121
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:wisdopa01",
+      "displayName": "Patrick Wisdom",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "wisdopa01",
+        "birthYear": 1991,
+        "retroID": "wisdp001",
+        "throws": "R"
+      },
+      "profileId": "prepared:5a63241ee3d9f1617ebf87296a8f5391275cc9a80508d8665f35c1db58fd4818",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "CHN",
+          "leagueId": "NL",
+          "teamName": "Chicago Cubs",
+          "counts": {
+            "2B": 7,
+            "3B": 2,
+            "AB": 158,
+            "BB": 10,
+            "CS": 0,
+            "G": 75,
+            "GIDP": 1,
+            "H": 27,
+            "HBP": 4,
+            "HR": 8,
+            "IBB": 0,
+            "R": 16,
+            "RBI": 23,
+            "SB": 5,
+            "SF": 1,
+            "SH": 1,
+            "SO": 59
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:suareeu01",
+      "displayName": "Eugenio Suarez",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "suareeu01",
+        "birthYear": 1991,
+        "retroID": "suare001",
+        "throws": "R"
+      },
+      "profileId": "prepared:1bac599a963c41354979b6d5ef0ff91a7c6aa1781ac58d0a025acf7b36ffc12e",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "ARI",
+          "leagueId": "NL",
+          "teamName": "Arizona Diamondbacks",
+          "counts": {
+            "2B": 28,
+            "3B": 2,
+            "AB": 571,
+            "BB": 49,
+            "CS": 1,
+            "G": 158,
+            "GIDP": 10,
+            "H": 146,
+            "HBP": 9,
+            "HR": 30,
+            "IBB": 0,
+            "R": 90,
+            "RBI": 101,
+            "SB": 2,
+            "SF": 11,
+            "SH": 0,
+            "SO": 176
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:andujmi01",
+      "displayName": "Miguel Andujar",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "andujmi01",
+        "birthYear": 1995,
+        "retroID": "andum001",
+        "throws": "R"
+      },
+      "profileId": "prepared:c465127e3e80879ee818f2f1ade6d31838bc6b2fa3b3ae178a7d5ef91d8692d4",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "OAK",
+          "leagueId": "AL",
+          "teamName": "Oakland Athletics",
+          "counts": {
+            "2B": 14,
+            "3B": 1,
+            "AB": 302,
+            "BB": 13,
+            "CS": 2,
+            "G": 75,
+            "GIDP": 10,
+            "H": 86,
+            "HBP": 3,
+            "HR": 4,
+            "IBB": 0,
+            "R": 31,
+            "RBI": 30,
+            "SB": 3,
+            "SF": 1,
+            "SH": 0,
+            "SO": 42
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:loperjo01",
+      "displayName": "Joey Loperfido",
+      "metadata": {
+        "bats": "L",
+        "bbrefID": "loperjo01",
+        "birthYear": 1999,
+        "retroID": "lopej008",
+        "throws": "R"
+      },
+      "profileId": "prepared:c027c9b2f9c6c7b7d9fd771d91354d1cc4bc199d386d9dd8e90d36cb1909cd9d",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "HOU",
+          "leagueId": "AL",
+          "teamName": "Houston Astros",
+          "counts": {
+            "2B": 5,
+            "3B": 1,
+            "AB": 106,
+            "BB": 7,
+            "CS": 1,
+            "G": 38,
+            "GIDP": 1,
+            "H": 25,
+            "HBP": 3,
+            "HR": 2,
+            "IBB": 0,
+            "R": 11,
+            "RBI": 16,
+            "SB": 2,
+            "SF": 1,
+            "SH": 1,
+            "SO": 43
+          }
+        },
+        {
+          "stint": 2,
+          "teamId": "TOR",
+          "leagueId": "AL",
+          "teamName": "Toronto Blue Jays",
+          "counts": {
+            "2B": 8,
+            "3B": 3,
+            "AB": 137,
+            "BB": 6,
+            "CS": 1,
+            "G": 43,
+            "GIDP": 2,
+            "H": 27,
+            "HBP": 1,
+            "HR": 2,
+            "IBB": 0,
+            "R": 13,
+            "RBI": 9,
+            "SB": 2,
+            "SF": 0,
+            "SH": 0,
+            "SO": 52
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:hurtuja01",
+      "displayName": "Jacob Hurtubise",
+      "metadata": {
+        "bats": "L",
+        "bbrefID": "hurtuja01",
+        "birthYear": 1997,
+        "retroID": "hurtj001",
+        "throws": "R"
+      },
+      "profileId": "prepared:747c2679094dc05f1a414719f745abca52bbd28ad769dff3bb243aadcf31fe44",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "CIN",
+          "leagueId": "NL",
+          "teamName": "Cincinnati Reds",
+          "counts": {
+            "2B": 1,
+            "3B": 1,
+            "AB": 54,
+            "BB": 6,
+            "CS": 0,
+            "G": 29,
+            "GIDP": 0,
+            "H": 10,
+            "HBP": 3,
+            "HR": 0,
+            "IBB": 0,
+            "R": 7,
+            "RBI": 4,
+            "SB": 2,
+            "SF": 1,
+            "SH": 4,
+            "SO": 18
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:delucjo01",
+      "displayName": "Jonny DeLuca",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "delucjo01",
+        "birthYear": 1998,
+        "retroID": "deluj001",
+        "throws": "R"
+      },
+      "profileId": "prepared:94b56bf19a4a7b98524a79f437a5aa4d743bb4d5e620bcbfb0170f4f78dd10e6",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "TBA",
+          "leagueId": "AL",
+          "teamName": "Tampa Bay Rays",
+          "counts": {
+            "2B": 12,
+            "3B": 4,
+            "AB": 332,
+            "BB": 24,
+            "CS": 6,
+            "G": 107,
+            "GIDP": 1,
+            "H": 72,
+            "HBP": 4,
+            "HR": 6,
+            "IBB": 1,
+            "R": 29,
+            "RBI": 31,
+            "SB": 16,
+            "SF": 0,
+            "SH": 2,
+            "SO": 77
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:noeljh01",
+      "displayName": "Jhonkensy Noel",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "noeljh01",
+        "birthYear": 2001,
+        "retroID": "noelj001",
+        "throws": "R"
+      },
+      "profileId": "prepared:3d7d7a9d4bbdf9ba399d97fc9defc9cf2628c3e5513d15c9c137265dfa90ef06",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "CLE",
+          "leagueId": "AL",
+          "teamName": "Cleveland Guardians",
+          "counts": {
+            "2B": 7,
+            "3B": 1,
+            "AB": 179,
+            "BB": 13,
+            "CS": 0,
+            "G": 67,
+            "GIDP": 1,
+            "H": 39,
+            "HBP": 5,
+            "HR": 13,
+            "IBB": 0,
+            "R": 25,
+            "RBI": 28,
+            "SB": 0,
+            "SF": 1,
+            "SH": 0,
+            "SO": 63
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:duvalad01",
+      "displayName": "Adam Duvall",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "duvalad01",
+        "birthYear": 1988,
+        "retroID": "duvaa001",
+        "throws": "R"
+      },
+      "profileId": "prepared:bb21a1c74298bba1dc8c9a5df2e2977d714ef5aa82cdbd5852e84315e280f53b",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "ATL",
+          "leagueId": "NL",
+          "teamName": "Atlanta Braves",
+          "counts": {
+            "2B": 10,
+            "3B": 0,
+            "AB": 303,
+            "BB": 21,
+            "CS": 0,
+            "G": 104,
+            "GIDP": 6,
+            "H": 55,
+            "HBP": 5,
+            "HR": 11,
+            "IBB": 0,
+            "R": 29,
+            "RBI": 30,
+            "SB": 0,
+            "SF": 1,
+            "SH": 0,
+            "SO": 99
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:harribr02",
+      "displayName": "Brett Harris",
+      "metadata": {
+        "bats": "R",
+        "bbrefID": "harribr02",
+        "birthYear": 1998,
+        "retroID": "harrb002",
+        "throws": "R"
+      },
+      "profileId": "prepared:711b3a6c9ac4f5b2533079e31b66be87a01f5544d461d4614fc39a4937660411",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "OAK",
+          "leagueId": "AL",
+          "teamName": "Oakland Athletics",
+          "counts": {
+            "2B": 3,
+            "3B": 0,
+            "AB": 103,
+            "BB": 17,
+            "CS": 3,
+            "G": 36,
+            "GIDP": 3,
+            "H": 15,
+            "HBP": 2,
+            "HR": 3,
+            "IBB": 0,
+            "R": 15,
+            "RBI": 12,
+            "SB": 0,
+            "SF": 1,
+            "SH": 0,
+            "SO": 25
+          }
+        }
+      ],
+      "positions": []
+    },
+    {
+      "id": "lahman:walshja01",
+      "displayName": "Jared Walsh",
+      "metadata": {
+        "bats": "L",
+        "bbrefID": "walshja01",
+        "birthYear": 1993,
+        "retroID": "walsj001",
+        "throws": "L"
+      },
+      "profileId": "prepared:f29cf118a528b6693fad834e80b7c1b5b6a95898c791448d8d2c52672d20b5cb",
+      "year": 2024,
+      "stints": [
+        {
+          "stint": 1,
+          "teamId": "TEX",
+          "leagueId": "AL",
+          "teamName": "Texas Rangers",
+          "counts": {
+            "2B": 2,
+            "3B": 0,
+            "AB": 53,
+            "BB": 7,
+            "CS": 0,
+            "G": 17,
+            "GIDP": 2,
+            "H": 12,
+            "HBP": 0,
+            "HR": 1,
+            "IBB": 0,
+            "R": 9,
+            "RBI": 7,
+            "SB": 0,
+            "SF": 0,
+            "SH": 0,
+            "SO": 21
+          }
+        }
+      ],
+      "positions": []
+    }
+  ],
+  "profiles": [
+    {
+      "id": "prepared:d6687ca250b5a2f926c7938b9720b82fd3ef9ae19df754de97bb6cf3f8e63539",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:smithwi05",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:9fd040af432f0550dc03e4669104a5ce2010da6eaafafe7252508ed665031172",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 544,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 44304,
+        "hitByPitch": 15283,
+        "homeRun": 35398,
+        "otherContact": 468152,
+        "single": 136765,
+        "strikeout": 204544,
+        "triple": 3766,
+        "walk": 91788
+      }
+    },
+    {
+      "id": "prepared:68158287bd182d559bff7fbdcdfc85d7ccb16c4ccfbe294dcc6b03e8e75f2e1a",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:baezja01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:c5b34acf1626a196133354653fe611e2e38c6e789a124ad26572798387a56361",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 289,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 42392,
+        "hitByPitch": 8707,
+        "homeRun": 24745,
+        "otherContact": 503341,
+        "single": 124774,
+        "strikeout": 235863,
+        "triple": 1578,
+        "walk": 58600
+      }
+    },
+    {
+      "id": "prepared:db13eaf51f1f168f543b148be284844e795b2764c8f0b33aea82b3b16fc985b1",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:margoma01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:0231e223ed9d1f4c72e970a77029878e3d6f25af4a17b4bd9f1b9f53a22fcd42",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 343,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 47522,
+        "hitByPitch": 9709,
+        "homeRun": 18572,
+        "otherContact": 515145,
+        "single": 151573,
+        "strikeout": 184623,
+        "triple": 3285,
+        "walk": 69571
+      }
+    },
+    {
+      "id": "prepared:78a6a39d225cc30802468b516e337e772530e851ffeef218ede50d9d9dd34728",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:rizzoan01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:faafd6454f49e2164093a91f564441393cb420b58e0bb49ef4d6053c88605019",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 375,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 35945,
+        "hitByPitch": 19626,
+        "homeRun": 24488,
+        "otherContact": 500129,
+        "single": 149538,
+        "strikeout": 192977,
+        "triple": 1342,
+        "walk": 75955
+      }
+    },
+    {
+      "id": "prepared:72ffe57f90cce4652a9a02bc5c2dd286b91e665d988e39dabc54a4961a4b3b8e",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:grissva01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:f6d5bad6cb913eb6e4fecbcd6d6a76c633457e8c142b7af02f243ea80e4a6118",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 114,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 37040,
+        "hitByPitch": 10336,
+        "homeRun": 19228,
+        "otherContact": 487480,
+        "single": 145952,
+        "strikeout": 222375,
+        "triple": 2458,
+        "walk": 75131
+      }
+    },
+    {
+      "id": "prepared:9fd9be2f66e545f6150dcaed78c56145e92d0e80e7c303be6660af66651282e4",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:smithjo09",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:f91ac3cf91f762360b62dcfd5b23d689141315d7b0e3f093cf3c7004af13e67a",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 592,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 49065,
+        "hitByPitch": 25745,
+        "homeRun": 24177,
+        "otherContact": 455559,
+        "single": 152088,
+        "strikeout": 211672,
+        "triple": 2248,
+        "walk": 79446
+      }
+    },
+    {
+      "id": "prepared:c465127e3e80879ee818f2f1ade6d31838bc6b2fa3b3ae178a7d5ef91d8692d4",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:andujmi01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:6e7e99602349b76a61d9b51575aeeacfd630ccbe494c92e7528db8dd1a21f204",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 319,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 43638,
+        "hitByPitch": 10108,
+        "homeRun": 19364,
+        "otherContact": 512671,
+        "single": 184758,
+        "strikeout": 169066,
+        "triple": 3420,
+        "walk": 56975
+      }
+    },
+    {
+      "id": "prepared:94b56bf19a4a7b98524a79f437a5aa4d743bb4d5e620bcbfb0170f4f78dd10e6",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:delucjo01",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:5ca8f198e58f6935ea4e5a12cc90dd41e25507a5d73054ec015edeaaff35e877",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 362,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 36781,
+        "hitByPitch": 11137,
+        "homeRun": 21478,
+        "otherContact": 490294,
+        "single": 140492,
+        "strikeout": 218934,
+        "triple": 8530,
+        "walk": 72354
+      }
+    },
+    {
+      "id": "prepared:711b3a6c9ac4f5b2533079e31b66be87a01f5544d461d4614fc39a4937660411",
+      "modelVersion": "lahman-contact-adapter-v1",
+      "provenance": {
+        "contextId": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174",
+        "playerId": "lahman:harribr02",
+        "policyId": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f",
+        "sourceId": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d",
+        "sourceProfileId": "sha256:9cdc790c47685aefcb946836d2dcb6829b250359a3a6a5c9cebace3485fb9d38",
+        "transformationVersion": "lahman-contact-adapter-v1"
+      },
+      "qualityFlags": [
+        "uncalibrated",
+        "conditional-on-no-sacrifice",
+        "ibb-included-in-nonintentional-walk",
+        "no-era-or-park-adjustment",
+        "league-baseline-smoothing",
+        "unresolved-contact-requires-observed-transitions"
+      ],
+      "sampleOpportunities": 123,
+      "weights": {
+        "battedBallOut": 0,
+        "double": 36002,
+        "hitByPitch": 13167,
+        "homeRun": 28056,
+        "otherContact": 480016,
+        "single": 116881,
+        "strikeout": 219251,
+        "triple": 2389,
+        "walk": 104238
+      }
+    }
+  ],
+  "draft": {
+    "schemaVersion": "1.0.0",
+    "rulesVersion": "mlb-protected-draft-v1",
+    "rngVersion": "mulberry32-rejection-v1",
+    "catalogId": "draft-catalog:95602e268bcd87ff6f5640525e3cfc1936eff28ae57a3d715a2f990ba689f9f8",
+    "seed": "20261027",
+    "config": {
+      "budget": 90,
+      "offers": 3,
+      "order": ["C", "SS", "CF", "1B", "2B", "3B", "LF", "RF", "DH"],
+      "minGames": 10,
+      "minPa": 50,
+      "universalDh": true
+    },
+    "rngState": 2227897722,
+    "remainingBudget": 28,
+    "history": [
+      {
+        "position": "C",
+        "playerId": "lahman:smithwi05",
+        "price": 10,
+        "offers": ["lahman:smithwi05", "lahman:perezsa02", "lahman:murphse01"]
+      },
+      {
+        "position": "SS",
+        "playerId": "lahman:baezja01",
+        "price": 4,
+        "offers": ["lahman:baezja01", "lahman:hamilda03", "lahman:perdoge01"]
+      },
+      {
+        "position": "CF",
+        "playerId": "lahman:margoma01",
+        "price": 7,
+        "offers": ["lahman:margoma01", "lahman:thomaal01", "lahman:camerda01"]
+      },
+      {
+        "position": "1B",
+        "playerId": "lahman:rizzoan01",
+        "price": 6,
+        "offers": ["lahman:rizzoan01", "lahman:bellico01", "lahman:lemahdj01"]
+      },
+      {
+        "position": "2B",
+        "playerId": "lahman:grissva01",
+        "price": 5,
+        "offers": ["lahman:grissva01", "lahman:garcilu04", "lahman:alexabl01"]
+      },
+      {
+        "position": "3B",
+        "playerId": "lahman:smithjo09",
+        "price": 10,
+        "offers": ["lahman:smithjo09", "lahman:wisdopa01", "lahman:suareeu01"]
+      },
+      {
+        "position": "LF",
+        "playerId": "lahman:andujmi01",
+        "price": 7,
+        "offers": ["lahman:andujmi01", "lahman:loperjo01", "lahman:hurtuja01"]
+      },
+      {
+        "position": "RF",
+        "playerId": "lahman:delucjo01",
+        "price": 6,
+        "offers": ["lahman:delucjo01", "lahman:noeljh01", "lahman:duvalad01"]
+      },
+      {
+        "position": "DH",
+        "playerId": "lahman:harribr02",
+        "price": 7,
+        "offers": ["lahman:harribr02", "lahman:bellico01", "lahman:walshja01"]
+      }
+    ],
+    "offers": [],
+    "excludedUnsafeCandidates": 0,
+    "status": "complete"
+  }
+}

@@ -5,7 +5,7 @@ for (const seed of ['0', '9007199254740993', '18446744073709551615']) {
   test(`native/browser full-season parity, summary/events, seed ${seed}`, async ({
     page,
   }) => {
-    await page.goto('/');
+    await page.goto('/dev');
     const browser = await session(page);
     const results = [];
     for (const detail of ['summary', 'events']) {
@@ -41,6 +41,27 @@ for (const seed of ['0', '9007199254740993', '18446744073709551615']) {
       expect(compact.summary).toEqual(response.summary);
       expect(compact).not.toHaveProperty('resultJson');
       expect(compact.timings.resultJsonBytes).toBeLessThan(300);
+      const batting = await browser.evaluate(
+        (worker, request) => worker.send(request),
+        {
+          type: 'simulate' as const,
+          requestId: `batting-${detail}`,
+          inputJson: JSON.stringify(input),
+          output: 'batting' as const,
+        },
+      );
+      expect(batting.type).toBe('result');
+      if (batting.type !== 'result') throw new Error(JSON.stringify(batting));
+      expect(batting.summary).toEqual(response.summary);
+      expect(batting.batting).toEqual({
+        schemaVersion: '1.0.0',
+        teamId: expected.team.teamId,
+        totals: expected.team.totals,
+        batters: expected.team.batters,
+      });
+      expect(batting).not.toHaveProperty('resultJson');
+      expect(batting.timings.resultJsonBytes).toBeLessThan(6000);
+
       if (detail === 'events')
         expect(
           actual.games.every(
@@ -59,7 +80,7 @@ for (const seed of ['0', '9007199254740993', '18446744073709551615']) {
 test('29 synthetic opponents and 270 profiles preserve exact full/native results', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('/dev');
   const worker = await session(page);
   const input = {
     ...largeFixture(),
@@ -165,7 +186,7 @@ test('structured errors, aborts and recovery; initialization runs once', async (
 test('worker rejects overlap while initializing and the main thread keeps rendering', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('/dev');
   const browser = await session(page);
   const responses = await browser.evaluate(async (worker) =>
     Promise.all([
@@ -211,7 +232,7 @@ test('worker rejects overlap while initializing and the main thread keeps render
 test('React harness renders the fixture result and supports worker restart', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('/dev');
   await expect(page.getByRole('status')).toHaveText('Ready');
   await page.getByRole('button', { name: 'Simulate 162 games' }).click();
   await expect(
@@ -237,7 +258,7 @@ test('initialization failure is visible and a fresh worker can recover', async (
   page,
 }) => {
   await page.route('**/*.wasm', (route) => route.abort());
-  await page.goto('/');
+  await page.goto('/dev');
   await expect(page.getByRole('alert')).toBeVisible();
   await expect(
     page.getByRole('button', { name: 'Simulate 162 games' }),
@@ -259,12 +280,34 @@ test('stopping during initialization does not revive or error the stopped worker
     await route.continue().catch(() => {}); // Termination can cancel the routed fetch.
   });
   const requested = page.waitForRequest('**/*.wasm');
-  await page.goto('/');
+  await page.goto('/dev');
   await requested;
   await page.getByRole('button', { name: 'Stop worker' }).click();
   release();
   await expect(page.getByRole('status')).toHaveText('Worker stopped');
   await expect(page.getByRole('alert')).toHaveCount(0);
+});
+
+test('diagnostic data controls stay in place while WASM initialization completes', async ({
+  page,
+}) => {
+  let release = () => {};
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route('**/*.wasm', async (route) => {
+    await gate;
+    await route.continue();
+  });
+  const requested = page.waitForRequest('**/*.wasm');
+  await page.goto('/dev');
+  await requested;
+  const button = page.getByRole('button', { name: 'Load published datasets' });
+  const before = await button.boundingBox();
+  release();
+  await expect(page.getByRole('status')).toHaveText('Ready');
+  const after = await button.boundingBox();
+  expect(after!.y).toBe(before!.y);
 });
 
 test('unsupported Worker construction is shown as an initialization error', async ({
@@ -273,7 +316,7 @@ test('unsupported Worker construction is shown as an initialization error', asyn
   await page.addInitScript(() =>
     Object.defineProperty(window, 'Worker', { value: undefined }),
   );
-  await page.goto('/');
+  await page.goto('/dev');
   await expect(page.getByRole('alert')).toBeVisible();
   await expect(
     page.getByRole('button', { name: 'Simulate 162 games' }),

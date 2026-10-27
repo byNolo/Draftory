@@ -58,7 +58,7 @@ test('startup, phase costs, capacity, payloads and repeated execution (no speed 
       });
     });
     for (const cache of ['fresh-context-http-cache', 'same-context-reload']) {
-      if (cache === 'fresh-context-http-cache') await visit.goto('/');
+      if (cache === 'fresh-context-http-cache') await visit.goto('/dev');
       else await visit.reload();
       await visit.getByRole('region', { name: 'Season result' }).waitFor();
       visits.push(

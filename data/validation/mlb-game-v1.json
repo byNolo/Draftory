@@ -1,0 +1,177 @@
+{
+  "strategies": {
+    "first": {
+      "drafts": 20,
+      "completed": 20,
+      "remaining": {
+        "min": 4,
+        "median": 15.0,
+        "max": 37
+      },
+      "meanPickPrice": 8.077777777777778,
+      "priceHistogram": {
+        "3": 1,
+        "4": 7,
+        "5": 11,
+        "6": 23,
+        "7": 39,
+        "8": 38,
+        "9": 16,
+        "10": 19,
+        "11": 10,
+        "12": 9,
+        "13": 4,
+        "15": 2,
+        "19": 1
+      },
+      "displayedSafeOffers": {
+        "3": 180
+      },
+      "cheapestOfferedChosen": 73,
+      "mostExpensiveOfferedChosen": 82
+    },
+    "cheapest": {
+      "drafts": 20,
+      "completed": 20,
+      "remaining": {
+        "min": 27,
+        "median": 33.5,
+        "max": 45
+      },
+      "meanPickPrice": 6.194444444444445,
+      "priceHistogram": {
+        "3": 4,
+        "4": 22,
+        "5": 35,
+        "6": 44,
+        "7": 38,
+        "8": 27,
+        "9": 7,
+        "10": 2,
+        "11": 1
+      },
+      "displayedSafeOffers": {
+        "3": 180
+      },
+      "cheapestOfferedChosen": 180,
+      "mostExpensiveOfferedChosen": 8
+    },
+    "expensive": {
+      "drafts": 20,
+      "completed": 20,
+      "remaining": {
+        "min": 0,
+        "median": 3.5,
+        "max": 11
+      },
+      "meanPickPrice": 9.627777777777778,
+      "priceHistogram": {
+        "1": 1,
+        "3": 1,
+        "6": 3,
+        "7": 23,
+        "8": 36,
+        "9": 21,
+        "10": 38,
+        "11": 22,
+        "12": 20,
+        "13": 8,
+        "14": 3,
+        "15": 3,
+        "20": 1
+      },
+      "displayedSafeOffers": {
+        "1": 1,
+        "3": 179
+      },
+      "cheapestOfferedChosen": 10,
+      "mostExpensiveOfferedChosen": 180
+    }
+  },
+  "fixedLineupSeasons": {
+    "count": 12,
+    "winsMin": 72,
+    "winsMedian": 82.5,
+    "winsMax": 97,
+    "winsPopulationSd": 6.890008869531463
+  },
+  "example": {
+    "inputBytes": 64668,
+    "fullSummaryResultMinifiedBytes": 916934,
+    "battingJsonBytes": 3315,
+    "wins": 81,
+    "losses": 81,
+    "runsScored": 593,
+    "runsAllowed": 550,
+    "runDifferential": 43,
+    "draftSeed": "20261027",
+    "seasonSeed": "20261025"
+  },
+  "schemaVersion": "1.0.0",
+  "catalogId": "draft-catalog:95602e268bcd87ff6f5640525e3cfc1936eff28ae57a3d715a2f990ba689f9f8",
+  "browserObservations": {
+    "note": "Windows local D1 / Vite preview, three runs per engine; first-worker and warm execution only, not first-visit WAN or physical mobile benchmarks. Repeated calls include one fresh seed. Memory is linear-memory capacity sampled after each call, not peak or process memory.",
+    "measurements": {
+      "chromium": {
+        "initializationMs": 18.5,
+        "firstWasmCallMs": 131,
+        "repeatedWasmCallMs": [47.1000000089407, 47.8999999910593],
+        "repeatedMedianMs": 47.5,
+        "linearMemoryAfterBytes": [1703936, 1703936, 1703936],
+        "historicalPlayerResponses": 26,
+        "historicalPlayerBytes": 41628,
+        "apiBytes": 51938
+      },
+      "edge": {
+        "initializationMs": 6.9000000059604645,
+        "firstWasmCallMs": 30,
+        "repeatedWasmCallMs": [21.5, 18.600000008940697],
+        "repeatedMedianMs": 20.05000000447035,
+        "linearMemoryAfterBytes": [1703936, 1703936, 1703936],
+        "historicalPlayerResponses": 26,
+        "historicalPlayerBytes": 41628,
+        "apiBytes": 51938
+      },
+      "firefox": {
+        "initializationMs": 20,
+        "firstWasmCallMs": 304,
+        "repeatedWasmCallMs": [207, 210],
+        "repeatedMedianMs": 208.5,
+        "linearMemoryAfterBytes": [1703936, 1703936, 1703936],
+        "historicalPlayerResponses": 26,
+        "historicalPlayerBytes": 41628,
+        "apiBytes": 51938
+      },
+      "mobile-chromium": {
+        "initializationMs": 9.900000005960464,
+        "firstWasmCallMs": 144.90000000596046,
+        "repeatedWasmCallMs": [48.70000000298023, 44.099999994039536],
+        "repeatedMedianMs": 46.399999998509884,
+        "linearMemoryAfterBytes": [1703936, 1703936, 1703936],
+        "historicalPlayerResponses": 26,
+        "historicalPlayerBytes": 41628,
+        "apiBytes": 51938
+      },
+      "mobile-webkit": {
+        "initializationMs": 23,
+        "firstWasmCallMs": 156,
+        "repeatedWasmCallMs": [64, 51],
+        "repeatedMedianMs": 57.5,
+        "linearMemoryAfterBytes": [1703936, 1703936, 1703936],
+        "historicalPlayerResponses": 26,
+        "historicalPlayerBytes": 41628,
+        "apiBytes": 51938
+      },
+      "webkit": {
+        "initializationMs": 43,
+        "firstWasmCallMs": 155,
+        "repeatedWasmCallMs": [62, 52.99999999999977],
+        "repeatedMedianMs": 57.499999999999886,
+        "linearMemoryAfterBytes": [1703936, 1703936, 1703936],
+        "historicalPlayerResponses": 26,
+        "historicalPlayerBytes": 41628,
+        "apiBytes": 51938
+      }
+    }
+  }
+}

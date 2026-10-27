@@ -1,5 +1,9 @@
 # MLB draft developer playtest (M7B)
 
+M7C: the playable game is now at `/`; the diagnostic harness described below
+is at `/dev`. See [the game guide](MLB_GAME.md) for current gameplay and result
+projection behavior.
+
 The M7B rules are versioned experiments, using the unchanged reviewed M7A
 measurements. See the [playtest report](../data/validation/draft-engine-v1.md)
 and [valuation limitations](../data/validation/valuation-eligibility-v1.md).

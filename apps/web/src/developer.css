@@ -1,0 +1,67 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #172e25;
+  background: #f5f7f3;
+  line-height: 1.6;
+}
+
+body {
+  margin: 0;
+}
+
+.developer {
+  max-width: 48rem;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+
+button {
+  font: inherit;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+dl {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 0.4rem 1rem;
+}
+dd {
+  margin: 0;
+}
+.attribution {
+  font-size: 0.85rem;
+}
+
+.draft-settings,
+.draft-offers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+.draft-settings label {
+  display: grid;
+}
+.draft-settings input {
+  min-width: 0;
+  font: inherit;
+}
+.draft-offers article {
+  border: 1px solid #a7b8ac;
+  padding: 0.75rem;
+}
+pre {
+  max-width: 100%;
+  overflow: auto;
+}
+code {
+  overflow-wrap: anywhere;
+}

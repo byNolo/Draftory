@@ -7,7 +7,7 @@ test('Cloudflare local runtime serves hashed assets with MIME, cache and worker 
   request,
   page,
 }) => {
-  for (const path of ['/', '/index.html']) {
+  for (const path of ['/', '/index.html', '/dev', '/dev/', '/dev/index.html']) {
     const response = await request.get(path);
     expect(response.ok()).toBe(true);
     expect(response.headers()['cache-control']).toBe('no-cache');
@@ -36,7 +36,7 @@ test('Cloudflare local runtime serves hashed assets with MIME, cache and worker 
     404,
   );
   expect((await request.get('/_headers')).status()).toBe(404);
-  await page.goto('/');
+  await page.goto('/dev');
   await expect(page.getByRole('status')).toHaveText('Ready');
   expect(await page.evaluate(() => crossOriginIsolated)).toBe(false);
 });
@@ -56,7 +56,7 @@ test('production worker runs under CSP without Vite paths or policy violations',
       );
     });
   });
-  await page.goto('/');
+  await page.goto('/dev');
   await expect(page.getByRole('status')).toHaveText('Ready');
   await page.getByRole('button', { name: 'Simulate 162 games' }).click();
   await expect(

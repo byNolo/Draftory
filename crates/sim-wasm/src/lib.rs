@@ -33,6 +33,29 @@ pub struct MeasuredRun {
 pub fn simulate_measured(
     input_json: &str,
     compact: bool,
+    now: impl FnMut() -> f64,
+) -> Result<MeasuredRun, BoundaryError> {
+    project_measured(
+        input_json,
+        if compact {
+            Projection::Summary
+        } else {
+            Projection::Full
+        },
+        now,
+    )
+}
+
+#[derive(Clone, Copy)]
+pub enum Projection {
+    Full,
+    Summary,
+    Batting,
+}
+
+pub fn project_measured(
+    input_json: &str,
+    projection: Projection,
     mut now: impl FnMut() -> f64,
 ) -> Result<MeasuredRun, BoundaryError> {
     let start = now();
@@ -57,13 +80,20 @@ pub fn simulate_measured(
     let simulated = now();
     // Project computed fields before serialization, avoiding full boxes/input/log JSON
     // when React only needs a summary. Full output remains byte-for-byte compatible.
-    let encoded = if compact {
-        serde_json::to_string(&serde_json::json!({
+    let encoded = if !matches!(projection, Projection::Full) {
+        let mut summary = serde_json::json!({
             "schemaVersion":result.schema_version,"engineVersion":result.engine_version,
             "seed":result.input.seed,"games":result.games.len(),"wins":result.wins,
             "losses":result.losses,"runsScored":result.runs_scored,"runsAllowed":result.runs_allowed,
             "runDifferential":result.run_differential
-        }))
+        });
+        if matches!(projection, Projection::Batting) {
+            summary["batting"] = serde_json::json!({
+                "schemaVersion": "1.0.0", "teamId": result.team.team_id,
+                "totals": result.team.totals, "batters": result.team.batters
+            });
+        }
+        serde_json::to_string(&summary)
     } else {
         serde_json::to_string(&result)
     };
@@ -98,8 +128,8 @@ mod browser {
     }
     thread_local! { static MEASUREMENTS: Cell<[f64; 4]> = const { Cell::new([0.0; 4]) }; }
 
-    fn execute(input: &str, compact: bool) -> Result<String, JsValue> {
-        simulate_measured(input, compact, clock_ms)
+    fn execute(input: &str, projection: Projection) -> Result<String, JsValue> {
+        project_measured(input, projection, clock_ms)
             .map(|run| {
                 MEASUREMENTS.set(run.measurements);
                 run.result_json
@@ -114,12 +144,17 @@ mod browser {
 
     #[wasm_bindgen]
     pub fn simulate_season_json(input_json: &str) -> Result<String, JsValue> {
-        execute(input_json, false)
+        execute(input_json, Projection::Full)
     }
 
     #[wasm_bindgen]
     pub fn simulate_season_summary_json(input_json: &str) -> Result<String, JsValue> {
-        execute(input_json, true)
+        execute(input_json, Projection::Summary)
+    }
+
+    #[wasm_bindgen]
+    pub fn simulate_season_batting_json(input_json: &str) -> Result<String, JsValue> {
+        execute(input_json, Projection::Batting)
     }
 
     /// Diagnostics for the last successful call in this single-request worker.
@@ -163,6 +198,28 @@ mod tests {
         let error = simulate_json(&serde_json::to_string(&input).unwrap()).unwrap_err();
         assert_eq!(error.code, "gameFailed");
         assert_eq!(error.game_number, Some(1));
+    }
+
+    #[test]
+    fn batting_projection_preserves_core_totals_and_large_seed_in_both_modes() {
+        for detail in ["summary", "events"] {
+            let mut value: serde_json::Value = serde_json::from_str(FIXTURE).unwrap();
+            value["detail"] = detail.into();
+            value["seed"] = u64::MAX.to_string().into();
+            let input = value.to_string();
+            let full: serde_json::Value =
+                serde_json::from_str(&simulate_json(&input).unwrap()).unwrap();
+            let compact = project_measured(&input, Projection::Batting, || 0.0).unwrap();
+            let result: serde_json::Value = serde_json::from_str(&compact.result_json).unwrap();
+            assert_eq!(result["batting"]["totals"], full["team"]["totals"]);
+            assert_eq!(result["batting"]["batters"], full["team"]["batters"]);
+            assert_eq!(result["seed"], value["seed"]);
+            assert_eq!(result["wins"], full["wins"]);
+            assert_eq!(result["runsScored"], full["runsScored"]);
+            assert_eq!(result["games"], 162);
+            assert!(compact.result_json.len() < 6000);
+            assert!(compact.result_json.len() < full.to_string().len() / 10);
+        }
     }
 
     #[test]

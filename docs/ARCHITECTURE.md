@@ -48,6 +48,13 @@ Server-owned sessions remain a future option. This avoids premature session
 endpoints/storage for a casual prototype with no verification requirement.
 See [draft rules and replay](MLB_DRAFT.md).
 
+**M8A hosting preparation:** one Workers Static Assets application serves the
+Vite build, with `/api` and `/api/*` routed to the existing read-only Worker/D1
+API. Matched assets bypass application code; unmatched routes use a strict 404
+handler with non-cacheable errors. The separate alpha configuration has no public
+route enabled by default. Hosted account/database selection, Access policy and
+deployment require approval; see [alpha deployment](ALPHA_DEPLOYMENT.md).
+
 ## 3. Proposed repository layout
 
 ```text

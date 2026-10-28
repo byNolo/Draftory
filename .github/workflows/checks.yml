@@ -48,6 +48,11 @@ jobs:
       - run: npm run test:integration
         env:
           HOME: /root
+      - run: npm run check:alpha
+      - run: npm run test:alpha:tools
+      - run: npm run test:alpha
+        env:
+          HOME: /root
       - run: npm run check:api
       - run: npm run d1:check --workspace @draftory/api
       - uses: actions/upload-artifact@v4
@@ -58,6 +63,7 @@ jobs:
             test-results/
             target/api-test-results/
             target/m6b-test-results/
+            target/alpha-test-results/
           retention-days: 7
 
   rust:

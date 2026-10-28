@@ -30,7 +30,11 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check:api": "npm run check --workspace @draftory/api",
-    "types:api": "npm run types --workspace @draftory/api"
+    "types:api": "npm run types --workspace @draftory/api",
+    "prepare:alpha": "node scripts/prepare-alpha.mjs",
+    "check:alpha": "node scripts/prepare-alpha.mjs --check-build && wrangler deploy --dry-run --config services/api/wrangler.alpha.json --outdir ../../target/alpha-dry-run",
+    "test:alpha": "playwright test --config apps/web/playwright.alpha.config.ts --project chromium --project firefox --project webkit --project mobile-chromium --project mobile-webkit",
+    "test:alpha:tools": "playwright test --config apps/web/playwright.alpha-tools.config.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

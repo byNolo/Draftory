@@ -1,6 +1,7 @@
 import { rate, simulatedRates } from './batting';
 import type { SeasonSuccess, BattingLine } from '../../workers/protocol';
-import { DraftEngine, POSITIONS, type DraftState } from '../draft/engine';
+import { DraftEngine, type DraftState } from '../draft/engine';
+import type { BattingOrder } from '../draft/batting-order';
 
 function Cells({ stats }: { stats: BattingLine }) {
   const r = simulatedRates(stats);
@@ -21,21 +22,23 @@ export default function SeasonResults({
   result,
   engine,
   draft,
+  order,
 }: {
   result: SeasonSuccess;
   engine: DraftEngine;
   draft: DraftState;
+  order: BattingOrder;
 }) {
   const { summary: s, batting: b } = result;
   if (!b || b.schemaVersion !== '1.0.0')
     throw new Error('Missing batting projection.');
-  const rows = POSITIONS.map((position) => {
-    const pick = draft.history.find((p) => p.position === position)!;
+  const rows = order.map((id) => {
+    const pick = draft.history.find((p) => p.playerId === id)!;
     const player = engine.player(pick.playerId);
     const box = b.batters.find(
       (p) => p.batterId === `draft:2024:${player.id}`,
     )!;
-    return { position, pick, player, stats: box.stats };
+    return { position: pick.position, pick, player, stats: box.stats };
   });
   return (
     <section aria-label="Simulated season results" className="results">
@@ -92,8 +95,8 @@ export default function SeasonResults({
       </p>
       <h3>Season batting</h3>
       <p className="muted">
-        Simulated totals, not historical projections. Lineup order is fixed by
-        position.
+        Simulated totals, not historical projections. Players are shown in the
+        batting order used for this season; fielding assignments are unchanged.
       </p>
       <div
         className="batting-scroll"
@@ -107,7 +110,7 @@ export default function SeasonResults({
           </caption>
           <thead>
             <tr>
-              <th scope="col">Player / position</th>
+              <th scope="col">Batting order / player / position</th>
               {['PA', 'H', 'HR', 'RBI', 'R', 'AVG', 'OBP', 'SLG'].map((k) => (
                 <th scope="col" key={k}>
                   {k}
@@ -116,10 +119,10 @@ export default function SeasonResults({
             </tr>
           </thead>
           <tbody>
-            {rows.map(({ player, position, pick, stats }) => (
+            {rows.map(({ player, position, pick, stats }, index) => (
               <tr key={player.id}>
                 <th scope="row">
-                  {player.name}
+                  {index + 1}. {player.name}
                   <small>
                     {position} · {pick.price} credits
                   </small>

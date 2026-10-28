@@ -13,6 +13,106 @@ import { draftedSeason } from '../src/mlb/draft/season';
 import type { PilotLoader } from '../src/mlb/pilot-loader';
 import { parsePilot } from '../src/mlb/season-input';
 import { nativeResult } from './helpers';
+import {
+  defaultBattingOrder,
+  moveBatter,
+  validateBattingOrder,
+} from '../src/mlb/draft/batting-order';
+
+test('batting order is a roster permutation independent of positions and draft replay', () => {
+  const state = engine.replay(
+    '20261027',
+    fixture.draft.history.map((p: { playerId: string }) => p.playerId),
+  );
+  const original = structuredClone(state);
+  const order = defaultBattingOrder(state);
+  expect(
+    order.map((id) => state.history.find((p) => p.playerId === id)!.position),
+  ).toEqual(['C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'DH']);
+  const up = moveBatter(order, order[4], 3);
+  expect(up[3]).toBe(order[4]);
+  expect(moveBatter(up, order[4], 4)).toEqual(order);
+  expect(moveBatter(order, order[8], 0)).toEqual([
+    order[8],
+    ...order.slice(0, 8),
+  ]);
+  expect(defaultBattingOrder(state)).toEqual(order);
+  expect(state).toEqual(original);
+  for (const invalid of [
+    [],
+    order.slice(1),
+    [...order, order[0]],
+    [order[0], ...order.slice(0, 8)],
+    ['not-drafted', ...order.slice(1)],
+  ])
+    expect(() => validateBattingOrder(state, invalid)).toThrow(/nine drafted/);
+  expect(() => defaultBattingOrder(engine.start('1'))).toThrow(/complete/);
+  expect(() => moveBatter(order, 'missing', 0)).toThrow();
+  expect(() => moveBatter(order, order[0], 9)).toThrow();
+});
+
+test('custom order changes actual native input/results, retains profile identities, and rejects bad orders before network', async () => {
+  const state = fixture.draft;
+  const order = defaultBattingOrder(state);
+  let requests = 0;
+  const api = new PlayerDataClient('/api', async (_url, init) => {
+    requests++;
+    return Response.json({
+      schemaVersion: '1.0.0',
+      ...(init?.body
+        ? {
+            datasetId: catalog.datasetId,
+            profiles: JSON.parse(String(init.body)).profileIds.map(
+              (id: string) =>
+                fixture.profiles.find((p: { id: string }) => p.id === id),
+            ),
+          }
+        : { dataset: fixture.dataset }),
+    });
+  });
+  const pilot = await parsePilot(
+    JSON.parse(
+      readFileSync('apps/web/src/generated/mlb-pilot-2024.json', 'utf8'),
+    ),
+  );
+  const shared = { load: async () => pilot } as PilotLoader;
+  await expect(
+    draftedSeason(engine, state, api, shared, '20261025', order.slice(1)),
+  ).rejects.toThrow(/nine drafted/);
+  expect(requests).toBe(0);
+  const normal = await draftedSeason(engine, state, api, shared, '20261025');
+  const reversed = [...order].reverse();
+  const custom = await draftedSeason(
+    engine,
+    state,
+    api,
+    shared,
+    '20261025',
+    reversed,
+  );
+  expect(custom.userTeam.lineup.map((p) => p.id)).toEqual(
+    reversed.map((id) => `draft:2024:${id}`),
+  );
+  for (const p of custom.userTeam.lineup)
+    expect(p.profileId).toBe(
+      engine.player(p.id.replace('draft:2024:', '')).profileId,
+    );
+  expect({ ...custom, userTeam: normal.userTeam }).toEqual(normal);
+  const result = nativeResult(custom);
+  expect(nativeResult(custom)).toEqual(result);
+  expect(result.team).not.toEqual(nativeResult(normal).team);
+  const newSeed = await draftedSeason(
+    engine,
+    state,
+    api,
+    shared,
+    '42',
+    reversed,
+  );
+  expect(newSeed.userTeam).toEqual(custom.userTeam);
+  expect({ ...newSeed, seed: custom.seed }).toEqual(custom);
+  expect(state).toEqual(fixture.draft);
+});
 
 const catalog: Catalog = JSON.parse(
   readFileSync('data/publications/mlb-draft-2024-v1.json', 'utf8'),

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "checkedOn": "2026-10-27",
+  "measuredLocally": {
+    "schemaVersion": "1.0.0",
+    "datasetId": "dataset:1fba260824fe05abec3c5950cd184caa0d314b41f1253bc782f97b678bb28add",
+    "sqlSha256": "4dab2562d2b4344cd7499bb6ea54f899b4ba3fe95f1f859c3772d6d7f695828d",
+    "baseRowsInserted": 11098,
+    "repeatRowChanges": 0,
+    "foreignKeyViolations": [],
+    "sqlitePageBytes": 4722688,
+    "sqlBytes": 6839740,
+    "indexCount": {
+      "mlb_batting_stints": 1,
+      "mlb_dataset_positions": 2,
+      "mlb_dataset_profiles": 3,
+      "mlb_datasets": 3,
+      "mlb_franchises": 1,
+      "mlb_player_seasons": 1,
+      "mlb_players": 2,
+      "mlb_position_appearances": 1,
+      "mlb_profiles": 2,
+      "mlb_publications": 1,
+      "mlb_sources": 1,
+      "mlb_team_seasons": 1
+    },
+    "estimatedTablePlusIndexInsertions": 26129,
+    "scope": "Local SQLite measurement. Index insertion estimate is not hosted D1 billing.",
+    "staticFileCount": 12,
+    "staticBytes": 998358,
+    "workerDryRunReported": "16.57 KiB / gzip 4.74 KiB",
+    "cloudActionsExecuted": false
+  },
+  "planningEstimates": {
+    "testers": 25,
+    "draftsPerTesterPerDay": 10,
+    "daysPerMonth": 30,
+    "apiRequestsPerDraftBudget": 30,
+    "rowsReadPerDraftBudget": 2000,
+    "workerRequestsPerDay": 7500,
+    "workerRequestsPerMonth": 225000,
+    "d1RowsReadPerDay": 500000,
+    "d1RowsReadPerMonth": 15000000,
+    "gameplayRowsWritten": 0,
+    "initialImportWriteBudget": 50000,
+    "hostedStorageBudgetBytes": 10000000,
+    "expectedMonthlyUSDOnFreePlans": 0,
+    "scope": "Estimates, not hosted measurements or guaranteed bounds. Quotas are shared with other account workloads."
+  }
+}

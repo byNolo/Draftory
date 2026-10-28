@@ -108,6 +108,27 @@ function setup() {
   };
 }
 
+test('network outages and HTML access gates provide hosted-session recovery advice', async () => {
+  const offline = new PlayerDataClient('/api', async () => {
+    throw new TypeError('Failed to fetch');
+  });
+  await expect(offline.datasets()).rejects.toMatchObject({
+    code: 'networkError',
+    message: expect.stringContaining('connection or access session'),
+  });
+  const gate = new PlayerDataClient(
+    '/api',
+    async () =>
+      new Response('<html>Sign in</html>', {
+        headers: { 'Content-Type': 'text/html' },
+      }),
+  );
+  await expect(gate.datasets()).rejects.toMatchObject({
+    code: 'invalidResponse',
+    message: expect.stringContaining('connection or access session'),
+  });
+});
+
 test('typed catalog, dataset and player caches return isolated snapshots', async () => {
   const s = setup();
   expect((await s.api.datasets()).datasets[0].id).toBe(datasetId);

@@ -28,6 +28,41 @@ strings, including full u64 season seeds; browser-generated seeds use u32 entrop
 Cancelling terminates the worker and preserves the lineup. A failed run can be
 retried with a fresh worker. Starting another draft clears the old result.
 
+## Custom batting order (M8C.1)
+
+After the ninth pick, the **Batting order** section shows all nine players with
+numbered batting slots and their assigned fielding positions. Move a hitter with
+the up/down buttons, drag the dedicated handle with mouse/touch, or focus the
+handle and use Arrow Up/Down. **Reset batting order** restores the original
+C,1B,2B,3B,SS,LF,CF,RF,DH order. These changes never alter picks, prices, fielding
+assignments, draft history or the draft RNG/seed.
+
+`draft/batting-order.ts` represents batting order as an immutable sequence of
+player IDs, separate from position-keyed draft assignments. The existing
+`draftedSeason` adapter accepts an optional order; it requires exactly the nine
+unique drafted identities and validates before profile loading/WASM execution.
+Only `userTeam.lineup` changes: player/profile mappings, profile-pool ordering,
+opponent, contexts, models, rules and seed remain unchanged. The existing Web
+Worker passes that complete JSON to the unchanged Rust season engine.
+
+Results retain a snapshot of the order actually simulated, and the batting table
+uses that sequence with statistics joined by stable batter ID. **Play another
+season** changes the seed while preserving the order. **Edit batting order**
+returns to the completed-lineup screen, retaining the current order and seed;
+the displayed previous result is cleared. Cancellation/retry preserves the order.
+Starting a new draft clears it; completing that draft initializes the default.
+Reloading clears the ephemeral session. No database or persistent storage is used.
+Local diagnostic exports include the current order and the result's order snapshot.
+
+Controls have accessible player-specific names, 48px targets, native keyboard
+focus and polite move/reset announcements. Editing is disabled during loading or
+simulation. Touch scrolling remains available outside the drag handles; dropping
+outside the list or cancelling a gesture leaves the order unchanged. Dragging
+does not auto-scroll: use buttons/arrow keys or scroll between moves for distant
+slots on short screens. Mobile emulation and browser touch input are covered;
+physical-device and screen-reader usability still require human testing.
+See [M8C.1 validation](../data/validation/batting-order-v1.md) for checks and limits.
+
 ## UI and boundaries
 
 `apps/web/src/mlb/game/` contains:
@@ -35,6 +70,7 @@ retried with a fresh worker. Starting another draft clears the old result.
 - `MLBGame.tsx`: game flow, async loading/retry/cancellation, session caches and
   worker lifetime. Generation checks ignore obsolete work after cancellation or unmount.
 - `DraftBoard.tsx`: historical offer cards and the nine-position roster.
+- `BattingOrderEditor.tsx`: separate post-draft batting sequence and accessible moves.
 - `SeasonResults.tsx`: record, batting totals, tied team leaders and denominator notes.
 - `batting.ts`: explicitly separated historical and simulated display-rate calculations.
 
@@ -138,5 +174,5 @@ pitching/defense, a fixed CHA template and synthetic schedule. The same historic
 identity may occur in that opponent. Known excess hits/double plays and compressed
 variance remain; this milestone does not recalibrate them. See the
 [M7C validation report](../data/validation/mlb-game-v1.md) for measurements and
-recommended human playtests before a privately hosted alpha. No hosting, access
-control or Cloudflare production resources have been provisioned.
+recommended human playtests. See [alpha deployment](ALPHA_DEPLOYMENT.md) for the
+hosting arrangement; M8C.1 itself makes no cloud or database changes.

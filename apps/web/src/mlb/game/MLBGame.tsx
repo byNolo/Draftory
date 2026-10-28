@@ -6,6 +6,12 @@ import { PilotLoader } from '../pilot-loader';
 import { loadCatalog } from '../draft/catalog';
 import { DraftEngine, type DraftState } from '../draft/engine';
 import { draftedSeason } from '../draft/season';
+import {
+  defaultBattingOrder,
+  validateBattingOrder,
+  type BattingOrder,
+} from '../draft/batting-order';
+import BattingOrderEditor from './BattingOrderEditor';
 import { historicalBatting, type HistoricalBatting } from './batting';
 import SeasonResults from './SeasonResults';
 import { OfferCards, Roster } from './DraftBoard';
@@ -21,7 +27,10 @@ export default function MLBGame() {
   const [engine, setEngine] = useState<DraftEngine>();
   const [draft, setDraft] = useState<DraftState>();
   const [stats, setStats] = useState<Record<string, HistoricalBatting>>({});
-  const [result, setResult] = useState<SeasonSuccess>();
+  const [battingOrder, setBattingOrder] = useState<BattingOrder>([]);
+  const [result, setResult] = useState<
+    SeasonSuccess & { battingOrder: BattingOrder }
+  >();
   const [phase, setPhase] = useState('');
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
@@ -86,6 +95,7 @@ export default function MLBGame() {
       if (token !== revision.current) return;
       setEngine(next);
       setDraft(state);
+      setBattingOrder([]);
       setStats({});
       setSeed(chosenSeed);
       setSeasonSeed(randomSeed());
@@ -103,6 +113,8 @@ export default function MLBGame() {
         `${engine.player(id).name} selected at ${draft.config.order[draft.history.length]} for ${engine.player(id).price} credits.`,
       );
       setDraft(next);
+      if (next.status === 'complete')
+        setBattingOrder(defaultBattingOrder(next));
       setStats({});
       setError('');
     } catch (e) {
@@ -117,7 +129,15 @@ export default function MLBGame() {
     setNotice('');
     setError('');
     try {
-      const input = await draftedSeason(engine, draft, api, pilot, nextSeed);
+      const order = validateBattingOrder(draft, battingOrder);
+      const input = await draftedSeason(
+        engine,
+        draft,
+        api,
+        pilot,
+        nextSeed,
+        order,
+      );
       if (token !== revision.current) return;
       if (!client.current) {
         setPhase('Preparing the season simulator…');
@@ -141,7 +161,11 @@ export default function MLBGame() {
         )
       )
         throw new Error('The season returned an incomplete batting result.');
-      setResult({ ...value, endToEndMs: performance.now() - started });
+      setResult({
+        ...value,
+        battingOrder: order,
+        endToEndMs: performance.now() - started,
+      });
       setSeasonSeed(nextSeed);
       setNotice('Season complete. Your batting totals are ready.');
     } catch (e) {
@@ -166,6 +190,7 @@ export default function MLBGame() {
       schemaVersion: '1.0.0',
       draft,
       seasonSeed,
+      battingOrder,
       result,
       transfers: api.transfers,
       pilotTransfers: pilot.transfers,
@@ -199,6 +224,17 @@ export default function MLBGame() {
         {error && (
           <div className="error" role="alert">
             <p>{error}</p>
+            {complete && (
+              <>
+                <p>
+                  If the app was updated, reload the latest version. Reloading
+                  clears this draft.
+                </p>
+                <button onClick={() => window.location.reload()}>
+                  Reload latest app
+                </button>
+              </>
+            )}
             {draft && !complete && (
               <button
                 disabled={busy}
@@ -325,7 +361,24 @@ export default function MLBGame() {
                 ))}
               </ol>
               {result && (
-                <SeasonResults result={result} engine={engine} draft={draft} />
+                <SeasonResults
+                  result={result}
+                  engine={engine}
+                  draft={draft}
+                  order={result.battingOrder}
+                />
+              )}
+              {complete && !result && (
+                <BattingOrderEditor
+                  engine={engine}
+                  draft={draft}
+                  order={battingOrder}
+                  disabled={busy}
+                  onChange={(order, announcement) => {
+                    setBattingOrder(order);
+                    setNotice(announcement);
+                  }}
+                />
               )}
               <div className={`play-layout ${complete ? 'completed' : ''}`}>
                 <section
@@ -350,6 +403,14 @@ export default function MLBGame() {
                           ? 'Keep your lineup and simulate a fresh season, or start over with new offers.'
                           : 'Your nine hitters will face a fixed opponent template across a synthetic 162-game schedule.'}
                       </p>
+                      {result && (
+                        <button
+                          disabled={busy}
+                          onClick={() => setResult(undefined)}
+                        >
+                          Edit batting order
+                        </button>
+                      )}
                       <button
                         className="primary"
                         disabled={busy}
@@ -380,10 +441,10 @@ export default function MLBGame() {
                           Replay this season seed
                         </button>
                         <p>
-                          Fixed batting order: C, 1B, 2B, 3B, SS, LF, CF, RF,
-                          DH. Neutral pitching and defense; no substitutions.
-                          The CHA opponent can contain the same historical
-                          identity. This experimental simulation has known hits,
+                          Your selected batting order is used for every game.
+                          Neutral pitching and defense; no substitutions. The
+                          CHA opponent can contain the same historical identity.
+                          This experimental simulation has known hits,
                           double-play and scoring-variance biases.
                         </p>
                       </details>

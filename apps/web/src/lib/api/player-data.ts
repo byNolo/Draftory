@@ -155,7 +155,7 @@ export class PlayerDataClient {
     } catch {
       throw new DataError(
         'networkError',
-        'Player API is unavailable. Start the local Worker and retry.',
+        'Player data is unavailable. Check your connection or access session, then retry.',
       );
     }
     const bytes = new Uint8Array(await response.arrayBuffer());
@@ -171,7 +171,7 @@ export class PlayerDataClient {
     } catch {
       throw new DataError(
         'invalidResponse',
-        'Player API did not return a JSON object',
+        'Player data could not be read. Check your connection or access session, then retry.',
         response.status,
       );
     }

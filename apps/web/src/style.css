@@ -638,3 +638,54 @@ summary {
   padding: 0;
   min-height: 0;
 }
+
+.batting-editor {
+  margin: 1.5rem 0;
+}
+.batting-order {
+  list-style: none;
+  padding: 0;
+  max-width: 48rem;
+}
+.batting-order li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid currentColor;
+}
+.batting-order .drop-target {
+  outline: 2px dashed currentColor;
+  outline-offset: 2px;
+}
+.batting-number {
+  width: 1.5rem;
+  flex-shrink: 0;
+  font-weight: bold;
+}
+.batting-name {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.batting-name small {
+  display: block;
+}
+.batting-controls {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+.batting-controls button {
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0.4rem;
+}
+.drag-handle {
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+}
+.drag-handle:active {
+  cursor: grabbing;
+}

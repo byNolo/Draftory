@@ -9,12 +9,13 @@ import {
   rmSync,
   writeFileSync,
 } from 'node:fs';
-import { resolve, sep } from 'node:path';
+import { dirname, resolve, sep } from 'node:path';
 import { canonical, digest, pilotArtifact } from './build-pilot.mjs';
 
 const root = process.cwd();
 const parent = resolve(root, 'target');
-const state = resolve(parent, 'm6b-api');
+const alpha = process.env.DRAFTORY_ALPHA_TEST === '1';
+const state = resolve(parent, alpha ? 'm8a-api' : 'm6b-api');
 if (!state.startsWith(parent + sep))
   throw new Error('Invalid generated integration directory');
 rmSync(state, { recursive: true, force: true });
@@ -119,9 +120,22 @@ const source = process.env.M6B_IMPORT_SQL
   ? resolve(process.env.M6B_IMPORT_SQL)
   : generated;
 const cli = resolve('node_modules/wrangler/bin/wrangler.js');
-const config = resolve('services/api/wrangler.jsonc');
+const config = resolve(
+  alpha ? 'services/api/wrangler.alpha.json' : 'services/api/wrangler.jsonc',
+);
 const common = ['--config', config];
 const options = { cwd: root, stdio: 'inherit', windowsHide: true };
+if (alpha && process.env.M6B_IMPORT_SQL) {
+  if (source !== resolve(dirname(source), 'import.sql'))
+    throw new Error(
+      'Use the verified publication import.sql for alpha validation',
+    );
+  execFileSync(
+    process.execPath,
+    ['scripts/prepare-alpha.mjs', '--publication-dir', dirname(source)],
+    options,
+  );
+}
 execFileSync(
   process.execPath,
   [
@@ -170,7 +184,7 @@ const child = spawn(
     '--ip',
     '127.0.0.1',
     '--port',
-    '4176',
+    alpha ? '4180' : '4176',
     '--persist-to',
     state,
     '--show-interactive-dev-session=false',

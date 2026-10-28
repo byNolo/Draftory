@@ -127,8 +127,10 @@ The fictional user lineup is labeled `userLineupKind: synthetic` under the
 existing Rust contract, while selected identities remain unique. A selected
 hitter may also occur in the immutable CHA opponent template; the UI discloses
 this. No source IDs, opponent profiles, rules or calibration are changed. The
-original historical-pilot path retains its overlap guard. Batting order is
-C,1B,2B,3B,SS,LF,CF,RF,DH, independent of draft order; optimization is deferred.
+original historical-pilot path retains its overlap guard. Default batting order
+is C,1B,2B,3B,SS,LF,CF,RF,DH, independent of draft order. M8C.1 lets the playable
+game customize that sequence separately from draft state; the developer harness
+continues to use the default. See [custom batting order](MLB_GAME.md#custom-batting-order-m8c1).
 
 ## Validation
 

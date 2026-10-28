@@ -4,6 +4,10 @@ import { historicalBatting, rate } from '../src/mlb/game/batting';
 import { nativeResult } from './helpers';
 import { DraftEngine, type Catalog } from '../src/mlb/draft/engine';
 import type { WorkerResponse, WorkerRequest } from '../src/workers/protocol';
+import {
+  defaultBattingOrder,
+  moveBatter,
+} from '../src/mlb/draft/batting-order';
 const fixture = JSON.parse(
   readFileSync('data/fixtures/mlb-game-2024-v1.json', 'utf8'),
 );
@@ -102,6 +106,188 @@ async function finish(page: Page) {
 }
 const runs = (page: Page) =>
   page.evaluate(() => (window as unknown as { gameRuns: Run[] }).gameRuns);
+
+test('custom batting order: keyboard, pointer/touch, native parity, result identity and session resets', async ({
+  page,
+}, info) => {
+  test.setTimeout(90_000);
+  await setup(page);
+  await finish(page);
+  const original = defaultBattingOrder(fixture.draft);
+  const list = page.getByRole('list', { name: 'Batting order', exact: true });
+  const ids = () =>
+    list
+      .locator('li')
+      .evaluateAll((rows) =>
+        rows.map((r) => (r as HTMLElement).dataset.battingPlayer),
+      );
+  expect(await ids()).toEqual(original);
+  const assignments = await page
+    .getByLabel('Your lineup', { exact: true })
+    .textContent();
+  const name = engine.player(original[2]).name;
+  const up = page.getByRole('button', { name: `Move ${name} up`, exact: true });
+  await up.focus();
+  await up.press('Enter');
+  expect(await ids()).toEqual(moveBatter(original, original[2], 1));
+  await expect(up).toBeFocused();
+  await expect(page.getByRole('status')).toContainText(`${name} now bats 2`);
+  await page
+    .getByRole('button', { name: `Move ${name} down`, exact: true })
+    .click();
+  expect(await ids()).toEqual(original);
+
+  const source = list
+    .locator('li')
+    .nth(2)
+    .getByRole('button', { name: /^Reorder / });
+  const target = list.locator('li').nth(1);
+  await source.scrollIntoViewIfNeeded();
+  const a = (await source.boundingBox())!,
+    b = (await target.boundingBox())!;
+  if (info.project.name === 'mobile-chromium') {
+    // Real browser touch input via the existing Playwright/CDP tooling.
+    const cdp = await page.context().newCDPSession(page);
+    await cdp.send('Input.dispatchTouchEvent', {
+      type: 'touchStart',
+      touchPoints: [{ x: a.x + a.width / 2, y: a.y + a.height / 2 }],
+    });
+    await cdp.send('Input.dispatchTouchEvent', {
+      type: 'touchMove',
+      touchPoints: [{ x: a.x + a.width / 2, y: b.y + b.height / 2 }],
+    });
+    await cdp.send('Input.dispatchTouchEvent', {
+      type: 'touchEnd',
+      touchPoints: [],
+    });
+    await cdp.detach();
+  } else {
+    await page.mouse.move(a.x + a.width / 2, a.y + a.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(a.x + a.width / 2, b.y + b.height / 2, { steps: 8 });
+    await page.mouse.up();
+  }
+  expect(await ids()).toEqual(moveBatter(original, original[2], 1));
+  await page
+    .getByRole('button', { name: 'Reset batting order', exact: true })
+    .click();
+  expect(await ids()).toEqual(original);
+  const handle = page.getByRole('button', {
+    name: `Reorder ${engine.player(original[8]).name}`,
+    exact: true,
+  });
+  await handle.focus();
+  await handle.press('ArrowUp');
+  const chosen = moveBatter(original, original[8], 7);
+  expect(await ids()).toEqual(chosen);
+  await expect(handle).toBeFocused();
+  expect(
+    await page.getByLabel('Your lineup', { exact: true }).textContent(),
+  ).toBe(assignments);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  for (const button of await list.getByRole('button').all()) {
+    const box = (await button.boundingBox())!;
+    expect(box.width).toBeGreaterThanOrEqual(44);
+    expect(box.height).toBeGreaterThanOrEqual(44);
+  }
+  mkdirSync('target/m8c1', { recursive: true });
+  await page.screenshot({
+    path: `target/m8c1/order-${info.project.name}.png`,
+    fullPage: true,
+  });
+  await page
+    .getByRole('button', { name: 'Simulate 162-game season', exact: true })
+    .click();
+  const result = page.getByRole('region', {
+    name: 'Simulated season results',
+    exact: true,
+  });
+  await expect(result).toBeVisible();
+  const first = (await runs(page))[0];
+  const input = JSON.parse(first.request.inputJson);
+  expect(input.userTeam.lineup.map((p: { id: string }) => p.id)).toEqual(
+    chosen.map((id) => `draft:2024:${id}`),
+  );
+  const native = nativeResult(input);
+  expect(first.response.batting!.batters).toEqual(native.team.batters);
+  const rows = result.locator('tbody tr');
+  for (let i = 0; i < chosen.length; i++) {
+    const id = chosen[i],
+      player = engine.player(id);
+    const position = fixture.draft.history.find(
+      (p: { playerId: string }) => p.playerId === id,
+    ).position;
+    const stats = native.team.batters.find(
+      (p: { batterId: string }) => p.batterId === `draft:2024:${id}`,
+    ).stats;
+    await expect(rows.nth(i).getByRole('rowheader')).toContainText(
+      `${i + 1}. ${player.name}`,
+    );
+    await expect(rows.nth(i).getByRole('rowheader')).toContainText(position);
+    await expect(rows.nth(i).getByRole('cell').first()).toHaveText(
+      String(stats.plateAppearances),
+    );
+  }
+  await page
+    .getByRole('button', { name: 'Replay this season seed', exact: true })
+    .click();
+  await expect.poll(async () => (await runs(page)).length).toBe(2);
+  expect((await runs(page))[1].response.batting).toEqual(
+    first.response.batting,
+  );
+  expect((await runs(page))[1].response.summary).toEqual(
+    first.response.summary,
+  );
+  await page
+    .getByRole('button', { name: 'Play another season', exact: true })
+    .click();
+  await expect.poll(async () => (await runs(page)).length).toBe(3);
+  const third = (await runs(page))[2];
+  expect(JSON.parse(third.request.inputJson).userTeam.lineup).toEqual(
+    input.userTeam.lineup,
+  );
+  expect(third.response.summary.seed).not.toBe(first.response.summary.seed);
+  await page
+    .getByRole('button', { name: 'Edit batting order', exact: true })
+    .click();
+  expect(await ids()).toEqual(chosen);
+  const reset = page.getByRole('button', {
+    name: 'Reset batting order',
+    exact: true,
+  });
+  if (info.project.name.startsWith('mobile-')) await reset.tap();
+  else await reset.click();
+  expect(await ids()).toEqual(original);
+  await page
+    .getByRole('button', { name: 'Start a new draft', exact: true })
+    .click();
+  await expect(list).toHaveCount(0);
+  await expect(
+    page.getByRole('heading', { name: 'Who’s your C?', exact: true }),
+  ).toBeFocused();
+  const exportButton = page.getByRole('button', {
+    name: 'Export session JSON',
+  });
+  if (!(await exportButton.isVisible()))
+    await page.getByText('Local playtest tools', { exact: true }).click();
+  await expect(exportButton).toBeVisible();
+  const download = page.waitForEvent('download');
+  await exportButton.click();
+  const exported = JSON.parse(
+    readFileSync((await (await download).path())!, 'utf8'),
+  );
+  expect(exported.battingOrder).toEqual([]);
+  expect(exported.draft.history).toEqual([]);
+  // Replay the same picks in a new draft to isolate reset from roster changes.
+  await page.reload();
+  await setup(page);
+  await finish(page);
+  expect(await ids()).toEqual(original);
+});
 
 test('complete playable flow: historical cards, roster, compact native parity, repeat and reset', async ({
   page,
@@ -205,6 +391,34 @@ test('complete playable flow: historical cards, roster, compact native parity, r
   }
 });
 
+test('a missing WASM asset offers an explicit reload that returns to the latest start screen', async ({
+  page,
+}) => {
+  await setup(page);
+  await finish(page);
+  await page.route('**/*.wasm', (route) =>
+    route.fulfill({
+      status: 404,
+      contentType: 'text/html',
+      body: 'Missing versioned asset',
+    }),
+  );
+  await page
+    .getByRole('button', { name: 'Simulate 162-game season', exact: true })
+    .click();
+  await expect(page.getByRole('alert')).toContainText(
+    'Reloading clears this draft',
+  );
+  await page.unroute('**/*.wasm');
+  await page
+    .getByRole('button', { name: 'Reload latest app', exact: true })
+    .click();
+  await expect(
+    page.getByRole('button', { name: 'Start your draft' }),
+  ).toBeVisible();
+  await expect(page.getByRole('alert')).toHaveCount(0);
+});
+
 test('mobile keyboard flow, loading, retry after API/WASM failures and cancellation', async ({
   page,
 }, info) => {
@@ -297,11 +511,17 @@ test('mobile keyboard flow, loading, retry after API/WASM failures and cancellat
     .click();
   await expect(page.getByRole('status')).toContainText('Preparing');
   await expect(
+    page.getByRole('button', { name: 'Reset batting order', exact: true }),
+  ).toBeDisabled();
+  await expect(
     page.getByRole('button', { name: 'Start a new draft' }),
   ).toBeDisabled();
   await page.getByRole('button', { name: 'Cancel season' }).click();
   release();
   await expect(page.getByRole('status')).toContainText('cancelled');
+  await expect(
+    page.getByRole('button', { name: 'Reset batting order', exact: true }),
+  ).toBeEnabled();
   await expect(page.getByRole('alert')).toHaveCount(0);
   await page.unroute('**/*.wasm');
   await page

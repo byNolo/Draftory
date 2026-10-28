@@ -5,7 +5,9 @@ export function Roster({ engine, draft }: RosterProps) {
   return (
     <aside className="roster" aria-label="Your lineup">
       <div className="roster-title">
-        <h2>Your lineup</h2>
+        <h2>
+          {draft.status === 'complete' ? 'Fielding assignments' : 'Your lineup'}
+        </h2>
         <span>{draft.history.length} / 9</span>
       </div>
       <ol>

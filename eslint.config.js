@@ -13,7 +13,7 @@ export default tseslint.config(
       '**/.wrangler/**',
       '**/worker-configuration.d.ts',
       '**/.venv/**',
-      'target/**',
+      '**/target/**',
       'apps/web/src/wasm/**',
       'apps/web/src/generated/**',
       'playwright-report/**',

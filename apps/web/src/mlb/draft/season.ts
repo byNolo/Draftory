@@ -1,7 +1,12 @@
 import { PlayerDataClient, type Player } from '../../lib/api/player-data';
 import { PilotLoader } from '../pilot-loader';
 import { assembleSeason, canonical, validateDataset } from '../season-input';
-import { DraftEngine, DraftError, POSITIONS, type DraftState } from './engine';
+import { DraftEngine, DraftError, type DraftState } from './engine';
+import {
+  defaultBattingOrder,
+  validateBattingOrder,
+  type BattingOrder,
+} from './batting-order';
 
 export async function draftedSeason(
   engine: DraftEngine,
@@ -9,6 +14,7 @@ export async function draftedSeason(
   api: PlayerDataClient,
   shared: PilotLoader,
   seed: string,
+  battingOrder: BattingOrder = defaultBattingOrder(state),
 ) {
   const replayed = engine.replay(
     state.seed,
@@ -19,6 +25,7 @@ export async function draftedSeason(
     JSON.stringify(canonical(replayed)) !== JSON.stringify(canonical(state))
   )
     throw new DraftError('Complete, valid replay required for simulation');
+  const order = validateBattingOrder(state, battingOrder);
   const [dataset, pilot] = await Promise.all([
     api.dataset(engine.catalog.datasetId),
     shared.load(),
@@ -34,10 +41,8 @@ export async function draftedSeason(
     throw new DraftError(
       'Offer catalog and published simulation dataset differ',
     );
-  // Batting order is the named position order, independent of the drafting order.
-  const players: Player[] = POSITIONS.map((pos) => {
-    const pick = state.history.find((p) => p.position === pos)!;
-    const p = engine.player(pick.playerId);
+  const players: Player[] = order.map((id) => {
+    const p = engine.player(id);
     return {
       id: p.id,
       displayName: p.name,
@@ -50,7 +55,8 @@ export async function draftedSeason(
   });
   const profiles = await api.profiles(
     dataset.id,
-    players.map((p) => p.profileId),
+    // Keep profile-pool serialization stable; only userTeam.lineup is reordered.
+    defaultBattingOrder(state).map((id) => engine.player(id).profileId),
   );
   return assembleSeason(dataset, players, profiles, pilot, seed, 'draft');
 }

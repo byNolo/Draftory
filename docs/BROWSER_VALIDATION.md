@@ -159,6 +159,11 @@ This is local delivery validation, not proof of production CDN behavior.
 
 ## Physical phone smoke test
 
+For the current M7C game and M8A hosted alpha, use the
+[HTTPS/Access phone checklist](ALPHA_DEPLOYMENT.md#hosted-verification-and-physical-phones).
+The older LAN-only instructions below exercise `/dev/` without player API data;
+plain LAN HTTP does not provide the Web Crypto context required by the game.
+
 No physical Android/iOS device is connected/tested. Mobile emulation checks engine
 execution, viewport/touch/user-agent behavior and UI layout on this desktop CPU;
 it does not establish phone CPU, thermal, memory, radio or actual Safari behavior.
@@ -173,7 +178,7 @@ npx wrangler pages dev apps/web/dist --ip 0.0.0.0 --port 4175 --compatibility-da
 ```
 
 Find the computer's LAN IPv4 address (`ipconfig` on Windows) and open
-`http://<computer-LAN-IP>:4175/` on the phone; `localhost` on the phone points to
+`http://<computer-LAN-IP>:4175/dev/` on the phone; `localhost` on the phone points to
 the phone. If Windows prompts, allow this local server on the private network.
 The command is intentionally provided for manual use; automated tests bind only
 127.0.0.1. No TLS/account/Cloudflare provisioning is needed for this harness's

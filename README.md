@@ -16,6 +16,10 @@ Scope and statistical decisions live in the [project plan](docs/PROJECT_PLAN.md)
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the branch, validation and pull-request workflow.
 
+M8A prepares a single-origin Cloudflare alpha without creating cloud resources.
+See [the deployment guide](docs/ALPHA_DEPLOYMENT.md) for guarded configuration,
+local production-build tests and approval-required deployment commands.
+
 ## Layout and boundaries
 
 ```text

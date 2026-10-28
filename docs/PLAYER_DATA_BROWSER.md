@@ -1,5 +1,9 @@
 # Published profiles in the browser (M6B)
 
+M8C.5: the playable game now uses nine verified representative opponents and a
+compact season dashboard. The single-opponent descriptions below retain the
+legacy pilot/history. See [current selection, contracts and gameplay](SEASON_DASHBOARD.md).
+
 M7C: the playable game is now at `/`; the diagnostic harness described below
 is at `/dev`. See [the game guide](MLB_GAME.md) for current gameplay and result
 projection behavior.

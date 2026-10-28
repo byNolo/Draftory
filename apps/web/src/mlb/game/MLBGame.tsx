@@ -15,6 +15,8 @@ import BattingOrderEditor from './BattingOrderEditor';
 import { historicalBatting, type HistoricalBatting } from './batting';
 import SeasonResults from './SeasonResults';
 import { OfferCards, Roster } from './DraftBoard';
+import { loadOpponents } from '../opponent-loader';
+import type { OpponentLabel } from './SeasonDashboard';
 import DefensePanel from './DefensePanel';
 import { loadDefense, withDefense } from '../defense';
 
@@ -35,6 +37,9 @@ export default function MLBGame() {
     SeasonSuccess & {
       battingOrder: BattingOrder;
       errorAvoidance: boolean;
+      assemblyMs: number;
+      opponentPublicationId: string;
+      opponents: OpponentLabel[];
       defense?: {
         supplementId: string;
         modelId: string;
@@ -160,6 +165,7 @@ export default function MLBGame() {
     setError('');
     try {
       const order = validateBattingOrder(draft, battingOrder);
+      const opponents = await loadOpponents();
       let input = await draftedSeason(
         engine,
         draft,
@@ -167,11 +173,13 @@ export default function MLBGame() {
         pilot,
         nextSeed,
         order,
+        opponents,
       );
       if (defenseEnabled) {
         input = withDefense(input, engine, draft, await loadDefense());
       }
       if (token !== revision.current) return;
+      const assemblyMs = performance.now() - started;
       if (!client.current) {
         setPhase('Preparing the season simulator…');
         client.current = new SeasonClient();
@@ -181,11 +189,14 @@ export default function MLBGame() {
       setPhase('Simulating 162 games…');
       const value = await client.current.simulate(
         JSON.stringify(input),
-        'batting',
+        'dashboard',
       );
       if (token !== revision.current) return;
       const b = value.batting;
       if (
+        !value.dashboard ||
+        value.dashboard.schemaVersion !== '1.0.0' ||
+        value.dashboard.games.length !== 162 ||
         !b ||
         b.schemaVersion !== '1.0.0' ||
         b.batters.length !== 9 ||
@@ -198,6 +209,13 @@ export default function MLBGame() {
         ...value,
         battingOrder: order,
         errorAvoidance: defenseEnabled,
+        assemblyMs,
+        opponentPublicationId: opponents.id,
+        opponents: opponents.opponents.map(({ id, name, abbreviation }) => ({
+          id,
+          name,
+          abbreviation,
+        })),
         ...(input.config.defense
           ? {
               defense: {
@@ -451,7 +469,7 @@ export default function MLBGame() {
                       <p>
                         {result
                           ? 'Keep your lineup and simulate a fresh season, or start over with new offers.'
-                          : 'Your nine hitters will face a fixed opponent template across a synthetic 162-game schedule.'}
+                          : 'Your nine hitters will face nine representative 2024 opponents across a synthetic 162-game schedule.'}
                       </p>
                       <DefensePanel
                         engine={engine}
@@ -502,8 +520,9 @@ export default function MLBGame() {
                         </button>
                         <p>
                           Your selected batting order is used for every game.
-                          Neutral pitching; defense follows the error-avoidance
-                          option above. No substitutions. The CHA opponent can
+                          Standardized pitching; your defense follows the
+                          error-avoidance option above. Opponent defense is
+                          neutral. No substitutions. Opponent lineups can
                           contain the same historical identity. This
                           experimental simulation has known hits, double-play
                           and scoring-variance biases.

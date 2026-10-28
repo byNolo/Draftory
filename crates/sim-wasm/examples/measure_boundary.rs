@@ -11,14 +11,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut samples = Vec::new();
     let mut stages = Vec::new();
     let mut bytes = 0;
-    let compact = match args.get(3).map(String::as_str).unwrap_or("full") {
-        "summary" => true,
-        "full" => false,
-        _ => return Err("Output must be summary or full".into()),
+    let projection = match args.get(3).map(String::as_str).unwrap_or("full") {
+        "summary" => sim_wasm::Projection::Summary,
+        "full" => sim_wasm::Projection::Full,
+        "batting" => sim_wasm::Projection::Batting,
+        "dashboard" => sim_wasm::Projection::Dashboard,
+        _ => return Err("Output must be summary, full, batting or dashboard".into()),
     };
     for _ in 0..repetitions {
         let start = Instant::now();
-        let result = sim_wasm::simulate_measured(black_box(&input), compact, || {
+        let result = sim_wasm::project_measured(black_box(&input), projection, || {
             start.elapsed().as_secs_f64() * 1000.0
         })?;
         samples.push(start.elapsed().as_secs_f64() * 1000.0);

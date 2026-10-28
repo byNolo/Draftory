@@ -20,3 +20,6 @@ data/processed/
 data/generated/
 # Canonical, checksummed static publications retain compact producer bytes.
 data/publications/*.json
+
+# Immutable historical executable research evidence; preserve pinned bytes.
+data/research/pricing-draft-engine-v1.ts

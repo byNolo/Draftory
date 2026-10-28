@@ -1,5 +1,9 @@
 # First playable MLB game · M7C
 
+M8C.5: the playable game now uses nine verified representative opponents and a
+compact season dashboard. The single-opponent descriptions below retain the
+legacy pilot/history. See [current selection, contracts and gameplay](SEASON_DASHBOARD.md).
+
 The default `/` route is the game: introduction → nine protected draft rounds →
 completed lineup → 162-game season → batting results. `/dev` retains the M6B
 diagnostic harness, including full fixture runs and the M7B draft debugger. Its

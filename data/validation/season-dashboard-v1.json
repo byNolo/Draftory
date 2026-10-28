@@ -1,0 +1,619 @@
+{
+  "assets": [
+    {
+      "bytes": 427821,
+      "gzipBytes": 73944,
+      "name": "defense-2024-v1-Da8cLOSJ.json"
+    },
+    { "bytes": 761, "gzipBytes": 428, "name": "DeveloperHarness-BNHm31qv.css" },
+    {
+      "bytes": 130013,
+      "gzipBytes": 12666,
+      "name": "DeveloperHarness-Cn5F26tn.js"
+    },
+    { "bytes": 11625, "gzipBytes": 3250, "name": "main-CV91OR23.css" },
+    { "bytes": 280406, "gzipBytes": 86911, "name": "main-Tn_N01u1.js" },
+    {
+      "bytes": 146786,
+      "gzipBytes": 39583,
+      "name": "mlb-draft-2024-v2-DJcVcKv0.json"
+    },
+    {
+      "bytes": 55591,
+      "gzipBytes": 6862,
+      "name": "mlb-pilot-2024-BDn3GC0n.json"
+    },
+    {
+      "bytes": 97295,
+      "gzipBytes": 17553,
+      "name": "opponents-2024-v1-pQ7KYtDL.json"
+    },
+    { "bytes": 6206, "gzipBytes": 2295, "name": "season.worker-DuF9JDC9.js" },
+    {
+      "bytes": 484855,
+      "gzipBytes": 158157,
+      "name": "sim_wasm_bg-HkZVU0fd.wasm"
+    }
+  ],
+  "browsers": {
+    "chromium": [
+      {
+        "compactJsonBytes": 59593,
+        "firstSimulationMs": 78.5,
+        "initializationMs": 29.19999998807907,
+        "inputBytes": 141900,
+        "mode": "neutral",
+        "warmResultProcessingMs": {
+          "max": 0.4000000059604645,
+          "median": 0.4000000059604645,
+          "min": 0.3999999910593033
+        },
+        "warmRoundTripMs": {
+          "max": 42.5,
+          "median": 31.399999991059303,
+          "min": 30.200000002980232
+        },
+        "warmSimulationMs": {
+          "max": 25.399999991059303,
+          "median": 23,
+          "min": 20.799999997019768
+        },
+        "wasmLinearMemoryMaxBytes": 2752512,
+        "workerMessageBytes": { "max": 59987, "median": 59977.5, "min": 59941 }
+      },
+      {
+        "compactJsonBytes": 59669,
+        "firstSimulationMs": 92.5,
+        "initializationMs": 8.200000002980232,
+        "inputBytes": 156788,
+        "mode": "defense",
+        "warmResultProcessingMs": {
+          "max": 0.4000000059604645,
+          "median": 0.29999999701976776,
+          "min": 0.29999999701976776
+        },
+        "warmRoundTripMs": {
+          "max": 44.79999999701977,
+          "median": 33,
+          "min": 29.5
+        },
+        "warmSimulationMs": {
+          "max": 27.299999997019768,
+          "median": 24.30000001192093,
+          "min": 21.900000005960464
+        },
+        "wasmLinearMemoryMaxBytes": 2752512,
+        "workerMessageBytes": { "max": 60048, "median": 60032.5, "min": 60017 }
+      }
+    ],
+    "edge": [
+      {
+        "compactJsonBytes": 59593,
+        "firstSimulationMs": 21.80000001192093,
+        "initializationMs": 33.20000000298023,
+        "inputBytes": 141900,
+        "mode": "neutral",
+        "warmResultProcessingMs": {
+          "max": 0.3999999910593033,
+          "median": 0.29999999701976776,
+          "min": 0.20000000298023224
+        },
+        "warmRoundTripMs": {
+          "max": 16.700000002980232,
+          "median": 15.899999991059303,
+          "min": 15.5
+        },
+        "warmSimulationMs": {
+          "max": 13.200000002980232,
+          "median": 12.799999997019768,
+          "min": 12.099999994039536
+        },
+        "wasmLinearMemoryMaxBytes": 2752512,
+        "workerMessageBytes": { "max": 59973, "median": 59969.5, "min": 59956 }
+      },
+      {
+        "compactJsonBytes": 59669,
+        "firstSimulationMs": 17.600000008940697,
+        "initializationMs": 4.9000000059604645,
+        "inputBytes": 156788,
+        "mode": "defense",
+        "warmResultProcessingMs": {
+          "max": 0.29999999701976776,
+          "median": 0.20000000298023224,
+          "min": 0.19999998807907104
+        },
+        "warmRoundTripMs": {
+          "max": 14.799999997019768,
+          "median": 14.299999997019768,
+          "min": 13.900000005960464
+        },
+        "warmSimulationMs": {
+          "max": 11.799999997019768,
+          "median": 11.5,
+          "min": 11.200000002980232
+        },
+        "wasmLinearMemoryMaxBytes": 2752512,
+        "workerMessageBytes": { "max": 60065, "median": 60043.5, "min": 60031 }
+      }
+    ],
+    "firefox": [
+      {
+        "compactJsonBytes": 59593,
+        "firstSimulationMs": 278,
+        "initializationMs": 72,
+        "inputBytes": 141900,
+        "mode": "neutral",
+        "warmResultProcessingMs": { "max": 1, "median": 1, "min": 0 },
+        "warmRoundTripMs": { "max": 271, "median": 153, "min": 147 },
+        "warmSimulationMs": { "max": 238, "median": 132, "min": 124 },
+        "wasmLinearMemoryMaxBytes": 2752512,
+        "workerMessageBytes": { "max": 59878, "median": 59876.5, "min": 59876 }
+      },
+      {
+        "compactJsonBytes": 59669,
+        "firstSimulationMs": 197,
+        "initializationMs": 19,
+        "inputBytes": 156788,
+        "mode": "defense",
+        "warmResultProcessingMs": { "max": 1, "median": 1, "min": 0 },
+        "warmRoundTripMs": { "max": 170, "median": 157, "min": 150 },
+        "warmSimulationMs": { "max": 144, "median": 131, "min": 126 },
+        "wasmLinearMemoryMaxBytes": 2752512,
+        "workerMessageBytes": { "max": 59954, "median": 59952.5, "min": 59952 }
+      }
+    ],
+    "mobile-chromium": [
+      {
+        "compactJsonBytes": 59593,
+        "firstSimulationMs": 85.09999999403954,
+        "initializationMs": 26.200000002980232,
+        "inputBytes": 141900,
+        "mode": "neutral",
+        "warmResultProcessingMs": {
+          "max": 0.5,
+          "median": 0.3999999910593033,
+          "min": 0.29999999701976776
+        },
+        "warmRoundTripMs": {
+          "max": 53.400000005960464,
+          "median": 32.29999999701977,
+          "min": 29.799999997019768
+        },
+        "warmSimulationMs": {
+          "max": 31.5,
+          "median": 23.700000002980232,
+          "min": 22
+        },
+        "wasmLinearMemoryMaxBytes": 2752512,
+        "workerMessageBytes": { "max": 59973, "median": 59964, "min": 59924 }
+      },
+      {
+        "compactJsonBytes": 59669,
+        "firstSimulationMs": 86.20000000298023,
+        "initializationMs": 6.9000000059604645,
+        "inputBytes": 156788,
+        "mode": "defense",
+        "warmResultProcessingMs": {
+          "max": 0.4000000059604645,
+          "median": 0.30000001192092896,
+          "min": 0.29999999701976776
+        },
+        "warmRoundTripMs": {
+          "max": 45.30000001192093,
+          "median": 32.79999999701977,
+          "min": 29.599999994039536
+        },
+        "warmSimulationMs": {
+          "max": 26.600000008940697,
+          "median": 24.299999997019768,
+          "min": 21.700000002980232
+        },
+        "wasmLinearMemoryMaxBytes": 2752512,
+        "workerMessageBytes": { "max": 60051, "median": 60047, "min": 60019 }
+      }
+    ],
+    "mobile-webkit": [
+      {
+        "compactJsonBytes": 59593,
+        "firstSimulationMs": 112,
+        "initializationMs": 38,
+        "inputBytes": 141900,
+        "mode": "neutral",
+        "warmResultProcessingMs": {
+          "max": 1.0000000000002274,
+          "median": 1,
+          "min": 1
+        },
+        "warmRoundTripMs": {
+          "max": 71,
+          "median": 48,
+          "min": 38.999999999999886
+        },
+        "warmSimulationMs": {
+          "max": 44,
+          "median": 26.999999999999886,
+          "min": 24
+        },
+        "wasmLinearMemoryMaxBytes": 2752512,
+        "workerMessageBytes": { "max": 59921, "median": 59891, "min": 59873 }
+      },
+      {
+        "compactJsonBytes": 59669,
+        "firstSimulationMs": 128,
+        "initializationMs": 59,
+        "inputBytes": 156788,
+        "mode": "defense",
+        "warmResultProcessingMs": { "max": 2, "median": 0, "min": 0 },
+        "warmRoundTripMs": {
+          "max": 75.00000000000045,
+          "median": 47.999999999999545,
+          "min": 35.000000000000455
+        },
+        "warmSimulationMs": {
+          "max": 43.99999999999994,
+          "median": 29,
+          "min": 22
+        },
+        "wasmLinearMemoryMaxBytes": 2752512,
+        "workerMessageBytes": { "max": 60013, "median": 59976, "min": 59949 }
+      }
+    ],
+    "webkit": [
+      {
+        "compactJsonBytes": 59593,
+        "firstSimulationMs": 131,
+        "initializationMs": 43,
+        "inputBytes": 141900,
+        "mode": "neutral",
+        "warmResultProcessingMs": { "max": 2, "median": 1, "min": 0 },
+        "warmRoundTripMs": {
+          "max": 82,
+          "median": 47.000000000000114,
+          "min": 40
+        },
+        "warmSimulationMs": {
+          "max": 50.99999999999994,
+          "median": 30,
+          "min": 22
+        },
+        "wasmLinearMemoryMaxBytes": 2752512,
+        "workerMessageBytes": { "max": 59906, "median": 59897, "min": 59873 }
+      },
+      {
+        "compactJsonBytes": 59669,
+        "firstSimulationMs": 126,
+        "initializationMs": 44,
+        "inputBytes": 156788,
+        "mode": "defense",
+        "warmResultProcessingMs": { "max": 2, "median": 1, "min": 1 },
+        "warmRoundTripMs": {
+          "max": 84,
+          "median": 45,
+          "min": 35.999999999999545
+        },
+        "warmSimulationMs": {
+          "max": 49.99999999999994,
+          "median": 30,
+          "min": 25
+        },
+        "wasmLinearMemoryMaxBytes": 2752512,
+        "workerMessageBytes": { "max": 59997, "median": 59966, "min": 59949 }
+      }
+    ]
+  },
+  "gameFlows": {
+    "chromium": {
+      "decodedResponseBytes": 1135201,
+      "firstUi": {
+        "assemblyMs": 104.6000000089407,
+        "endToEndMs": 284,
+        "roundTripMs": 138.29999999701977
+      },
+      "inputBytes": 142910,
+      "opponentRequests": 1,
+      "repeatedUi": {
+        "assemblyMs": 27.200000002980232,
+        "endToEndMs": 81.29999999701977,
+        "roundTripMs": 52.900000005960464
+      },
+      "requestCount": 36,
+      "selectiveDataDecodedBytes": 149233,
+      "selectiveDataRequests": 29,
+      "transferScope": "all-observed-http-responses-through-cached-replay"
+    },
+    "edge": {
+      "decodedResponseBytes": 1135201,
+      "firstUi": {
+        "assemblyMs": 49.5,
+        "endToEndMs": 95.90000000596046,
+        "roundTripMs": 30.19999998807907
+      },
+      "inputBytes": 142910,
+      "opponentRequests": 1,
+      "repeatedUi": {
+        "assemblyMs": 8.299999997019768,
+        "endToEndMs": 25.400000005960464,
+        "roundTripMs": 16.399999991059303
+      },
+      "requestCount": 36,
+      "selectiveDataDecodedBytes": 149233,
+      "selectiveDataRequests": 29,
+      "transferScope": "all-observed-http-responses-through-cached-replay"
+    },
+    "firefox": {
+      "decodedResponseBytes": 1135201,
+      "firstUi": { "assemblyMs": 94, "endToEndMs": 376, "roundTripMs": 230 },
+      "inputBytes": 142910,
+      "opponentRequests": 1,
+      "repeatedUi": { "assemblyMs": 33, "endToEndMs": 180, "roundTripMs": 146 },
+      "requestCount": 36,
+      "selectiveDataDecodedBytes": 149233,
+      "selectiveDataRequests": 29,
+      "transferScope": "all-observed-http-responses-through-cached-replay"
+    },
+    "mobile-chromium": {
+      "decodedResponseBytes": 1135201,
+      "firstUi": {
+        "assemblyMs": 93.5,
+        "endToEndMs": 256,
+        "roundTripMs": 136.90000000596046
+      },
+      "inputBytes": 142910,
+      "opponentRequests": 1,
+      "repeatedUi": {
+        "assemblyMs": 25.399999991059303,
+        "endToEndMs": 80.3999999910593,
+        "roundTripMs": 53.80000001192093
+      },
+      "requestCount": 36,
+      "selectiveDataDecodedBytes": 149233,
+      "selectiveDataRequests": 29,
+      "transferScope": "all-observed-http-responses-through-cached-replay"
+    },
+    "mobile-webkit": {
+      "decodedResponseBytes": 1135201,
+      "firstUi": {
+        "assemblyMs": 420,
+        "endToEndMs": 644.9999999999995,
+        "roundTripMs": 179.00000000000045
+      },
+      "inputBytes": 142910,
+      "opponentRequests": 1,
+      "repeatedUi": { "assemblyMs": 302, "endToEndMs": 382, "roundTripMs": 80 },
+      "requestCount": 36,
+      "selectiveDataDecodedBytes": 149233,
+      "selectiveDataRequests": 29,
+      "transferScope": "all-observed-http-responses-through-cached-replay"
+    },
+    "webkit": {
+      "decodedResponseBytes": 1135201,
+      "firstUi": {
+        "assemblyMs": 430.99999999999955,
+        "endToEndMs": 672.9999999999995,
+        "roundTripMs": 183.99999999999955
+      },
+      "inputBytes": 142910,
+      "opponentRequests": 1,
+      "repeatedUi": {
+        "assemblyMs": 284,
+        "endToEndMs": 371,
+        "roundTripMs": 85.99999999999909
+      },
+      "requestCount": 36,
+      "selectiveDataDecodedBytes": 149233,
+      "selectiveDataRequests": 29,
+      "transferScope": "all-observed-http-responses-through-cached-replay"
+    }
+  },
+  "gzipLevel": 6,
+  "largerPoolEvaluation": {
+    "decision": "Retain nine balanced opponents; a larger pool needs a reviewed schedule policy/version.",
+    "excludedClub": "CHA",
+    "existingSchedulerGamesPerOpponent": { "fourGames": 6, "sixGames": 23 },
+    "kind": "sizing-only-not-a-publication",
+    "previewBytes": 310757,
+    "previewGzipBytes": 55480,
+    "teams": 29,
+    "uniqueProfiles": 261
+  },
+  "native": [
+    {
+      "compactBytes": 3307,
+      "firstBoundaryMs": 11.7696,
+      "full": {
+        "events": {
+          "bytes": 5928346,
+          "gzipBytes": 359718,
+          "losses": 37,
+          "runsAllowed": 518,
+          "runsScored": 984,
+          "wins": 125
+        },
+        "summary": {
+          "bytes": 908652,
+          "gzipBytes": 50020,
+          "losses": 37,
+          "runsAllowed": 518,
+          "runsScored": 984,
+          "wins": 125
+        }
+      },
+      "inputBytes": 64627,
+      "mode": "legacy-batting",
+      "samples": {
+        "boundaryMs": [
+          11.7696, 9.7712, 9.1893, 9.3209, 8.2983, 8.328000000000001, 8.1345,
+          9.3978, 8.5365, 8.2889, 8.2559, 8.2744, 8.1849, 8.468699999999998,
+          8.665600000000001, 8.3473, 8.3287, 8.217699999999999, 8.5053, 8.4657,
+          8.1426
+        ],
+        "engineVersion": "0.4.0",
+        "repetitions": 21,
+        "resultJsonBytes": 3307,
+        "stages": [
+          [0.3631, 11.107499999999998, 0.17870000000000097, 3307],
+          [0.1667, 9.487699999999998, 0.04980000000000118, 3307],
+          [0.1471, 8.937800000000001, 0.039199999999999235, 3307],
+          [0.1514, 9.071399999999999, 0.03669999999999973, 3307],
+          [0.14730000000000001, 8.061200000000001, 0.03389999999999915, 3307],
+          [0.1308, 8.1145, 0.03110000000000035, 3307],
+          [0.12959999999999997, 7.921400000000001, 0.027699999999999392, 3307],
+          [0.1296, 9.167900000000001, 0.03939999999999877, 3307],
+          [0.13899999999999998, 8.3056, 0.03399999999999892, 3307],
+          [0.1311, 8.0754, 0.028200000000000003, 3307],
+          [0.13510000000000003, 8.0323, 0.031500000000001194, 3307],
+          [0.133, 8.0602, 0.029500000000000526, 3307],
+          [0.1301, 7.9574, 0.04610000000000092, 3307],
+          [0.1424, 8.2286, 0.04100000000000037, 3307],
+          [0.13490000000000002, 8.431600000000001, 0.04229999999999734, 3307],
+          [0.1495, 8.0884, 0.05410000000000004, 3307],
+          [0.142, 8.095699999999999, 0.036300000000000665, 3307],
+          [0.1474, 7.982400000000001, 0.03359999999999985, 3307],
+          [0.1297, 8.280000000000001, 0.03989999999999938, 3307],
+          [0.1434, 8.2096, 0.05670000000000108, 3307],
+          [0.1442, 7.910899999999999, 0.03350000000000186, 3307]
+        ]
+      },
+      "warmBoundaryMs": {
+        "max": 9.7712,
+        "median": 8.338000000000001,
+        "min": 8.1345
+      },
+      "warmSimulationMs": {
+        "max": 9.487699999999998,
+        "median": 8.1051,
+        "min": 7.910899999999999
+      }
+    },
+    {
+      "compactBytes": 59593,
+      "firstBoundaryMs": 12.988,
+      "full": {
+        "events": {
+          "bytes": 6383519,
+          "gzipBytes": 403714,
+          "losses": 70,
+          "runsAllowed": 785,
+          "runsScored": 973,
+          "wins": 92
+        },
+        "summary": {
+          "bytes": 1014754,
+          "gzipBytes": 72183,
+          "losses": 70,
+          "runsAllowed": 785,
+          "runsScored": 973,
+          "wins": 92
+        }
+      },
+      "inputBytes": 141900,
+      "mode": "nine-neutral",
+      "samples": {
+        "boundaryMs": [
+          12.988, 10.9787, 10.4183, 10.8512, 10.2698, 9.7461, 9.824599999999998,
+          10.488900000000001, 10.1335, 10.9889, 9.9441, 10.0119, 11.4076,
+          11.1217, 10.6571, 10.805499999999999, 11.038400000000001, 10.8062,
+          10.9065, 10.302800000000001, 10.2947
+        ],
+        "engineVersion": "0.4.0",
+        "repetitions": 21,
+        "resultJsonBytes": 59593,
+        "stages": [
+          [0.3792, 11.250399999999999, 1.2585000000000015, 59593],
+          [0.2352, 9.6718, 1.0007000000000001, 59593],
+          [0.22139999999999999, 9.2879, 0.8414999999999999, 59593],
+          [0.22210000000000002, 9.767, 0.7933000000000003, 59593],
+          [0.2295, 9.1818, 0.7887999999999984, 59593],
+          [0.23110000000000003, 8.7021, 0.7477999999999998, 59593],
+          [0.2184, 8.8032, 0.7417999999999978, 59593],
+          [0.21880000000000002, 9.4306, 0.7720000000000002, 59593],
+          [0.2156, 9.1017, 0.7522000000000002, 59593],
+          [0.2137, 9.8814, 0.8263999999999996, 59593],
+          [0.23459999999999998, 8.8864, 0.7591000000000001, 59593],
+          [0.2207, 8.912099999999999, 0.8101000000000003, 59593],
+          [0.2732, 10.1848, 0.8643999999999998, 59593],
+          [0.2498, 9.9635, 0.8342000000000009, 59593],
+          [0.2642, 9.2992, 1.0113999999999983, 59593],
+          [0.2619, 9.4081, 1.0551999999999992, 59593],
+          [0.2901, 9.8368, 0.8351999999999986, 59593],
+          [0.24810000000000001, 9.692899999999998, 0.7962000000000007, 59593],
+          [0.2609, 9.583400000000001, 0.9375, 59593],
+          [0.3118, 9.0197, 0.8931000000000004, 59593],
+          [0.23729999999999998, 9.1535, 0.8304000000000009, 59593]
+        ]
+      },
+      "warmBoundaryMs": { "max": 11.4076, "median": 10.573, "min": 9.7461 },
+      "warmSimulationMs": { "max": 10.1848, "median": 9.35365, "min": 8.7021 }
+    },
+    {
+      "compactBytes": 59669,
+      "firstBoundaryMs": 13.4513,
+      "full": {
+        "events": {
+          "bytes": 6398619,
+          "gzipBytes": 406027,
+          "losses": 70,
+          "runsAllowed": 784,
+          "runsScored": 975,
+          "wins": 92
+        },
+        "summary": {
+          "bytes": 1029633,
+          "gzipBytes": 74553,
+          "losses": 70,
+          "runsAllowed": 784,
+          "runsScored": 975,
+          "wins": 92
+        }
+      },
+      "inputBytes": 156788,
+      "mode": "nine-defense",
+      "samples": {
+        "boundaryMs": [
+          13.4513, 11.449900000000001, 10.980699999999999, 10.9712, 10.5861,
+          10.4058, 11.2105, 10.5174, 10.9169, 10.355, 10.5136, 10.5816,
+          11.155899999999999, 10.9739, 10.486600000000001, 10.132800000000001,
+          10.300099999999999, 10.8674, 10.105599999999999, 10.0637, 10.091
+        ],
+        "engineVersion": "0.4.0",
+        "repetitions": 21,
+        "resultJsonBytes": 59669,
+        "stages": [
+          [0.4914, 11.5503, 1.287700000000001, 59669],
+          [0.2808, 9.959200000000001, 1.1389999999999993, 59669],
+          [0.2756, 9.5253, 1.1018000000000008, 59669],
+          [0.28640000000000004, 9.739700000000001, 0.8743999999999996, 59669],
+          [0.276, 9.398000000000001, 0.8375999999999983, 59669],
+          [0.2736, 9.2366, 0.8270000000000017, 59669],
+          [0.26689999999999997, 9.6277, 1.2218, 59669],
+          [0.2829, 9.2928, 0.8703000000000003, 59669],
+          [0.2701, 9.7381, 0.8375000000000004, 59669],
+          [0.26619999999999994, 9.085899999999999, 0.9318000000000008, 59669],
+          [0.2902, 9.305900000000001, 0.8466999999999985, 59669],
+          [0.2832, 9.3886, 0.8431999999999995, 59669],
+          [0.2836, 9.4511, 1.3415999999999997, 59669],
+          [0.296, 9.308100000000001, 1.2914999999999992, 59669],
+          [0.2955, 9.270399999999999, 0.8488000000000007, 59669],
+          [0.27340000000000003, 8.9267, 0.861699999999999, 59669],
+          [0.27930000000000005, 9.110899999999999, 0.839500000000001, 59669],
+          [0.28550000000000003, 9.4559, 1.049199999999999, 59669],
+          [0.4131, 8.8003, 0.8237000000000005, 59669],
+          [0.2661, 8.9022, 0.8285999999999998, 59669],
+          [0.2722, 8.9262, 0.8246000000000002, 59669]
+        ]
+      },
+      "warmBoundaryMs": {
+        "max": 11.449900000000001,
+        "median": 10.5495,
+        "min": 10.0637
+      },
+      "warmSimulationMs": {
+        "max": 9.959200000000001,
+        "median": 9.307000000000002,
+        "min": 8.8003
+      }
+    }
+  ],
+  "schemaVersion": "1.0.0",
+  "timingScope": "Local production assets; fresh worker then five repeats. No first-WAN-visit or physical-phone claim."
+}

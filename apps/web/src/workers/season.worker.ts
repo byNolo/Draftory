@@ -1,6 +1,7 @@
 /// <reference lib="webworker" />
 import init, {
   simulate_season_json,
+  simulate_season_dashboard_json,
   simulate_season_batting_json,
   simulate_season_summary_json,
   last_run_measurements,
@@ -9,6 +10,7 @@ import wasmUrl from '../wasm/sim_wasm_bg.wasm?url';
 import type {
   SeasonSummary,
   SeasonBatting,
+  SeasonDashboard,
   WorkerFailure,
   WorkerRequest,
   WorkerResponse,
@@ -112,13 +114,15 @@ scope.onmessage = async ({ data }: MessageEvent<WorkerRequest>) => {
     }
     const callStart = performance.now();
     const wasmMemoryBeforeBytes = memory.buffer.byteLength;
-    const compact = data.output === 'summary' || data.output === 'batting';
+    const compact = ['summary', 'batting', 'dashboard'].includes(data.output);
     const resultJson =
-      data.output === 'batting'
-        ? simulate_season_batting_json(data.inputJson)
-        : compact
-          ? simulate_season_summary_json(data.inputJson)
-          : simulate_season_json(data.inputJson);
+      data.output === 'dashboard'
+        ? simulate_season_dashboard_json(data.inputJson)
+        : data.output === 'batting'
+          ? simulate_season_batting_json(data.inputJson)
+          : compact
+            ? simulate_season_summary_json(data.inputJson)
+            : simulate_season_json(data.inputJson);
     const wasmCallMs = performance.now() - callStart;
     const [inputParsingMs, simulationMs, serializationMs, resultJsonBytes] =
       last_run_measurements();
@@ -158,8 +162,14 @@ scope.onmessage = async ({ data }: MessageEvent<WorkerRequest>) => {
         runsAllowed: summary.runsAllowed,
         runDifferential: summary.runDifferential,
       },
-      ...(data.output === 'batting'
+      ...(data.output === 'batting' || data.output === 'dashboard'
         ? { batting: (result as unknown as { batting: SeasonBatting }).batting }
+        : {}),
+      ...(data.output === 'dashboard'
+        ? {
+            dashboard: (result as unknown as { dashboard: SeasonDashboard })
+              .dashboard,
+          }
         : {}),
       timings: {
         initializationMs,

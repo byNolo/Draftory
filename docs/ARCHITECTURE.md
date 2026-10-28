@@ -227,3 +227,8 @@ Use integer/defined rounding logic or documented floating-point operations with 
 - Rust/WASM wasm-bindgen: https://rustwasm.github.io/wasm-bindgen/
 - Web Workers: https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API
 - See [DATA_SPEC.md](DATA_SPEC.md) and [SIMULATION_SPEC.md](SIMULATION_SPEC.md).
+
+
+M8C.5 reuses the Rust scheduler and adds a Python-produced, immutable static
+opponent pool plus a compact Rust dashboard projection. React owns filtering,
+charts and presentation; no D1/API schema changes. See [season dashboard](SEASON_DASHBOARD.md).

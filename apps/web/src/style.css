@@ -773,3 +773,97 @@ summary {
 .offer-statistics {
   min-height: 14rem;
 }
+
+.dashboard-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin: 0 0 1.25rem;
+  font-size: 0.88rem;
+}
+.dashboard-nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.dashboard-section {
+  margin: 2rem 0;
+  scroll-margin-top: 1rem;
+}
+.season-chart {
+  display: block;
+  width: 100%;
+  max-height: 240px;
+  background: #fffefa;
+  border: 1px solid #d3d9ca;
+  border-radius: 10px;
+}
+.season-chart text {
+  font-size: 12px;
+  fill: #536356;
+}
+.schedule-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.schedule-filters label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  min-width: 0;
+  max-width: 100%;
+}
+.schedule-filters select {
+  min-height: 44px;
+  max-width: 100%;
+  padding: 0.6rem;
+  color: inherit;
+  background: #fffefa;
+  border: 1px solid #89988d;
+  border-radius: 4px;
+  font: inherit;
+}
+.schedule-scroll {
+  max-height: 28rem;
+  margin-top: 0.75rem;
+}
+.schedule-scroll thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.game-link {
+  font-size: 0.8rem;
+  min-width: 6rem;
+}
+.selected-game {
+  background: #e9eddf;
+}
+.game-detail {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border: 1px solid #c6cbbd;
+  border-radius: 10px;
+  background: #e9eddf;
+}
+.game-detail h4 {
+  font-size: 1.1rem;
+  margin-top: 0;
+}
+.game-detail .batting-scroll {
+  margin: 1rem 0;
+}
+.model-label {
+  font-size: 0.85rem;
+  color: #536356;
+}
+@media (max-width: 640px) {
+  .schedule-filters {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dashboard-nav {
+    gap: 0.25rem 1rem;
+  }
+}

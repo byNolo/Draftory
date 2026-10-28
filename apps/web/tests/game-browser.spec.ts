@@ -15,6 +15,9 @@ const catalog: Catalog = JSON.parse(
   readFileSync('data/publications/mlb-draft-2024-v2.json', 'utf8'),
 );
 const engine = new DraftEngine(catalog);
+const opponentPublication = JSON.parse(
+  readFileSync('data/publications/opponents-2024-v1.json', 'utf8'),
+);
 // Preserve the immutable historical excerpt and v1 golden. Its same offered
 // identities replay under the new catalog, with the new prices/budget/version.
 fixture.draft = engine.replay(
@@ -25,6 +28,122 @@ type Run = {
   request: Extract<WorkerRequest, { type: 'simulate' }>;
   response: Extract<WorkerResponse, { type: 'result' }>;
 };
+
+test('season dashboard reconciles games and opponent totals, filters, details and cached replays', async ({
+  page,
+}, info) => {
+  const transfers: { url: string; bytes: number }[] = [];
+  page.on('response', async (response) => {
+    if (response.url().startsWith('http'))
+      transfers.push({
+        url: response.url(),
+        bytes: (await response.body().catch(() => Buffer.alloc(0))).length,
+      });
+  });
+  await setup(page);
+  await finish(page);
+  await page
+    .getByRole('button', { name: 'Simulate 162-game season', exact: true })
+    .click();
+  await expect(
+    page.getByRole('button', { name: 'Play another season', exact: true }),
+  ).toBeVisible();
+  const first = (await runs(page))[0];
+  const input = JSON.parse(first.request.inputJson);
+  const native = nativeResult(input);
+  const dashboard = first.response.dashboard!;
+  expect(input.opponents).toHaveLength(9);
+  expect(dashboard.games).toHaveLength(162);
+  expect(first.response.summary.wins).toBe(native.wins);
+  expect(dashboard.games.map((g) => g.score)).toEqual(
+    native.games.map((g: { score: number[] }) => g.score),
+  );
+  expect(dashboard.opponents.reduce((n, t) => n + t.games, 0)).toBe(162);
+  expect(dashboard.opponents.reduce((n, t) => n + t.runsScored, 0)).toBe(
+    native.runsScored,
+  );
+  expect(dashboard.opponents.reduce((n, t) => n + t.wins, 0)).toBe(native.wins);
+  const table = page.getByRole('region', {
+    name: 'Game results table',
+    exact: true,
+  });
+  await expect(table.locator('tbody tr')).toHaveCount(162);
+  await expect(
+    page.getByRole('img', { name: 'Cumulative wins across the season' }),
+  ).toBeVisible();
+  await expect(
+    page.getByText('Your defense: neutral', { exact: false }),
+  ).toBeVisible();
+  const opponent = opponentPublication.opponents[0];
+  await page
+    .getByRole('combobox', { name: 'Opponent', exact: true })
+    .selectOption(opponent.id);
+  await expect(table.locator('tbody tr')).toHaveCount(18);
+  await page
+    .getByRole('combobox', { name: 'Result', exact: true })
+    .selectOption('wins');
+  await expect(table.locator('tbody tr')).toHaveCount(
+    dashboard.games.filter((g) => g.opponentId === opponent.id && g.won).length,
+  );
+  await page
+    .getByRole('combobox', { name: 'Opponent', exact: true })
+    .selectOption('all');
+  await page
+    .getByRole('combobox', { name: 'Result', exact: true })
+    .selectOption('all');
+  await page
+    .getByRole('button', { name: 'View game 162', exact: true })
+    .click();
+  await expect(page.getByRole('heading', { name: /Game 162 ·/ })).toBeFocused();
+  await expect(
+    page
+      .getByRole('region', { name: 'Game team statistics', exact: true })
+      .locator('tbody tr'),
+  ).toHaveCount(2);
+  await expect(
+    page.getByRole('region', { name: 'Game inning scores', exact: true }),
+  ).toContainText(String(native.games[161].score[0]));
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  await page.screenshot({
+    path: `target/m8c5/dashboard-${info.project.name}.png`,
+    fullPage: true,
+  });
+  await page.getByText('Local playtest tools', { exact: true }).click();
+  const exportedRun = async () => {
+    const downloaded = page.waitForEvent('download');
+    await page
+      .getByRole('button', { name: 'Export session JSON', exact: true })
+      .click();
+    const file = await downloaded;
+    return JSON.parse(readFileSync((await file.path())!, 'utf8')).result;
+  };
+  const firstUi = await exportedRun();
+  const count = transfers.length;
+  await page
+    .getByRole('button', { name: 'Replay this season seed', exact: true })
+    .click();
+  await expect.poll(async () => (await runs(page)).length).toBe(2);
+  expect((await runs(page))[1].response.dashboard).toEqual(dashboard);
+  expect(transfers.length).toBe(count);
+  mkdirSync('target/m8c5', { recursive: true });
+  // Only real-publication runs feed the handoff performance report.
+  if (process.env.M6B_IMPORT_SQL)
+    writeFileSync(
+      `target/m8c5/game-${info.project.name}.json`,
+      JSON.stringify({
+        inputBytes: Buffer.byteLength(first.request.inputJson),
+        transferScope: 'all-observed-http-responses-through-cached-replay',
+        transfers,
+        firstUi,
+        repeatedUi: await exportedRun(),
+        runs: await runs(page),
+      }),
+    );
+});
 async function setup(page: Page) {
   // Small verified source excerpt in ordinary CI; real D1 is exercised with M6B_IMPORT_SQL.
   if (!process.env.M6B_IMPORT_SQL)
@@ -290,7 +409,12 @@ test('custom batting order: keyboard, pointer/touch, native parity, result ident
   );
   const native = nativeResult(input);
   expect(first.response.batting!.batters).toEqual(native.team.batters);
-  const rows = result.locator('tbody tr');
+  const rows = result
+    .getByRole('region', {
+      name: 'Season batting table, scroll for all statistics',
+      exact: true,
+    })
+    .locator('tbody tr');
   for (let i = 0; i < chosen.length; i++) {
     const id = chosen[i],
       player = engine.player(id);
@@ -406,11 +530,20 @@ test('complete playable flow: historical cards, roster, compact native parity, r
     name: 'Simulated season results',
     exact: true,
   });
-  await expect(results).toContainText('81–81');
-  await expect(results.getByRole('row')).toHaveCount(11);
+  await expect(results).toBeVisible();
+  await expect(
+    results
+      .getByRole('region', {
+        name: 'Season batting table, scroll for all statistics',
+        exact: true,
+      })
+      .getByRole('row'),
+  ).toHaveCount(11);
   const [firstRun] = await runs(page);
   const native = nativeResult(JSON.parse(firstRun.request.inputJson));
-  expect(firstRun.request.output).toBe('batting');
+  expect(firstRun.request.output).toBe('dashboard');
+  await expect(results).toContainText(`${native.wins}–${native.losses}`);
+  expect(firstRun.response.dashboard!.games).toHaveLength(162);
   expect(firstRun.response.batting).toEqual({
     schemaVersion: '1.0.0',
     teamId: native.team.teamId,
@@ -418,7 +551,7 @@ test('complete playable flow: historical cards, roster, compact native parity, r
     batters: native.team.batters,
   });
   expect(firstRun.response).not.toHaveProperty('resultJson');
-  expect(firstRun.response.timings.resultJsonBytes).toBeLessThan(6000);
+  expect(firstRun.response.timings.resultJsonBytes).toBeLessThan(150000);
   for (const row of native.team.batters) {
     const player = engine.player(row.batterId.replace('draft:2024:', ''));
     await expect(

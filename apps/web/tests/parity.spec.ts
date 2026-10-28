@@ -1,6 +1,104 @@
 import { expect, test } from '@playwright/test';
-import { fixture, largeFixture, nativeResult, session } from './helpers';
+import {
+  fixture,
+  largeFixture,
+  nativeResult,
+  nativeDashboard,
+  session,
+} from './helpers';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+
+test('dashboard v1 multiple opponents exact native parity, details and measured costs', async ({
+  page,
+}, info) => {
+  test.setTimeout(120_000);
+  const neutral = JSON.parse(
+    readFileSync('data/fixtures/dashboard-season-2024-v1.json', 'utf8'),
+  );
+  const real = structuredClone(neutral);
+  const defense = JSON.parse(
+    readFileSync('data/fixtures/defense-season-2024-v1.json', 'utf8'),
+  );
+  real.config.defense = defense.config.defense;
+  real.schemaVersion = '1.1.0';
+  real.gameSchemaVersion = '1.3.0';
+  real.rulesVersion = 'error-avoidance-nine-inning-v1';
+  const rows = [];
+  await page.goto('/__bench.html');
+  for (const [mode, input] of [
+    ['neutral', neutral],
+    ['defense', real],
+  ] as const) {
+    const worker = await session(page);
+    const init = await worker.evaluate((w) =>
+      w.send({ type: 'initialize', requestId: 'init' }),
+    );
+    expect(init.type).toBe('ready');
+    const runs = [];
+    for (let i = 0; i < 6; i++) {
+      const sample = await worker.evaluate(
+        async (w, request) => {
+          const started = performance.now();
+          const response = await w.send(request);
+          return { response, roundTripMs: performance.now() - started };
+        },
+        {
+          type: 'simulate' as const,
+          requestId: String(i),
+          inputJson: JSON.stringify(input),
+          output: 'dashboard' as const,
+        },
+      );
+      const response = sample.response;
+      expect(response.type).toBe('result');
+      if (response.type !== 'result') throw new Error(JSON.stringify(response));
+      const expected = nativeDashboard(input);
+      expect(response.dashboard).toEqual(expected.dashboard);
+      expect(response.batting).toEqual(expected.batting);
+      expect(response).not.toHaveProperty('resultJson');
+      runs.push({
+        timings: response.timings,
+        roundTripMs: sample.roundTripMs,
+        workerMessageBytes: Buffer.byteLength(JSON.stringify(response)),
+      });
+    }
+    for (const seed of ['0', '18446744073709551615']) {
+      const detailed = { ...input, seed, detail: 'events' };
+      const response = await worker.evaluate((w, request) => w.send(request), {
+        type: 'simulate' as const,
+        requestId: seed,
+        inputJson: JSON.stringify(detailed),
+        output: 'full' as const,
+      });
+      expect(response.type).toBe('result');
+      if (response.type !== 'result') throw new Error(JSON.stringify(response));
+      expect(JSON.parse(response.resultJson!)).toEqual(nativeResult(detailed));
+      const compact = await worker.evaluate((w, request) => w.send(request), {
+        type: 'simulate' as const,
+        requestId: seed + 'compact',
+        inputJson: JSON.stringify(detailed),
+        output: 'dashboard' as const,
+      });
+      expect(compact.type).toBe('result');
+      if (compact.type !== 'result') throw new Error(JSON.stringify(compact));
+      expect(compact.dashboard).toEqual(
+        nativeDashboard({ ...detailed, detail: 'summary' }).dashboard,
+      );
+    }
+    rows.push({
+      mode,
+      initialization: init,
+      inputBytes: Buffer.byteLength(JSON.stringify(input)),
+      runs,
+    });
+    await worker.evaluate((w) => w.terminate());
+  }
+  mkdirSync('target/m8c5', { recursive: true });
+  writeFileSync(
+    `target/m8c5/parity-${info.project.name}.json`,
+    JSON.stringify(rows, null, 2),
+  );
+});
 
 test('defense v1 exact native parity, explicit neutral identity, warm costs and memory', async ({
   page,

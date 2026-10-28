@@ -45,7 +45,7 @@ export type WorkerRequest =
       requestId: string;
       inputJson: string;
       // summaryBaseline keeps the M5A full-serialization path as a benchmark control.
-      output: 'summary' | 'full' | 'summaryBaseline' | 'batting';
+      output: 'summary' | 'full' | 'summaryBaseline' | 'batting' | 'dashboard';
     };
 
 export type WorkerResponse =
@@ -69,6 +69,7 @@ export type WorkerResponse =
       timings: WorkerTimings;
       resultJson?: string;
       batting?: SeasonBatting;
+      dashboard?: SeasonDashboard;
     }
   | { type: 'error'; requestId: string; error: WorkerFailure };
 
@@ -100,4 +101,41 @@ export interface SeasonBatting {
   teamId: string;
   totals: BattingLine;
   batters: { batterId: string; stats: BattingLine }[];
+}
+
+// Dashboard projection v1. All pairs are user/opponent, including inning lines.
+export interface DashboardGame {
+  gameNumber: number;
+  opponentId: string;
+  userHome: boolean;
+  seed: string;
+  score: [number, number];
+  won: boolean;
+  wins: number;
+  losses: number;
+  innings: number;
+  plateAppearances: number;
+  lineScore: [number | null, number | null][];
+  hits: [number, number];
+  homeRuns: [number, number];
+  walks: [number, number];
+  strikeouts: [number, number];
+  leftOnBase: [number, number];
+}
+export interface SeasonDashboard {
+  schemaVersion: '1.0.0';
+  scheduleVersion: string;
+  seedDerivationVersion: string;
+  defenseModelId: string | null;
+  opponentDefense: 'neutral';
+  games: DashboardGame[];
+  opponents: {
+    opponentId: string;
+    games: number;
+    wins: number;
+    losses: number;
+    runsScored: number;
+    runsAllowed: number;
+    runDifferential: number;
+  }[];
 }

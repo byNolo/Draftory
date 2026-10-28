@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://draftory.example/contracts/opponents.schema.json",
+  "title": "Draftory 2024 representative opponent publication v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contextId",
+    "datasetId",
+    "engineVersion",
+    "opponentSetKind",
+    "policyId",
+    "scheduleLabel",
+    "scheduleVersion",
+    "schemaVersion",
+    "selectionVersion",
+    "source",
+    "sourceId",
+    "sourceSqlSha256",
+    "transitionModelId",
+    "year",
+    "id",
+    "attribution",
+    "opponents",
+    "profiles"
+  ],
+  "properties": {
+    "contextId": {
+      "const": "context:37967c8929f1d6369202a1d3f9635f81381fe4ce15ce0e9dab71ac24b3c19174"
+    },
+    "datasetId": {
+      "const": "dataset:1fba260824fe05abec3c5950cd184caa0d314b41f1253bc782f97b678bb28add"
+    },
+    "engineVersion": {
+      "const": "0.4.0"
+    },
+    "opponentSetKind": {
+      "const": "reconstructedFixedLineups"
+    },
+    "policyId": {
+      "const": "policy:2b740d4980456816758e092fa477cec3f68dfcb8552a10bc18c31755405aa54f"
+    },
+    "scheduleLabel": {
+      "const": "Synthetic Draftory schedule"
+    },
+    "scheduleVersion": {
+      "const": "round-robin-season-v1"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "selectionVersion": {
+      "const": "team-pa-ranked-nine-full-season-profiles-v1"
+    },
+    "source": {
+      "const": {
+        "lockSha256": "8f4cfb56f0726ebe7c900f8d8748232a3c8b326b2fc0d44a387512442e58a22c",
+        "release": "2025 (CSV folder, observed 2026-10-25; includes February 2026 BOM revisions)",
+        "source": "SABR Lahman"
+      }
+    },
+    "sourceId": {
+      "const": "source:fa2fe5339e68fda5862649f14cdacfb92c1e7e0693be6ecb35b5a61ce6a7ac9d"
+    },
+    "sourceSqlSha256": {
+      "const": "4dab2562d2b4344cd7499bb6ea54f899b4ba3fe95f1f859c3772d6d7f695828d"
+    },
+    "transitionModelId": {
+      "const": "transitions:d2206ab52b6a0bb9a7dec86168fb868dd19acd33720df47ad14945b494ba18cb"
+    },
+    "year": {
+      "const": 2024
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^opponents:[a-f0-9]{64}$"
+    },
+    "attribution": {
+      "type": "string",
+      "minLength": 1
+    },
+    "opponents": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "sourceTeamId",
+          "name",
+          "abbreviation",
+          "year",
+          "lineup"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/id"
+          },
+          "sourceTeamId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "abbreviation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "year": {
+            "const": 2024
+          },
+          "lineup": {
+            "type": "array",
+            "minItems": 9,
+            "maxItems": 9,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "playerId", "profileId", "name", "teamPa"],
+              "properties": {
+                "id": {
+                  "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/id"
+                },
+                "playerId": {
+                  "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/id"
+                },
+                "profileId": {
+                  "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/id"
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "teamPa": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "profiles": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 81,
+      "items": {
+        "$ref": "https://draftory.example/contracts/player-data-api.schema.json#/$defs/preparedProfile"
+      }
+    }
+  }
+}

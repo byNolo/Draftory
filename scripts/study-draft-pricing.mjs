@@ -1,14 +1,35 @@
 // Offline research using the actual TypeScript game engine, not a Python imitation.
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 import ts from 'typescript';
 
-const output = resolve('data/processed/m8c2');
+const output = resolve(process.argv[4] ?? 'data/processed/m8c2');
+mkdirSync(output, { recursive: true });
+if (existsSync(resolve(output, 'draft-budgets.json')))
+  throw Error(
+    'Research measurements already exist; choose a new output directory to preserve their timings and provenance',
+  );
 mkdirSync('target/m8c2', { recursive: true });
 const enginePath = resolve('target/m8c2/engine.mjs');
-const engineSource = readFileSync('apps/web/src/mlb/draft/engine.ts', 'utf8');
+const current = process.argv[3] === 'current';
+if (current && (!process.argv[4] || output === resolve('data/processed/m8c2')))
+  throw Error('Current-engine comparison requires a separate output directory');
+if (process.argv[3] && !['current', 'historical'].includes(process.argv[3]))
+  throw Error('Engine must be historical or current');
+const engineSource = readFileSync(
+  current
+    ? 'apps/web/src/mlb/draft/engine.ts'
+    : 'data/research/pricing-draft-engine-v1.ts',
+  'utf8',
+);
+if (
+  !current &&
+  createHash('sha256').update(engineSource).digest('hex') !==
+    '38c8a68ba2c1bc9876b69107ddf44e25ad22781d5c1d8b4bdb792cf5792f082a'
+)
+  throw Error('Historical pricing engine integrity mismatch');
 writeFileSync(
   enginePath,
   ts.transpileModule(engineSource, {
@@ -25,7 +46,7 @@ const base = JSON.parse(
   readFileSync('data/publications/mlb-draft-2024-v1.json', 'utf8'),
 );
 const study = JSON.parse(
-  readFileSync(resolve(output, 'pa-pricing.json'), 'utf8'),
+  readFileSync(resolve('data/processed/m8c2/pa-pricing.json'), 'utf8'),
 );
 const records = new Map(study.records.map((p) => [p.id, p]));
 const policies = ['linear', 'elite', 'confidence-discount', 'tier-cap'];

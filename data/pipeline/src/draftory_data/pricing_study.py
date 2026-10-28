@@ -227,13 +227,22 @@ def main() -> int:
         return 2
 
 
+PRICING_ENGINE_SHA = "38c8a68ba2c1bc9876b69107ddf44e25ad22781d5c1d8b4bdb792cf5792f082a"
+
+
+def pricing_engine_source() -> bytes:
+    source = (ROOT / "data/research/pricing-draft-engine-v1.ts").read_bytes()
+    if sha(source) != PRICING_ENGINE_SHA:
+        raise DataError("Historical pricing engine integrity mismatch")
+    return source
+
+
 def compact_summary(pa: dict, drafts: dict, catalog: dict) -> dict:
     if (
         drafts["datasetId"] != pa["datasetId"]
         or drafts["measurementSha256"] != pa["measurementSha256"]
         or drafts["paStudySha256"] != sha(canonical_bytes(pa))
-        or drafts["engineSourceSha256"]
-        != sha((ROOT / "apps/web/src/mlb/draft/engine.ts").read_bytes())
+        or drafts["engineSourceSha256"] != sha(pricing_engine_source())
         or catalog["datasetId"] != pa["datasetId"]
         or catalog["defaultBudget"] != DEFAULT_BUDGET
         or catalog["pricingPolicy"] != POLICY_ID

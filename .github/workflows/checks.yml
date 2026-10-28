@@ -31,7 +31,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: simulation-builds
-      - run: chmod +x target/release/examples/season
+      - run: chmod +x target/release/examples/season target/release/examples/project_season
       - run: npm run build:pilot
       - run: npm run types:api
       # The mounted workspace belongs to the host runner, not container root.
@@ -86,6 +86,7 @@ jobs:
           name: simulation-builds
           path: |
             target/release/examples/season
+            target/release/examples/project_season
             apps/web/src/wasm/
           if-no-files-found: error
           retention-days: 1

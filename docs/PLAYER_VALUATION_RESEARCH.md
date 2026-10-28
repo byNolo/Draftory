@@ -167,3 +167,27 @@ and refuses to overwrite any existing catalog file with different bytes.
 Only the compact currency catalog and compact report are committed; full native
 inputs and large research audits remain generated. No D1 price table, migration,
 probability adjustment or cloud deployment is part of this work.
+
+### Historical pricing engine pin (M8C.5 final review)
+
+M8C.2 executes `data/research/pricing-draft-engine-v1.ts`, the exact engine from
+commit `fe02cbda273cc4db9339539592284eb4b7026a84`, SHA-256
+`38c8a68ba2c1bc9876b69107ddf44e25ad22781d5c1d8b4bdb792cf5792f082a`.
+Both the Node runner and Python summary validator verify these bytes. They do
+not bind historical research to the evolving application engine. The snapshot
+is executable evidence, excluded from formatting to preserve its exact hash.
+The live game continues to use its current reroll-capable engine.
+
+Use separate output directories to compare regenerated measurements without
+replacing the original cache or frozen report:
+
+```sh
+node scripts/study-draft-pricing.mjs 100 historical target/m8c5/pricing-historical
+node scripts/study-draft-pricing.mjs 100 current target/m8c5/pricing-current
+```
+
+`current` requires an explicit separate output directory. Existing measurement
+files are never overwritten; use a fresh directory for another run. Compare all deterministic
+fields; measured timings naturally differ. Regenerating a timing measurement is
+not byte reproduction of an old wall-clock observation. Preserve the original
+cache/report for that historical evidence. See the [final review](../data/validation/season-dashboard-final-review-v1.md).

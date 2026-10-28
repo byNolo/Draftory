@@ -1,0 +1,300 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://draftory.example/contracts/season-dashboard-summary.schema.json",
+  "title": "Draftory compact season dashboard projection v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "engineVersion",
+    "seed",
+    "games",
+    "wins",
+    "losses",
+    "runsScored",
+    "runsAllowed",
+    "runDifferential",
+    "batting",
+    "dashboard"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "enum": ["1.0.0", "1.1.0"]
+    },
+    "engineVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "seed": {
+      "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/properties/seed"
+    },
+    "games": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "wins": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "losses": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "runsScored": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "runsAllowed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "runDifferential": {
+      "type": "integer"
+    },
+    "batting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "teamId", "totals", "batters"],
+      "properties": {
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "teamId": {
+          "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/id"
+        },
+        "totals": {
+          "$ref": "https://draftory.example/contracts/simulation-result.schema.json#/$defs/stats"
+        },
+        "batters": {
+          "$ref": "https://draftory.example/contracts/simulation-result.schema.json#/$defs/teamBox/properties/batters"
+        }
+      }
+    },
+    "dashboard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "scheduleVersion",
+        "seedDerivationVersion",
+        "defenseModelId",
+        "opponentDefense",
+        "games",
+        "opponents"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "scheduleVersion": {
+          "const": "round-robin-season-v1"
+        },
+        "seedDerivationVersion": {
+          "const": "splitmix64-index-v1"
+        },
+        "defenseModelId": {
+          "type": ["string", "null"]
+        },
+        "opponentDefense": {
+          "const": "neutral"
+        },
+        "games": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1000,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "gameNumber",
+              "opponentId",
+              "userHome",
+              "seed",
+              "score",
+              "won",
+              "wins",
+              "losses",
+              "innings",
+              "plateAppearances",
+              "lineScore",
+              "hits",
+              "homeRuns",
+              "walks",
+              "strikeouts",
+              "leftOnBase"
+            ],
+            "properties": {
+              "gameNumber": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000
+              },
+              "opponentId": {
+                "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/id"
+              },
+              "userHome": {
+                "type": "boolean"
+              },
+              "seed": {
+                "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/properties/seed"
+              },
+              "score": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4294967295
+                }
+              },
+              "won": {
+                "type": "boolean"
+              },
+              "wins": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967295
+              },
+              "losses": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967295
+              },
+              "innings": {
+                "type": "integer",
+                "minimum": 9,
+                "maximum": 65535
+              },
+              "plateAppearances": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967295
+              },
+              "lineScore": {
+                "type": "array",
+                "minItems": 9,
+                "maxItems": 65535,
+                "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": {
+                    "type": ["integer", "null"],
+                    "minimum": 0
+                  }
+                }
+              },
+              "hits": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4294967295
+                }
+              },
+              "homeRuns": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4294967295
+                }
+              },
+              "walks": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4294967295
+                }
+              },
+              "strikeouts": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4294967295
+                }
+              },
+              "leftOnBase": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4294967295
+                }
+              }
+            }
+          }
+        },
+        "opponents": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 30,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "opponentId",
+              "games",
+              "wins",
+              "losses",
+              "runsScored",
+              "runsAllowed",
+              "runDifferential"
+            ],
+            "properties": {
+              "opponentId": {
+                "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/id"
+              },
+              "games": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967295
+              },
+              "wins": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967295
+              },
+              "losses": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967295
+              },
+              "runsScored": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967295
+              },
+              "runsAllowed": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967295
+              },
+              "runDifferential": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

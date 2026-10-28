@@ -6,6 +6,7 @@ export default defineConfig({
     '**/draft.spec.ts',
     '**/game.spec.ts',
     '**/pricing.spec.ts',
+    '**/opponents.spec.ts',
   ],
   outputDir: '../../target/client-test-results',
   workers: 1,

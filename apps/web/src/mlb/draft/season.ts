@@ -1,3 +1,4 @@
+import { withOpponents, type OpponentPublication } from '../opponents';
 import { PlayerDataClient, type Player } from '../../lib/api/player-data';
 import { PilotLoader } from '../pilot-loader';
 import { assembleSeason, canonical, validateDataset } from '../season-input';
@@ -15,6 +16,7 @@ export async function draftedSeason(
   shared: PilotLoader,
   seed: string,
   battingOrder: BattingOrder = defaultBattingOrder(state),
+  opponents?: OpponentPublication,
 ) {
   const replayed = engine.replay(
     state.seed,
@@ -59,5 +61,13 @@ export async function draftedSeason(
     // Keep profile-pool serialization stable; only userTeam.lineup is reordered.
     defaultBattingOrder(state).map((id) => engine.player(id).profileId),
   );
-  return assembleSeason(dataset, players, profiles, pilot, seed, 'draft');
+  const input = await assembleSeason(
+    dataset,
+    players,
+    profiles,
+    pilot,
+    seed,
+    'draft',
+  );
+  return opponents ? withOpponents(input, opponents, pilot, dataset.id) : input;
 }

@@ -75,6 +75,24 @@ export function nativeResult(input: typeof fixture) {
   );
 }
 
+export function nativeDashboard(input: typeof fixture) {
+  const path = resolve(
+    artifacts,
+    `dashboard-${process.pid}-${nativeInputOrdinal++}.json`,
+  );
+  writeFileSync(path, JSON.stringify(input));
+  return JSON.parse(
+    execFileSync(
+      resolve(
+        root,
+        `target/release/examples/project_season${process.platform === 'win32' ? '.exe' : ''}`,
+      ),
+      [path],
+      { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 },
+    ),
+  );
+}
+
 // Test-only handle: the production app never exposes a debug global or full results.
 export async function session(page: Page) {
   return page.evaluateHandle((url) => {

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "historicalCommit": "fe02cbda273cc4db9339539592284eb4b7026a84",
+  "rerollCommit": "a6f7bca03f60302872f9d5a19f2bef388b179665",
+  "engineHashes": {
+    "original": "38c8a68ba2c1bc9876b69107ddf44e25ad22781d5c1d8b4bdb792cf5792f082a",
+    "historical": "38c8a68ba2c1bc9876b69107ddf44e25ad22781d5c1d8b4bdb792cf5792f082a",
+    "current": "2ff3e2ccf280d3ddfa5206ad6f4cdf67a6dbd9206fefcd0868bde69831d4bd4a"
+  },
+  "cases": 64,
+  "draftsPerEngine": 6400,
+  "checkedOffersPerEngine": 171458,
+  "allDeterministicResearchFieldsEqual": true,
+  "excludedComparisons": [
+    "wall-clock timings",
+    "expected historical/current source-hash difference"
+  ],
+  "cacheSha256": {
+    "original": "3e38c9a186994c0d889f3b4376e449d1fdfcc7971eb1db4023fa9aa26a1018a7",
+    "historical": "39effc331ba45729718c25029b9a3f48748fab03cd87b003dceed0375944cf70",
+    "current": "79fdf6c5c1f4aeb886231f5b79dbae9d4ce118557af9f81871f7ec3f7458c431"
+  },
+  "fixtureSha256": "d02959d2673eeeec2951644cf327434babefeddeb1cb5b516d809d3aa8a562a4",
+  "deterministicResultSha256": "db59de54e6e733337412e291b86a395c8b2b9927e5ebff52d1726fd3cc5a9a3a"
+}

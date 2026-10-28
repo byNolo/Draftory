@@ -209,3 +209,16 @@ def test_committed_experiment_covers_all_budgets_policies_and_complete_round_cou
         )
         == report["checkedSafeOffers"]
     )
+
+
+def test_historical_engine_snapshot_is_pinned_and_tampering_fails(tmp_path, monkeypatch):
+    source = pricing_study.pricing_engine_source()
+    assert pricing_study.sha(source) == pricing_study.PRICING_ENGINE_SHA
+    historical = json.loads((ROOT / "data/validation/pricing-pa-v1.json").read_text("utf-8"))
+    assert historical["draftEngineSourceSha256"] == pricing_study.PRICING_ENGINE_SHA
+    target = tmp_path / "data/research/pricing-draft-engine-v1.ts"
+    target.parent.mkdir(parents=True)
+    target.write_bytes(source + b"// changed")
+    monkeypatch.setattr(pricing_study, "ROOT", tmp_path)
+    with pytest.raises(DataError, match="Historical pricing engine integrity"):
+        pricing_study.pricing_engine_source()

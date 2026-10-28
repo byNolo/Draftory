@@ -104,3 +104,9 @@ binds the unchanged 2024 batting publication. Opt-in `defense-game-input` is
 schemas are unchanged and reject opt-in fields/versions. Runtime validation
 additionally checks ID/source/year/model/position links and probability mass.
 See [methodology and compatibility](../docs/DEFENSIVE_SIMULATION.md).
+
+M8C.5 adds `opponents.schema.json` (immutable representative 2024 opponent pool)
+and `season-dashboard-summary.schema.json` (dashboard projection v1 with original
+summary/batting plus ordered games and opponent totals). All metric/inning pairs
+are user/opponent; null inning runs mean an unplayed half. Existing input, result
+and legacy projection schemas retain their semantics. See [methodology](../docs/SEASON_DASHBOARD.md).

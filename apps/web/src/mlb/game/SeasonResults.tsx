@@ -1,3 +1,4 @@
+import SeasonDashboard, { type OpponentLabel } from './SeasonDashboard';
 import { rate, simulatedRates } from './batting';
 import type { SeasonSuccess, BattingLine } from '../../workers/protocol';
 import { DraftEngine, type DraftState } from '../draft/engine';
@@ -8,13 +9,19 @@ function Cells({ stats }: { stats: BattingLine }) {
   return (
     <>
       <td>{stats.plateAppearances}</td>
+      <td>{stats.atBats}</td>
       <td>{stats.hits}</td>
+      <td>{stats.doubles}</td>
+      <td>{stats.triples}</td>
       <td>{stats.homeRuns}</td>
+      <td>{stats.walks}</td>
+      <td>{stats.strikeouts}</td>
       <td>{stats.runsBattedIn}</td>
       <td>{stats.runs}</td>
       <td>{rate(r.avg)}</td>
       <td>{rate(r.obp)}</td>
       <td>{rate(r.slg)}</td>
+      <td>{rate(r.obp === null || r.slg === null ? null : r.obp + r.slg)}</td>
     </>
   );
 }
@@ -24,7 +31,10 @@ export default function SeasonResults({
   draft,
   order,
 }: {
-  result: SeasonSuccess;
+  result: SeasonSuccess & {
+    opponents?: OpponentLabel[];
+    errorAvoidance?: boolean;
+  };
   engine: DraftEngine;
   draft: DraftState;
   order: BattingOrder;
@@ -42,7 +52,13 @@ export default function SeasonResults({
   });
   return (
     <section aria-label="Simulated season results" className="results">
-      <div className="scoreboard">
+      <nav className="dashboard-nav" aria-label="Season dashboard">
+        <a href="#season-overview">Overview</a>
+        <a href="#season-batting">Player statistics</a>
+        <a href="#opponent-summary">By opponent</a>
+        <a href="#season-schedule">Game results</a>
+      </nav>
+      <div className="scoreboard" id="season-overview">
         <p className="eyebrow">Your season · {s.games} games</p>
         <h2 tabIndex={-1} data-screen-title>
           {s.wins}
@@ -70,6 +86,11 @@ export default function SeasonResults({
             <span>Run differential</span>
           </div>
         </div>
+        <p className="team-rate-summary">
+          Team batting: AVG {rate(simulatedRates(b.totals).avg)} · OBP{' '}
+          {rate(simulatedRates(b.totals).obp)} · SLG{' '}
+          {rate(simulatedRates(b.totals).slg)}
+        </p>
       </div>
       <div className="leaders" aria-label="Team leaders">
         {(['homeRuns', 'hits', 'runsBattedIn'] as const).map((field, i) => {
@@ -93,7 +114,13 @@ export default function SeasonResults({
       <p className="muted">
         Season seed: {s.seed} · Engine {s.engineVersion}
       </p>
-      <h3>Season batting</h3>
+      <p className="model-label">
+        {result.dashboard?.defenseModelId
+          ? 'Experimental error avoidance on'
+          : 'Your defense: neutral'}{' '}
+        · Opponent defense: neutral · Standardized pitching
+      </p>
+      <h3 id="season-batting">Season batting</h3>
       <p className="muted">
         Simulated totals, not historical projections. Players are shown in the
         batting order used for this season; fielding assignments are unchanged.
@@ -111,7 +138,22 @@ export default function SeasonResults({
           <thead>
             <tr>
               <th scope="col">Batting order / player / position</th>
-              {['PA', 'H', 'HR', 'RBI', 'R', 'AVG', 'OBP', 'SLG'].map((k) => (
+              {[
+                'PA',
+                'AB',
+                'H',
+                '2B',
+                '3B',
+                'HR',
+                'BB',
+                'SO',
+                'RBI',
+                'R',
+                'AVG',
+                'OBP',
+                'SLG',
+                'OPS',
+              ].map((k) => (
                 <th scope="col" key={k}>
                   {k}
                 </th>
@@ -139,6 +181,13 @@ export default function SeasonResults({
           </tfoot>
         </table>
       </div>
+      {result.dashboard && (
+        <SeasonDashboard
+          key={s.seed}
+          dashboard={result.dashboard}
+          opponents={result.opponents ?? []}
+        />
+      )}
       <details className="rules">
         <summary>How to read these results</summary>
         <p>
@@ -148,11 +197,13 @@ export default function SeasonResults({
           played are not tracked.
         </p>
         <p>
-          This experimental model uses neutral pitching and defense, a fixed CHA
-          opponent template and a synthetic schedule. A historical identity may
-          appear on both teams. Known biases include excess hits and double
-          plays and compressed scoring variance. Results are not predictions of
-          real baseball.
+          This experimental model uses standardized pitching, neutral opponent
+          defense, optional error avoidance for your fielders, and a synthetic
+          Draftory schedule. Opponent lineups are representative PA-ranked
+          orders using full-season profiles, not authentic starting lineups. A
+          historical identity may appear on both teams. Known biases include
+          excess hits and double plays and compressed scoring variance. Results
+          are not predictions of real baseball.
         </p>
       </details>
     </section>

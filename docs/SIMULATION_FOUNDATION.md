@@ -1,5 +1,9 @@
 # Rust simulation foundation — contract decision and implementation scope
 
+M8C.5: the playable game now uses nine verified representative opponents and a
+compact season dashboard. The single-opponent descriptions below retain the
+legacy pilot/history. See [current selection, contracts and gameplay](SEASON_DASHBOARD.md).
+
 M8C.4 adds opt-in [position-specific error avoidance](DEFENSIVE_SIMULATION.md)
 under new input/rules/model versions. Legacy inputs, RNG and golden behavior below
 remain unchanged. Only error/ordinary-out mass transfers are supported; no range,

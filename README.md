@@ -230,3 +230,8 @@ documents measured coverage, working commands, profile semantics and remaining
 questions. The [Rust foundation](docs/SIMULATION_FOUNDATION.md) now implements
 scripted and sampled games plus season orchestration. Historical calibration is
 an ongoing measured process; application tables beyond the M6A player publication remain deferred.
+
+The playable season now includes nine representative 2024 opponents, a synthetic
+162-game schedule, expanded batting statistics, game details and opponent/trend
+views. See [season dashboard and reproduction](docs/SEASON_DASHBOARD.md) and
+[local validation](data/validation/season-dashboard-v1.md).

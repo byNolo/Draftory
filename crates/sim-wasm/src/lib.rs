@@ -51,6 +51,7 @@ pub enum Projection {
     Full,
     Summary,
     Batting,
+    Dashboard,
 }
 
 pub fn project_measured(
@@ -87,11 +88,14 @@ pub fn project_measured(
             "losses":result.losses,"runsScored":result.runs_scored,"runsAllowed":result.runs_allowed,
             "runDifferential":result.run_differential
         });
-        if matches!(projection, Projection::Batting) {
+        if matches!(projection, Projection::Batting | Projection::Dashboard) {
             summary["batting"] = serde_json::json!({
                 "schemaVersion": "1.0.0", "teamId": result.team.team_id,
                 "totals": result.team.totals, "batters": result.team.batters
             });
+        }
+        if matches!(projection, Projection::Dashboard) {
+            summary["dashboard"] = dashboard(&result);
         }
         serde_json::to_string(&summary)
     } else {
@@ -113,6 +117,57 @@ pub fn project_measured(
             bytes,
         ],
     })
+}
+
+/// Presentation projection of computed counters; no input snapshot or event logs.
+pub fn dashboard(result: &baseball_sim::SeasonResult) -> serde_json::Value {
+    let mut wins = 0_u16;
+    let mut opponents = std::collections::BTreeMap::<&str, [i64; 5]>::new();
+    let games: Vec<_> = result
+        .games
+        .iter()
+        .map(|g| {
+            wins += u16::from(g.won);
+            let record = opponents.entry(&g.opponent_id).or_default();
+            record[0] += 1;
+            record[1] += i64::from(g.won);
+            record[2] += i64::from(!g.won);
+            record[3] += i64::from(g.score[0]);
+            record[4] += i64::from(g.score[1]);
+            let lines: Vec<_> = g
+                .line_score
+                .iter()
+                .map(|line| {
+                    if g.user_home {
+                        [line.home, Some(line.away)]
+                    } else {
+                        [Some(line.away), line.home]
+                    }
+                })
+                .collect();
+            serde_json::json!({"gameNumber":g.game_number,"opponentId":g.opponent_id,
+            "userHome":g.user_home,"seed":g.seed,"score":g.score,"won":g.won,
+            "wins":wins,"losses":g.game_number-wins,"innings":g.innings,
+            "plateAppearances":g.plate_appearances,"lineScore":lines,
+            "hits":[g.teams[0].totals.hits,g.teams[1].totals.hits],
+            "homeRuns":[g.teams[0].totals.home_runs,g.teams[1].totals.home_runs],
+            "walks":[g.teams[0].totals.walks,g.teams[1].totals.walks],
+            "strikeouts":[g.teams[0].totals.strikeouts,g.teams[1].totals.strikeouts],
+            "leftOnBase":[g.teams[0].left_on_base,g.teams[1].left_on_base]})
+        })
+        .collect();
+    let opponents: Vec<_> = opponents
+        .into_iter()
+        .map(|(id, n)| {
+            serde_json::json!({
+        "opponentId":id,"games":n[0],"wins":n[1],"losses":n[2],"runsScored":n[3],
+        "runsAllowed":n[4],"runDifferential":n[3]-n[4]})
+        })
+        .collect();
+    serde_json::json!({"schemaVersion":"1.0.0","scheduleVersion":result.input.model_version,
+        "seedDerivationVersion":result.input.seed_derivation_version,
+        "defenseModelId":result.input.config.defense.as_ref().map(|d| &d.model.id),
+        "opponentDefense":"neutral","games":games,"opponents":opponents})
 }
 
 #[cfg(target_arch = "wasm32")]
@@ -155,6 +210,11 @@ mod browser {
     #[wasm_bindgen]
     pub fn simulate_season_batting_json(input_json: &str) -> Result<String, JsValue> {
         execute(input_json, Projection::Batting)
+    }
+
+    #[wasm_bindgen]
+    pub fn simulate_season_dashboard_json(input_json: &str) -> Result<String, JsValue> {
+        execute(input_json, Projection::Dashboard)
     }
 
     /// Diagnostics for the last successful call in this single-request worker.

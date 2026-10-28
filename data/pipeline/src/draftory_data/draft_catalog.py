@@ -3,9 +3,11 @@
 import argparse
 import json
 import sys
+from fractions import Fraction
 from pathlib import Path
 
 from .draft_research import POLICIES, POSITIONS, eligibility, price_quotes
+from .pricing import DEFAULT_BUDGET, POLICY_ID, prices, tier_boundaries, value_tier
 from .simulation import identity
 from .source import DataError, canonical_bytes
 from .valuation import ROOT, load_publication, sha, write
@@ -46,7 +48,11 @@ def measurement_digest(research: dict) -> str:
     return sha(canonical_bytes(measured))
 
 
-def publish(publication: Path, research_path: Path) -> dict:
+def publish(
+    publication: Path, research_path: Path, pricing_policy: str = "m7a-linear-1-20-v1"
+) -> dict:
+    if pricing_policy not in ("m7a-linear-1-20-v1", POLICY_ID):
+        raise DataError("Unsupported catalog pricing policy")
     content = research_path.read_bytes()
     research = json.loads(content)
     if measurement_digest(research) != MEASUREMENTS_SHA:
@@ -99,7 +105,45 @@ def publish(publication: Path, research_path: Path) -> dict:
             "See docs/DATA_ATTRIBUTION.md."
         ),
     }
+    if pricing_policy == POLICY_ID:
+        exact_values = {pid: Fraction(value) for pid, value in values.items()}
+        body = elite_body(body, exact_values)
     return {"id": identity(body, "draft-catalog"), **body}
+
+
+def elite_body(legacy_body: dict, values: dict[str, Fraction]) -> dict:
+    entries = legacy_body["players"]
+    if set(values) != {p["id"] for p in entries}:
+        raise DataError("Price values and catalog identities differ")
+    quotes_v2 = prices(values, entries, "elite")
+    boundaries = tier_boundaries(values)
+    return {
+        **legacy_body,
+        "schemaVersion": "2.0.0",
+        "pricingPolicy": POLICY_ID,
+        "defaultBudget": DEFAULT_BUDGET,
+        "players": [
+            {
+                **p,
+                "price": quotes_v2[p["id"]],
+                "valueTier": value_tier(values[p["id"]], boundaries),
+            }
+            for p in entries
+        ],
+        "attribution": (
+            "SABR Lahman (CC BY-SA 3.0); M8C.2 provisional currency over reviewed "
+            "M7A measurements. See docs/DATA_ATTRIBUTION.md."
+        ),
+    }
+
+
+def write_catalog(path: Path, catalog: dict) -> None:
+    encoded = canonical_bytes(catalog) + b"\n"
+    if path.exists() and path.read_bytes() != encoded:
+        raise DataError(
+            "Immutable catalog already exists with different bytes; choose a new versioned path"
+        )
+    write(path, catalog)
 
 
 def main() -> int:
@@ -107,10 +151,13 @@ def main() -> int:
     parser.add_argument("--publication-dir", type=Path, required=True)
     parser.add_argument("--research", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument(
+        "--pricing-policy", choices=("m7a-linear-1-20-v1", POLICY_ID), default="m7a-linear-1-20-v1"
+    )
     args = parser.parse_args()
     try:
-        catalog = publish(args.publication_dir, args.research)
-        write(args.output, catalog)
+        catalog = publish(args.publication_dir, args.research, args.pricing_policy)
+        write_catalog(args.output, catalog)
         print(f"Published {catalog['id']}: {len(catalog['players'])} players")
         return 0
     except (DataError, OSError, ValueError, KeyError) as error:

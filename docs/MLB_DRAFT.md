@@ -4,7 +4,7 @@ M7C: the playable game is now at `/`; the diagnostic harness described below
 is at `/dev`. See [the game guide](MLB_GAME.md) for current gameplay and result
 projection behavior.
 
-The M7B rules are versioned experiments, using the unchanged reviewed M7A
+The draft rules are versioned experiments, using the unchanged reviewed M7A
 measurements. See the [playtest report](../data/validation/draft-engine-v1.md)
 and [valuation limitations](../data/validation/valuation-eligibility-v1.md).
 
@@ -28,11 +28,22 @@ for this casual prototype; client results are not competitive verification.
 
 ## Rules and state
 
-`mlb-protected-draft-v1` defaults to 90 credits, three offers, ten observed games
+`mlb-protected-draft-v1` with the current M8C.2 catalog defaults to 65 credits,
+three offers, ten observed games
 at each specific fielding position, universal DH and the existing 50-PA publication
 floor. Positions are C,1B,2B,3B,SS,LF,CF,RF,DH; draft order is
-C,SS,CF,1B,2B,3B,LF,RF,DH. Each player has one M7A linear price (1–20), regardless
-of position. No scarcity premium is used. Selected identities must be unique.
+C,SS,CF,1B,2B,3B,LF,RF,DH. Each player has one researched elite price (1–30),
+regardless of position. No scarcity premium is used. Selected identities must be
+unique. [M8C.2 measurements](../data/validation/pricing-pa-v1.md) justify this
+provisional choice; prices do not change prepared ability or historical availability.
+
+The algorithm/rules and RNG identifiers remain unchanged: state still records
+schema 1.0.0, explicit config and catalog ID. Catalog **2.0.0** adds a reviewed
+`defaultBudget` and broad `valueTier`, with policy `m8c2-elite-1-30-smoothed-v1`.
+Legacy catalog 1.0.0, 1–20 prices, 90-credit defaults and replay goldens are retained.
+A new-catalog engine rejects old-catalog state; replay must use its original
+catalog/config. `DEFAULTS` is the legacy fallback; the current catalog supplies
+65 unless an explicit developer config overrides it.
 
 `DraftConfig` exposes budget (0–180), offer count (1–10), any permutation of nine
 positions, minimum games, minimum PA >=50, and universal/observed DH. The form
@@ -94,27 +105,29 @@ Changing the season seed does not change draft offers.
 
 ## Catalog publication and network
 
-The explicitly requested static `data/publications/mlb-draft-2024-v1.json` is a
+The explicitly requested static `data/publications/mlb-draft-2024-v2.json` is a
 small exception to the general restriction on committing generated datasets.
 It contains 526 identities/names/profile IDs, fixed prices, default eligibility,
 nullable observed games and historical PA, with source/dataset/policy IDs and
 attribution. It contains no simulation probability profiles. The language-neutral
-[catalog schema](../contracts/mlb-draft-catalog.schema.json), digest and counts
+[catalog schema](../contracts/mlb-draft-catalog-v2.schema.json), digest and counts
 are tested. Producer bytes stay compact; Prettier ignores this publication.
 Vite emits a lazy-loaded hashed JSON asset covered by immutable-asset headers.
 The browser checks its pinned content ID and versions; a new publication requires
 a reviewed pin/build. No D1 schema changes or new API endpoints are introduced.
 
 ```sh
-uv run --project data/pipeline python -m draftory_data.draft_catalog --publication-dir data/processed/d1-2024 --research data/processed/m7a/research.json --output data/publications/mlb-draft-2024-v1.json
+uv run --project data/pipeline python -m draftory_data.draft_catalog --publication-dir data/processed/d1-2024 --research data/processed/m7a/research.json --pricing-policy m8c2-elite-1-30-smoothed-v1 --output data/publications/mlb-draft-2024-v2.json
 ```
 
 The producer verifies the publication and a pinned portable digest of M7A model
 versions, source/fixture IDs, positions, PA, seeds and eight integer marginal-run
 observations/player. Host executable hashes and floating error bars are excluded
-from that portable digest. Prices reuse `floor(1 + 19*z + 0.5)` on means of the
-reviewed observations, with the same pool min/max. There are no manual overrides
-or new valuation models. Changed measurements require review. Lahman attribution
+from that portable digest. Current prices use `round_half_up(1 + 29*z²)` on means
+of the reviewed observations, with the same pool min/max and exact rational
+arithmetic. The original linear producer/catalog remains available; catalog files
+cannot be replaced with different bytes. There are no manual overrides, extra PA
+discounts or new valuation models. Changed measurements require review. Lahman attribution
 and CC BY-SA 3.0 notice accompany the artifact; see [data notices](DATA_ATTRIBUTION.md).
 
 Drafting requests only static app/catalog assets. Simulation loads a compatible

@@ -12,9 +12,15 @@ const fixture = JSON.parse(
   readFileSync('data/fixtures/mlb-game-2024-v1.json', 'utf8'),
 );
 const catalog: Catalog = JSON.parse(
-  readFileSync('data/publications/mlb-draft-2024-v1.json', 'utf8'),
+  readFileSync('data/publications/mlb-draft-2024-v2.json', 'utf8'),
 );
 const engine = new DraftEngine(catalog);
+// Preserve the immutable historical excerpt and v1 golden. Its same offered
+// identities replay under the new catalog, with the new prices/budget/version.
+fixture.draft = engine.replay(
+  '20261027',
+  fixture.draft.history.map((p: { playerId: string }) => p.playerId),
+);
 type Run = {
   request: Extract<WorkerRequest, { type: 'simulate' }>;
   response: Extract<WorkerResponse, { type: 'result' }>;
@@ -90,7 +96,7 @@ async function finish(page: Page) {
       .click();
     await expect(page.getByTestId('game-budget')).toHaveText(
       String(
-        90 -
+        engine.config.budget -
           fixture.draft.history
             .slice(0, i + 1)
             .reduce((sum: number, p: { price: number }) => sum + p.price, 0),
@@ -106,6 +112,28 @@ async function finish(page: Page) {
 }
 const runs = (page: Page) =>
   page.evaluate(() => (window as unknown as { gameRuns: Run[] }).gameRuns);
+
+test('current game rejects legacy or modified catalog versions and budgets', async ({
+  page,
+}) => {
+  const legacy = JSON.parse(
+    readFileSync('data/publications/mlb-draft-2024-v1.json', 'utf8'),
+  );
+  for (const payload of [
+    legacy,
+    { ...catalog, defaultBudget: 90 },
+    { ...catalog, pricingPolicy: 'unreviewed' },
+  ]) {
+    await page.route('**/assets/mlb-draft-2024-*.json', (route) =>
+      route.fulfill({ json: payload }),
+    );
+    await page.goto('/');
+    await page.getByRole('button', { name: 'Start your draft' }).click();
+    await expect(page.getByRole('alert')).toContainText('digest/version');
+    await expect(page.getByLabel('Player offers')).toHaveCount(0);
+    await page.unroute('**/assets/mlb-draft-2024-*.json');
+  }
+});
 
 test('custom batting order: keyboard, pointer/touch, native parity, result identity and session resets', async ({
   page,
@@ -303,6 +331,13 @@ test('complete playable flow: historical cards, roster, compact native parity, r
   await expect(first).toContainText(rate(s.avg));
   await expect(first).toContainText(rate(s.obp));
   await expect(first).toContainText(rate(s.slg));
+  await expect(first.locator('.price strong')).toHaveText(
+    String(engine.player(p.id).price),
+  );
+  await expect(first).toContainText('historical PA');
+  await expect(
+    page.getByText('credits left / 65', { exact: true }),
+  ).toBeVisible();
   expect(
     requests.some((p) => p.endsWith('.wasm') || p.includes('DeveloperHarness')),
   ).toBe(false);
@@ -313,6 +348,9 @@ test('complete playable flow: historical cards, roster, compact native parity, r
     fullPage: true,
   });
   await finish(page);
+  await expect(page.getByLabel('Your lineup', { exact: true })).toContainText(
+    `${engine.config.budget - fixture.draft.remainingBudget} credits`,
+  );
   await page
     .getByRole('button', { name: 'Simulate 162-game season', exact: true })
     .click();
@@ -338,6 +376,9 @@ test('complete playable flow: historical cards, roster, compact native parity, r
     await expect(
       results.getByRole('row').filter({ hasText: player.name }),
     ).toContainText(String(row.stats.plateAppearances));
+    await expect(
+      results.getByRole('row').filter({ hasText: player.name }),
+    ).toContainText(`${engine.player(player.id).price} credits`);
   }
   const batchCount = requests.filter((p) => p === '/api/profiles/batch').length;
   await page.getByRole('button', { name: 'Replay this season seed' }).click();
@@ -380,7 +421,9 @@ test('complete playable flow: historical cards, roster, compact native parity, r
   await expect(
     page.getByRole('heading', { name: 'Who’s your C?' }),
   ).toBeVisible();
-  await expect(page.getByTestId('game-budget')).toHaveText('90');
+  await expect(page.getByTestId('game-budget')).toHaveText(
+    String(engine.config.budget),
+  );
   await expect(results).toHaveCount(0);
   await expect(page.getByLabel('Your lineup')).toContainText('0 / 9');
   if (process.env.M6B_IMPORT_SQL) {

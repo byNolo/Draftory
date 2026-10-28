@@ -26,7 +26,7 @@ export function Roster({ engine, draft }: RosterProps) {
       </ol>
       <div className="roster-total">
         <span>Total spent</span>
-        <strong>{90 - draft.remainingBudget} credits</strong>
+        <strong>{draft.config.budget - draft.remainingBudget} credits</strong>
       </div>
     </aside>
   );
@@ -82,10 +82,15 @@ export function OfferCards({
                   </dl>
                   <p className="count-stats">
                     <b>{s.hr ?? '—'}</b> HR <span>·</span> <b>{s.pa ?? '—'}</b>{' '}
-                    PA
+                    historical PA
                   </p>
                   <details>
                     <summary>Historical details</summary>
+                    <p>
+                      Historical PA is the sample behind this profile. Every
+                      selected hitter currently plays a full simulated season;
+                      historical PA is not an availability limit.
+                    </p>
                     <p>
                       {s.teams.join(' / ')} · {engine.catalog.year}. All batting
                       stints combined once. OBP includes sacrifice flies in its

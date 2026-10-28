@@ -11,6 +11,11 @@ are provisioned. See the [measured report](../data/validation/player-data-browse
 
 ## Loading and assembly
 
+M8C.2 changes only the playable draft's static currency catalog/default budget.
+Its 526 player/profile/source/dataset references remain identical; the API and
+season assembler need no D1 migration or updated probability profiles. Legacy
+pilot fixtures and native/WASM goldens remain unchanged.
+
 `apps/web/src/lib/api/player-data.ts` provides typed catalog, dataset, player,
 single-profile and batch-profile requests, runtime response checks and structured
 errors. The small `SessionCache` is independent of MLB and can serve another API

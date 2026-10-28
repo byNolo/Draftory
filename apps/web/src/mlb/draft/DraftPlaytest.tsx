@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { PlayerDataClient } from '../../lib/api/player-data';
 import { PilotLoader } from '../pilot-loader';
 import type { SeasonSuccess } from '../../workers/protocol';
-import { loadCatalog } from './catalog';
+import { loadCatalog, PLAYTEST_BUDGET } from './catalog';
 import { DEFAULTS, DraftEngine, POSITIONS, type DraftState } from './engine';
 import { draftedSeason } from './season';
 
@@ -15,7 +15,7 @@ export default function DraftPlaytest({
 }) {
   const [seed, setSeed] = useState('20261027');
   const [seasonSeed, setSeasonSeed] = useState('20261025');
-  const [budget, setBudget] = useState('90');
+  const [budget, setBudget] = useState(String(PLAYTEST_BUDGET));
   const [engine, setEngine] = useState<DraftEngine>();
   const [state, setState] = useState<DraftState>();
   const [busy, setBusy] = useState(false);

@@ -1,5 +1,10 @@
 # Offline MLB valuation and eligibility research (M7A)
 
+M8C.2 reuses these frozen observations for provisional game currency; see
+[pricing/PA findings](../data/validation/pricing-pa-v1.md) and the
+[reproduction section below](#m8c2-pricing-and-pa-study). The original research
+and its statistical limitations remain unchanged.
+
 This is an analysis tool, not the draft game. Python reads the immutable M6A
 publication and calls the existing native Rust calibration example. It neither
 changes prepared profiles nor implements baseball transitions in Python. There
@@ -115,3 +120,50 @@ an explicit reason when the release `calibrate` executable has not been built.
 Run it after building to exercise real paired native measurements. Existing
 source integration tests also accept `--lahman-source data/raw/lahman-2025` and
 `--retrosheet-source data/raw/retrosheet-m4` from the repository root.
+
+## M8C.2 pricing and PA study
+
+Use the existing verified 2024 SQL publication and reviewed
+`data/processed/m7a/research.json`. The portable integer measurement digest must
+match M7A; the historical source/profile context cannot be silently substituted.
+If starting without that generated research, use the M7A workflow above first.
+Do not rerun its two-million-game valuation merely to compare currency/budgets.
+
+From the root:
+
+```sh
+cargo build --locked --release -p baseball-sim --example season
+uv run --project data/pipeline python -m draftory_data.pricing_study --publication-dir data/processed/d1-2024 --research data/processed/m7a/research.json --output-dir data/processed/m8c2
+node scripts/study-draft-pricing.mjs 100
+uv run --project data/pipeline python -m draftory_data.draft_catalog --publication-dir data/processed/d1-2024 --research data/processed/m7a/research.json --pricing-policy m8c2-elite-1-30-smoothed-v1 --output data/publications/mlb-draft-2024-v2.json
+uv run --project data/pipeline python -m draftory_data.pricing_study --publication-dir data/processed/d1-2024 --research data/processed/m7a/research.json --output-dir data/processed/m8c2 --reuse-native --draft-study data/processed/m8c2/draft-budgets.json --summary-output data/validation/pricing-pa-v1.json
+```
+
+`pricing.py` defines exact rational half-up currency formulas, broad pool-value
+tiers, two comparison-only PA adjustments and the selected elite/no-extra-PA
+policy. The measured report explains why the extra adjustments were rejected.
+These functions never edit a prepared outcome vector or historical statistic.
+
+`pricing_study` measures actual candidate PA in slot five of the existing reference
+lineup for two fixed season seeds, over all 526 profiles. It retains versioned
+input JSON and checksummed observations under ignored `data/processed/m8c2/native`.
+`--reuse-native` rejects changed runner/input/observations; use a new directory or
+explicitly rerun without that flag if the native binary changes. Binary hashes
+are platform/toolchain dependent; prices depend only on the portable M7A integer
+observations and explicit currency policy, not benchmark timings.
+
+`study-draft-pricing.mjs` transpiles the actual pure TypeScript draft engine using
+the already-installed compiler into ignored `target/m8c2/`. It does not recreate
+the game in Python. Four price policies, budgets 65/70/75/90, four agents and 100
+seeds produce 6,400 drafts, checking every displayed candidate's completion cost.
+It writes cost/remaining distributions, per-round choices, selected value tiers,
+elite frequencies, distinct rosters and fresh-cache timings to `draft-budgets.json`.
+JS/JIT warmup is explicit; timings are not cold-network or phone measurements.
+
+`--summary-output` combines these outputs with current catalog identity and checks
+their provenance. Timing hashes naturally change across reruns; deterministic
+catalog bytes do not. The publisher preserves v1, adds v2 with a new ID and schema,
+and refuses to overwrite any existing catalog file with different bytes.
+Only the compact currency catalog and compact report are committed; full native
+inputs and large research audits remain generated. No D1 price table, migration,
+probability adjustment or cloud deployment is part of this work.

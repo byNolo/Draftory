@@ -16,10 +16,19 @@ Rebuild WASM after adapter changes. The game needs the complete published
 The `/dev` bundled fixture continues to work without an imported database.
 
 Open “Replay a draft seed” before starting to reproduce offers. Default rules
-remain 90 fictional credits, nine unique hitters, three protected offers where
+use 65 fictional credits, nine unique hitters, three protected offers where
 possible, 10 observed games at each fielding position and universal DH. A choice
 is offered only if an affordable matching for all remaining positions exists.
-There are no rerolls or price changes. See [the draft contract](MLB_DRAFT.md).
+There are no rerolls; each catalog fixes one price per player at every position.
+M8C.2 uses the researched elite 1–30 curve, catalog schema 2.0.0 and policy
+`m8c2-elite-1-30-smoothed-v1`. See [the draft contract](MLB_DRAFT.md) and
+[pricing/PA measurements](../data/validation/pricing-pa-v1.md).
+
+Cards explicitly label **historical PA**, the sample supporting the existing
+smoothed profile. It does not cap simulated-season PA: every selected hitter
+still plays the full season. No extra PA price discount, availability rule or
+probability change is applied. The 65-credit budget is a provisional human
+playtest choice; conservative drafts can still leave credits unused.
 
 After completing the lineup, simulate, inspect the record and batting table,
 then choose “Play another season” for a different seed or start a new draft.
@@ -140,7 +149,9 @@ batting equality, repeat seeds, fresh seasons, new-draft reset, export, keyboard
 focus, mobile layout, touch-target size, API/WASM failures, cancellation and retry.
 Ordinary CI intercepts player/profile responses with a small verified source
 excerpt in `data/fixtures/mlb-game-2024-v1.json`; it still uses real production
-WASM. To exercise genuine local D1 without those intercepts:
+WASM. M8C.2 retains that historical excerpt unchanged, replaying its same offered
+identities under the new catalog's prices/config. The legacy unit replay and
+81–81 simulation golden remain intact. To exercise genuine local D1 without those intercepts:
 
 ```powershell
 $env:M6B_IMPORT_SQL = 'data/processed/d1-2024/import.sql'

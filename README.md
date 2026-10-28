@@ -1,7 +1,7 @@
 # Draftory
 
 Draftory is an expandable sports drafting and simulation platform. The first
-playable game drafts nine real 2024 MLB hitters within 90 fictional credits and
+playable game drafts nine real 2024 MLB hitters within 65 fictional credits and
 simulates a 162-game season in a Rust/WASM Web Worker. Review your record and
 individual batting totals, replay a season or start another draft. Prices and
 the simulation remain experimental; results are not real-world predictions.
@@ -196,7 +196,9 @@ over the verified 2024 publication and unchanged native simulator. Its
 offensive value, illustrative prices and random-offer feasibility. These are
 research outputs; draft rules and prices remain provisional.
 
-M7B adds a randomized MLB draft playtest below the existing harnesses: 90 credits,
+M7B added a randomized MLB draft playtest below the existing harnesses. M8C.2
+now uses 65 credits and provisional elite pricing; see the
+[pricing/PA report](data/validation/pricing-pa-v1.md). The draft retains
 nine positions and up to three safe choices per round. Drafting loads a compact
 static catalog; simulating the finished roster requires the compatible local
 player-data API/import. See [draft setup and replay](docs/MLB_DRAFT.md) and

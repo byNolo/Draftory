@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://draftory.local/contracts/mlb-draft-catalog-v2.schema.json",
+  "title": "MLB provisional elite draft offer catalog v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "schemaVersion",
+    "datasetId",
+    "year",
+    "sourceId",
+    "profilePolicyId",
+    "contextId",
+    "researchMeasurementSha256",
+    "pricingPolicy",
+    "eligibilityPolicy",
+    "sourceSqlSha256",
+    "players",
+    "attribution",
+    "defaultBudget"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^draft-catalog:[a-f0-9]{64}$"
+    },
+    "schemaVersion": {
+      "const": "2.0.0"
+    },
+    "datasetId": {
+      "type": "string",
+      "pattern": "^dataset:[a-f0-9]{64}$"
+    },
+    "year": {
+      "const": 2024
+    },
+    "sourceId": {
+      "type": "string",
+      "pattern": "^source:[a-f0-9]{64}$"
+    },
+    "profilePolicyId": {
+      "type": "string",
+      "pattern": "^policy:[a-f0-9]{64}$"
+    },
+    "contextId": {
+      "type": "string",
+      "pattern": "^context:[a-f0-9]{64}$"
+    },
+    "researchMeasurementSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "sourceSqlSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "pricingPolicy": {
+      "const": "m8c2-elite-1-30-smoothed-v1"
+    },
+    "eligibilityPolicy": {
+      "const": "observed-10-universal-dh-v1"
+    },
+    "attribution": {
+      "type": "string",
+      "minLength": 1
+    },
+    "players": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2000,
+      "items": {
+        "$ref": "#/$defs/player"
+      }
+    },
+    "defaultBudget": {
+      "type": "integer",
+      "const": 65
+    }
+  },
+  "$defs": {
+    "position": {
+      "enum": ["C", "1B", "2B", "3B", "SS", "LF", "CF", "RF", "DH"]
+    },
+    "player": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "profileId",
+        "positions",
+        "games",
+        "pa",
+        "price",
+        "valueTier"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^lahman:[a-z0-9]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profileId": {
+          "type": "string",
+          "pattern": "^prepared:[a-f0-9]{64}$"
+        },
+        "positions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/position"
+          }
+        },
+        "price": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30
+        },
+        "pa": {
+          "type": "integer",
+          "minimum": 50
+        },
+        "games": {
+          "type": "object",
+          "minProperties": 9,
+          "maxProperties": 9,
+          "propertyNames": {
+            "$ref": "#/$defs/position"
+          },
+          "additionalProperties": {
+            "type": ["integer", "null"],
+            "minimum": 0
+          }
+        },
+        "valueTier": {
+          "enum": ["low", "middle", "aboveAverage", "elite"]
+        }
+      }
+    }
+  }
+}

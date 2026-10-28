@@ -21,6 +21,7 @@ export interface DraftPlayer {
   games: Record<Position, number | null>;
   pa: number;
   price: number;
+  valueTier?: 'low' | 'middle' | 'aboveAverage' | 'elite';
 }
 export interface Catalog {
   id: string;
@@ -35,6 +36,7 @@ export interface Catalog {
   researchMeasurementSha256: string;
   sourceSqlSha256: string;
   attribution: string;
+  defaultBudget?: number;
   players: DraftPlayer[];
 }
 export interface DraftConfig {
@@ -171,7 +173,13 @@ export class DraftEngine {
   private readonly pools: Record<Position, DraftPlayer[]>;
   private readonly relevant: Set<string>;
   private readonly costs = new Map<string, number | null>();
-  constructor(catalog: Catalog, config: DraftConfig = DEFAULTS) {
+  constructor(
+    catalog: Catalog,
+    config: DraftConfig = {
+      ...DEFAULTS,
+      budget: catalog.defaultBudget ?? DEFAULTS.budget,
+    },
+  ) {
     check(
       Number.isInteger(config.budget) &&
         config.budget >= 0 &&
@@ -216,7 +224,7 @@ export class DraftEngine {
           typeof p.name === 'string' &&
           Number.isInteger(p.price) &&
           p.price >= 1 &&
-          p.price <= 20 &&
+          p.price <= (catalog.schemaVersion === '2.0.0' ? 30 : 20) &&
           Number.isInteger(p.pa) &&
           p.pa >= 50 &&
           POSITIONS.every(

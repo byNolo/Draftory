@@ -3,7 +3,7 @@ import { PlayerDataClient } from '../../lib/api/player-data';
 import { SeasonClient } from '../../workers/season-client';
 import type { SeasonSuccess } from '../../workers/protocol';
 import { PilotLoader } from '../pilot-loader';
-import { loadCatalog } from '../draft/catalog';
+import { loadCatalog, PLAYTEST_BUDGET } from '../draft/catalog';
 import { DraftEngine, type DraftState } from '../draft/engine';
 import { draftedSeason } from '../draft/season';
 import {
@@ -257,9 +257,9 @@ export default function MLBGame() {
               <em>Make it count.</em>
             </h1>
             <p className="intro">
-              Draft real hitters from the 2024 season. Stretch 90 fictional
-              credits across nine positions, then see how your lineup handles
-              162 games.
+              Draft real hitters from the 2024 season. Stretch {PLAYTEST_BUDGET}{' '}
+              fictional credits across nine positions, then see how your lineup
+              handles 162 games.
             </p>
             <button
               className="primary"
@@ -335,7 +335,7 @@ export default function MLBGame() {
                   <strong data-testid="game-budget">
                     {draft.remainingBudget}
                   </strong>
-                  <span>credits left / 90</span>
+                  <span>credits left / {draft.config.budget}</span>
                 </div>
               </div>
               <ol className="progress" aria-label="Draft progress">

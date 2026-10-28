@@ -1,4 +1,4 @@
-import url from '../../../../../data/publications/mlb-draft-2024-v1.json?url';
+import url from '../../../../../data/publications/mlb-draft-2024-v2.json?url';
 import { hash } from '../season-input';
 import {
   DEFAULTS,
@@ -10,7 +10,8 @@ import {
 } from './engine';
 
 export const CATALOG_ID =
-  'draft-catalog:95602e268bcd87ff6f5640525e3cfc1936eff28ae57a3d715a2f990ba689f9f8';
+  'draft-catalog:cbfacb05ccb10ad266e115074e56193a74e529355ce7ed2706b04aefef9e724c';
+export const PLAYTEST_BUDGET = 65;
 export async function parseCatalog(value: unknown): Promise<Catalog> {
   if (!value || typeof value !== 'object')
     throw new DraftError('Invalid offer catalog');
@@ -19,9 +20,10 @@ export async function parseCatalog(value: unknown): Promise<Catalog> {
   if (
     id !== CATALOG_ID ||
     id !== 'draft-catalog:' + (await hash(body)) ||
-    c.schemaVersion !== '1.0.0' ||
+    c.schemaVersion !== '2.0.0' ||
     c.year !== 2024 ||
-    c.pricingPolicy !== 'm7a-linear-1-20-v1' ||
+    c.pricingPolicy !== 'm8c2-elite-1-30-smoothed-v1' ||
+    c.defaultBudget !== PLAYTEST_BUDGET ||
     c.eligibilityPolicy !== 'observed-10-universal-dh-v1'
   )
     throw new DraftError(

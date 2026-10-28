@@ -64,7 +64,7 @@ test('target preparation rejects missing, placeholder and malformed IDs without 
 
 test('preparation refuses a stale catalog asset even if it is still valid JSON', () => {
   const name = readdirSync('apps/web/dist/assets').find((n) =>
-    /^mlb-draft-2024-v1-.*\.json$/.test(n),
+    /^mlb-draft-2024-v2-.*\.json$/.test(n),
   )!;
   const path = `apps/web/dist/assets/${name}`;
   const original = readFileSync(path);

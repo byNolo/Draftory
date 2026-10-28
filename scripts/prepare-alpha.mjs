@@ -46,7 +46,7 @@ if (
 
 const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const readJson = (path) => JSON.parse(readFileSync(path, 'utf8'));
-const catalogPath = resolve(root, 'data/publications/mlb-draft-2024-v1.json');
+const catalogPath = resolve(root, 'data/publications/mlb-draft-2024-v2.json');
 const catalogBytes = readFileSync(catalogPath),
   catalog = JSON.parse(catalogBytes);
 const { id, ...body } = catalog;
@@ -61,7 +61,7 @@ const find = (pattern) => {
     throw new Error(`Expected one built asset: ${pattern}`);
   return matches[0];
 };
-const catalogAsset = find(/^mlb-draft-2024-v1-.*\.json$/);
+const catalogAsset = find(/^mlb-draft-2024-v2-.*\.json$/);
 const pilotAsset = find(/^mlb-pilot-2024-.*\.json$/);
 find(/^season\.worker-.*\.js$/);
 find(/^sim_wasm_bg-.*\.wasm$/);

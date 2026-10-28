@@ -19,7 +19,7 @@ Open “Replay a draft seed” before starting to reproduce offers. Default rule
 use 65 fictional credits, nine unique hitters, three protected offers where
 possible, 10 observed games at each fielding position and universal DH. A choice
 is offered only if an affordable matching for all remaining positions exists.
-There are no rerolls; each catalog fixes one price per player at every position.
+Three free rerolls per draft replace the current offers; each catalog fixes one price per player at every position.
 M8C.2 uses the researched elite 1–30 curve, catalog schema 2.0.0 and policy
 `m8c2-elite-1-30-smoothed-v1`. See [the draft contract](MLB_DRAFT.md) and
 [pricing/PA measurements](../data/validation/pricing-pa-v1.md).

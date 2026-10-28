@@ -641,6 +641,31 @@ test('three rerolls replace offers, persist across picks, simulate and reset for
   );
   await setup(page);
   let state = engine.start('20261027');
+  await expect(page.getByText(/No rerolls/i)).toHaveCount(0);
+  await expect(
+    page.getByRole('button', {
+      name: `Draft ${engine.player(state.offers[0]).name}`,
+      exact: true,
+    }),
+  ).toBeEnabled();
+  const actions = page.getByRole('group', { name: 'Reroll current offers' });
+  await expect(actions).toBeVisible();
+  if (test.info().project.name.startsWith('mobile-'))
+    await expect(
+      page.getByRole('button', {
+        name: 'Reroll players (3 left)',
+        exact: true,
+      }),
+    ).toBeInViewport();
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  await page.screenshot({
+    path: `target/reroll-ui/${test.info().project.name}.png`,
+    fullPage: true,
+  });
   for (let i = 0; i < 3; i++) {
     await page
       .getByRole('button', {
@@ -667,6 +692,15 @@ test('three rerolls replace offers, persist across picks, simulate and reset for
     await expect(page.getByTestId('game-budget')).toHaveText(
       String(state.remainingBudget),
     );
+    const beforeStats = await actions.boundingBox();
+    await expect(
+      page.getByRole('button', {
+        name: `Draft ${engine.player(state.offers[0]).name}`,
+        exact: true,
+      }),
+    ).toBeEnabled();
+    const afterStats = await actions.boundingBox();
+    expect(Math.abs(afterStats!.y - beforeStats!.y)).toBeLessThanOrEqual(1);
     await page
       .getByRole('button', {
         name: `Draft ${engine.player(state.offers[0]).name}`,

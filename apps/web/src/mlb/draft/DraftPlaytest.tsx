@@ -85,7 +85,7 @@ export default function DraftPlaytest({
         Experimental 2024 prices, 10 games at each fielding position, all
         hitters DH. Every offered choice preserves an affordable complete
         lineup. Fewer than three choices appear when fewer safe players remain.
-        No rerolls.
+        The main game at / includes three free rerolls per draft.
       </p>
       <div className="draft-settings">
         <label>

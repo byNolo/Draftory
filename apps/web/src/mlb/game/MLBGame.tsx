@@ -434,26 +434,14 @@ export default function MLBGame() {
                   aria-label={complete ? 'Next season' : 'Player offers'}
                 >
                   {!complete && (
-                    <>
-                      <button
-                        disabled={busy || !engine.canReroll(draft)}
-                        onClick={reroll}
-                      >
-                        Reroll players (
-                        {REROLL_LIMIT - (draft.rerollRounds?.length ?? 0)} left)
-                      </button>
-                      <p className="muted">
-                        Replaces all current offers. No credits spent. Requires
-                        enough different affordable players.
-                      </p>
-                      <OfferCards
-                        engine={engine}
-                        draft={draft}
-                        stats={stats}
-                        busy={busy}
-                        onPick={pick}
-                      />
-                    </>
+                    <OfferCards
+                      engine={engine}
+                      draft={draft}
+                      stats={stats}
+                      busy={busy}
+                      onPick={pick}
+                      onReroll={reroll}
+                    />
                   )}
                   {complete && (
                     <div className="season-actions">

@@ -701,3 +701,75 @@ summary {
 .drag-handle:active {
   cursor: grabbing;
 }
+
+.offer-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  background: #e9eddf;
+  border: 1px solid #d1d8c5;
+  border-radius: 10px;
+}
+.reroll-description {
+  min-width: 0;
+}
+.reroll-description strong {
+  font-size: 0.9rem;
+}
+.reroll-description p {
+  margin: 0.2rem 0 0;
+  font-size: 0.78rem;
+  color: #566459;
+}
+.reroll-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+.reroll-count {
+  border-left: 1px solid #c6cbbd;
+  padding-left: 0.6rem;
+  font-size: 0.76rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.reroll-button:disabled {
+  cursor: default;
+}
+.offer-note {
+  margin: 0.75rem 0;
+  font-size: 0.76rem;
+}
+@media (max-width: 640px) {
+  .offer-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+    padding: 0.8rem 0.9rem max(0.8rem, env(safe-area-inset-bottom));
+  }
+  .offer-actions.reroll-active {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    box-shadow: 0 -4px 16px #193b3212;
+  }
+  .reroll-description strong {
+    font-size: 0.82rem;
+  }
+  .reroll-description p {
+    font-size: 0.73rem;
+  }
+  .reroll-button {
+    width: 100%;
+  }
+}
+
+/* Reserve the stat block while requests settle so selection controls stay put. */
+.offer-statistics {
+  min-height: 14rem;
+}

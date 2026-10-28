@@ -110,10 +110,21 @@ impl OutcomeDistribution {
 /// One complete game. Limits abort with an error, never a fabricated winner.
 /// Scripted replay remains available for both versions and never consumes RNG.
 pub fn simulate_game(input: GameInput) -> Result<GameResult, EngineError> {
-    input.validate()?;
+    simulate_game_prepared(input, None, false)
+}
+
+pub(crate) fn simulate_game_prepared(
+    input: GameInput,
+    prepared: Option<&crate::ContextualModel>,
+    season_validated: bool,
+) -> Result<GameResult, EngineError> {
+    if !season_validated {
+        input.validate()?;
+    }
     if ![
         SAMPLED_INPUT_SCHEMA_VERSION,
         crate::CONTEXT_INPUT_SCHEMA_VERSION,
+        crate::DEFENSE_INPUT_VERSION,
     ]
     .contains(&input.schema_version.as_str())
     {
@@ -139,14 +150,34 @@ pub fn simulate_game(input: GameInput) -> Result<GameResult, EngineError> {
         });
     let mut rng = SplitMix64::new(input.seed.parse().expect("validated seed"));
     let context_model = input.config.contextual_model.clone();
-    let mut game = Game::new(input)?;
+    let defensive_side = input
+        .config
+        .defense
+        .as_ref()
+        .map(|d| usize::from(d.team_id == input.teams.away.id));
+    let owned_defense = if prepared.is_none() {
+        input
+            .config
+            .defense
+            .as_ref()
+            .map(|d| d.prepare(context_model.as_ref().expect("validated contextual model")))
+    } else {
+        None
+    };
+    let defensive_model = prepared.or(owned_defense.as_ref());
+    let mut game = Game::from_validated(input);
     while game.snapshot().status == GameStatus::InProgress {
         let state = game.snapshot();
         let side = state.half.batting_side().index();
         let distribution = ordered[side][usize::from(state.next_batter[side])];
         let event = distribution.sample(&mut rng);
-        if let (Some(model), Some(kind)) = (&context_model, crate::ContextEvent::from_event(event))
-        {
+        let active_model = if defensive_side == Some(side) {
+            defensive_model
+        } else {
+            None
+        }
+        .or(context_model.as_ref());
+        if let (Some(model), Some(kind)) = (active_model, crate::ContextEvent::from_event(event)) {
             let cell = model.cell(kind, state.outs, crate::base_mask(&state.bases));
             let index = if cell.choices.len() == 1 {
                 0

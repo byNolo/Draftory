@@ -1,0 +1,10 @@
+{
+  "observedDate": "2026-10-28",
+  "path": "2024plays.zip",
+  "role": "development-only; never holdout",
+  "schemaVersion": "1.0.0",
+  "sha256": "a3e8c08876ddf70e1ffb0b20486c2873cf4aae19e0acc8002096e9056107615b",
+  "sizeBytes": 7446849,
+  "source": "Retrosheet official 2024 development plays",
+  "url": "https://www.retrosheet.org/downloads/plays/2024plays.zip"
+}

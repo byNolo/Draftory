@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://draftory.example/contracts/defense-game-input.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "rulesVersion",
+    "seed",
+    "config",
+    "detail",
+    "pitchingEnvironment",
+    "teams",
+    "profiles",
+    "sampling"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.3.0"
+    },
+    "rulesVersion": {
+      "const": "error-avoidance-nine-inning-v1"
+    },
+    "seed": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$",
+      "not": {
+        "pattern": "[^0-9]"
+      },
+      "description": "Canonical decimal u64, range 0..18446744073709551615; range checked by engine. Unused by scripted resolution."
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "advancementPolicy",
+        "maxInnings",
+        "maxPlateAppearances",
+        "defense",
+        "contextualModel"
+      ],
+      "properties": {
+        "advancementPolicy": {
+          "const": "retrosheet-contextual-v1"
+        },
+        "maxInnings": {
+          "type": "integer",
+          "minimum": 9,
+          "maximum": 65535
+        },
+        "maxPlateAppearances": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "contextualModel": {
+          "$ref": "https://draftory.example/contracts/contextual-model.schema.json"
+        },
+        "defense": {
+          "$ref": "https://draftory.example/contracts/defense.schema.json"
+        }
+      }
+    },
+    "detail": {
+      "enum": ["summary", "events"]
+    },
+    "pitchingEnvironment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contextId", "mode"],
+      "properties": {
+        "contextId": {
+          "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/id"
+        },
+        "mode": {
+          "const": "leagueAverage"
+        }
+      }
+    },
+    "teams": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["away", "home"],
+      "properties": {
+        "away": {
+          "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/team"
+        },
+        "home": {
+          "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/team"
+        }
+      }
+    },
+    "profiles": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/profile"
+          },
+          {
+            "required": ["provenance"],
+            "properties": {
+              "weights": {
+                "required": ["otherContact"],
+                "properties": {
+                  "battedBallOut": {
+                    "const": 0
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 18
+    },
+    "sampling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rngVersion"],
+      "properties": {
+        "rngVersion": {
+          "const": "splitmix64-v1"
+        }
+      }
+    }
+  },
+  "description": "Prepared profiles only; no Lahman field names or unresolved categories. Engine additionally validates unique team/batter/profile IDs, profile references, seed range, and weight sum."
+}

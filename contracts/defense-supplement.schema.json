@@ -1,0 +1,283 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://draftory.example/contracts/defense-supplement.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "schemaVersion",
+    "modelVersion",
+    "datasetId",
+    "source",
+    "year",
+    "model",
+    "profiles",
+    "references",
+    "policy",
+    "attribution"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "modelVersion": {
+      "const": "error-avoidance-v1"
+    },
+    "datasetId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "release", "lockSha256"],
+      "properties": {
+        "source": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "release": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "lockSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "year": {
+      "const": 2024
+    },
+    "model": {
+      "$ref": "https://draftory.example/contracts/defense.schema.json#/$defs/model"
+    },
+    "profiles": {
+      "type": "array",
+      "items": {
+        "$ref": "https://draftory.example/contracts/defense.schema.json#/$defs/profile"
+      },
+      "minItems": 788,
+      "maxItems": 788
+    },
+    "references": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["C", "1B", "2B", "3B", "SS", "LF", "CF", "RF"],
+      "properties": {
+        "C": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["errors", "chances", "players"],
+          "properties": {
+            "errors": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            "chances": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            "players": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            }
+          }
+        },
+        "1B": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["errors", "chances", "players"],
+          "properties": {
+            "errors": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            "chances": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            "players": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            }
+          }
+        },
+        "2B": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["errors", "chances", "players"],
+          "properties": {
+            "errors": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            "chances": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            "players": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            }
+          }
+        },
+        "3B": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["errors", "chances", "players"],
+          "properties": {
+            "errors": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            "chances": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            "players": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            }
+          }
+        },
+        "SS": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["errors", "chances", "players"],
+          "properties": {
+            "errors": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            "chances": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            "players": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            }
+          }
+        },
+        "LF": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["errors", "chances", "players"],
+          "properties": {
+            "errors": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            "chances": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            "players": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            }
+          }
+        },
+        "CF": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["errors", "chances", "players"],
+          "properties": {
+            "errors": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            "chances": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            "players": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            }
+          }
+        },
+        "RF": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["errors", "chances", "players"],
+          "properties": {
+            "errors": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            "chances": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            "players": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            }
+          }
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minInnings",
+        "priorChances",
+        "rounding",
+        "referenceMinInnings"
+      ],
+      "properties": {
+        "minInnings": {
+          "const": 100
+        },
+        "priorChances": {
+          "const": 1000
+        },
+        "rounding": {
+          "const": "half-up-millionths"
+        },
+        "referenceMinInnings": {
+          "const": 300
+        }
+      }
+    },
+    "attribution": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

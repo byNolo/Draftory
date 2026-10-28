@@ -145,8 +145,13 @@ pub struct Game {
 impl Game {
     pub fn new(input: GameInput) -> Result<Self, EngineError> {
         input.validate()?;
+        Ok(Self::from_validated(input))
+    }
+
+    /// Internal only: caller has validated this game or every immutable season matchup.
+    pub(crate) fn from_validated(input: GameInput) -> Self {
         let event_log = (input.detail == Detail::Events).then(Vec::new);
-        Ok(Self {
+        Self {
             input,
             state: GameSnapshot {
                 inning: 1,
@@ -168,7 +173,7 @@ impl Game {
                 home: None,
             }],
             event_log,
-        })
+        }
     }
 
     pub fn snapshot(&self) -> &GameSnapshot {
@@ -446,7 +451,12 @@ impl Game {
             GameStatus::Final => {}
         }
         Ok(GameResult {
-            schema_version: RESULT_SCHEMA_VERSION.into(),
+            schema_version: if self.input.config.defense.is_some() {
+                "1.1.0"
+            } else {
+                RESULT_SCHEMA_VERSION
+            }
+            .into(),
             engine_version: ENGINE_VERSION.into(),
             input: self.input.clone(),
             winner: if self.state.score[0] > self.state.score[1] {

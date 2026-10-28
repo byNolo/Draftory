@@ -7,6 +7,7 @@
 mod bases;
 mod contextual;
 mod contract;
+mod defense;
 mod game;
 mod sampling;
 mod season;
@@ -15,6 +16,7 @@ mod stats;
 pub use bases::{BasePlay, Bases, Runner, ScoringRunner, resolve_bases};
 pub use contextual::*;
 pub use contract::*;
+pub use defense::*;
 pub use game::*;
 pub use sampling::*;
 pub use season::*;

@@ -1,5 +1,9 @@
 # Defensive simulation research and proposed M8C.4
 
+M8C.4 now implements a narrower [error-avoidance model](DEFENSIVE_SIMULATION.md).
+The following remains the original research proposal; its whole-complement
+odds formula was replaced by transfers limited to eligible errors/ordinary outs.
+
 M8C.3, reviewed 2026-10-28. **Design only.** The live game, prices, batting
 profiles, source locks, D1, Rust rules/RNG and goldens are unchanged.
 [Measured findings](../data/validation/defense-research-v1.md) and

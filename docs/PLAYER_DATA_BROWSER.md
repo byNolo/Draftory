@@ -58,6 +58,13 @@ and preparation contexts rather than synthesizing missing configuration.
 
 ## Session and delivery behavior
 
+M8C.4 can add separate [error-avoidance inputs](DEFENSIVE_SIMULATION.md) to a
+completed draft. The opt-in static supplement is content-hashed and fetched only
+when selected, with a failed-request retry policy and session caching. Only eight
+selected defensive profiles and shared model enter the new season input 1.1/game
+input 1.3. The original batting API/fixtures and legacy assembler remain intact;
+opponent defense stays neutral. No additional D1/API tables or endpoint are used.
+
 Immutable dataset/profile IDs scope cache entries; player metadata is additionally
 dataset-scoped. Concurrent individual and overlapping batch requests share work.
 Batch requests deduplicate and split at the API's existing limit of 20. Failed

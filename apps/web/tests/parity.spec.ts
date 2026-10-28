@@ -1,5 +1,72 @@
 import { expect, test } from '@playwright/test';
 import { fixture, largeFixture, nativeResult, session } from './helpers';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+
+test('defense v1 exact native parity, explicit neutral identity, warm costs and memory', async ({
+  page,
+}, info) => {
+  const real = JSON.parse(
+    readFileSync('data/fixtures/defense-season-2024-v1.json', 'utf8'),
+  );
+  const neutral = structuredClone(real);
+  for (const p of neutral.config.defense.assignments) p.errorRatio = 1000000;
+  const legacy = structuredClone(neutral);
+  delete legacy.config.defense;
+  legacy.schemaVersion = '1.0.0';
+  legacy.gameSchemaVersion = '1.2.0';
+  legacy.rulesVersion = 'contextual-nine-inning-v1';
+  const expectedNeutral = nativeResult(neutral);
+  expect(expectedNeutral.games).toEqual(nativeResult(legacy).games);
+  const rows = [];
+  await page.goto('/__bench.html');
+  for (const [mode, input] of [
+    ['legacy', legacy],
+    ['neutral', neutral],
+    ['real', real],
+  ] as const) {
+    const worker = await session(page);
+    const init = await worker.evaluate((w) =>
+      w.send({ type: 'initialize', requestId: 'init' }),
+    );
+    expect(init.type).toBe('ready');
+    const timings = [];
+    for (let i = 0; i < 6; i++) {
+      const response = await worker.evaluate((w, request) => w.send(request), {
+        type: 'simulate' as const,
+        requestId: String(i),
+        inputJson: JSON.stringify(input),
+        output: 'summary' as const,
+      });
+      expect(response.type).toBe('result');
+      if (response.type !== 'result') throw new Error(JSON.stringify(response));
+      timings.push(response.timings);
+    }
+    for (const seed of ['0', '18446744073709551615']) {
+      const detailed = { ...input, seed, detail: 'events' };
+      const response = await worker.evaluate((w, request) => w.send(request), {
+        type: 'simulate' as const,
+        requestId: seed,
+        inputJson: JSON.stringify(detailed),
+        output: 'full' as const,
+      });
+      expect(response.type).toBe('result');
+      if (response.type !== 'result') throw new Error(JSON.stringify(response));
+      expect(JSON.parse(response.resultJson!)).toEqual(nativeResult(detailed));
+    }
+    rows.push({
+      mode,
+      initialization: init,
+      inputBytes: Buffer.byteLength(JSON.stringify(input)),
+      timings,
+    });
+    await worker.evaluate((w) => w.terminate());
+  }
+  mkdirSync('target/m8c4', { recursive: true });
+  writeFileSync(
+    `target/m8c4/browser-${info.project.name}.json`,
+    JSON.stringify(rows, null, 2),
+  );
+});
 
 for (const seed of ['0', '9007199254740993', '18446744073709551615']) {
   test(`native/browser full-season parity, summary/events, seed ${seed}`, async ({

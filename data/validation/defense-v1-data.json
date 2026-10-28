@@ -1,0 +1,337 @@
+{
+  "coverage": {
+    "1B": { "insufficient": 18, "observed": 75 },
+    "2B": { "insufficient": 17, "observed": 83 },
+    "3B": { "insufficient": 17, "observed": 87 },
+    "C": { "modelNeutral": 77 },
+    "CF": { "insufficient": 15, "modelNeutral": 77 },
+    "LF": { "insufficient": 27, "modelNeutral": 94 },
+    "RF": { "insufficient": 23, "modelNeutral": 101 },
+    "SS": { "insufficient": 11, "observed": 66 }
+  },
+  "development": {
+    "ambiguousROE": 71,
+    "batterROE": 1018,
+    "errorPlays": 1981,
+    "errorWithoutBatterROE": 963,
+    "modifiableROE": 880,
+    "noSupportedPair": 11,
+    "pa": 162877,
+    "pitcherROE": 52,
+    "position2": 8,
+    "position3": 97,
+    "position4": 131,
+    "position5": 304,
+    "position6": 280,
+    "position7": 18,
+    "position8": 22,
+    "position9": 20,
+    "supportedROE": 1014,
+    "unsupportedROE": 4
+  },
+  "developmentSource": {
+    "observedDate": "2026-10-28",
+    "path": "2024plays.zip",
+    "role": "development-only; never holdout",
+    "schemaVersion": "1.0.0",
+    "sha256": "a3e8c08876ddf70e1ffb0b20486c2873cf4aae19e0acc8002096e9056107615b",
+    "sizeBytes": 7446849,
+    "source": "Retrosheet official 2024 development plays",
+    "url": "https://www.retrosheet.org/downloads/plays/2024plays.zip"
+  },
+  "references": {
+    "1B": { "chances": 32888, "errors": 184, "players": 47 },
+    "2B": { "chances": 14928, "errors": 213, "players": 43 },
+    "3B": { "chances": 9484, "errors": 337, "players": 47 },
+    "C": { "chances": 38759, "errors": 282, "players": 56 },
+    "CF": { "chances": 10695, "errors": 96, "players": 51 },
+    "LF": { "chances": 6691, "errors": 87, "players": 44 },
+    "RF": { "chances": 7378, "errors": 106, "players": 52 },
+    "SS": { "chances": 16034, "errors": 439, "players": 45 }
+  },
+  "reliability": [
+    {
+      "minInnings": 100,
+      "priorChances": 100,
+      "scores": [
+        {
+          "chances": 134900,
+          "from": 2022,
+          "logLossChangePerChance": 0.00044559890012079687,
+          "to": 2023,
+          "used": 261
+        },
+        {
+          "chances": 136857,
+          "from": 2023,
+          "logLossChangePerChance": 0.0004501949071851987,
+          "to": 2024,
+          "used": 288
+        }
+      ]
+    },
+    {
+      "minInnings": 100,
+      "priorChances": 300,
+      "scores": [
+        {
+          "chances": 134900,
+          "from": 2022,
+          "logLossChangePerChance": 6.670820238500564e-5,
+          "to": 2023,
+          "used": 261
+        },
+        {
+          "chances": 136857,
+          "from": 2023,
+          "logLossChangePerChance": 0.00012067976531872246,
+          "to": 2024,
+          "used": 288
+        }
+      ]
+    },
+    {
+      "minInnings": 100,
+      "priorChances": 1000,
+      "scores": [
+        {
+          "chances": 134900,
+          "from": 2022,
+          "logLossChangePerChance": -7.480428539665546e-5,
+          "to": 2023,
+          "used": 261
+        },
+        {
+          "chances": 136857,
+          "from": 2023,
+          "logLossChangePerChance": -2.8075102317018808e-5,
+          "to": 2024,
+          "used": 288
+        }
+      ]
+    },
+    {
+      "minInnings": 100,
+      "priorChances": 3000,
+      "scores": [
+        {
+          "chances": 134900,
+          "from": 2022,
+          "logLossChangePerChance": -6.15515430106136e-5,
+          "to": 2023,
+          "used": 261
+        },
+        {
+          "chances": 136857,
+          "from": 2023,
+          "logLossChangePerChance": -3.748086952459436e-5,
+          "to": 2024,
+          "used": 288
+        }
+      ]
+    },
+    {
+      "minInnings": 300,
+      "priorChances": 100,
+      "scores": [
+        {
+          "chances": 134900,
+          "from": 2022,
+          "logLossChangePerChance": 0.00036868673997951816,
+          "to": 2023,
+          "used": 209
+        },
+        {
+          "chances": 136857,
+          "from": 2023,
+          "logLossChangePerChance": 0.0003489218545506745,
+          "to": 2024,
+          "used": 227
+        }
+      ]
+    },
+    {
+      "minInnings": 300,
+      "priorChances": 300,
+      "scores": [
+        {
+          "chances": 134900,
+          "from": 2022,
+          "logLossChangePerChance": 6.814006794704135e-5,
+          "to": 2023,
+          "used": 209
+        },
+        {
+          "chances": 136857,
+          "from": 2023,
+          "logLossChangePerChance": 8.937995386178157e-5,
+          "to": 2024,
+          "used": 227
+        }
+      ]
+    },
+    {
+      "minInnings": 300,
+      "priorChances": 1000,
+      "scores": [
+        {
+          "chances": 134900,
+          "from": 2022,
+          "logLossChangePerChance": -6.378807072110502e-5,
+          "to": 2023,
+          "used": 209
+        },
+        {
+          "chances": 136857,
+          "from": 2023,
+          "logLossChangePerChance": -3.422422495398445e-5,
+          "to": 2024,
+          "used": 227
+        }
+      ]
+    },
+    {
+      "minInnings": 300,
+      "priorChances": 3000,
+      "scores": [
+        {
+          "chances": 134900,
+          "from": 2022,
+          "logLossChangePerChance": -5.5887757109432936e-5,
+          "to": 2023,
+          "used": 209
+        },
+        {
+          "chances": 136857,
+          "from": 2023,
+          "logLossChangePerChance": -3.871715510197407e-5,
+          "to": 2024,
+          "used": 227
+        }
+      ]
+    },
+    {
+      "minInnings": 600,
+      "priorChances": 100,
+      "scores": [
+        {
+          "chances": 134900,
+          "from": 2022,
+          "logLossChangePerChance": 0.00015481163617236067,
+          "to": 2023,
+          "used": 149
+        },
+        {
+          "chances": 136857,
+          "from": 2023,
+          "logLossChangePerChance": 0.0002615580758842827,
+          "to": 2024,
+          "used": 157
+        }
+      ]
+    },
+    {
+      "minInnings": 600,
+      "priorChances": 300,
+      "scores": [
+        {
+          "chances": 134900,
+          "from": 2022,
+          "logLossChangePerChance": -4.338033609973333e-8,
+          "to": 2023,
+          "used": 149
+        },
+        {
+          "chances": 136857,
+          "from": 2023,
+          "logLossChangePerChance": 7.97735421663017e-5,
+          "to": 2024,
+          "used": 157
+        }
+      ]
+    },
+    {
+      "minInnings": 600,
+      "priorChances": 1000,
+      "scores": [
+        {
+          "chances": 134900,
+          "from": 2022,
+          "logLossChangePerChance": -6.810972882488867e-5,
+          "to": 2023,
+          "used": 149
+        },
+        {
+          "chances": 136857,
+          "from": 2023,
+          "logLossChangePerChance": -2.2220243867953752e-5,
+          "to": 2024,
+          "used": 157
+        }
+      ]
+    },
+    {
+      "minInnings": 600,
+      "priorChances": 3000,
+      "scores": [
+        {
+          "chances": 134900,
+          "from": 2022,
+          "logLossChangePerChance": -5.0860277004296173e-5,
+          "to": 2023,
+          "used": 149
+        },
+        {
+          "chances": 136857,
+          "from": 2023,
+          "logLossChangePerChance": -3.0378603222215207e-5,
+          "to": 2024,
+          "used": 157
+        }
+      ]
+    }
+  ],
+  "schemaVersion": "1.0.0",
+  "supplementId": "defense-supplement:bc23560d196fa7f10a7424906a6460d3c4a546f018fb356287b64526eba24611",
+  "supplementSha256": "dd7ec9285c4d4901f946d7bd7be5a1049bb9e7a191feb408cbfb23ad2ec579cc",
+  "training": [
+    {
+      "ambiguousROE": 48,
+      "batterROE": 1036,
+      "errorPlays": 1991,
+      "errorWithoutBatterROE": 955,
+      "modifiableROE": 916,
+      "pa": 162616,
+      "pitcherROE": 61,
+      "position2": 8,
+      "position3": 101,
+      "position4": 147,
+      "position5": 276,
+      "position6": 311,
+      "position7": 29,
+      "position8": 21,
+      "position9": 23,
+      "supportedROE": 1025,
+      "unsupportedROE": 11
+    },
+    {
+      "ambiguousROE": 54,
+      "batterROE": 950,
+      "errorPlays": 1881,
+      "errorWithoutBatterROE": 931,
+      "modifiableROE": 838,
+      "pa": 164500,
+      "pitcherROE": 51,
+      "position2": 5,
+      "position3": 109,
+      "position4": 112,
+      "position5": 282,
+      "position6": 262,
+      "position7": 19,
+      "position8": 24,
+      "position9": 25,
+      "supportedROE": 943,
+      "unsupportedROE": 7
+    }
+  ]
+}

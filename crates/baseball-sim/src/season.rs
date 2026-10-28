@@ -2,7 +2,7 @@
 use crate::{
     Detail, ENGINE_VERSION, EngineError, GameConfig, GameInput, InningScore, PitchingEnvironment,
     PlayRecord, PreparedBatterProfile, SamplingConfig, Side, SplitMix64, StatLine, Team,
-    TeamBoxScore, Teams, simulate_game,
+    TeamBoxScore, Teams,
 };
 use serde::{Deserialize, Serialize};
 use std::{collections::BTreeSet, fmt};
@@ -131,7 +131,10 @@ impl SeasonInput {
 
     pub fn validate(&self) -> Result<(), SeasonError> {
         let invalid = |s: &str| SeasonError::InvalidInput(s.into());
-        if self.schema_version != "1.0.0"
+        if !(self.schema_version == "1.0.0" && self.config.defense.is_none()
+            || self.schema_version == "1.1.0"
+                && self.config.defense.is_some()
+                && self.game_schema_version == crate::DEFENSE_INPUT_VERSION)
             || self.model_version != SEASON_MODEL_VERSION
             || self.seed_derivation_version != SEED_DERIVATION_VERSION
             || self.games == 0
@@ -140,6 +143,11 @@ impl SeasonInput {
             || self.opponents.len() > 30
             || self.profiles.is_empty()
             || self.profiles.len() > 279
+            || self
+                .config
+                .defense
+                .as_ref()
+                .is_some_and(|d| d.team_id != self.user_team.id)
         {
             return Err(invalid("Unsupported version or season bounds"));
         }
@@ -235,6 +243,15 @@ pub struct SeasonResult {
 
 pub fn simulate_season(input: SeasonInput) -> Result<SeasonResult, SeasonError> {
     input.validate()?;
+    let prepared_defense = input.config.defense.as_ref().map(|d| {
+        d.prepare(
+            input
+                .config
+                .contextual_model
+                .as_ref()
+                .expect("validated contextual model"),
+        )
+    });
     let mut games = Vec::with_capacity(usize::from(input.games));
     let mut wins = 0;
     let mut runs_scored = 0;
@@ -243,10 +260,14 @@ pub fn simulate_season(input: SeasonInput) -> Result<SeasonResult, SeasonError> 
     let mut opponent_totals = StatLine::default();
     for index in 0..input.games {
         let game_input = input.game_input(index)?;
-        let result = simulate_game(game_input).map_err(|source| SeasonError::GameFailed {
-            game_number: index + 1,
-            source,
-        })?;
+        // validate() checked every opponent, including unused ones. game_input only
+        // selects those immutable rosters/profiles, swaps sides and derives a valid seed.
+        let result =
+            crate::sampling::simulate_game_prepared(game_input, prepared_defense.as_ref(), true)
+                .map_err(|source| SeasonError::GameFailed {
+                    game_number: index + 1,
+                    source,
+                })?;
         let user_home = index % 2 == 1;
         let user = usize::from(user_home);
         let opponent = 1 - user;
@@ -281,7 +302,12 @@ pub fn simulate_season(input: SeasonInput) -> Result<SeasonResult, SeasonError> 
         });
     }
     Ok(SeasonResult {
-        schema_version: "1.0.0".into(),
+        schema_version: if input.config.defense.is_some() {
+            "1.1.0"
+        } else {
+            "1.0.0"
+        }
+        .into(),
         engine_version: ENGINE_VERSION.into(),
         wins,
         losses: input.games - wins,

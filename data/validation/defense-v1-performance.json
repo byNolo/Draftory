@@ -1,0 +1,1316 @@
+{
+  "assetGzipLevel": 6,
+  "assets": [
+    {
+      "bytes": 427821,
+      "file": "defense-2024-v1-Da8cLOSJ.json",
+      "gzipBytes": 73944,
+      "sha256": "dd7ec9285c4d4901f946d7bd7be5a1049bb9e7a191feb408cbfb23ad2ec579cc"
+    },
+    {
+      "bytes": 129967,
+      "file": "DeveloperHarness-Df-0NwCE.js",
+      "gzipBytes": 12651,
+      "sha256": "8eecd10b841174a311e98e16e9c759b0c51ce55b00e2b640676d86f477b3364d"
+    },
+    {
+      "bytes": 266614,
+      "file": "main-sULQOhVc.js",
+      "gzipBytes": 83333,
+      "sha256": "0caedbc43ee8344db5f4d2f75d3e07bce490a32a08a7cc607c3b11953e04d063"
+    },
+    {
+      "bytes": 5855,
+      "file": "season.worker-CV8rFxQi.js",
+      "gzipBytes": 2253,
+      "sha256": "723a01b03816f86154e263d2581a1fca3cbef29306683fdc2e1e24882c0cf3ad"
+    },
+    {
+      "bytes": 457265,
+      "file": "sim_wasm_bg-Yr0eVPkZ.wasm",
+      "gzipBytes": 149987,
+      "sha256": "ada21c26942d57df09db99254b91457a0f0f4c09c057edbf7f18dd682cb710ad"
+    }
+  ],
+  "browsers": {
+    "chromium": [
+      {
+        "first": {
+          "initializationMs": 118.79999999701977,
+          "inputParsingMs": 36.70000000298023,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 1.0999999940395355,
+          "serializationMs": 4.399999991059303,
+          "simulationMs": 132.5,
+          "wasmCallMs": 201.8999999910593,
+          "wasmMemoryAfterBytes": 1703936,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 204.29999999701977
+        },
+        "initializationMs": 118.79999999701977,
+        "inputBytes": 64627,
+        "mode": "legacy",
+        "warm": {
+          "inputParsingMs": {
+            "max": 22.100000008940697,
+            "median": 2.4000000059604645,
+            "min": 1.2999999970197678,
+            "n": 5,
+            "p25": 1.4000000059604645,
+            "p75": 6.899999991059303
+          },
+          "resultProcessingMs": {
+            "max": 0.10000000894069672,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0.10000000894069672
+          },
+          "serializationMs": {
+            "max": 1.5,
+            "median": 0.10000000894069672,
+            "min": 0.09999999403953552,
+            "n": 5,
+            "p25": 0.09999999403953552,
+            "p75": 0.10000000894069672
+          },
+          "simulationMs": {
+            "max": 54.20000000298023,
+            "median": 33.19999998807907,
+            "min": 28.700000002980232,
+            "n": 5,
+            "p25": 30.400000005960464,
+            "p75": 49.69999998807907
+          },
+          "wasmCallMs": {
+            "max": 78.70000000298023,
+            "median": 36.69999998807907,
+            "min": 32.599999994039536,
+            "n": 5,
+            "p25": 35.599999994039536,
+            "p75": 70.3999999910593
+          },
+          "workerTotalMs": {
+            "max": 79,
+            "median": 36.79999999701977,
+            "min": 32.69999998807907,
+            "n": 5,
+            "p25": 35.79999999701977,
+            "p75": 70.5
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1703936
+      },
+      {
+        "first": {
+          "initializationMs": 25,
+          "inputParsingMs": 82.90000000596046,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0.20000000298023224,
+          "serializationMs": 4,
+          "simulationMs": 284.20000000298023,
+          "wasmCallMs": 400.29999999701977,
+          "wasmMemoryAfterBytes": 1769472,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 400.79999999701977
+        },
+        "initializationMs": 25,
+        "inputBytes": 79518,
+        "mode": "neutral",
+        "warm": {
+          "inputParsingMs": {
+            "max": 13.799999997019768,
+            "median": 5.9000000059604645,
+            "min": 3.5,
+            "n": 5,
+            "p25": 5.5999999940395355,
+            "p75": 11
+          },
+          "resultProcessingMs": {
+            "max": 0.10000000894069672,
+            "median": 0.09999999403953552,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0.09999999403953552
+          },
+          "serializationMs": {
+            "max": 1.1000000089406967,
+            "median": 0.4000000059604645,
+            "min": 0.20000000298023224,
+            "n": 5,
+            "p25": 0.20000000298023224,
+            "p75": 0.800000011920929
+          },
+          "simulationMs": {
+            "max": 101.29999999701977,
+            "median": 68.79999999701977,
+            "min": 45.70000000298023,
+            "n": 5,
+            "p25": 60.8999999910593,
+            "p75": 84.29999999701977
+          },
+          "wasmCallMs": {
+            "max": 116.8999999910593,
+            "median": 87.29999999701977,
+            "min": 52.29999999701977,
+            "n": 5,
+            "p25": 76.29999999701977,
+            "p75": 90.09999999403954
+          },
+          "workerTotalMs": {
+            "max": 117.09999999403954,
+            "median": 87.40000000596046,
+            "min": 52.3999999910593,
+            "n": 5,
+            "p25": 76.6000000089407,
+            "p75": 90.19999998807907
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1769472
+      },
+      {
+        "first": {
+          "initializationMs": 16.099999994039536,
+          "inputParsingMs": 57.29999999701977,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0.09999999403953552,
+          "serializationMs": 7.799999997019768,
+          "simulationMs": 265.1000000089407,
+          "wasmCallMs": 353.20000000298023,
+          "wasmMemoryAfterBytes": 1769472,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 353.79999999701977
+        },
+        "initializationMs": 16.099999994039536,
+        "inputBytes": 79515,
+        "mode": "real",
+        "warm": {
+          "inputParsingMs": {
+            "max": 74.20000000298023,
+            "median": 7.399999991059303,
+            "min": 2.2000000029802322,
+            "n": 5,
+            "p25": 3.9000000059604645,
+            "p75": 13.400000005960464
+          },
+          "resultProcessingMs": {
+            "max": 0.09999999403953552,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "serializationMs": {
+            "max": 0.800000011920929,
+            "median": 0.20000000298023224,
+            "min": 0.09999999403953552,
+            "n": 5,
+            "p25": 0.20000000298023224,
+            "p75": 0.4000000059604645
+          },
+          "simulationMs": {
+            "max": 206.69999998807907,
+            "median": 52.099999994039536,
+            "min": 40.70000000298023,
+            "n": 5,
+            "p25": 49.70000000298023,
+            "p75": 119.29999999701977
+          },
+          "wasmCallMs": {
+            "max": 287.40000000596046,
+            "median": 68.70000000298023,
+            "min": 49.20000000298023,
+            "n": 5,
+            "p25": 53.20000000298023,
+            "p75": 129.59999999403954
+          },
+          "workerTotalMs": {
+            "max": 287.59999999403954,
+            "median": 68.70000000298023,
+            "min": 49.3999999910593,
+            "n": 5,
+            "p25": 53.29999999701977,
+            "p75": 129.59999999403954
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1769472
+      }
+    ],
+    "edge": [
+      {
+        "first": {
+          "initializationMs": 32,
+          "inputParsingMs": 7.899999991059303,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0,
+          "serializationMs": 1.199999988079071,
+          "simulationMs": 56.1000000089407,
+          "wasmCallMs": 69.5,
+          "wasmMemoryAfterBytes": 1703936,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 69.6000000089407
+        },
+        "initializationMs": 32,
+        "inputBytes": 64627,
+        "mode": "legacy",
+        "warm": {
+          "inputParsingMs": {
+            "max": 0.699999988079071,
+            "median": 0.5,
+            "min": 0.4000000059604645,
+            "n": 5,
+            "p25": 0.5,
+            "p75": 0.6000000089406967
+          },
+          "resultProcessingMs": {
+            "max": 0.10000000894069672,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "serializationMs": {
+            "max": 0.10000000894069672,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "simulationMs": {
+            "max": 22,
+            "median": 15.200000002980232,
+            "min": 15,
+            "n": 5,
+            "p25": 15.099999994039536,
+            "p75": 15.200000002980232
+          },
+          "wasmCallMs": {
+            "max": 23.200000002980232,
+            "median": 16.099999994039536,
+            "min": 15.799999997019768,
+            "n": 5,
+            "p25": 15.899999991059303,
+            "p75": 16.200000002980232
+          },
+          "workerTotalMs": {
+            "max": 23.200000002980232,
+            "median": 16.200000002980232,
+            "min": 15.899999991059303,
+            "n": 5,
+            "p25": 16,
+            "p75": 16.200000002980232
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1703936
+      },
+      {
+        "first": {
+          "initializationMs": 7.299999997019768,
+          "inputParsingMs": 6.899999991059303,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0,
+          "serializationMs": 0.7000000029802322,
+          "simulationMs": 36.900000005960464,
+          "wasmCallMs": 47.6000000089407,
+          "wasmMemoryAfterBytes": 1769472,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 47.70000000298023
+        },
+        "initializationMs": 7.299999997019768,
+        "inputBytes": 79518,
+        "mode": "neutral",
+        "warm": {
+          "inputParsingMs": {
+            "max": 0.8999999910593033,
+            "median": 0.5999999940395355,
+            "min": 0.5,
+            "n": 5,
+            "p25": 0.5999999940395355,
+            "p75": 0.6000000089406967
+          },
+          "resultProcessingMs": {
+            "max": 0.10000000894069672,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "serializationMs": {
+            "max": 0,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "simulationMs": {
+            "max": 16,
+            "median": 15.700000002980232,
+            "min": 15.200000002980232,
+            "n": 5,
+            "p25": 15.400000005960464,
+            "p75": 15.799999997019768
+          },
+          "wasmCallMs": {
+            "max": 17.899999991059303,
+            "median": 16.799999997019768,
+            "min": 16.400000005960464,
+            "n": 5,
+            "p25": 16.599999994039536,
+            "p75": 17
+          },
+          "workerTotalMs": {
+            "max": 18,
+            "median": 16.799999997019768,
+            "min": 16.400000005960464,
+            "n": 5,
+            "p25": 16.599999994039536,
+            "p75": 17
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1769472
+      },
+      {
+        "first": {
+          "initializationMs": 6,
+          "inputParsingMs": 6.5999999940395355,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0,
+          "serializationMs": 0.6000000089406967,
+          "simulationMs": 27.799999997019768,
+          "wasmCallMs": 37.900000005960464,
+          "wasmMemoryAfterBytes": 1769472,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 37.900000005960464
+        },
+        "initializationMs": 6,
+        "inputBytes": 79515,
+        "mode": "real",
+        "warm": {
+          "inputParsingMs": {
+            "max": 2.7000000029802322,
+            "median": 0.7000000029802322,
+            "min": 0.5,
+            "n": 5,
+            "p25": 0.5999999940395355,
+            "p75": 0.7999999970197678
+          },
+          "resultProcessingMs": {
+            "max": 0.10000000894069672,
+            "median": 0.09999999403953552,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0.09999999403953552
+          },
+          "serializationMs": {
+            "max": 0,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "simulationMs": {
+            "max": 19.19999998807907,
+            "median": 15.900000005960464,
+            "min": 14.900000005960464,
+            "n": 5,
+            "p25": 15.200000002980232,
+            "p75": 16.200000002980232
+          },
+          "wasmCallMs": {
+            "max": 20.5,
+            "median": 18.19999998807907,
+            "min": 16.100000008940697,
+            "n": 5,
+            "p25": 16.200000002980232,
+            "p75": 19.100000008940697
+          },
+          "workerTotalMs": {
+            "max": 20.5,
+            "median": 18.299999997019768,
+            "min": 16.100000008940697,
+            "n": 5,
+            "p25": 16.299999997019768,
+            "p75": 19.200000002980232
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1769472
+      }
+    ],
+    "firefox": [
+      {
+        "first": {
+          "initializationMs": 321,
+          "inputParsingMs": 38,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0,
+          "serializationMs": 3,
+          "simulationMs": 226,
+          "wasmCallMs": 286,
+          "wasmMemoryAfterBytes": 1703936,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 287
+        },
+        "initializationMs": 321,
+        "inputBytes": 64627,
+        "mode": "legacy",
+        "warm": {
+          "inputParsingMs": {
+            "max": 9,
+            "median": 6,
+            "min": 4,
+            "n": 5,
+            "p25": 4,
+            "p75": 6
+          },
+          "resultProcessingMs": {
+            "max": 0,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "serializationMs": {
+            "max": 1,
+            "median": 1,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 1
+          },
+          "simulationMs": {
+            "max": 177,
+            "median": 168,
+            "min": 152,
+            "n": 5,
+            "p25": 152,
+            "p75": 172
+          },
+          "wasmCallMs": {
+            "max": 192,
+            "median": 179,
+            "min": 161,
+            "n": 5,
+            "p25": 162,
+            "p75": 183
+          },
+          "workerTotalMs": {
+            "max": 192,
+            "median": 180,
+            "min": 161,
+            "n": 5,
+            "p25": 164,
+            "p75": 184
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1703936
+      },
+      {
+        "first": {
+          "initializationMs": 37,
+          "inputParsingMs": 46,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0,
+          "serializationMs": 4,
+          "simulationMs": 240,
+          "wasmCallMs": 307,
+          "wasmMemoryAfterBytes": 1769472,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 308
+        },
+        "initializationMs": 37,
+        "inputBytes": 79518,
+        "mode": "neutral",
+        "warm": {
+          "inputParsingMs": {
+            "max": 16,
+            "median": 7,
+            "min": 5,
+            "n": 5,
+            "p25": 6,
+            "p75": 13
+          },
+          "resultProcessingMs": {
+            "max": 0,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "serializationMs": {
+            "max": 0,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "simulationMs": {
+            "max": 190,
+            "median": 171,
+            "min": 159,
+            "n": 5,
+            "p25": 162,
+            "p75": 182
+          },
+          "wasmCallMs": {
+            "max": 213,
+            "median": 184,
+            "min": 170,
+            "n": 5,
+            "p25": 180,
+            "p75": 195
+          },
+          "workerTotalMs": {
+            "max": 214,
+            "median": 184,
+            "min": 170,
+            "n": 5,
+            "p25": 180,
+            "p75": 196
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1769472
+      },
+      {
+        "first": {
+          "initializationMs": 45,
+          "inputParsingMs": 43,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0,
+          "serializationMs": 10,
+          "simulationMs": 297,
+          "wasmCallMs": 367,
+          "wasmMemoryAfterBytes": 1769472,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 367
+        },
+        "initializationMs": 45,
+        "inputBytes": 79515,
+        "mode": "real",
+        "warm": {
+          "inputParsingMs": {
+            "max": 13,
+            "median": 8,
+            "min": 6,
+            "n": 5,
+            "p25": 6,
+            "p75": 9
+          },
+          "resultProcessingMs": {
+            "max": 1,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "serializationMs": {
+            "max": 1,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "simulationMs": {
+            "max": 238,
+            "median": 193,
+            "min": 184,
+            "n": 5,
+            "p25": 187,
+            "p75": 204
+          },
+          "wasmCallMs": {
+            "max": 250,
+            "median": 209,
+            "min": 194,
+            "n": 5,
+            "p25": 207,
+            "p75": 218
+          },
+          "workerTotalMs": {
+            "max": 250,
+            "median": 210,
+            "min": 194,
+            "n": 5,
+            "p25": 207,
+            "p75": 219
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1769472
+      }
+    ],
+    "mobile-chromium": [
+      {
+        "first": {
+          "initializationMs": 32.8999999910593,
+          "inputParsingMs": 26.899999991059303,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0.10000000894069672,
+          "serializationMs": 3.6000000089406967,
+          "simulationMs": 118.79999999701977,
+          "wasmCallMs": 162.30000001192093,
+          "wasmMemoryAfterBytes": 1703936,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 162.80000001192093
+        },
+        "initializationMs": 32.8999999910593,
+        "inputBytes": 64627,
+        "mode": "legacy",
+        "warm": {
+          "inputParsingMs": {
+            "max": 5.5999999940395355,
+            "median": 5.5,
+            "min": 1.4000000059604645,
+            "n": 5,
+            "p25": 4.0999999940395355,
+            "p75": 5.5
+          },
+          "resultProcessingMs": {
+            "max": 0.10000000894069672,
+            "median": 0.09999999403953552,
+            "min": 0,
+            "n": 5,
+            "p25": 0.09999999403953552,
+            "p75": 0.10000000894069672
+          },
+          "serializationMs": {
+            "max": 0.800000011920929,
+            "median": 0.09999999403953552,
+            "min": 0.09999999403953552,
+            "n": 5,
+            "p25": 0.09999999403953552,
+            "p75": 0.10000000894069672
+          },
+          "simulationMs": {
+            "max": 40.5,
+            "median": 31.099999994039536,
+            "min": 26.80000001192093,
+            "n": 5,
+            "p25": 29.600000008940697,
+            "p75": 32.79999999701977
+          },
+          "wasmCallMs": {
+            "max": 51.29999999701977,
+            "median": 37.80000001192093,
+            "min": 33.79999999701977,
+            "n": 5,
+            "p25": 36.599999994039536,
+            "p75": 40.29999999701977
+          },
+          "workerTotalMs": {
+            "max": 51.400000005960464,
+            "median": 37.80000001192093,
+            "min": 34,
+            "n": 5,
+            "p25": 36.69999998807907,
+            "p75": 40.5
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1703936
+      },
+      {
+        "first": {
+          "initializationMs": 8.5,
+          "inputParsingMs": 33.79999999701977,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0.20000000298023224,
+          "serializationMs": 10.700000002980232,
+          "simulationMs": 120.29999999701977,
+          "wasmCallMs": 180.20000000298023,
+          "wasmMemoryAfterBytes": 1769472,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 180.70000000298023
+        },
+        "initializationMs": 8.5,
+        "inputBytes": 79518,
+        "mode": "neutral",
+        "warm": {
+          "inputParsingMs": {
+            "max": 7.799999997019768,
+            "median": 6,
+            "min": 1.8999999910593033,
+            "n": 5,
+            "p25": 2.2000000029802322,
+            "p75": 6.199999988079071
+          },
+          "resultProcessingMs": {
+            "max": 0.10000000894069672,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0.09999999403953552
+          },
+          "serializationMs": {
+            "max": 0.7999999970197678,
+            "median": 0.10000000894069672,
+            "min": 0.10000000894069672,
+            "n": 5,
+            "p25": 0.10000000894069672,
+            "p75": 0.29999999701976776
+          },
+          "simulationMs": {
+            "max": 39,
+            "median": 35,
+            "min": 31.200000002980232,
+            "n": 5,
+            "p25": 32.099999994039536,
+            "p75": 38.1000000089407
+          },
+          "wasmCallMs": {
+            "max": 50.400000005960464,
+            "median": 38.29999999701977,
+            "min": 36.3999999910593,
+            "n": 5,
+            "p25": 37.900000005960464,
+            "p75": 46.5
+          },
+          "workerTotalMs": {
+            "max": 50.79999999701977,
+            "median": 38.5,
+            "min": 36.5,
+            "n": 5,
+            "p25": 38,
+            "p75": 46.6000000089407
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1769472
+      },
+      {
+        "first": {
+          "initializationMs": 9.700000002980232,
+          "inputParsingMs": 35.400000005960464,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0.19999998807907104,
+          "serializationMs": 3.4000000059604645,
+          "simulationMs": 122.3999999910593,
+          "wasmCallMs": 176.19999998807907,
+          "wasmMemoryAfterBytes": 1769472,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 176.69999998807907
+        },
+        "initializationMs": 9.700000002980232,
+        "inputBytes": 79515,
+        "mode": "real",
+        "warm": {
+          "inputParsingMs": {
+            "max": 11.200000002980232,
+            "median": 5,
+            "min": 1.699999988079071,
+            "n": 5,
+            "p25": 2.1000000089406967,
+            "p75": 10.199999988079071
+          },
+          "resultProcessingMs": {
+            "max": 0.10000000894069672,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0.09999999403953552
+          },
+          "serializationMs": {
+            "max": 0.7000000029802322,
+            "median": 0.10000000894069672,
+            "min": 0.09999999403953552,
+            "n": 5,
+            "p25": 0.09999999403953552,
+            "p75": 0.29999999701976776
+          },
+          "simulationMs": {
+            "max": 39.099999994039536,
+            "median": 32.70000000298023,
+            "min": 27.700000002980232,
+            "n": 5,
+            "p25": 29.899999991059303,
+            "p75": 33.1000000089407
+          },
+          "wasmCallMs": {
+            "max": 53.20000000298023,
+            "median": 35.79999999701977,
+            "min": 33.6000000089407,
+            "n": 5,
+            "p25": 34.900000005960464,
+            "p75": 46.20000000298023
+          },
+          "workerTotalMs": {
+            "max": 53.30000001192093,
+            "median": 35.8999999910593,
+            "min": 33.70000000298023,
+            "n": 5,
+            "p25": 35,
+            "p75": 46.5
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1769472
+      }
+    ],
+    "mobile-webkit": [
+      {
+        "first": {
+          "initializationMs": 51,
+          "inputParsingMs": 26,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 1,
+          "serializationMs": 0,
+          "simulationMs": 156.00000000000006,
+          "wasmCallMs": 197,
+          "wasmMemoryAfterBytes": 1703936,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 199
+        },
+        "initializationMs": 51,
+        "inputBytes": 64627,
+        "mode": "legacy",
+        "warm": {
+          "inputParsingMs": {
+            "max": 12,
+            "median": 7.000000000000114,
+            "min": 5,
+            "n": 5,
+            "p25": 6,
+            "p75": 8.000000000000057
+          },
+          "resultProcessingMs": {
+            "max": 0,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "serializationMs": {
+            "max": 1,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "simulationMs": {
+            "max": 55,
+            "median": 33,
+            "min": 28,
+            "n": 5,
+            "p25": 28.999999999999886,
+            "p75": 36.99999999999994
+          },
+          "wasmCallMs": {
+            "max": 74,
+            "median": 40,
+            "min": 35,
+            "n": 5,
+            "p25": 36,
+            "p75": 48
+          },
+          "workerTotalMs": {
+            "max": 74,
+            "median": 40,
+            "min": 35,
+            "n": 5,
+            "p25": 36,
+            "p75": 48
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1703936
+      },
+      {
+        "first": {
+          "initializationMs": 46,
+          "inputParsingMs": 29,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0,
+          "serializationMs": 1,
+          "simulationMs": 160,
+          "wasmCallMs": 201,
+          "wasmMemoryAfterBytes": 1769472,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 202
+        },
+        "initializationMs": 46,
+        "inputBytes": 79518,
+        "mode": "neutral",
+        "warm": {
+          "inputParsingMs": {
+            "max": 13,
+            "median": 8,
+            "min": 5.000000000000114,
+            "n": 5,
+            "p25": 8,
+            "p75": 9
+          },
+          "resultProcessingMs": {
+            "max": 0,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "serializationMs": {
+            "max": 1,
+            "median": 1,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 1
+          },
+          "simulationMs": {
+            "max": 59,
+            "median": 35,
+            "min": 29.999999999999886,
+            "n": 5,
+            "p25": 31,
+            "p75": 41
+          },
+          "wasmCallMs": {
+            "max": 76,
+            "median": 45,
+            "min": 39,
+            "n": 5,
+            "p25": 45,
+            "p75": 53
+          },
+          "workerTotalMs": {
+            "max": 76,
+            "median": 45,
+            "min": 39,
+            "n": 5,
+            "p25": 45,
+            "p75": 53
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1769472
+      },
+      {
+        "first": {
+          "initializationMs": 67,
+          "inputParsingMs": 27,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0,
+          "serializationMs": 1,
+          "simulationMs": 165,
+          "wasmCallMs": 205,
+          "wasmMemoryAfterBytes": 1769472,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 206
+        },
+        "initializationMs": 67,
+        "inputBytes": 79515,
+        "mode": "real",
+        "warm": {
+          "inputParsingMs": {
+            "max": 15.000000000000057,
+            "median": 8,
+            "min": 6,
+            "n": 5,
+            "p25": 6,
+            "p75": 9
+          },
+          "resultProcessingMs": {
+            "max": 0,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "serializationMs": {
+            "max": 1,
+            "median": 1,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 1
+          },
+          "simulationMs": {
+            "max": 60,
+            "median": 37,
+            "min": 27,
+            "n": 5,
+            "p25": 34.999999999999886,
+            "p75": 44
+          },
+          "wasmCallMs": {
+            "max": 78.00000000000006,
+            "median": 49,
+            "min": 34,
+            "n": 5,
+            "p25": 49,
+            "p75": 60
+          },
+          "workerTotalMs": {
+            "max": 78.00000000000006,
+            "median": 49,
+            "min": 34,
+            "n": 5,
+            "p25": 49,
+            "p75": 60
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1769472
+      }
+    ],
+    "webkit": [
+      {
+        "first": {
+          "initializationMs": 298,
+          "inputParsingMs": 22,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0,
+          "serializationMs": 0,
+          "simulationMs": 166,
+          "wasmCallMs": 204.0000000000001,
+          "wasmMemoryAfterBytes": 1703936,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 205.0000000000001
+        },
+        "initializationMs": 298,
+        "inputBytes": 64627,
+        "mode": "legacy",
+        "warm": {
+          "inputParsingMs": {
+            "max": 16,
+            "median": 8,
+            "min": 4,
+            "n": 5,
+            "p25": 6,
+            "p75": 10
+          },
+          "resultProcessingMs": {
+            "max": 1,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "serializationMs": {
+            "max": 2,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 1
+          },
+          "simulationMs": {
+            "max": 53,
+            "median": 39,
+            "min": 31,
+            "n": 5,
+            "p25": 39,
+            "p75": 48.000000000000114
+          },
+          "wasmCallMs": {
+            "max": 71,
+            "median": 53,
+            "min": 40,
+            "n": 5,
+            "p25": 45,
+            "p75": 62.000000000000114
+          },
+          "workerTotalMs": {
+            "max": 72,
+            "median": 53,
+            "min": 40,
+            "n": 5,
+            "p25": 45,
+            "p75": 62.000000000000114
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1703936
+      },
+      {
+        "first": {
+          "initializationMs": 116,
+          "inputParsingMs": 62,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0,
+          "serializationMs": 0,
+          "simulationMs": 657,
+          "wasmCallMs": 741.0000000000001,
+          "wasmMemoryAfterBytes": 1769472,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 743.0000000000001
+        },
+        "initializationMs": 116,
+        "inputBytes": 79518,
+        "mode": "neutral",
+        "warm": {
+          "inputParsingMs": {
+            "max": 44,
+            "median": 22,
+            "min": 19.000000000000227,
+            "n": 5,
+            "p25": 21,
+            "p75": 27
+          },
+          "resultProcessingMs": {
+            "max": 2,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 1
+          },
+          "serializationMs": {
+            "max": 2,
+            "median": 1,
+            "min": 0,
+            "n": 5,
+            "p25": 1,
+            "p75": 1
+          },
+          "simulationMs": {
+            "max": 179.99999999999977,
+            "median": 128,
+            "min": 95,
+            "n": 5,
+            "p25": 100,
+            "p75": 179
+          },
+          "wasmCallMs": {
+            "max": 240,
+            "median": 157,
+            "min": 130,
+            "n": 5,
+            "p25": 131,
+            "p75": 211.99999999999977
+          },
+          "workerTotalMs": {
+            "max": 242,
+            "median": 157,
+            "min": 130,
+            "n": 5,
+            "p25": 132,
+            "p75": 212.99999999999977
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1769472
+      },
+      {
+        "first": {
+          "initializationMs": 146,
+          "inputParsingMs": 100,
+          "resultJsonBytes": 159,
+          "resultProcessingMs": 0,
+          "serializationMs": 1,
+          "simulationMs": 353.0000000000001,
+          "wasmCallMs": 481,
+          "wasmMemoryAfterBytes": 1769472,
+          "wasmMemoryBeforeBytes": 1114112,
+          "workerTotalMs": 483
+        },
+        "initializationMs": 146,
+        "inputBytes": 79515,
+        "mode": "real",
+        "warm": {
+          "inputParsingMs": {
+            "max": 92,
+            "median": 21,
+            "min": 6,
+            "n": 5,
+            "p25": 13,
+            "p75": 30
+          },
+          "resultProcessingMs": {
+            "max": 0,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 0
+          },
+          "serializationMs": {
+            "max": 2,
+            "median": 0,
+            "min": 0,
+            "n": 5,
+            "p25": 0,
+            "p75": 1
+          },
+          "simulationMs": {
+            "max": 124,
+            "median": 95,
+            "min": 33,
+            "n": 5,
+            "p25": 67,
+            "p75": 117
+          },
+          "wasmCallMs": {
+            "max": 191,
+            "median": 165,
+            "min": 40.00000000000023,
+            "n": 5,
+            "p25": 92,
+            "p75": 165
+          },
+          "workerTotalMs": {
+            "max": 191,
+            "median": 165,
+            "min": 41.00000000000023,
+            "n": 5,
+            "p25": 92,
+            "p75": 165
+          }
+        },
+        "wasmLinearMemoryMaxBytes": 1769472
+      }
+    ]
+  },
+  "native": [
+    {
+      "firstSeasonMs": 12.72,
+      "fullSummaryResultBytes": 908652,
+      "mode": "legacy",
+      "warmSeasonMs": {
+        "max": 12.8323,
+        "median": 11.46085,
+        "min": 11.1334,
+        "n": 20,
+        "p25": 11.2157,
+        "p75": 11.5701
+      }
+    },
+    {
+      "firstSeasonMs": 11.3603,
+      "fullSummaryResultBytes": 923543,
+      "mode": "neutral",
+      "warmSeasonMs": {
+        "max": 11.7981,
+        "median": 11.40865,
+        "min": 11.214,
+        "n": 20,
+        "p25": 11.275,
+        "p75": 11.5102
+      }
+    },
+    {
+      "firstSeasonMs": 11.629199999999999,
+      "fullSummaryResultBytes": 923370,
+      "mode": "real",
+      "warmSeasonMs": {
+        "max": 11.9216,
+        "median": 11.508600000000001,
+        "min": 11.216999999999999,
+        "n": 20,
+        "p25": 11.4244,
+        "p75": 11.6608
+      }
+    }
+  ],
+  "nativePreparationMs": 0.0085678,
+  "schemaVersion": "1.0.0"
+}

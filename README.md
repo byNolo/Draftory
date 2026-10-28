@@ -207,8 +207,9 @@ versioned experiments, without accounts or server sessions.
 
 M8C.3 adds offline [defensive-data research](data/validation/defense-research-v1.md)
 and a proposed [defensive simulation design](docs/DEFENSIVE_SIMULATION_DESIGN.md).
-Experimental error-avoidance measurements remain separate from game profiles;
-no defensive mechanics or production data changes are implemented yet.
+M8C.4 adds optional [error-avoidance simulation](docs/DEFENSIVE_SIMULATION.md)
+with a separate static supplement. It preserves legacy neutral simulations,
+batting profiles, prices and budget; it does not model overall defensive ability.
 
 ## Foundation and data milestones
 

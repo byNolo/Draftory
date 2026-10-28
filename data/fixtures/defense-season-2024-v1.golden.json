@@ -1,0 +1,42 @@
+{
+  "wins": 126,
+  "losses": 36,
+  "runsScored": 987,
+  "runsAllowed": 517,
+  "team": {
+    "reachedOnError": 36,
+    "fieldersChoices": 102,
+    "groundedIntoDoublePlays": 153,
+    "plateAppearances": 6455,
+    "atBats": 5733,
+    "hits": 1559,
+    "singles": 954,
+    "doubles": 279,
+    "triples": 30,
+    "homeRuns": 296,
+    "walks": 642,
+    "intentionalWalks": 0,
+    "hitByPitch": 80,
+    "strikeouts": 1363,
+    "runs": 987,
+    "runsBattedIn": 981
+  },
+  "opponent": {
+    "reachedOnError": 32,
+    "fieldersChoices": 96,
+    "groundedIntoDoublePlays": 105,
+    "plateAppearances": 6040,
+    "atBats": 5533,
+    "hits": 1179,
+    "singles": 778,
+    "doubles": 231,
+    "triples": 8,
+    "homeRuns": 162,
+    "walks": 465,
+    "intentionalWalks": 0,
+    "hitByPitch": 42,
+    "strikeouts": 1517,
+    "runs": 517,
+    "runsBattedIn": 513
+  }
+}

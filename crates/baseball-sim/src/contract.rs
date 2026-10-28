@@ -56,6 +56,12 @@ pub struct GameConfig {
         skip_serializing_if = "Option::is_none"
     )]
     pub contextual_model: Option<crate::ContextualModel>,
+    #[serde(
+        default,
+        deserialize_with = "present",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub defense: Option<std::sync::Arc<crate::DefenseConfig>>,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -245,14 +251,24 @@ impl GameInput {
             INPUT_SCHEMA_VERSION,
             SAMPLED_INPUT_SCHEMA_VERSION,
             crate::CONTEXT_INPUT_SCHEMA_VERSION,
+            crate::DEFENSE_INPUT_VERSION,
         ]
         .contains(&self.schema_version.as_str())
         {
             return Err(invalid("Unsupported input schema or rules version"));
         }
-        let contextual = self.schema_version == crate::CONTEXT_INPUT_SCHEMA_VERSION;
+        let defensive = self.schema_version == crate::DEFENSE_INPUT_VERSION;
+        let contextual = defensive || self.schema_version == crate::CONTEXT_INPUT_SCHEMA_VERSION;
+        if !defensive && self.config.defense.is_some() {
+            return Err(invalid("Legacy input cannot enable defense"));
+        }
         if contextual {
-            if self.rules_version != crate::CONTEXT_RULES_VERSION
+            if self.rules_version
+                != if defensive {
+                    crate::DEFENSE_RULES_VERSION
+                } else {
+                    crate::CONTEXT_RULES_VERSION
+                }
                 || self.config.advancement_policy != AdvancementPolicy::RetrosheetContextualV1
             {
                 return Err(invalid(
@@ -264,6 +280,13 @@ impl GameInput {
                 .as_ref()
                 .ok_or_else(|| invalid("Missing contextual model"))?
                 .validate()?;
+            if defensive {
+                self.config
+                    .defense
+                    .as_ref()
+                    .ok_or_else(|| invalid("Missing defense configuration"))?
+                    .validate(self)?;
+            }
         } else if self.rules_version != RULES_VERSION
             || self.config.contextual_model.is_some()
             || self.config.advancement_policy != AdvancementPolicy::ConservativeOutsV1

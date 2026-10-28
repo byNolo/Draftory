@@ -1,0 +1,240 @@
+{
+  "fixtureSha256": "c51c158b4d7b87893b287514c0349a23a49baa1e8a7ff7fe34ff9bc527052669",
+  "modes": {
+    "legacy": {
+      "means": {
+        "losses": 48.375,
+        "opponent:groundedIntoDoublePlays": 129.8125,
+        "opponent:hits": 1283.578125,
+        "opponent:ordinaryContactOuts": 2561.59375,
+        "opponent:plateAppearances": 6104.3125,
+        "opponent:reachedOnError": 36.390625,
+        "runsAllowed": 575.84375,
+        "runsScored": 927.484375,
+        "user:groundedIntoDoublePlays": 148.3125,
+        "user:hits": 1546.859375,
+        "user:plateAppearances": 6488.28125,
+        "user:reachedOnError": 36.390625,
+        "wins": 113.625
+      },
+      "pairedChangeFromLegacy": {
+        "losses": { "mc95HalfWidth": 0, "mean": 0 },
+        "opponent:groundedIntoDoublePlays": { "mc95HalfWidth": 0, "mean": 0 },
+        "opponent:hits": { "mc95HalfWidth": 0, "mean": 0 },
+        "opponent:ordinaryContactOuts": { "mc95HalfWidth": 0, "mean": 0 },
+        "opponent:plateAppearances": { "mc95HalfWidth": 0, "mean": 0 },
+        "opponent:reachedOnError": { "mc95HalfWidth": 0, "mean": 0 },
+        "runsAllowed": { "mc95HalfWidth": 0, "mean": 0 },
+        "runsScored": { "mc95HalfWidth": 0, "mean": 0 },
+        "user:groundedIntoDoublePlays": { "mc95HalfWidth": 0, "mean": 0 },
+        "user:hits": { "mc95HalfWidth": 0, "mean": 0 },
+        "user:plateAppearances": { "mc95HalfWidth": 0, "mean": 0 },
+        "user:reachedOnError": { "mc95HalfWidth": 0, "mean": 0 },
+        "wins": { "mc95HalfWidth": 0, "mean": 0 }
+      }
+    },
+    "neutral": {
+      "means": {
+        "losses": 48.375,
+        "opponent:groundedIntoDoublePlays": 129.8125,
+        "opponent:hits": 1283.578125,
+        "opponent:ordinaryContactOuts": 2561.59375,
+        "opponent:plateAppearances": 6104.3125,
+        "opponent:reachedOnError": 36.390625,
+        "runsAllowed": 575.84375,
+        "runsScored": 927.484375,
+        "user:groundedIntoDoublePlays": 148.3125,
+        "user:hits": 1546.859375,
+        "user:plateAppearances": 6488.28125,
+        "user:reachedOnError": 36.390625,
+        "wins": 113.625
+      },
+      "pairedChangeFromLegacy": {
+        "losses": { "mc95HalfWidth": 0, "mean": 0 },
+        "opponent:groundedIntoDoublePlays": { "mc95HalfWidth": 0, "mean": 0 },
+        "opponent:hits": { "mc95HalfWidth": 0, "mean": 0 },
+        "opponent:ordinaryContactOuts": { "mc95HalfWidth": 0, "mean": 0 },
+        "opponent:plateAppearances": { "mc95HalfWidth": 0, "mean": 0 },
+        "opponent:reachedOnError": { "mc95HalfWidth": 0, "mean": 0 },
+        "runsAllowed": { "mc95HalfWidth": 0, "mean": 0 },
+        "runsScored": { "mc95HalfWidth": 0, "mean": 0 },
+        "user:groundedIntoDoublePlays": { "mc95HalfWidth": 0, "mean": 0 },
+        "user:hits": { "mc95HalfWidth": 0, "mean": 0 },
+        "user:plateAppearances": { "mc95HalfWidth": 0, "mean": 0 },
+        "user:reachedOnError": { "mc95HalfWidth": 0, "mean": 0 },
+        "wins": { "mc95HalfWidth": 0, "mean": 0 }
+      }
+    },
+    "real": {
+      "means": {
+        "losses": 48.234375,
+        "opponent:groundedIntoDoublePlays": 129.640625,
+        "opponent:hits": 1283.078125,
+        "opponent:ordinaryContactOuts": 2562.078125,
+        "opponent:plateAppearances": 6103.09375,
+        "opponent:reachedOnError": 35.4375,
+        "runsAllowed": 574.96875,
+        "runsScored": 928.015625,
+        "user:groundedIntoDoublePlays": 148.484375,
+        "user:hits": 1547.296875,
+        "user:plateAppearances": 6488.203125,
+        "user:reachedOnError": 36.375,
+        "wins": 113.765625
+      },
+      "pairedChangeFromLegacy": {
+        "losses": { "mc95HalfWidth": 0.16255674757005797, "mean": -0.140625 },
+        "opponent:groundedIntoDoublePlays": {
+          "mc95HalfWidth": 0.23326496394181828,
+          "mean": -0.171875
+        },
+        "opponent:hits": { "mc95HalfWidth": 0.5624253036823843, "mean": -0.5 },
+        "opponent:ordinaryContactOuts": {
+          "mc95HalfWidth": 0.8224702639423777,
+          "mean": 0.484375
+        },
+        "opponent:plateAppearances": {
+          "mc95HalfWidth": 1.6931771273916447,
+          "mean": -1.21875
+        },
+        "opponent:reachedOnError": {
+          "mc95HalfWidth": 0.28767634989979046,
+          "mean": -0.953125
+        },
+        "runsAllowed": { "mc95HalfWidth": 0.6134714518396289, "mean": -0.875 },
+        "runsScored": { "mc95HalfWidth": 0.767305101022765, "mean": 0.53125 },
+        "user:groundedIntoDoublePlays": {
+          "mc95HalfWidth": 0.21186025022405688,
+          "mean": 0.171875
+        },
+        "user:hits": { "mc95HalfWidth": 0.7197728229564289, "mean": 0.4375 },
+        "user:plateAppearances": {
+          "mc95HalfWidth": 1.8711189578735739,
+          "mean": -0.078125
+        },
+        "user:reachedOnError": {
+          "mc95HalfWidth": 0.05332397378811481,
+          "mean": -0.015625
+        },
+        "wins": { "mc95HalfWidth": 0.16255674757005797, "mean": 0.140625 }
+      }
+    },
+    "strong": {
+      "means": {
+        "losses": 47.6875,
+        "opponent:groundedIntoDoublePlays": 128.3125,
+        "opponent:hits": 1280.515625,
+        "opponent:ordinaryContactOuts": 2572.96875,
+        "opponent:plateAppearances": 6090.484375,
+        "opponent:reachedOnError": 22.453125,
+        "runsAllowed": 567.671875,
+        "runsScored": 927.640625,
+        "user:groundedIntoDoublePlays": 148.796875,
+        "user:hits": 1547.5,
+        "user:plateAppearances": 6490.484375,
+        "user:reachedOnError": 36.390625,
+        "wins": 114.3125
+      },
+      "pairedChangeFromLegacy": {
+        "losses": { "mc95HalfWidth": 0.563905651091859, "mean": -0.6875 },
+        "opponent:groundedIntoDoublePlays": {
+          "mc95HalfWidth": 0.6832723550028283,
+          "mean": -1.5
+        },
+        "opponent:hits": {
+          "mc95HalfWidth": 2.331998576567128,
+          "mean": -3.0625
+        },
+        "opponent:ordinaryContactOuts": {
+          "mc95HalfWidth": 2.945342368327775,
+          "mean": 11.375
+        },
+        "opponent:plateAppearances": {
+          "mc95HalfWidth": 5.728413711885158,
+          "mean": -13.828125
+        },
+        "opponent:reachedOnError": {
+          "mc95HalfWidth": 1.031972558313016,
+          "mean": -13.9375
+        },
+        "runsAllowed": {
+          "mc95HalfWidth": 2.3257307785971033,
+          "mean": -8.171875
+        },
+        "runsScored": { "mc95HalfWidth": 3.1406324834073365, "mean": 0.15625 },
+        "user:groundedIntoDoublePlays": {
+          "mc95HalfWidth": 0.7199279296973644,
+          "mean": 0.484375
+        },
+        "user:hits": { "mc95HalfWidth": 2.605068718769984, "mean": 0.640625 },
+        "user:plateAppearances": {
+          "mc95HalfWidth": 5.629024798514541,
+          "mean": 2.203125
+        },
+        "user:reachedOnError": {
+          "mc95HalfWidth": 0.2829016319029166,
+          "mean": 0
+        },
+        "wins": { "mc95HalfWidth": 0.563905651091859, "mean": 0.6875 }
+      }
+    },
+    "weak": {
+      "means": {
+        "losses": 48.734375,
+        "opponent:groundedIntoDoublePlays": 131.65625,
+        "opponent:hits": 1286.5,
+        "opponent:ordinaryContactOuts": 2551,
+        "opponent:plateAppearances": 6119.515625,
+        "opponent:reachedOnError": 50.625,
+        "runsAllowed": 582.46875,
+        "runsScored": 927.171875,
+        "user:groundedIntoDoublePlays": 148.859375,
+        "user:hits": 1547.234375,
+        "user:plateAppearances": 6488.40625,
+        "user:reachedOnError": 36.484375,
+        "wins": 113.265625
+      },
+      "pairedChangeFromLegacy": {
+        "losses": { "mc95HalfWidth": 0.45651424045270605, "mean": 0.359375 },
+        "opponent:groundedIntoDoublePlays": {
+          "mc95HalfWidth": 0.7462164984104814,
+          "mean": 1.84375
+        },
+        "opponent:hits": {
+          "mc95HalfWidth": 1.9253275447346325,
+          "mean": 2.921875
+        },
+        "opponent:ordinaryContactOuts": {
+          "mc95HalfWidth": 3.4028701376354507,
+          "mean": -10.59375
+        },
+        "opponent:plateAppearances": {
+          "mc95HalfWidth": 5.648625020899875,
+          "mean": 15.203125
+        },
+        "opponent:reachedOnError": {
+          "mc95HalfWidth": 1.0382933922561475,
+          "mean": 14.234375
+        },
+        "runsAllowed": { "mc95HalfWidth": 1.6394468918239196, "mean": 6.625 },
+        "runsScored": { "mc95HalfWidth": 2.317243483346347, "mean": -0.3125 },
+        "user:groundedIntoDoublePlays": {
+          "mc95HalfWidth": 0.6942417238833716,
+          "mean": 0.546875
+        },
+        "user:hits": { "mc95HalfWidth": 2.557130010165476, "mean": 0.375 },
+        "user:plateAppearances": {
+          "mc95HalfWidth": 6.620183154566043,
+          "mean": 0.125
+        },
+        "user:reachedOnError": {
+          "mc95HalfWidth": 0.2785531193108018,
+          "mean": 0.09375
+        },
+        "wins": { "mc95HalfWidth": 0.45651424045270605, "mean": -0.359375 }
+      }
+    }
+  },
+  "runnerSha256": "1c3d95fdadcde03199f7989ad34082d197fcc2d02b5e4dd9b88c95338e80e6cc",
+  "schemaVersion": "1.0.0",
+  "seeds": 64
+}

@@ -113,6 +113,54 @@ async function finish(page: Page) {
 const runs = (page: Page) =>
   page.evaluate(() => (window as unknown as { gameRuns: Run[] }).gameRuns);
 
+test('error avoidance completes draft to season and keeps fielding independent of batting order', async ({
+  page,
+}) => {
+  await setup(page);
+  await finish(page);
+  const first = engine.player(defaultBattingOrder(fixture.draft)[0]).name;
+  await page
+    .getByRole('button', { name: `Move ${first} down`, exact: true })
+    .click();
+  await page
+    .getByRole('checkbox', {
+      name: 'Experimental error avoidance',
+      exact: true,
+    })
+    .check();
+  await page
+    .getByText('Fielding samples and estimates', { exact: true })
+    .click();
+  await expect(
+    page.getByRole('region', { name: 'Error avoidance', exact: true }),
+  ).toContainText('defensive innings');
+  await page
+    .getByRole('button', { name: 'Simulate 162-game season', exact: true })
+    .click();
+  await expect(
+    page.getByRole('button', { name: 'Play another season', exact: true }),
+  ).toBeVisible();
+  const [run] = await runs(page);
+  const input = JSON.parse(run.request.inputJson);
+  expect(input.schemaVersion).toBe('1.1.0');
+  expect(input.config.defense.assignments).toHaveLength(8);
+  for (const assignment of input.config.defense.assignments) {
+    expect(
+      fixture.draft.history.find(
+        (p: { position: string }) => p.position === assignment.position,
+      ).playerId,
+    ).toBe(assignment.playerId);
+    expect(assignment.position).not.toBe('DH');
+  }
+  const native = nativeResult(input);
+  expect(run.response.summary.runsAllowed).toBe(native.runsAllowed);
+  expect(run.response.summary.wins).toBe(native.wins);
+  expect(run.response.batting!.batters).toEqual(native.team.batters);
+  expect(input.userTeam.lineup[0].id).not.toBe(
+    `draft:${defaultBattingOrder(fixture.draft)[0]}`,
+  );
+});
+
 test('current game rejects legacy or modified catalog versions and budgets', async ({
   page,
 }) => {

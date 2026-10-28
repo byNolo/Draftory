@@ -94,3 +94,13 @@ team totals and the nine batter boxes, reusing existing counter definitions.
 Full result and summary transports remain supported; input, game events and
 opponent boxes are omitted from this projection. The projection has its own
 version and does not change engine, rules, RNG or season-result versions.
+
+## M8C.4 defensive contracts
+
+The `defense.schema.json` definitions specify separate defensive profiles,
+environment and eight fielding assignments (all 1.0.0). The supplement schema
+binds the unchanged 2024 batting publication. Opt-in `defense-game-input` is
+1.3.0, `defense-season-input` 1.1.0, and their result schemas 1.1.0. Existing
+schemas are unchanged and reject opt-in fields/versions. Runtime validation
+additionally checks ID/source/year/model/position links and probability mass.
+See [methodology and compatibility](../docs/DEFENSIVE_SIMULATION.md).

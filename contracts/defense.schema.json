@@ -1,0 +1,407 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://draftory.example/contracts/defense.schema.json",
+  "$defs": {
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "modelId",
+        "sourceId",
+        "playerId",
+        "battingProfileId",
+        "schemaVersion",
+        "year",
+        "position",
+        "status",
+        "errorRatio",
+        "games",
+        "innOuts",
+        "chances",
+        "errors"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "modelId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "sourceId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "playerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "battingProfileId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "year": {
+          "const": 2024
+        },
+        "position": {
+          "enum": ["C", "1B", "2B", "3B", "SS", "LF", "CF", "RF"]
+        },
+        "status": {
+          "enum": ["observed", "insufficient", "unknown", "modelNeutral"]
+        },
+        "errorRatio": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000000
+        },
+        "games": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "innOuts": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "chances": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errors": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "not": {
+                  "const": "observed"
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "errorRatio": {
+                "const": 1000000
+              }
+            }
+          }
+        }
+      ]
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "schemaVersion",
+        "modelVersion",
+        "sourceId",
+        "year",
+        "transitionModelId",
+        "retrosheetLockSha256",
+        "supportedPositions",
+        "minimumAttributedEvents",
+        "cells"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "modelVersion": {
+          "const": "error-avoidance-v1"
+        },
+        "sourceId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "year": {
+          "const": 2024
+        },
+        "transitionModelId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "retrosheetLockSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "supportedPositions": {
+          "const": ["1B", "2B", "3B", "SS"]
+        },
+        "minimumAttributedEvents": {
+          "const": 50
+        },
+        "cells": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["outs", "baseMask", "ordinaryIndex", "components"],
+            "properties": {
+              "outs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2
+              },
+              "baseMask": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 7
+              },
+              "ordinaryIndex": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 127
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "components": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["choiceIndex", "position", "weight"],
+                  "properties": {
+                    "choiceIndex": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 127
+                    },
+                    "position": {
+                      "type": "integer",
+                      "minimum": 2,
+                      "maximum": 9
+                    },
+                    "weight": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 1000000
+                    }
+                  }
+                },
+                "minItems": 0,
+                "maxItems": 1024
+              }
+            }
+          },
+          "minItems": 24,
+          "maxItems": 24
+        }
+      }
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "supplementId",
+        "datasetId",
+        "teamId",
+        "model",
+        "assignments"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "supplementId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "datasetId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "teamId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "model": {
+          "$ref": "#/$defs/model"
+        },
+        "assignments": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/profile"
+                },
+                {
+                  "properties": {
+                    "position": {
+                      "const": "C"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/profile"
+                },
+                {
+                  "properties": {
+                    "position": {
+                      "const": "1B"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/profile"
+                },
+                {
+                  "properties": {
+                    "position": {
+                      "const": "2B"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/profile"
+                },
+                {
+                  "properties": {
+                    "position": {
+                      "const": "3B"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/profile"
+                },
+                {
+                  "properties": {
+                    "position": {
+                      "const": "SS"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/profile"
+                },
+                {
+                  "properties": {
+                    "position": {
+                      "const": "LF"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/profile"
+                },
+                {
+                  "properties": {
+                    "position": {
+                      "const": "CF"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/profile"
+                },
+                {
+                  "properties": {
+                    "position": {
+                      "const": "RF"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "items": false,
+          "minItems": 8,
+          "maxItems": 8
+        }
+      }
+    }
+  },
+  "$ref": "#/$defs/config"
+}

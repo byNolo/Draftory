@@ -390,6 +390,18 @@ summary {
   gap: 0.4rem;
   margin: 0.7rem 0;
 }
+.rules label.defense-toggle {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+.defense-toggle input {
+  width: 1.25rem;
+  height: 1.25rem;
+  min-height: 1.25rem;
+  padding: 0;
+  flex-shrink: 0;
+}
 .rules button,
 .rules a {
   margin-right: 1rem;

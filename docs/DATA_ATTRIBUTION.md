@@ -16,6 +16,12 @@ Keep this notice with redistributed calibration tables and products using them.
 Derived transition probabilities and fixed-lineup experiments are Draftory
 transformations, not Retrosheet's predictions or historical game records.
 
+M8C.4 additionally uses official **2024 parsed plays as development data**,
+independently pinned in `retrosheet-defense-dev.lock.json`. This does not change
+the M4 lock or training/holdout roles. The separate defensive supplement retains
+both upstream attributions; its relative error effects are Draftory estimates,
+not historical errors, Retrosheet predictions or overall defensive ability.
+
 ## SABR Lahman
 
 Draftory's Lahman adapter uses the official

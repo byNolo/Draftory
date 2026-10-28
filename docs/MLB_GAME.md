@@ -74,6 +74,16 @@ See [M8C.1 validation](../data/validation/batting-order-v1.md) for checks and li
 
 ## UI and boundaries
 
+M8C.4 adds **Experimental error avoidance** to the completed-lineup screen.
+It defaults off for legacy comparison. When enabled, a verified static supplement
+binds the same eight fielding assignments to player-position error profiles;
+customizing batting order never changes those assignments. Only supported
+1B/2B/3B/SS error reaches change while the opponent bats. Catcher, outfield, DH,
+pitching and all unmodeled defensive skills remain neutral. The display includes
+defensive exposure and explicit neutral/insufficient mapping status. See
+[defensive methodology, versions and reproduction](DEFENSIVE_SIMULATION.md).
+Prices and the 65-credit budget are unchanged; no D1 migration is needed.
+
 `apps/web/src/mlb/game/` contains:
 
 - `MLBGame.tsx`: game flow, async loading/retry/cancellation, session caches and

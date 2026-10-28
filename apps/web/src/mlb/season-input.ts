@@ -1,4 +1,5 @@
 import type fixture from '../../../../crates/baseball-sim/tests/fixtures/season-modern-2024.json';
+import type { DefenseConfig } from './defense';
 import {
   DataError,
   object,
@@ -10,8 +11,9 @@ import {
 import { PILOT_ID } from '../generated/pilot-meta';
 
 // Shapes reuse the existing v1 season fixture; no fixture bytes enter this module.
-export type SeasonInput = Omit<typeof fixture, 'profiles'> & {
+export type SeasonInput = Omit<typeof fixture, 'profiles' | 'config'> & {
   profiles: PreparedProfile[];
+  config: typeof fixture.config & { defense?: DefenseConfig };
 };
 export interface Pilot {
   id: string;

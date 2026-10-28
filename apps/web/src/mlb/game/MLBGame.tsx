@@ -15,6 +15,8 @@ import BattingOrderEditor from './BattingOrderEditor';
 import { historicalBatting, type HistoricalBatting } from './batting';
 import SeasonResults from './SeasonResults';
 import { OfferCards, Roster } from './DraftBoard';
+import DefensePanel from './DefensePanel';
+import { loadDefense, withDefense } from '../defense';
 
 const randomSeed = () => String(crypto.getRandomValues(new Uint32Array(1))[0]);
 function differentSeed(previous: string) {
@@ -28,8 +30,21 @@ export default function MLBGame() {
   const [draft, setDraft] = useState<DraftState>();
   const [stats, setStats] = useState<Record<string, HistoricalBatting>>({});
   const [battingOrder, setBattingOrder] = useState<BattingOrder>([]);
+  const [defenseEnabled, setDefenseEnabled] = useState(false);
   const [result, setResult] = useState<
-    SeasonSuccess & { battingOrder: BattingOrder }
+    SeasonSuccess & {
+      battingOrder: BattingOrder;
+      errorAvoidance: boolean;
+      defense?: {
+        supplementId: string;
+        modelId: string;
+        assignments: {
+          position: string;
+          playerId: string;
+          profileId: string;
+        }[];
+      };
+    }
   >();
   const [phase, setPhase] = useState('');
   const [error, setError] = useState('');
@@ -96,6 +111,7 @@ export default function MLBGame() {
       setEngine(next);
       setDraft(state);
       setBattingOrder([]);
+      setDefenseEnabled(false);
       setStats({});
       setSeed(chosenSeed);
       setSeasonSeed(randomSeed());
@@ -130,7 +146,7 @@ export default function MLBGame() {
     setError('');
     try {
       const order = validateBattingOrder(draft, battingOrder);
-      const input = await draftedSeason(
+      let input = await draftedSeason(
         engine,
         draft,
         api,
@@ -138,6 +154,9 @@ export default function MLBGame() {
         nextSeed,
         order,
       );
+      if (defenseEnabled) {
+        input = withDefense(input, engine, draft, await loadDefense());
+      }
       if (token !== revision.current) return;
       if (!client.current) {
         setPhase('Preparing the season simulator…');
@@ -164,6 +183,20 @@ export default function MLBGame() {
       setResult({
         ...value,
         battingOrder: order,
+        errorAvoidance: defenseEnabled,
+        ...(input.config.defense
+          ? {
+              defense: {
+                supplementId: input.config.defense.supplementId,
+                modelId: input.config.defense.model.id,
+                assignments: input.config.defense.assignments.map((p) => ({
+                  position: p.position,
+                  playerId: p.playerId,
+                  profileId: p.id,
+                })),
+              },
+            }
+          : {}),
         endToEndMs: performance.now() - started,
       });
       setSeasonSeed(nextSeed);
@@ -191,6 +224,7 @@ export default function MLBGame() {
       draft,
       seasonSeed,
       battingOrder,
+      defenseEnabled,
       result,
       transfers: api.transfers,
       pilotTransfers: pilot.transfers,
@@ -403,6 +437,16 @@ export default function MLBGame() {
                           ? 'Keep your lineup and simulate a fresh season, or start over with new offers.'
                           : 'Your nine hitters will face a fixed opponent template across a synthetic 162-game schedule.'}
                       </p>
+                      <DefensePanel
+                        engine={engine}
+                        draft={draft}
+                        enabled={defenseEnabled}
+                        disabled={busy}
+                        onChange={(value) => {
+                          setDefenseEnabled(value);
+                          setResult(undefined);
+                        }}
+                      />
                       {result && (
                         <button
                           disabled={busy}
@@ -442,10 +486,11 @@ export default function MLBGame() {
                         </button>
                         <p>
                           Your selected batting order is used for every game.
-                          Neutral pitching and defense; no substitutions. The
-                          CHA opponent can contain the same historical identity.
-                          This experimental simulation has known hits,
-                          double-play and scoring-variance biases.
+                          Neutral pitching; defense follows the error-avoidance
+                          option above. No substitutions. The CHA opponent can
+                          contain the same historical identity. This
+                          experimental simulation has known hits, double-play
+                          and scoring-variance biases.
                         </p>
                       </details>
                     </div>

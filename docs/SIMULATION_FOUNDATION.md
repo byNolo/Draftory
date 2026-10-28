@@ -1,5 +1,10 @@
 # Rust simulation foundation — contract decision and implementation scope
 
+M8C.4 adds opt-in [position-specific error avoidance](DEFENSIVE_SIMULATION.md)
+under new input/rules/model versions. Legacy inputs, RNG and golden behavior below
+remain unchanged. Only error/ordinary-out mass transfers are supported; no range,
+individual GDP, catcher specialties or pitcher ratings are added.
+
 The original foundation review below records the scripted milestone. Statistical
 integration is now implemented in [M3](#statistical-integration-m3); its explicit
 research policies supersede the earlier deferred adapter/sampling gate. The

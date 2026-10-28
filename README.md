@@ -205,6 +205,11 @@ player-data API/import. See [draft setup and replay](docs/MLB_DRAFT.md) and
 [playtest results](data/validation/draft-engine-v1.md). Rules and prices remain
 versioned experiments, without accounts or server sessions.
 
+M8C.3 adds offline [defensive-data research](data/validation/defense-research-v1.md)
+and a proposed [defensive simulation design](docs/DEFENSIVE_SIMULATION_DESIGN.md).
+Experimental error-avoidance measurements remain separate from game profiles;
+no defensive mechanics or production data changes are implemented yet.
+
 ## Foundation and data milestones
 
 Repository Foundation is **M0** in the plan. The requested **Milestone 2: Lahman

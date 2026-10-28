@@ -1,0 +1,1504 @@
+{
+  "datasetId": "dataset:1fba260824fe05abec3c5950cd184caa0d314b41f1253bc782f97b678bb28add",
+  "fullResearchId": "sha256:c1e2dc1a9e75378c8d4aad953f55aa963cda7549ae2ae5ab3043df6b660f8477",
+  "lahman": {
+    "lockSha256": "8f4cfb56f0726ebe7c900f8d8748232a3c8b326b2fc0d44a387512442e58a22c",
+    "release": "2025 (CSV folder, observed 2026-10-25; includes February 2026 BOM revisions)",
+    "source": "SABR Lahman"
+  },
+  "nativeDiagnostic": {
+    "counts": {
+      "eligibleOtherContact": 1152,
+      "gdp": 275,
+      "otherContact": 5581,
+      "pa": 12296,
+      "stateOpportunity": 2551
+    },
+    "fixtureSha256": "d02959d2673eeeec2951644cf327434babefeddeb1cb5b516d809d3aa8a562a4",
+    "games": 162,
+    "innings1to8Counts": {
+      "eligibleOtherContact": 1035,
+      "gdp": 249,
+      "otherContact": 5005,
+      "pa": 11051,
+      "stateOpportunity": 2300
+    },
+    "inputSha256": "8b47e7e7a32cf5fec3642ac2bf446d47aa5cff007424365ae5901cbb01c06bd1",
+    "otherContactStates": [
+      { "baseMask": 0, "n": 1233, "outs": 0 },
+      { "baseMask": 1, "n": 280, "outs": 0 },
+      { "baseMask": 2, "n": 79, "outs": 0 },
+      { "baseMask": 3, "n": 72, "outs": 0 },
+      { "baseMask": 4, "n": 3, "outs": 0 },
+      { "baseMask": 5, "n": 12, "outs": 0 },
+      { "baseMask": 6, "n": 9, "outs": 0 },
+      { "baseMask": 7, "n": 24, "outs": 0 },
+      { "baseMask": 0, "n": 877, "outs": 1 },
+      { "baseMask": 1, "n": 377, "outs": 1 },
+      { "baseMask": 2, "n": 99, "outs": 1 },
+      { "baseMask": 3, "n": 160, "outs": 1 },
+      { "baseMask": 4, "n": 21, "outs": 1 },
+      { "baseMask": 5, "n": 56, "outs": 1 },
+      { "baseMask": 6, "n": 26, "outs": 1 },
+      { "baseMask": 7, "n": 54, "outs": 1 },
+      { "baseMask": 0, "n": 729, "outs": 2 },
+      { "baseMask": 1, "n": 396, "outs": 2 },
+      { "baseMask": 2, "n": 117, "outs": 2 },
+      { "baseMask": 3, "n": 157, "outs": 2 },
+      { "baseMask": 4, "n": 36, "outs": 2 },
+      { "baseMask": 5, "n": 89, "outs": 2 },
+      { "baseMask": 6, "n": 28, "outs": 2 },
+      { "baseMask": 7, "n": 71, "outs": 2 }
+    ],
+    "resultSha256": "0f268bc1d5dd2d305877b80615abe6eea6e6ce3c049682a62de3c9e81affe69b",
+    "runnerSha256": "ef487f23e0f03f1da0c2275a2376f9b83078aaf3dfdaf461e1b1524000dbdb76",
+    "seed": "20261025"
+  },
+  "pool": {
+    "eligibleFieldingPositionCounts": {
+      "0": 22,
+      "1": 308,
+      "2": 127,
+      "3": 56,
+      "4": 8,
+      "5": 4,
+      "6": 1
+    },
+    "noRecordedFielding": [
+      "Dan Vogelbach",
+      "Giancarlo Stanton",
+      "J. D. Martinez",
+      "Joc Pederson",
+      "Marcell Ozuna",
+      "Shohei Ohtani"
+    ],
+    "positions": {
+      "1B": {
+        "baselineErrorRate": 0.005594745803940647,
+        "eligibleAtLeastInnings": { "100": 75, "300": 47, "50": 91, "600": 27 },
+        "eligibleGamesMismatch": 0,
+        "eligibleMissingCore": 0,
+        "eligibleMissingInnings": 0,
+        "eligibleMissingRecord": 0,
+        "eligibleMultiTeam": 10,
+        "eligiblePlayers": 93,
+        "games": {
+          "max": 162,
+          "median": 41,
+          "min": 10,
+          "n": 93,
+          "p25": 17,
+          "p75": 92
+        },
+        "innings": {
+          "max": 1443.3333333333333,
+          "median": 300.6666666666667,
+          "min": 22,
+          "n": 93,
+          "p25": 102,
+          "p75": 768.6666666666666
+        },
+        "recordedPlayers": 146
+      },
+      "2B": {
+        "baselineErrorRate": 0.014268488745980707,
+        "eligibleAtLeastInnings": { "100": 83, "300": 43, "50": 98, "600": 25 },
+        "eligibleGamesMismatch": 0,
+        "eligibleMissingCore": 0,
+        "eligibleMissingInnings": 0,
+        "eligibleMissingRecord": 0,
+        "eligibleMultiTeam": 7,
+        "eligiblePlayers": 100,
+        "games": {
+          "max": 159,
+          "median": 37,
+          "min": 10,
+          "n": 100,
+          "p25": 20,
+          "p75": 71
+        },
+        "innings": {
+          "max": 1382.6666666666667,
+          "median": 251,
+          "min": 37,
+          "n": 100,
+          "p25": 124.66666666666667,
+          "p75": 578
+        },
+        "recordedPlayers": 146
+      },
+      "3B": {
+        "baselineErrorRate": 0.0355335301560523,
+        "eligibleAtLeastInnings": {
+          "100": 87,
+          "300": 47,
+          "50": 104,
+          "600": 23
+        },
+        "eligibleGamesMismatch": 0,
+        "eligibleMissingCore": 0,
+        "eligibleMissingInnings": 0,
+        "eligibleMissingRecord": 0,
+        "eligibleMultiTeam": 12,
+        "eligiblePlayers": 104,
+        "games": {
+          "max": 155,
+          "median": 36.5,
+          "min": 10,
+          "n": 104,
+          "p25": 18,
+          "p75": 67
+        },
+        "innings": {
+          "max": 1361.6666666666667,
+          "median": 261.66666666666663,
+          "min": 55,
+          "n": 104,
+          "p25": 125.33333333333333,
+          "p75": 529
+        },
+        "recordedPlayers": 144
+      },
+      "C": {
+        "baselineErrorRate": 0.007275729507985242,
+        "eligibleAtLeastInnings": { "100": 77, "300": 56, "50": 77, "600": 34 },
+        "eligibleGamesMismatch": 0,
+        "eligibleMissingCore": 0,
+        "eligibleMissingInnings": 0,
+        "eligibleMissingRecord": 0,
+        "eligibleMultiTeam": 5,
+        "eligiblePlayers": 77,
+        "games": {
+          "max": 135,
+          "median": 66,
+          "min": 15,
+          "n": 77,
+          "p25": 40,
+          "p75": 96
+        },
+        "innings": {
+          "max": 1122,
+          "median": 544.3333333333334,
+          "min": 115,
+          "n": 77,
+          "p25": 283.6666666666667,
+          "p75": 766
+        },
+        "recordedPlayers": 79
+      },
+      "CF": {
+        "baselineErrorRate": 0.008976157082748949,
+        "eligibleAtLeastInnings": { "100": 77, "300": 51, "50": 91, "600": 31 },
+        "eligibleGamesMismatch": 0,
+        "eligibleMissingCore": 0,
+        "eligibleMissingInnings": 0,
+        "eligibleMissingRecord": 0,
+        "eligibleMultiTeam": 10,
+        "eligiblePlayers": 92,
+        "games": {
+          "max": 157,
+          "median": 45,
+          "min": 10,
+          "n": 92,
+          "p25": 22,
+          "p75": 97
+        },
+        "innings": {
+          "max": 1323.3333333333333,
+          "median": 316.5,
+          "min": 43,
+          "n": 92,
+          "p25": 147,
+          "p75": 724.6666666666666
+        },
+        "recordedPlayers": 138
+      },
+      "LF": {
+        "baselineErrorRate": 0.013002540726348827,
+        "eligibleAtLeastInnings": {
+          "100": 94,
+          "300": 44,
+          "50": 116,
+          "600": 24
+        },
+        "eligibleGamesMismatch": 0,
+        "eligibleMissingCore": 0,
+        "eligibleMissingInnings": 0,
+        "eligibleMissingRecord": 0,
+        "eligibleMultiTeam": 15,
+        "eligiblePlayers": 121,
+        "games": {
+          "max": 148,
+          "median": 30,
+          "min": 10,
+          "n": 121,
+          "p25": 18,
+          "p75": 67
+        },
+        "innings": {
+          "max": 1248.3333333333333,
+          "median": 186,
+          "min": 19.333333333333332,
+          "n": 121,
+          "p25": 103,
+          "p75": 443
+        },
+        "recordedPlayers": 194
+      },
+      "RF": {
+        "baselineErrorRate": 0.01436703713743562,
+        "eligibleAtLeastInnings": {
+          "100": 101,
+          "300": 52,
+          "50": 120,
+          "600": 22
+        },
+        "eligibleGamesMismatch": 0,
+        "eligibleMissingCore": 0,
+        "eligibleMissingInnings": 0,
+        "eligibleMissingRecord": 0,
+        "eligibleMultiTeam": 16,
+        "eligiblePlayers": 124,
+        "games": {
+          "max": 157,
+          "median": 35.5,
+          "min": 10,
+          "n": 124,
+          "p25": 18,
+          "p75": 60
+        },
+        "innings": {
+          "max": 1363.6666666666667,
+          "median": 224,
+          "min": 27.666666666666668,
+          "n": 124,
+          "p25": 114,
+          "p75": 393
+        },
+        "recordedPlayers": 180
+      },
+      "SS": {
+        "baselineErrorRate": 0.027379318947237122,
+        "eligibleAtLeastInnings": { "100": 66, "300": 45, "50": 74, "600": 28 },
+        "eligibleGamesMismatch": 0,
+        "eligibleMissingCore": 0,
+        "eligibleMissingInnings": 0,
+        "eligibleMissingRecord": 0,
+        "eligibleMultiTeam": 5,
+        "eligiblePlayers": 77,
+        "games": {
+          "max": 161,
+          "median": 49,
+          "min": 10,
+          "n": 77,
+          "p25": 23,
+          "p75": 97
+        },
+        "innings": {
+          "max": 1416.6666666666667,
+          "median": 358.3333333333333,
+          "min": 34.666666666666664,
+          "n": 77,
+          "p25": 152,
+          "p75": 849.3333333333334
+        },
+        "recordedPlayers": 111
+      }
+    }
+  },
+  "researchVersion": "defense-research-v1",
+  "retrosheet": {
+    "cells": [
+      { "baseMask": 0, "event": "double", "n": 3711, "outs": 0 },
+      { "baseMask": 1, "event": "double", "n": 848, "outs": 0 },
+      { "baseMask": 2, "event": "double", "n": 227, "outs": 0 },
+      { "baseMask": 3, "event": "double", "n": 218, "outs": 0 },
+      { "baseMask": 4, "event": "double", "n": 35, "outs": 0 },
+      { "baseMask": 5, "event": "double", "n": 74, "outs": 0 },
+      { "baseMask": 6, "event": "double", "n": 56, "outs": 0 },
+      { "baseMask": 7, "event": "double", "n": 70, "outs": 0 },
+      { "baseMask": 0, "event": "double", "n": 2596, "outs": 1 },
+      { "baseMask": 1, "event": "double", "n": 1031, "outs": 1 },
+      { "baseMask": 2, "event": "double", "n": 388, "outs": 1 },
+      { "baseMask": 3, "event": "double", "n": 366, "outs": 1 },
+      { "baseMask": 4, "event": "double", "n": 137, "outs": 1 },
+      { "baseMask": 5, "event": "double", "n": 160, "outs": 1 },
+      { "baseMask": 6, "event": "double", "n": 118, "outs": 1 },
+      { "baseMask": 7, "event": "double", "n": 152, "outs": 1 },
+      { "baseMask": 0, "event": "double", "n": 2025, "outs": 2 },
+      { "baseMask": 1, "event": "double", "n": 954, "outs": 2 },
+      { "baseMask": 2, "event": "double", "n": 467, "outs": 2 },
+      { "baseMask": 3, "event": "double", "n": 442, "outs": 2 },
+      { "baseMask": 4, "event": "double", "n": 213, "outs": 2 },
+      { "baseMask": 5, "event": "double", "n": 209, "outs": 2 },
+      { "baseMask": 6, "event": "double", "n": 120, "outs": 2 },
+      { "baseMask": 7, "event": "double", "n": 161, "outs": 2 },
+      { "baseMask": 0, "event": "otherContact", "n": 38068, "outs": 0 },
+      { "baseMask": 1, "event": "otherContact", "n": 8261, "outs": 0 },
+      { "baseMask": 2, "event": "otherContact", "n": 2439, "outs": 0 },
+      { "baseMask": 3, "event": "otherContact", "n": 2045, "outs": 0 },
+      { "baseMask": 4, "event": "otherContact", "n": 224, "outs": 0 },
+      { "baseMask": 5, "event": "otherContact", "n": 489, "outs": 0 },
+      { "baseMask": 6, "event": "otherContact", "n": 400, "outs": 0 },
+      { "baseMask": 7, "event": "otherContact", "n": 422, "outs": 0 },
+      { "baseMask": 0, "event": "otherContact", "n": 27552, "outs": 1 },
+      { "baseMask": 1, "event": "otherContact", "n": 10126, "outs": 1 },
+      { "baseMask": 2, "event": "otherContact", "n": 3956, "outs": 1 },
+      { "baseMask": 3, "event": "otherContact", "n": 3692, "outs": 1 },
+      { "baseMask": 4, "event": "otherContact", "n": 754, "outs": 1 },
+      { "baseMask": 5, "event": "otherContact", "n": 1148, "outs": 1 },
+      { "baseMask": 6, "event": "otherContact", "n": 816, "outs": 1 },
+      { "baseMask": 7, "event": "otherContact", "n": 924, "outs": 1 },
+      { "baseMask": 0, "event": "otherContact", "n": 21398, "outs": 2 },
+      { "baseMask": 1, "event": "otherContact", "n": 10232, "outs": 2 },
+      { "baseMask": 2, "event": "otherContact", "n": 5153, "outs": 2 },
+      { "baseMask": 3, "event": "otherContact", "n": 4392, "outs": 2 },
+      { "baseMask": 4, "event": "otherContact", "n": 1949, "outs": 2 },
+      { "baseMask": 5, "event": "otherContact", "n": 2005, "outs": 2 },
+      { "baseMask": 6, "event": "otherContact", "n": 1336, "outs": 2 },
+      { "baseMask": 7, "event": "otherContact", "n": 1538, "outs": 2 },
+      { "baseMask": 0, "event": "single", "n": 11520, "outs": 0 },
+      { "baseMask": 1, "event": "single", "n": 2735, "outs": 0 },
+      { "baseMask": 2, "event": "single", "n": 818, "outs": 0 },
+      { "baseMask": 3, "event": "single", "n": 664, "outs": 0 },
+      { "baseMask": 4, "event": "single", "n": 119, "outs": 0 },
+      { "baseMask": 5, "event": "single", "n": 268, "outs": 0 },
+      { "baseMask": 6, "event": "single", "n": 157, "outs": 0 },
+      { "baseMask": 7, "event": "single", "n": 196, "outs": 0 },
+      { "baseMask": 0, "event": "single", "n": 8207, "outs": 1 },
+      { "baseMask": 1, "event": "single", "n": 3474, "outs": 1 },
+      { "baseMask": 2, "event": "single", "n": 1245, "outs": 1 },
+      { "baseMask": 3, "event": "single", "n": 1097, "outs": 1 },
+      { "baseMask": 4, "event": "single", "n": 458, "outs": 1 },
+      { "baseMask": 5, "event": "single", "n": 596, "outs": 1 },
+      { "baseMask": 6, "event": "single", "n": 426, "outs": 1 },
+      { "baseMask": 7, "event": "single", "n": 365, "outs": 1 },
+      { "baseMask": 0, "event": "single", "n": 6489, "outs": 2 },
+      { "baseMask": 1, "event": "single", "n": 3236, "outs": 2 },
+      { "baseMask": 2, "event": "single", "n": 1487, "outs": 2 },
+      { "baseMask": 3, "event": "single", "n": 1275, "outs": 2 },
+      { "baseMask": 4, "event": "single", "n": 588, "outs": 2 },
+      { "baseMask": 5, "event": "single", "n": 664, "outs": 2 },
+      { "baseMask": 6, "event": "single", "n": 361, "outs": 2 },
+      { "baseMask": 7, "event": "single", "n": 458, "outs": 2 }
+    ],
+    "classificationCounts": {
+      "batter-extra-advance-proxy": 1338,
+      "ground-double-play": 6250,
+      "observed-error": 1968,
+      "observed-fieldersChoice": 5320,
+      "observed-safe-transition": 147021,
+      "running-out-on-hit-proxy": 1086,
+      "third-out-or-unsupported-contact-proxy": 48016,
+      "unsupported-contact-reach-proxy": 1
+    },
+    "counts": {
+      "bip": 212260,
+      "dpoppGroundMismatch": 4623,
+      "dpoppStateMismatch": 45400,
+      "eligibleGround": 18075,
+      "eligibleOtherContact": 27107,
+      "eligibleOtherContactGround": 13497,
+      "gdp": 6250,
+      "ground": 95768,
+      "missingFielderId": 0,
+      "missingLocation": 32,
+      "otherContact": 149319,
+      "pa": 327116,
+      "reportedDpopp": 13542,
+      "stateOpportunity": 58942
+    },
+    "expectedGDPOnObservedStates": 6250.004798,
+    "firstFielders": {
+      "1": 7566,
+      "2": 1964,
+      "3": 16168,
+      "4": 25764,
+      "5": 24495,
+      "6": 28720,
+      "7": 34505,
+      "8": 37811,
+      "9": 35267
+    },
+    "hitTypes": {
+      "BG": 1084,
+      "BL": 19,
+      "BP": 148,
+      "F": 47735,
+      "G": 95768,
+      "L": 52123,
+      "P": 15383
+    },
+    "selection": "full regular PA, innings 1-8, no SH/SF; unchanged M4 selection",
+    "source": {
+      "lockSha256": "1f725399cff54a7c924f4d71cd1dedbdc393f025b4a6ef3b3dded2ea3fe7a017",
+      "source": "Retrosheet official modern calibration snapshot"
+    },
+    "years": [2022, 2023]
+  },
+  "schemaVersion": "1.0.0",
+  "sqlSha256": "4dab2562d2b4344cd7499bb6ea54f899b4ba3fe95f1f859c3772d6d7f695828d",
+  "tables": {
+    "Appearances.csv": {
+      "fields": {
+        "GS": {
+          "firstKnownYear": 1871,
+          "known": 112365,
+          "lastKnownYear": 2025,
+          "missing": 16147,
+          "zero": 24374
+        },
+        "G_1b": {
+          "firstKnownYear": 1871,
+          "known": 128504,
+          "lastKnownYear": 2025,
+          "missing": 8,
+          "zero": 111216
+        },
+        "G_2b": {
+          "firstKnownYear": 1871,
+          "known": 128504,
+          "lastKnownYear": 2025,
+          "missing": 8,
+          "zero": 111948
+        },
+        "G_3b": {
+          "firstKnownYear": 1871,
+          "known": 128504,
+          "lastKnownYear": 2025,
+          "missing": 8,
+          "zero": 110835
+        },
+        "G_all": {
+          "firstKnownYear": 1871,
+          "known": 128512,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "G_batting": {
+          "firstKnownYear": 1871,
+          "known": 127377,
+          "lastKnownYear": 2025,
+          "missing": 1135,
+          "zero": 12158
+        },
+        "G_c": {
+          "firstKnownYear": 1871,
+          "known": 128504,
+          "lastKnownYear": 2025,
+          "missing": 8,
+          "zero": 114501
+        },
+        "G_cf": {
+          "firstKnownYear": 1871,
+          "known": 128504,
+          "lastKnownYear": 2025,
+          "missing": 8,
+          "zero": 110579
+        },
+        "G_defense": {
+          "firstKnownYear": 1871,
+          "known": 109358,
+          "lastKnownYear": 2025,
+          "missing": 19154,
+          "zero": 1495
+        },
+        "G_dh": {
+          "firstKnownYear": 1871,
+          "known": 127248,
+          "lastKnownYear": 2025,
+          "missing": 1264,
+          "zero": 113902
+        },
+        "G_lf": {
+          "firstKnownYear": 1871,
+          "known": 128504,
+          "lastKnownYear": 2025,
+          "missing": 8,
+          "zero": 104317
+        },
+        "G_of": {
+          "firstKnownYear": 1871,
+          "known": 117055,
+          "lastKnownYear": 2025,
+          "missing": 11457,
+          "zero": 85389
+        },
+        "G_p": {
+          "firstKnownYear": 1871,
+          "known": 128504,
+          "lastKnownYear": 2025,
+          "missing": 8,
+          "zero": 70896
+        },
+        "G_ph": {
+          "firstKnownYear": 1871,
+          "known": 119543,
+          "lastKnownYear": 2025,
+          "missing": 8969,
+          "zero": 67406
+        },
+        "G_pr": {
+          "firstKnownYear": 1871,
+          "known": 119543,
+          "lastKnownYear": 2025,
+          "missing": 8969,
+          "zero": 95146
+        },
+        "G_rf": {
+          "firstKnownYear": 1871,
+          "known": 128504,
+          "lastKnownYear": 2025,
+          "missing": 8,
+          "zero": 105065
+        },
+        "G_ss": {
+          "firstKnownYear": 1871,
+          "known": 128504,
+          "lastKnownYear": 2025,
+          "missing": 8,
+          "zero": 113913
+        },
+        "lgID": {
+          "firstKnownYear": 1871,
+          "known": 128512,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "playerID": {
+          "firstKnownYear": 1871,
+          "known": 128512,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "teamID": {
+          "firstKnownYear": 1871,
+          "known": 128512,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "yearID": {
+          "firstKnownYear": 1871,
+          "known": 128512,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        }
+      },
+      "leagues": [
+        "AA",
+        "AL",
+        "ANL",
+        "EAS",
+        "ECL",
+        "EWL",
+        "FL",
+        "IND",
+        "INT",
+        "NA",
+        "NAC",
+        "NAL",
+        "NL",
+        "NN2",
+        "NNL",
+        "NSL",
+        "PL",
+        "UA",
+        "WES"
+      ],
+      "positions": { "n/a": 128512 },
+      "rows": 128512
+    },
+    "Fielding.csv": {
+      "fields": {
+        "A": {
+          "firstKnownYear": 1871,
+          "known": 173716,
+          "lastKnownYear": 2025,
+          "missing": 616,
+          "zero": 31910
+        },
+        "CS": {
+          "firstKnownYear": 1871,
+          "known": 10166,
+          "lastKnownYear": 2025,
+          "missing": 164166,
+          "zero": 3044
+        },
+        "DP": {
+          "firstKnownYear": 1871,
+          "known": 173703,
+          "lastKnownYear": 2025,
+          "missing": 629,
+          "zero": 82794
+        },
+        "E": {
+          "firstKnownYear": 1871,
+          "known": 173702,
+          "lastKnownYear": 2025,
+          "missing": 630,
+          "zero": 74438
+        },
+        "G": {
+          "firstKnownYear": 1871,
+          "known": 174332,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "GS": {
+          "firstKnownYear": 1871,
+          "known": 125675,
+          "lastKnownYear": 2025,
+          "missing": 48657,
+          "zero": 31797
+        },
+        "InnOuts": {
+          "firstKnownYear": 1871,
+          "known": 144395,
+          "lastKnownYear": 2025,
+          "missing": 29937,
+          "zero": 1055
+        },
+        "PB": {
+          "firstKnownYear": 1871,
+          "known": 16278,
+          "lastKnownYear": 2025,
+          "missing": 158054,
+          "zero": 6369
+        },
+        "PO": {
+          "firstKnownYear": 1871,
+          "known": 173716,
+          "lastKnownYear": 2025,
+          "missing": 616,
+          "zero": 26036
+        },
+        "POS": {
+          "firstKnownYear": 1871,
+          "known": 174332,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "SB": {
+          "firstKnownYear": 1871,
+          "known": 12288,
+          "lastKnownYear": 2025,
+          "missing": 162044,
+          "zero": 3298
+        },
+        "WP": {
+          "firstKnownYear": 1925,
+          "known": 2387,
+          "lastKnownYear": 2025,
+          "missing": 171945,
+          "zero": 1090
+        },
+        "ZR": {
+          "firstKnownYear": 1954,
+          "known": 1169,
+          "lastKnownYear": 1969,
+          "missing": 173163,
+          "zero": 684
+        },
+        "lgID": {
+          "firstKnownYear": 1871,
+          "known": 174332,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "playerID": {
+          "firstKnownYear": 1871,
+          "known": 174332,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "stint": {
+          "firstKnownYear": 1871,
+          "known": 174332,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "teamID": {
+          "firstKnownYear": 1871,
+          "known": 174332,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "yearID": {
+          "firstKnownYear": 1871,
+          "known": 174332,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        }
+      },
+      "leagues": [
+        "AA",
+        "AL",
+        "ANL",
+        "EAS",
+        "ECL",
+        "EWL",
+        "FL",
+        "IND",
+        "INT",
+        "NA",
+        "NAC",
+        "NAL",
+        "NL",
+        "NN2",
+        "NNL",
+        "NSL",
+        "PL",
+        "UA",
+        "WES"
+      ],
+      "positions": {
+        "1B": 17271,
+        "2B": 16529,
+        "3B": 17660,
+        "C": 14018,
+        "OF": 36460,
+        "P": 57631,
+        "PH": 167,
+        "PR": 21,
+        "SS": 14575
+      },
+      "rows": 174332
+    },
+    "FieldingOFsplit.csv": {
+      "fields": {
+        "A": {
+          "firstKnownYear": 1891,
+          "known": 44878,
+          "lastKnownYear": 2025,
+          "missing": 269,
+          "zero": 26229
+        },
+        "CS": {
+          "firstKnownYear": 1942,
+          "known": 1,
+          "lastKnownYear": 1942,
+          "missing": 45146,
+          "zero": 1
+        },
+        "DP": {
+          "firstKnownYear": 1891,
+          "known": 44874,
+          "lastKnownYear": 2025,
+          "missing": 273,
+          "zero": 36760
+        },
+        "E": {
+          "firstKnownYear": 1891,
+          "known": 44876,
+          "lastKnownYear": 2025,
+          "missing": 271,
+          "zero": 28597
+        },
+        "G": {
+          "firstKnownYear": 1891,
+          "known": 45147,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "GS": {
+          "firstKnownYear": 1891,
+          "known": 43990,
+          "lastKnownYear": 2025,
+          "missing": 1157,
+          "zero": 7421
+        },
+        "InnOuts": {
+          "firstKnownYear": 1891,
+          "known": 45147,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 327
+        },
+        "PB": {
+          "firstKnownYear": 1921,
+          "known": 1114,
+          "lastKnownYear": 1942,
+          "missing": 44033,
+          "zero": 1114
+        },
+        "PO": {
+          "firstKnownYear": 1891,
+          "known": 44878,
+          "lastKnownYear": 2025,
+          "missing": 269,
+          "zero": 5197
+        },
+        "POS": {
+          "firstKnownYear": 1891,
+          "known": 45147,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "SB": {
+          "firstKnownYear": 1921,
+          "known": 244,
+          "lastKnownYear": 1942,
+          "missing": 44903,
+          "zero": 243
+        },
+        "WP": {
+          "firstKnownYear": null,
+          "known": 0,
+          "lastKnownYear": null,
+          "missing": 45147,
+          "zero": 0
+        },
+        "ZR": {
+          "firstKnownYear": null,
+          "known": 0,
+          "lastKnownYear": null,
+          "missing": 45147,
+          "zero": 0
+        },
+        "lgID": {
+          "firstKnownYear": 1891,
+          "known": 45147,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "playerID": {
+          "firstKnownYear": 1891,
+          "known": 45147,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "stint": {
+          "firstKnownYear": 1891,
+          "known": 45147,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "teamID": {
+          "firstKnownYear": 1891,
+          "known": 45147,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "yearID": {
+          "firstKnownYear": 1891,
+          "known": 45147,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        }
+      },
+      "leagues": [
+        "AL",
+        "ANL",
+        "EAS",
+        "ECL",
+        "EWL",
+        "IND",
+        "INT",
+        "NAC",
+        "NAL",
+        "NL",
+        "NN2",
+        "NNL",
+        "NSL",
+        "WES"
+      ],
+      "positions": { "CF": 11676, "LF": 17348, "RF": 16123 },
+      "rows": 45147
+    },
+    "Teams.csv": {
+      "fields": {
+        "2B": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 2
+        },
+        "3B": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 12
+        },
+        "AB": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 0
+        },
+        "BB": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 1
+        },
+        "BBA": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 2
+        },
+        "BPF": {
+          "firstKnownYear": 1871,
+          "known": 3105,
+          "lastKnownYear": 2025,
+          "missing": 509,
+          "zero": 0
+        },
+        "CG": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 96
+        },
+        "CS": {
+          "firstKnownYear": 1871,
+          "known": 2498,
+          "lastKnownYear": 2025,
+          "missing": 1116,
+          "zero": 74
+        },
+        "DP": {
+          "firstKnownYear": 1871,
+          "known": 3220,
+          "lastKnownYear": 2025,
+          "missing": 394,
+          "zero": 6
+        },
+        "DivWin": {
+          "firstKnownYear": 1969,
+          "known": 1560,
+          "lastKnownYear": 2025,
+          "missing": 2054,
+          "zero": 0
+        },
+        "E": {
+          "firstKnownYear": 1871,
+          "known": 3600,
+          "lastKnownYear": 2025,
+          "missing": 14,
+          "zero": 0
+        },
+        "ER": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 1
+        },
+        "ERA": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 1
+        },
+        "FP": {
+          "firstKnownYear": 1871,
+          "known": 3600,
+          "lastKnownYear": 2025,
+          "missing": 14,
+          "zero": 0
+        },
+        "G": {
+          "firstKnownYear": 1871,
+          "known": 3614,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "Ghome": {
+          "firstKnownYear": 1891,
+          "known": 2986,
+          "lastKnownYear": 2025,
+          "missing": 628,
+          "zero": 15
+        },
+        "H": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 0
+        },
+        "HA": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 0
+        },
+        "HBP": {
+          "firstKnownYear": 1884,
+          "known": 2455,
+          "lastKnownYear": 2025,
+          "missing": 1159,
+          "zero": 40
+        },
+        "HR": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 40
+        },
+        "HRA": {
+          "firstKnownYear": 1871,
+          "known": 3600,
+          "lastKnownYear": 2025,
+          "missing": 14,
+          "zero": 33
+        },
+        "IPouts": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 0
+        },
+        "L": {
+          "firstKnownYear": 1871,
+          "known": 3614,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 5
+        },
+        "LgWin": {
+          "firstKnownYear": 1871,
+          "known": 3126,
+          "lastKnownYear": 2025,
+          "missing": 488,
+          "zero": 0
+        },
+        "PPF": {
+          "firstKnownYear": 1871,
+          "known": 3105,
+          "lastKnownYear": 2025,
+          "missing": 509,
+          "zero": 0
+        },
+        "R": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 0
+        },
+        "RA": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 0
+        },
+        "Rank": {
+          "firstKnownYear": 1871,
+          "known": 3614,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "SB": {
+          "firstKnownYear": 1871,
+          "known": 3473,
+          "lastKnownYear": 2025,
+          "missing": 141,
+          "zero": 6
+        },
+        "SF": {
+          "firstKnownYear": 1905,
+          "known": 1624,
+          "lastKnownYear": 2025,
+          "missing": 1990,
+          "zero": 21
+        },
+        "SHO": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 176
+        },
+        "SO": {
+          "firstKnownYear": 1871,
+          "known": 3534,
+          "lastKnownYear": 2025,
+          "missing": 80,
+          "zero": 29
+        },
+        "SOA": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 1
+        },
+        "SV": {
+          "firstKnownYear": 1871,
+          "known": 3613,
+          "lastKnownYear": 2025,
+          "missing": 1,
+          "zero": 370
+        },
+        "W": {
+          "firstKnownYear": 1871,
+          "known": 3614,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 6
+        },
+        "WCWin": {
+          "firstKnownYear": 1995,
+          "known": 924,
+          "lastKnownYear": 2025,
+          "missing": 2690,
+          "zero": 0
+        },
+        "WSWin": {
+          "firstKnownYear": 1884,
+          "known": 2759,
+          "lastKnownYear": 2025,
+          "missing": 855,
+          "zero": 0
+        },
+        "attendance": {
+          "firstKnownYear": 1890,
+          "known": 2826,
+          "lastKnownYear": 2025,
+          "missing": 788,
+          "zero": 30
+        },
+        "divID": {
+          "firstKnownYear": 1969,
+          "known": 1588,
+          "lastKnownYear": 2025,
+          "missing": 2026,
+          "zero": 0
+        },
+        "franchID": {
+          "firstKnownYear": 1871,
+          "known": 3614,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "lgID": {
+          "firstKnownYear": 1871,
+          "known": 3614,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "name": {
+          "firstKnownYear": 1871,
+          "known": 3614,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "park": {
+          "firstKnownYear": 1871,
+          "known": 3558,
+          "lastKnownYear": 2025,
+          "missing": 56,
+          "zero": 0
+        },
+        "teamID": {
+          "firstKnownYear": 1871,
+          "known": 3614,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "teamIDBR": {
+          "firstKnownYear": 1871,
+          "known": 3614,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        },
+        "teamIDlahman45": {
+          "firstKnownYear": 1871,
+          "known": 3105,
+          "lastKnownYear": 2025,
+          "missing": 509,
+          "zero": 0
+        },
+        "teamIDretro": {
+          "firstKnownYear": 1871,
+          "known": 3553,
+          "lastKnownYear": 2025,
+          "missing": 61,
+          "zero": 0
+        },
+        "yearID": {
+          "firstKnownYear": 1871,
+          "known": 3614,
+          "lastKnownYear": 2025,
+          "missing": 0,
+          "zero": 0
+        }
+      },
+      "leagues": [
+        "AA",
+        "AL",
+        "ANL",
+        "EAS",
+        "ECL",
+        "EWL",
+        "FL",
+        "IND",
+        "INT",
+        "NA",
+        "NAC",
+        "NAL",
+        "NL",
+        "NN2",
+        "NNL",
+        "NSL",
+        "PL",
+        "UA",
+        "WES"
+      ],
+      "positions": { "n/a": 3614 },
+      "rows": 3614
+    }
+  },
+  "teamChecks2024": [
+    {
+      "errors": 62,
+      "fielderDPParticipations": 380,
+      "putouts": 4330,
+      "teamDP": 138,
+      "teamId": "ARI"
+    },
+    {
+      "errors": 68,
+      "fielderDPParticipations": 354,
+      "putouts": 4330,
+      "teamDP": 131,
+      "teamId": "ATL"
+    },
+    {
+      "errors": 81,
+      "fielderDPParticipations": 269,
+      "putouts": 4326,
+      "teamDP": 100,
+      "teamId": "BAL"
+    },
+    {
+      "errors": 115,
+      "fielderDPParticipations": 310,
+      "putouts": 4358,
+      "teamDP": 117,
+      "teamId": "BOS"
+    },
+    {
+      "errors": 90,
+      "fielderDPParticipations": 310,
+      "putouts": 4260,
+      "teamDP": 115,
+      "teamId": "CHA"
+    },
+    {
+      "errors": 76,
+      "fielderDPParticipations": 257,
+      "putouts": 4297,
+      "teamDP": 91,
+      "teamId": "CHN"
+    },
+    {
+      "errors": 96,
+      "fielderDPParticipations": 265,
+      "putouts": 4284,
+      "teamDP": 100,
+      "teamId": "CIN"
+    },
+    {
+      "errors": 87,
+      "fielderDPParticipations": 360,
+      "putouts": 4284,
+      "teamDP": 130,
+      "teamId": "CLE"
+    },
+    {
+      "errors": 82,
+      "fielderDPParticipations": 448,
+      "putouts": 4280,
+      "teamDP": 164,
+      "teamId": "COL"
+    },
+    {
+      "errors": 80,
+      "fielderDPParticipations": 344,
+      "putouts": 4341,
+      "teamDP": 129,
+      "teamId": "DET"
+    },
+    {
+      "errors": 84,
+      "fielderDPParticipations": 346,
+      "putouts": 4296,
+      "teamDP": 130,
+      "teamId": "HOU"
+    },
+    {
+      "errors": 85,
+      "fielderDPParticipations": 334,
+      "putouts": 4284,
+      "teamDP": 125,
+      "teamId": "KCA"
+    },
+    {
+      "errors": 97,
+      "fielderDPParticipations": 420,
+      "putouts": 4293,
+      "teamDP": 152,
+      "teamId": "LAA"
+    },
+    {
+      "errors": 88,
+      "fielderDPParticipations": 316,
+      "putouts": 4337,
+      "teamDP": 119,
+      "teamId": "LAN"
+    },
+    {
+      "errors": 117,
+      "fielderDPParticipations": 331,
+      "putouts": 4312,
+      "teamDP": 123,
+      "teamId": "MIA"
+    },
+    {
+      "errors": 89,
+      "fielderDPParticipations": 317,
+      "putouts": 4338,
+      "teamDP": 113,
+      "teamId": "MIL"
+    },
+    {
+      "errors": 70,
+      "fielderDPParticipations": 203,
+      "putouts": 4321,
+      "teamDP": 75,
+      "teamId": "MIN"
+    },
+    {
+      "errors": 93,
+      "fielderDPParticipations": 293,
+      "putouts": 4358,
+      "teamDP": 112,
+      "teamId": "NYA"
+    },
+    {
+      "errors": 94,
+      "fielderDPParticipations": 347,
+      "putouts": 4327,
+      "teamDP": 127,
+      "teamId": "NYN"
+    },
+    {
+      "errors": 84,
+      "fielderDPParticipations": 384,
+      "putouts": 4310,
+      "teamDP": 142,
+      "teamId": "OAK"
+    },
+    {
+      "errors": 85,
+      "fielderDPParticipations": 323,
+      "putouts": 4328,
+      "teamDP": 120,
+      "teamId": "PHI"
+    },
+    {
+      "errors": 91,
+      "fielderDPParticipations": 378,
+      "putouts": 4316,
+      "teamDP": 139,
+      "teamId": "PIT"
+    },
+    {
+      "errors": 75,
+      "fielderDPParticipations": 313,
+      "putouts": 4318,
+      "teamDP": 116,
+      "teamId": "SDN"
+    },
+    {
+      "errors": 79,
+      "fielderDPParticipations": 258,
+      "putouts": 4299,
+      "teamDP": 95,
+      "teamId": "SEA"
+    },
+    {
+      "errors": 87,
+      "fielderDPParticipations": 372,
+      "putouts": 4301,
+      "teamDP": 135,
+      "teamId": "SFN"
+    },
+    {
+      "errors": 75,
+      "fielderDPParticipations": 415,
+      "putouts": 4332,
+      "teamDP": 155,
+      "teamId": "SLN"
+    },
+    {
+      "errors": 90,
+      "fielderDPParticipations": 289,
+      "putouts": 4322,
+      "teamDP": 108,
+      "teamId": "TBA"
+    },
+    {
+      "errors": 73,
+      "fielderDPParticipations": 280,
+      "putouts": 4283,
+      "teamDP": 106,
+      "teamId": "TEX"
+    },
+    {
+      "errors": 92,
+      "fielderDPParticipations": 337,
+      "putouts": 4282,
+      "teamDP": 125,
+      "teamId": "TOR"
+    },
+    {
+      "errors": 109,
+      "fielderDPParticipations": 415,
+      "putouts": 4302,
+      "teamDP": 155,
+      "teamId": "WAS"
+    }
+  ],
+  "transitionModelId": "transitions:d2206ab52b6a0bb9a7dec86168fb868dd19acd33720df47ad14945b494ba18cb"
+}

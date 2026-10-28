@@ -423,3 +423,109 @@ test('drafted profile retrieval is selected-only, cached, versioned and runs nat
     draftedSeason(e, { ...s, remainingBudget: 999 }, api, shared, '1'),
   ).rejects.toThrow(/replay/);
 });
+
+test('three deterministic free rerolls replace current offers and replay across rounds', () => {
+  const current: Catalog = JSON.parse(
+    readFileSync('data/publications/mlb-draft-2024-v2.json', 'utf8'),
+  );
+  const e = new DraftEngine(current);
+  let state = e.start('20261027');
+  const original = state;
+  for (let i = 0; i < 3; i++) {
+    expect(e.canReroll(state)).toBe(true);
+    const before = state;
+    state = e.reroll(state);
+    expect(state.offers).toHaveLength(3);
+    expect(state.offers.every((id) => !before.offers.includes(id))).toBe(true);
+    expect(state.remainingBudget).toBe(before.remainingBudget);
+    expect(state.history).toEqual(before.history);
+    expect(e.reroll(before)).toEqual(state);
+    expect(
+      e.replay(
+        state.seed,
+        state.history.map((p) => p.playerId),
+        state.rerollRounds,
+      ),
+    ).toEqual(state);
+    state = e.select(state, state.offers[0]);
+  }
+  expect(e.canReroll(state)).toBe(false);
+  expect(() => e.reroll(state)).toThrow(/No rerolls/);
+  while (state.status !== 'complete') state = e.select(state, state.offers[0]);
+  expect(state.remainingBudget).toBeGreaterThanOrEqual(0);
+  expect(new Set(state.history.map((p) => p.playerId)).size).toBe(9);
+  expect(
+    e.replay(
+      state.seed,
+      state.history.map((p) => p.playerId),
+      state.rerollRounds,
+    ),
+  ).toEqual(state);
+  expect(e.canReroll(state)).toBe(false);
+  expect(() => e.reroll(state)).toThrow();
+  expect(e.start(original.seed)).toEqual(original);
+  expect(e.canReroll(e.start(original.seed))).toBe(true);
+  expect(() => e.replay('1', [], [0, 0, 0, 0])).toThrow();
+  expect(() => e.replay('1', [], [1])).toThrow();
+});
+
+test('rerolls cannot spend a charge on a small safe pool or revive selected players', () => {
+  const e = new DraftEngine(synthetic());
+  const state = e.start('1');
+  expect(e.canReroll(state)).toBe(false);
+  expect(() => e.reroll(state)).toThrow(/too few/);
+  expect(e.start('1')).toEqual(state);
+  const current: Catalog = JSON.parse(
+    readFileSync('data/publications/mlb-draft-2024-v2.json', 'utf8'),
+  );
+  for (let seed = 0; seed < 40; seed++) {
+    const engine = new DraftEngine(current);
+    let s = engine.start(String(seed));
+    while (s.status !== 'complete') {
+      if (engine.canReroll(s)) {
+        const before = s;
+        s = engine.reroll(s);
+        expect(
+          s.offers.every(
+            (id) =>
+              !before.offers.includes(id) &&
+              !s.history.some((p) => p.playerId === id),
+          ),
+        ).toBe(true);
+      }
+      s = engine.select(s, s.offers[seed % s.offers.length]);
+    }
+    expect(s.remainingBudget).toBeGreaterThanOrEqual(0);
+  }
+});
+
+test('reroll replay supports repeated uses in one round and the final DH round', () => {
+  const current: Catalog = JSON.parse(
+    readFileSync('data/publications/mlb-draft-2024-v2.json', 'utf8'),
+  );
+  const e = new DraftEngine(current);
+  let state = e.start('20261027');
+  state = e.reroll(e.reroll(state));
+  expect(state.rerollRounds).toEqual([0, 0]);
+  expect(e.replay(state.seed, [], [0, 0])).toEqual(state);
+  while (state.history.length < 8) state = e.select(state, state.offers[0]);
+  expect(e.canReroll(state)).toBe(true);
+  state = e.reroll(state);
+  expect(state.rerollRounds).toEqual([0, 0, 8]);
+  expect(
+    e.replay(
+      state.seed,
+      state.history.map((p) => p.playerId),
+      state.rerollRounds,
+    ),
+  ).toEqual(state);
+  state = e.select(state, state.offers[0]);
+  expect(
+    e.replay(
+      state.seed,
+      state.history.map((p) => p.playerId),
+      state.rerollRounds,
+    ),
+  ).toEqual(state);
+  expect(() => e.replay(state.seed, [], [0, -1])).toThrow();
+});

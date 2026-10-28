@@ -12,6 +12,8 @@ export const POSITIONS = [
 ] as const;
 export type Position = (typeof POSITIONS)[number];
 export const RULES = 'mlb-protected-draft-v1';
+export const REROLL_RULES = 'mlb-protected-draft-rerolls-v1';
+export const REROLL_LIMIT = 3;
 export const RNG = 'mulberry32-rejection-v1';
 export interface DraftPlayer {
   id: string;
@@ -62,8 +64,10 @@ export interface Pick {
   offers: string[];
 }
 export interface DraftState {
-  schemaVersion: '1.0.0';
-  rulesVersion: typeof RULES;
+  schemaVersion: '1.0.0' | '1.1.0';
+  rulesVersion: typeof RULES | typeof REROLL_RULES;
+  /** Zero-based round of each reroll, in execution order. Absent in legacy drafts. */
+  rerollRounds?: number[];
   rngVersion: typeof RNG;
   catalogId: string;
   seed: string;
@@ -322,7 +326,7 @@ export class DraftEngine {
       status: 'drafting',
     });
   }
-  private next(state: DraftState): DraftState {
+  private safeCandidates(state: DraftState) {
     const pos = this.config.order[state.history.length];
     const selected = state.history.map((p) => p.playerId);
     const candidates = this.pools[pos]
@@ -336,6 +340,14 @@ export class DraftEngine {
       );
       return cost !== null && p.price + cost <= state.remainingBudget;
     });
+    return { candidates, safe };
+  }
+  private next(
+    state: DraftState,
+    excluded: readonly string[] = [],
+  ): DraftState {
+    const { candidates, safe: allSafe } = this.safeCandidates(state);
+    const safe = allSafe.filter((p) => !excluded.includes(p.id));
     check(safe.length, 'No legal continuation: no safe offer');
     // Uniform without replacement on safe eligible identities. Protection conditions
     // the distribution on affordability and completion, not the unfiltered pool.
@@ -352,13 +364,27 @@ export class DraftEngine {
       rngState: rng,
       offers,
       excludedUnsafeCandidates:
-        state.excludedUnsafeCandidates + candidates.length - safe.length,
+        state.excludedUnsafeCandidates + candidates.length - allSafe.length,
     });
   }
-  select(state: DraftState, id: string): DraftState {
+  private validate(state: DraftState) {
     // States are values from this engine. Imported histories must use replay().
     check(
-      state.schemaVersion === '1.0.0' &&
+      ((state.schemaVersion === '1.0.0' &&
+        state.rulesVersion === RULES &&
+        state.rerollRounds === undefined) ||
+        (state.schemaVersion === '1.1.0' &&
+          state.rulesVersion === REROLL_RULES &&
+          Array.isArray(state.rerollRounds) &&
+          state.rerollRounds.length > 0 &&
+          state.rerollRounds.length <= REROLL_LIMIT &&
+          state.rerollRounds.every(
+            (round, i, rounds) =>
+              Number.isInteger(round) &&
+              round >= 0 &&
+              round <= Math.min(state.history.length, 8) &&
+              (i === 0 || round >= rounds[i - 1]),
+          ))) &&
         state.catalogId === this.catalog.id &&
         state.config.budget === this.config.budget &&
         state.config.offers === this.config.offers &&
@@ -369,23 +395,10 @@ export class DraftEngine {
         state.config.order.every(
           (position, i) => position === this.config.order[i],
         ) &&
-        state.rulesVersion === RULES &&
         state.rngVersion === RNG,
       'Draft versions/configuration differ',
     );
-    check(
-      state.status === 'drafting' &&
-        state.history.length < 9 &&
-        state.offers.includes(id),
-      'Selection is not a current selectable offer',
-    );
-    const p = this.player(id),
-      pos = this.config.order[state.history.length];
     const selected = state.history.map((p) => p.playerId);
-    check(
-      !selected.includes(id) && eligible(p, pos, this.config),
-      'Duplicate or ineligible selection',
-    );
     check(
       new Set(selected).size === selected.length &&
         state.history.every(
@@ -398,6 +411,50 @@ export class DraftEngine {
           this.config.budget -
             state.history.reduce((sum, p) => sum + p.price, 0),
       'Invalid history or remaining budget; import drafts through replay',
+    );
+  }
+  canReroll(state: DraftState): boolean {
+    if (
+      state.status !== 'drafting' ||
+      (state.rerollRounds?.length ?? 0) >= REROLL_LIMIT
+    )
+      return false;
+    this.validate(state);
+    return (
+      this.safeCandidates(state).safe.filter(
+        (p) => !state.offers.includes(p.id),
+      ).length >= state.offers.length
+    );
+  }
+  reroll(state: DraftState): DraftState {
+    check(
+      this.canReroll(state),
+      'No rerolls remaining or too few alternative safe players',
+    );
+    return this.next(
+      {
+        ...state,
+        schemaVersion: '1.1.0',
+        rulesVersion: REROLL_RULES,
+        rerollRounds: [...(state.rerollRounds ?? []), state.history.length],
+      },
+      state.offers,
+    );
+  }
+  select(state: DraftState, id: string): DraftState {
+    this.validate(state);
+    check(
+      state.status === 'drafting' &&
+        state.history.length < 9 &&
+        state.offers.includes(id),
+      'Selection is not a current selectable offer',
+    );
+    const p = this.player(id),
+      pos = this.config.order[state.history.length];
+    const selected = state.history.map((p) => p.playerId);
+    check(
+      !selected.includes(id) && eligible(p, pos, this.config),
+      'Duplicate or ineligible selection',
     );
     const budget = state.remainingBudget - p.price;
     const minimum = this.minimum(
@@ -425,9 +482,28 @@ export class DraftEngine {
     };
     return next.status === 'complete' ? frozen(next) : this.next(next);
   }
-  replay(seed: string, picks: readonly string[]): DraftState {
+  replay(
+    seed: string,
+    picks: readonly string[],
+    rerollRounds: readonly number[] = [],
+  ): DraftState {
+    check(
+      rerollRounds.length <= REROLL_LIMIT &&
+        rerollRounds.every(
+          (round, i) =>
+            Number.isInteger(round) &&
+            round >= 0 &&
+            round <= Math.min(picks.length, 8) &&
+            (i === 0 || round >= rerollRounds[i - 1]),
+        ),
+      'Invalid reroll history',
+    );
     let state = this.start(seed);
-    for (const id of picks) state = this.select(state, id);
+    for (let round = 0; round <= picks.length; round++) {
+      for (const rerollRound of rerollRounds)
+        if (rerollRound === round) state = this.reroll(state);
+      if (round < picks.length) state = this.select(state, picks[round]);
+    }
     return state;
   }
 }

@@ -19,6 +19,7 @@ export async function draftedSeason(
   const replayed = engine.replay(
     state.seed,
     state.history.map((p) => p.playerId),
+    state.rerollRounds,
   );
   if (
     replayed.status !== 'complete' ||

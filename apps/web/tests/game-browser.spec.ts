@@ -631,3 +631,73 @@ test('mobile keyboard flow, loading, retry after API/WASM failures and cancellat
     fullPage: true,
   });
 });
+
+test('three rerolls replace offers, persist across picks, simulate and reset for a new draft', async ({
+  page,
+}) => {
+  test.skip(
+    !process.env.M6B_IMPORT_SQL,
+    'Requires the full player publication for rerolled players',
+  );
+  await setup(page);
+  let state = engine.start('20261027');
+  for (let i = 0; i < 3; i++) {
+    await page
+      .getByRole('button', {
+        name: `Reroll players (${3 - i} left)`,
+        exact: true,
+      })
+      .click();
+    const previous = state;
+    state = engine.reroll(state);
+    for (const id of previous.offers)
+      await expect(
+        page.getByRole('button', {
+          name: `Draft ${engine.player(id).name}`,
+          exact: true,
+        }),
+      ).toHaveCount(0);
+    for (const id of state.offers)
+      await expect(
+        page.getByRole('button', {
+          name: `Draft ${engine.player(id).name}`,
+          exact: true,
+        }),
+      ).toBeVisible();
+    await expect(page.getByTestId('game-budget')).toHaveText(
+      String(state.remainingBudget),
+    );
+    await page
+      .getByRole('button', {
+        name: `Draft ${engine.player(state.offers[0]).name}`,
+        exact: true,
+      })
+      .click();
+    state = engine.select(state, state.offers[0]);
+  }
+  await expect(
+    page.getByRole('button', { name: 'Reroll players (0 left)', exact: true }),
+  ).toBeDisabled();
+  while (state.status !== 'complete') {
+    await page
+      .getByRole('button', {
+        name: `Draft ${engine.player(state.offers[0]).name}`,
+        exact: true,
+      })
+      .click();
+    state = engine.select(state, state.offers[0]);
+  }
+  await page
+    .getByRole('button', { name: 'Simulate 162-game season', exact: true })
+    .click();
+  await expect(
+    page.getByRole('button', { name: 'Play another season', exact: true }),
+  ).toBeVisible({ timeout: 30000 });
+  await expect(page.getByRole('alert')).toHaveCount(0);
+  await page
+    .getByRole('button', { name: 'Start a new draft', exact: true })
+    .click();
+  await expect(
+    page.getByRole('button', { name: 'Reroll players (3 left)', exact: true }),
+  ).toBeEnabled();
+});

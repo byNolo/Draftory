@@ -197,3 +197,11 @@ variance remain; this milestone does not recalibrate them. See the
 [M7C validation report](../data/validation/mlb-game-v1.md) for measurements and
 recommended human playtests. See [alpha deployment](ALPHA_DEPLOYMENT.md) for the
 hosting arrangement; M8C.1 itself makes no cloud or database changes.
+
+## Offer rerolls
+
+Use **Reroll players** while drafting to replace the current offer. Each draft has
+three free rerolls shared across all positions; the button shows how many remain.
+Picks and credits stay unchanged. Rerolling requires enough different affordable
+players to replace every displayed card. Starting a new draft restores all three.
+See [draft rules and replay](MLB_DRAFT.md#three-free-rerolls).

@@ -4,7 +4,7 @@ import { SeasonClient } from '../../workers/season-client';
 import type { SeasonSuccess } from '../../workers/protocol';
 import { PilotLoader } from '../pilot-loader';
 import { loadCatalog, PLAYTEST_BUDGET } from '../draft/catalog';
-import { DraftEngine, type DraftState } from '../draft/engine';
+import { DraftEngine, REROLL_LIMIT, type DraftState } from '../draft/engine';
 import { draftedSeason } from '../draft/season';
 import {
   defaultBattingOrder,
@@ -133,6 +133,20 @@ export default function MLBGame() {
         setBattingOrder(defaultBattingOrder(next));
       setStats({});
       setError('');
+    } catch (e) {
+      setError(String(e));
+    }
+  }
+  function reroll() {
+    if (!engine || !draft || busy) return;
+    try {
+      const next = engine.reroll(draft);
+      setDraft(next);
+      setStats({});
+      setError('');
+      setNotice(
+        `New player offers. ${REROLL_LIMIT - (next.rerollRounds?.length ?? 0)} rerolls remaining.`,
+      );
     } catch (e) {
       setError(String(e));
     }
@@ -308,6 +322,7 @@ export default function MLBGame() {
                 <h2>Choose your hitters</h2>
                 <p>
                   Up to three randomized, affordable choices at every position.
+                  Three free rerolls per draft.
                 </p>
               </article>
               <article>
@@ -419,13 +434,26 @@ export default function MLBGame() {
                   aria-label={complete ? 'Next season' : 'Player offers'}
                 >
                   {!complete && (
-                    <OfferCards
-                      engine={engine}
-                      draft={draft}
-                      stats={stats}
-                      busy={busy}
-                      onPick={pick}
-                    />
+                    <>
+                      <button
+                        disabled={busy || !engine.canReroll(draft)}
+                        onClick={reroll}
+                      >
+                        Reroll players (
+                        {REROLL_LIMIT - (draft.rerollRounds?.length ?? 0)} left)
+                      </button>
+                      <p className="muted">
+                        Replaces all current offers. No credits spent. Requires
+                        enough different affordable players.
+                      </p>
+                      <OfferCards
+                        engine={engine}
+                        draft={draft}
+                        stats={stats}
+                        busy={busy}
+                        onPick={pick}
+                      />
+                    </>
                   )}
                   {complete && (
                     <div className="season-actions">

@@ -16,7 +16,7 @@ playtest** sits below the preserved simulation harnesses. Start a seeded draft,
 select one offer per position, inspect roster/history JSON, then simulate the
 completed roster with a separate season seed. Drafting works with static assets;
 simulation needs the compatible API publication. Data failures are visible and
-retryable. There is no account, persistence, undo, reroll or production deployment.
+retryable. There is no account, persistence or undo. The alpha game supports three free rerolls per draft.
 
 `apps/web/src/mlb/draft/engine.ts` owns MLB game rules independently of React,
 network, clocks and Rust. React only presents states and dispatches choices.
@@ -61,6 +61,25 @@ histories use `replay(seed, pickIds)`, which reconstructs valid offers; arbitrar
 JSON is not accepted as a saved state. Simulation requires exact replay equality.
 Start/replay resets the entered seed/config; repeating picks repeats the roster.
 New-random uses browser crypto outside the engine.
+
+## Three free rerolls
+
+The playable game allows **three rerolls total per draft**, shared across all
+nine positions. Each replaces the entire visible offer with distinct safe players
+not in that immediately previous offer. Picks, position and credits stay unchanged.
+Rerolled players may appear again on a later reroll or round; selected players
+never reappear. A new draft resets the allowance. If too few alternatives exist to
+replace every current card, reroll is disabled without consuming an allowance.
+
+The pure engine exposes `canReroll(state)` and `reroll(state)`. The first reroll
+opts into state schema **1.1.0**, rules `mlb-protected-draft-rerolls-v1`, with
+`rerollRounds`: up to three ordered zero-based round indexes (duplicates represent
+multiple rerolls at the same position). Exported sessions include this history.
+`replay(seed, pickIds, rerollRounds)` reconstructs all draws, including rerolls
+before an unfinished round. Season assembly verifies this complete replay before
+loading simulation profiles. No-reroll drafts retain the exact legacy schema,
+versions, RNG sequence and goldens. This is an additive draft feature, with no
+simulation model, price, catalog, database or API changes.
 
 ## Completion guarantee and offer distribution
 

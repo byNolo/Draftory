@@ -26,6 +26,9 @@ export interface HistoricalBatting {
   obp: number | null;
   slg: number | null;
   hr: number | null;
+  sb: number | null;
+  cs: number | null;
+  sbPct: number | null;
   pa: number | null;
   teams: string[];
 }
@@ -86,6 +89,8 @@ export function historicalBatting(
   )
     throw new Error('Inconsistent historical batting totals.');
   const pa = add(ab, bb, hbp, sh, sf);
+  const sb = total('SB'),
+    cs = total('CS');
   if (pa !== null && pa !== expected.pa)
     throw new Error(
       'Historical plate appearances differ from the pinned catalog.',
@@ -95,6 +100,9 @@ export function historicalBatting(
     obp: ratio(add(h, bb, hbp), add(ab, bb, hbp, sf)),
     slg: ratio(bases, ab),
     hr,
+    sb,
+    cs,
+    sbPct: ratio(sb, add(sb, cs)),
     pa,
     teams: [
       ...new Set(player.stints.map((s) => String(s.teamName ?? s.teamId))),

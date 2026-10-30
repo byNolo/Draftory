@@ -88,7 +88,10 @@ export default function MLBGame() {
     )
       .then((entries) => {
         if (active) {
-          setStats(Object.fromEntries(entries));
+          setStats((previous) => ({
+            ...previous,
+            ...Object.fromEntries(entries),
+          }));
           setError('');
         }
       })
@@ -136,7 +139,11 @@ export default function MLBGame() {
       setDraft(next);
       if (next.status === 'complete')
         setBattingOrder(defaultBattingOrder(next));
-      setStats({});
+      setStats((previous) =>
+        Object.fromEntries(
+          next.history.map((pick) => [pick.playerId, previous[pick.playerId]]),
+        ),
+      );
       setError('');
     } catch (e) {
       setError(String(e));
@@ -147,7 +154,11 @@ export default function MLBGame() {
     try {
       const next = engine.reroll(draft);
       setDraft(next);
-      setStats({});
+      setStats((previous) =>
+        Object.fromEntries(
+          next.history.map((pick) => [pick.playerId, previous[pick.playerId]]),
+        ),
+      );
       setError('');
       setNotice(
         `New player offers. ${REROLL_LIMIT - (next.rerollRounds?.length ?? 0)} rerolls remaining.`,
@@ -440,6 +451,7 @@ export default function MLBGame() {
                   engine={engine}
                   draft={draft}
                   order={battingOrder}
+                  stats={stats}
                   disabled={busy}
                   onChange={(order, announcement) => {
                     setBattingOrder(order);

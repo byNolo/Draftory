@@ -317,6 +317,28 @@ test('custom batting order: keyboard, pointer/touch, native parity, result ident
         rows.map((r) => (r as HTMLElement).dataset.battingPlayer),
       );
   expect(await ids()).toEqual(original);
+  for (const id of original) {
+    const player = fixture.players.find((p: { id: string }) => p.id === id);
+    const stats = historicalBatting(player, engine.player(id), 2024);
+    const row = list.locator(`[data-batting-player="${id}"]`);
+    const expected = [
+      rate(stats.avg),
+      rate(stats.obp),
+      rate(stats.slg),
+      rate(
+        stats.obp === null || stats.slg === null ? null : stats.obp + stats.slg,
+      ),
+      String(stats.hr ?? '—'),
+      String(stats.sb ?? '—'),
+      stats.sbPct === null ? '—' : `${(stats.sbPct * 100).toFixed(1)}%`,
+      String(stats.pa ?? '—'),
+    ];
+    await expect(row.locator('.batting-stats dd')).toHaveText(expected);
+  }
+  mkdirSync('target/batting-order', { recursive: true });
+  await page.locator('.batting-editor').screenshot({
+    path: `target/batting-order/${info.project.name}.png`,
+  });
   const assignments = await page
     .getByLabel('Your lineup', { exact: true })
     .textContent();

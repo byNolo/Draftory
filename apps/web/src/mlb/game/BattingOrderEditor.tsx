@@ -1,5 +1,6 @@
 import { useRef, useState, type PointerEvent } from 'react';
 import type { DraftEngine, DraftState } from '../draft/engine';
+import { rate, type HistoricalBatting } from './batting';
 import {
   defaultBattingOrder,
   moveBatter,
@@ -10,12 +11,14 @@ export default function BattingOrderEditor({
   engine,
   draft,
   order,
+  stats,
   disabled,
   onChange,
 }: {
   engine: DraftEngine;
   draft: DraftState;
   order: BattingOrder;
+  stats: Record<string, HistoricalBatting>;
   disabled: boolean;
   onChange: (order: BattingOrder, announcement: string) => void;
 }) {
@@ -39,7 +42,18 @@ export default function BattingOrderEditor({
   }
   return (
     <section className="batting-editor" aria-labelledby="batting-order-title">
-      <h2 id="batting-order-title">Batting order</h2>
+      <div className="batting-heading">
+        <div>
+          <p className="eyebrow">Build your lineup</p>
+          <h2 id="batting-order-title">Batting order</h2>
+        </div>
+        <span className="batting-season">
+          {engine.catalog.year} historical stats
+        </span>
+      </div>
+      <p className="batting-insight">
+        Compare on-base ability and power as you arrange your nine hitters.
+      </p>
       <p id="batting-order-help" className="muted">
         Drag a handle or use Move up and Move down. A focused handle also
         accepts Arrow Up/Down. Fielding positions stay assigned.
@@ -48,6 +62,27 @@ export default function BattingOrderEditor({
         {order.map((id, i) => {
           const player = engine.player(id);
           const pick = draft.history.find((p) => p.playerId === id)!;
+          const s = stats[id];
+          const metrics = [
+            ['AVG', 'Batting average', rate(s?.avg ?? null)],
+            ['OBP', 'On-base percentage', rate(s?.obp ?? null)],
+            ['SLG', 'Slugging percentage', rate(s?.slg ?? null)],
+            [
+              'OPS',
+              'On-base plus slugging',
+              rate(
+                s && s.obp !== null && s.slg !== null ? s.obp + s.slg : null,
+              ),
+            ],
+            ['HR', 'Home runs', s?.hr ?? '—'],
+            ['SB', 'Stolen bases', s?.sb ?? '—'],
+            [
+              'SB%',
+              `Stolen-base success rate${s && s.sb !== null && s.cs !== null ? `: ${s.sb} stolen, ${s.cs} caught stealing` : ''}`,
+              s?.sbPct == null ? '—' : `${(s.sbPct * 100).toFixed(1)}%`,
+            ],
+            ['PA', 'Plate appearances', s?.pa ?? '—'],
+          ];
           return (
             <li
               key={id}
@@ -58,9 +93,28 @@ export default function BattingOrderEditor({
                 {i + 1}
               </span>
               <span className="batting-name">
-                {player.name}
-                <small>{pick.position}</small>
+                <strong>{player.name}</strong>
+                <small>
+                  <span className="batting-position">{pick.position}</span>{' '}
+                  {s?.teams.join(' / ')}
+                </small>
               </span>
+              <dl
+                className="batting-stats"
+                aria-label={`${player.name} historical batting statistics`}
+              >
+                {metrics.map(([label, description, value]) => (
+                  <div
+                    key={label}
+                    className={label === 'OPS' ? 'batting-ops' : undefined}
+                  >
+                    <dt>
+                      <abbr title={String(description)}>{label}</abbr>
+                    </dt>
+                    <dd>{value}</dd>
+                  </div>
+                ))}
+              </dl>
               <div className="batting-controls">
                 <button
                   type="button"
@@ -127,6 +181,24 @@ export default function BattingOrderEditor({
           );
         })}
       </ol>
+      <details className="batting-stat-help">
+        <summary>About these stats</summary>
+        <p>
+          AVG: batting average · OBP: on-base percentage · SLG: slugging
+          percentage · OPS: OBP + SLG · HR: home runs · SB: stolen bases · SB%:
+          stolen bases ÷ (stolen bases + caught stealing) · PA: plate
+          appearances.
+        </p>
+        <p>
+          All historical batting stints are combined. PA shows the sample size,
+          not a limit on simulated playing time. Unknown stats display —. These
+          are historical records; simulated results will vary.
+        </p>
+        <p>
+          SB% displays — when there are no attempts or counts are unknown. Steal
+          attempts are not currently modeled in the simulator.
+        </p>
+      </details>
       <button
         type="button"
         disabled={disabled}

@@ -133,6 +133,9 @@ test('historical cards use verified counts and official SF denominator, not mode
   expect(s.obp).toBe((c.H + c.BB + c.HBP) / (c.AB + c.BB + c.HBP + c.SF));
   expect(s.slg).toBe((c.H + c['2B'] + 2 * c['3B'] + 3 * c.HR) / c.AB);
   expect(s.hr).toBe(c.HR);
+  expect(s.sb).toBe(c.SB);
+  expect(s.cs).toBe(c.CS);
+  expect(s.sbPct).toBe(c.SB / (c.SB + c.CS));
   expect(() =>
     historicalBatting({ ...player, year: 2023 }, expected, 2024),
   ).toThrow(/match/);
@@ -157,6 +160,8 @@ test('multi-team cards sum stints once, preserve unknowns, reject inconsistent c
     HBP: 1,
     SH: 0,
     SF: 1,
+    SB: 2,
+    CS: 1,
   };
   p.stints = [
     { stint: 1, teamId: 'A', leagueId: 'AL', counts },
@@ -169,6 +174,9 @@ test('multi-team cards sum stints once, preserve unknowns, reject inconsistent c
     slg: 0.7,
     pa: 28,
     hr: 2,
+    sb: 4,
+    cs: 2,
+    sbPct: 4 / 6,
     teams: ['A', 'B'],
   });
   p.stints[0] = { ...p.stints[0], counts: { ...counts, SF: null } };
@@ -179,6 +187,24 @@ test('multi-team cards sum stints once, preserve unknowns, reject inconsistent c
   });
   p.stints[0] = { ...p.stints[0], counts: { ...counts, H: 25 } };
   expect(() => historicalBatting(p, e, 2024)).toThrow(/Inconsistent/);
+});
+
+test('stolen-base success distinguishes zero success, no attempts and missing counts', () => {
+  for (const [sb, cs, percentage] of [
+    [0, 0, null],
+    [0, 2, 0],
+    [3, 0, 1],
+    [3, null, null],
+    [null, 2, null],
+  ]) {
+    const p = structuredClone(player);
+    p.stints[0].counts = {
+      ...(p.stints[0].counts as Record<string, number>),
+      SB: sb,
+      CS: cs,
+    };
+    expect(historicalBatting(p, expected, 2024).sbPct).toBe(percentage);
+  }
 });
 
 test('simulated rates handle zero denominators and walks already including IBB', () => {

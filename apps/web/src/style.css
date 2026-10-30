@@ -653,35 +653,124 @@ summary {
 
 .batting-editor {
   margin: 1.5rem 0;
+  padding: clamp(1rem, 2vw, 1.75rem);
+  background: #eeefe5;
+  border: 1px solid #d6d9cb;
+  border-radius: 14px;
+}
+.batting-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.batting-heading h2,
+.batting-heading .eyebrow {
+  margin: 0;
+}
+.batting-heading h2 {
+  font-size: 1.65rem;
+}
+.batting-season {
+  padding: 0.35rem 0.7rem;
+  border-radius: 20px;
+  background: #dde5d8;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.batting-insight {
+  margin-bottom: 0.35rem;
+}
+#batting-order-help {
+  margin-top: 0;
+  font-size: 0.8rem;
 }
 .batting-order {
   list-style: none;
   padding: 0;
-  max-width: 48rem;
+  display: grid;
+  gap: 0.5rem;
 }
 .batting-order li {
-  display: flex;
+  display: grid;
+  grid-template-columns: 2rem minmax(10rem, 1fr) minmax(27rem, 2fr) auto;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.6rem 0;
-  border-bottom: 1px solid currentColor;
+  padding: 0.8rem;
+  background: #fffefa;
+  border: 1px solid #d6d9cb;
+  border-radius: 10px;
 }
 .batting-order .drop-target {
   outline: 2px dashed currentColor;
   outline-offset: 2px;
 }
 .batting-number {
-  width: 1.5rem;
-  flex-shrink: 0;
-  font-weight: bold;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: #e9eddf;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
 }
 .batting-name {
-  flex: 1;
   min-width: 0;
   overflow-wrap: anywhere;
 }
 .batting-name small {
   display: block;
+  margin-top: 0.25rem;
+  color: #566459;
+  font-size: 0.72rem;
+}
+.batting-position {
+  color: #193b32;
+  font-weight: 800;
+  margin-right: 0.3rem;
+}
+.batting-stats {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  align-items: center;
+  margin: 0;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.batting-stats > div {
+  padding: 0.3rem 0.15rem;
+}
+.batting-stats dt {
+  font-size: 0.65rem;
+  font-weight: 650;
+  color: #566459;
+}
+.batting-stats abbr {
+  text-decoration: none;
+}
+.batting-stats dd {
+  margin: 0.15rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 750;
+}
+.batting-ops {
+  background: #e9eddf;
+  border-radius: 6px;
+}
+.batting-stat-help {
+  margin: 1rem 0;
+  font-size: 0.8rem;
+  color: #566459;
+}
+.batting-stat-help summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 .batting-controls {
   display: flex;
@@ -700,6 +789,53 @@ summary {
 }
 .drag-handle:active {
   cursor: grabbing;
+}
+@media (max-width: 1150px) {
+  .batting-order li {
+    grid-template-columns: 2rem minmax(0, 1fr) auto;
+  }
+  .batting-stats {
+    grid-row: 2;
+    grid-column: 2 / -1;
+    padding-top: 0.5rem;
+    border-top: 1px solid #e5e6dd;
+  }
+  .batting-controls {
+    grid-row: 1;
+    grid-column: 3;
+  }
+}
+@media (max-width: 540px) {
+  .batting-order li {
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+  .batting-name {
+    font-size: 0.85rem;
+  }
+  .batting-controls {
+    gap: 0.15rem;
+  }
+  .batting-controls button {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.2rem;
+  }
+  .batting-stats {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: 0.35rem;
+  }
+}
+@media (max-width: 380px) {
+  .batting-order li {
+    grid-template-columns: 1.5rem minmax(0, 1fr) auto;
+    padding: 0.6rem;
+  }
+  .batting-number {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 .offer-actions {

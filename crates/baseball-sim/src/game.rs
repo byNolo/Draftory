@@ -271,7 +271,7 @@ impl Game {
                 "Unexpected contextual transition".into(),
             ));
         }
-        let play = if let Some(t) = &transition {
+        let mut play = if let Some(t) = &transition {
             crate::resolve_transition(
                 &self.state.bases,
                 self.state.outs,
@@ -300,6 +300,16 @@ impl Game {
         } else {
             play.scorers.len() as u32
         };
+        // A proven timing run preceded the sole tag out. On a walk-off the game
+        // ended at that run, so the later retirement cannot count.
+        if walk_off
+            && transition
+                .as_ref()
+                .and_then(|t| t.runner_play)
+                .is_some_and(|p| p.runs_before_outs)
+        {
+            play.outs_on_play = 0;
+        }
         let mut credited_event = event;
         if walk_off && event != PlateAppearance::HomeRun {
             if let Some(bases) = event.hit_bases() {
@@ -371,7 +381,11 @@ impl Game {
             self.clear_bases();
             self.state.status = GameStatus::Final;
         } else if self.state.outs == 3 {
-            self.left_on_base[team] += self.state.bases.iter().flatten().count() as u32;
+            self.left_on_base[team] += if self.input.schema_version == crate::RUNNER_INPUT_VERSION {
+                occupied_before as u32 + 1 - runs - u32::from(play.outs_on_play)
+            } else {
+                self.state.bases.iter().flatten().count() as u32
+            };
             self.clear_bases();
             self.end_half();
         }
@@ -451,7 +465,9 @@ impl Game {
             GameStatus::Final => {}
         }
         Ok(GameResult {
-            schema_version: if self.input.config.defense.is_some() {
+            schema_version: if self.input.schema_version == crate::RUNNER_INPUT_VERSION {
+                "1.2.0"
+            } else if self.input.config.defense.is_some() {
                 "1.1.0"
             } else {
                 RESULT_SCHEMA_VERSION

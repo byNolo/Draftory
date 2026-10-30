@@ -1,5 +1,14 @@
 # Shared contracts
 
+M9B.1 adds separate `runner-model`, `runner-game-input` (1.4.0),
+`runner-season-input` (1.2.0), and runner game/season result (1.2.0) schemas.
+They select `runner-outs-nine-inning-v1` / `retrosheet-runner-outs-v1` and
+`retrosheet-runner-transitions-v1`. Optional fixed-size `runnerPlay` metadata
+identifies retirement kinds/attempted bases and proven timing; old choices retain
+their v1 resolution. Old and defensive rule/model combinations cannot enable
+this behavior. The dashboard result-version union also accepts 1.2.0; its layout
+is unchanged. See [runner rules and compatibility](../docs/RUNNER_TRANSITIONS.md).
+
 M7B adds `mlb-draft-catalog.schema.json` v1.0.0 for the compact static offer
 publication: source/dataset/policy identities, fixed experimental prices,
 nullable position games and default eligibility. It contains no simulation

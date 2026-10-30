@@ -1,0 +1,1572 @@
+{
+  "auditVersion": "m9a-accuracy-v1",
+  "baseline": {
+    "2022": {
+      "archivedRowsIdenticalExcludingTimings": true,
+      "historical": {
+        "double": 1.6337448559670782,
+        "gdp": 0.6981481481481482,
+        "hbp": 0.42098765432098767,
+        "hits": 8.16358024691358,
+        "homeRuns": 1.073045267489712,
+        "pa": 37.45925925925926,
+        "runs": 4.283333333333333,
+        "strikeouts": 8.397530864197531,
+        "triple": 0.1323045267489712,
+        "walks": 3.0561728395061727
+      },
+      "historicalDistribution": {
+        "beyondTen": 0.024691358024691357,
+        "extras": 0.08888888888888889,
+        "meanInnings": 9.11358024691358,
+        "runSD": 3.1096729501946436,
+        "shutouts": 0.07016460905349794,
+        "tenPlus": 0.06728395061728396
+      },
+      "hitDifference": {
+        "rate": 0.22941637248942237,
+        "total": 0.5175308641975302,
+        "volume": 0.28811449170810727
+      },
+      "simulated": {
+        "double": {
+          "mc95HalfWidth": 0.009700219439224703,
+          "mean": 1.7568518518518519,
+          "n": 20,
+          "sd": 0.022133010268134006
+        },
+        "gdp": {
+          "mc95HalfWidth": 0.005027302438976451,
+          "mean": 0.8841975308641975,
+          "n": 20,
+          "sd": 0.011470806119389625
+        },
+        "hbp": {
+          "mc95HalfWidth": 0.0038740887883742018,
+          "mean": 0.4276234567901235,
+          "n": 20,
+          "sd": 0.00883951620579032
+        },
+        "hits": {
+          "mc95HalfWidth": 0.015094621503311718,
+          "mean": 8.681111111111111,
+          "n": 20,
+          "sd": 0.03444142834289293
+        },
+        "homeRuns": {
+          "mc95HalfWidth": 0.0076548322152574875,
+          "mean": 1.1566358024691359,
+          "n": 20,
+          "sd": 0.01746604611190923
+        },
+        "pa": {
+          "mc95HalfWidth": 0.027410331897272915,
+          "mean": 38.7812962962963,
+          "n": 20,
+          "sd": 0.06254220960013573
+        },
+        "runs": {
+          "mc95HalfWidth": 0.01456516636376049,
+          "mean": 4.277829218106996,
+          "n": 20,
+          "sd": 0.03323336948261417
+        },
+        "strikeouts": {
+          "mc95HalfWidth": 0.014408059700465995,
+          "mean": 8.500123456790124,
+          "n": 20,
+          "sd": 0.032874898891956356
+        },
+        "triple": {
+          "mc95HalfWidth": 0.0027556016729143335,
+          "mean": 0.13733539094650205,
+          "n": 20,
+          "sd": 0.006287461897498562
+        },
+        "walks": {
+          "mc95HalfWidth": 0.00959643067661363,
+          "mean": 3.2106069958847736,
+          "n": 20,
+          "sd": 0.021896195239053447
+        }
+      },
+      "simulatedContactRates": {
+        "fieldersChoices": {
+          "mc95HalfWidth": 0.004881817242370607,
+          "mean": 0.7556584362139918,
+          "n": 20,
+          "sd": 0.011138852252725762
+        },
+        "reachedOnError": {
+          "mc95HalfWidth": 0.0030302756911138834,
+          "mean": 0.23045267489711935,
+          "n": 20,
+          "sd": 0.006914186159077346
+        }
+      },
+      "simulatedDistribution": {
+        "extras": {
+          "mc95HalfWidth": 0.002018073429322282,
+          "mean": 0.10139917695473251,
+          "n": 20,
+          "sd": 0.004604642215868103
+        },
+        "runSD": {
+          "mc95HalfWidth": 0.014521476748669694,
+          "mean": 2.9699546477445615,
+          "n": 20,
+          "sd": 0.03313368279970211
+        },
+        "shutouts": {
+          "mc95HalfWidth": 0.0014219078643821035,
+          "mean": 0.06795267489711934,
+          "n": 20,
+          "sd": 0.0032443700433672814
+        },
+        "tenPlus": {
+          "mc95HalfWidth": 0.0011446062725594998,
+          "mean": 0.05698559670781893,
+          "n": 20,
+          "sd": 0.002611650441750708
+        }
+      }
+    },
+    "2023": {
+      "archivedRowsIdenticalExcludingTimings": true,
+      "historical": {
+        "double": 1.6930041152263375,
+        "gdp": 0.7131687242798354,
+        "hbp": 0.4345679012345679,
+        "hits": 8.403086419753086,
+        "homeRuns": 1.2074074074074075,
+        "pa": 37.88148148148148,
+        "runs": 4.6156378600823045,
+        "strikeouts": 8.609670781893005,
+        "triple": 0.14650205761316873,
+        "walks": 3.254938271604938
+      },
+      "historicalDistribution": {
+        "beyondTen": 0.02139917695473251,
+        "extras": 0.08271604938271605,
+        "meanInnings": 9.110699588477367,
+        "runSD": 3.2187839923658994,
+        "shutouts": 0.06358024691358025,
+        "tenPlus": 0.08127572016460906
+      },
+      "hitDifference": {
+        "rate": 0.21951759469151474,
+        "total": 0.509207818930042,
+        "volume": 0.28969022423852786
+      },
+      "simulated": {
+        "double": {
+          "mc95HalfWidth": 0.009528656253872596,
+          "mean": 1.7944135802469137,
+          "n": 20,
+          "sd": 0.021741554201926142
+        },
+        "gdp": {
+          "mc95HalfWidth": 0.005386811776716279,
+          "mean": 0.8775000000000001,
+          "n": 20,
+          "sd": 0.012291099300749
+        },
+        "hbp": {
+          "mc95HalfWidth": 0.0032260853810997317,
+          "mean": 0.4403909465020576,
+          "n": 20,
+          "sd": 0.007360965523833996
+        },
+        "hits": {
+          "mc95HalfWidth": 0.02041032739165227,
+          "mean": 8.912294238683128,
+          "n": 20,
+          "sd": 0.04657028519465352
+        },
+        "homeRuns": {
+          "mc95HalfWidth": 0.005429439852402478,
+          "mean": 1.314588477366255,
+          "n": 20,
+          "sd": 0.012388363867059557
+        },
+        "pa": {
+          "mc95HalfWidth": 0.03027629400439256,
+          "mean": 39.18741769547325,
+          "n": 20,
+          "sd": 0.06908148112305214
+        },
+        "runs": {
+          "mc95HalfWidth": 0.010980400722697587,
+          "mean": 4.639074074074074,
+          "n": 20,
+          "sd": 0.02505400248585676
+        },
+        "strikeouts": {
+          "mc95HalfWidth": 0.016664069368477214,
+          "mean": 8.777067901234568,
+          "n": 20,
+          "sd": 0.03802244070376229
+        },
+        "triple": {
+          "mc95HalfWidth": 0.0022249225825932296,
+          "mean": 0.1564300411522634,
+          "n": 20,
+          "sd": 0.0050766103462784205
+        },
+        "walks": {
+          "mc95HalfWidth": 0.012171538035626504,
+          "mean": 3.4180349794238682,
+          "n": 20,
+          "sd": 0.02777182289631135
+        }
+      },
+      "simulatedContactRates": {
+        "fieldersChoices": {
+          "mc95HalfWidth": 0.004844818577276727,
+          "mean": 0.750679012345679,
+          "n": 20,
+          "sd": 0.01105443232392304
+        },
+        "reachedOnError": {
+          "mc95HalfWidth": 0.002723090773448141,
+          "mean": 0.2239917695473251,
+          "n": 20,
+          "sd": 0.006213281712584207
+        }
+      },
+      "simulatedDistribution": {
+        "extras": {
+          "mc95HalfWidth": 0.0019456826771621916,
+          "mean": 0.09823045267489712,
+          "n": 20,
+          "sd": 0.004439468090590243
+        },
+        "runSD": {
+          "mc95HalfWidth": 0.01599593431250712,
+          "mean": 3.1235897063747102,
+          "n": 20,
+          "sd": 0.03649795559835438
+        },
+        "shutouts": {
+          "mc95HalfWidth": 0.0011868303557343593,
+          "mean": 0.05719135802469136,
+          "n": 20,
+          "sd": 0.002707993217532944
+        },
+        "tenPlus": {
+          "mc95HalfWidth": 0.001433308163674922,
+          "mean": 0.0747119341563786,
+          "n": 20,
+          "sd": 0.003270382129267878
+        }
+      }
+    },
+    "2024": {
+      "archivedRowsIdenticalExcludingTimings": true,
+      "historical": {
+        "double": 1.599629477151091,
+        "gdp": 0.6642651296829971,
+        "hbp": 0.4158089748867847,
+        "hits": 8.197406340057636,
+        "homeRuns": 1.122478386167147,
+        "pa": 37.55640181144504,
+        "runs": 4.393371757925072,
+        "strikeouts": 8.480238781391519,
+        "triple": 0.1434746809386579,
+        "walks": 3.073075339645945
+      },
+      "historicalDistribution": {
+        "beyondTen": 0.022231370934540962,
+        "extras": 0.08892548373816385,
+        "meanInnings": 9.121037463976945,
+        "runSD": 3.0865380983710775,
+        "shutouts": 0.06607657472210786,
+        "tenPlus": 0.06607657472210786
+      },
+      "hitDifference": {
+        "rate": 0.19224022691543552,
+        "total": 0.4699804912180845,
+        "volume": 0.2777402643026496
+      },
+      "simulated": {
+        "double": {
+          "mc95HalfWidth": 0.005604509001342677,
+          "mean": 1.6929012345679013,
+          "n": 20,
+          "sd": 0.012787819497460906
+        },
+        "gdp": {
+          "mc95HalfWidth": 0.004389570887930569,
+          "mean": 0.8756584362139918,
+          "n": 20,
+          "sd": 0.010015692752517208
+        },
+        "hbp": {
+          "mc95HalfWidth": 0.0052201356206299,
+          "mean": 0.44012345679012344,
+          "n": 20,
+          "sd": 0.011910793979078071
+        },
+        "hits": {
+          "mc95HalfWidth": 0.01891267436552262,
+          "mean": 8.66738683127572,
+          "n": 20,
+          "sd": 0.043153087262883964
+        },
+        "homeRuns": {
+          "mc95HalfWidth": 0.006823175795545872,
+          "mean": 1.2096707818930041,
+          "n": 20,
+          "sd": 0.01556845398088957
+        },
+        "pa": {
+          "mc95HalfWidth": 0.028773050019649596,
+          "mean": 38.8288683127572,
+          "n": 20,
+          "sd": 0.06565152628973281
+        },
+        "runs": {
+          "mc95HalfWidth": 0.012739124325763764,
+          "mean": 4.327438271604938,
+          "n": 20,
+          "sd": 0.029066885679825464
+        },
+        "strikeouts": {
+          "mc95HalfWidth": 0.014448969022016745,
+          "mean": 8.684043209876544,
+          "n": 20,
+          "sd": 0.03296824177348786
+        },
+        "triple": {
+          "mc95HalfWidth": 0.0019305496697058376,
+          "mean": 0.15169753086419754,
+          "n": 20,
+          "sd": 0.004404939076940837
+        },
+        "walks": {
+          "mc95HalfWidth": 0.009151748007637333,
+          "mean": 3.2535699588477365,
+          "n": 20,
+          "sd": 0.020881561895944225
+        }
+      },
+      "simulatedContactRates": {
+        "fieldersChoices": {
+          "mc95HalfWidth": 0.005055912374862421,
+          "mean": 0.7461316872427983,
+          "n": 20,
+          "sd": 0.0115360854678314
+        },
+        "reachedOnError": {
+          "mc95HalfWidth": 0.0034092786832955104,
+          "mean": 0.23092592592592592,
+          "n": 20,
+          "sd": 0.007778958051111977
+        }
+      },
+      "simulatedDistribution": {
+        "extras": {
+          "mc95HalfWidth": 0.0015085485506218194,
+          "mean": 0.0994753086419753,
+          "n": 20,
+          "sd": 0.00344205827198895
+        },
+        "runSD": {
+          "mc95HalfWidth": 0.014071276498511639,
+          "mean": 2.9847289840571096,
+          "n": 20,
+          "sd": 0.03210645998047678
+        },
+        "shutouts": {
+          "mc95HalfWidth": 0.0016031815330119288,
+          "mean": 0.06523662551440329,
+          "n": 20,
+          "sd": 0.0036579825388642815
+        },
+        "tenPlus": {
+          "mc95HalfWidth": 0.0014772989203980925,
+          "mean": 0.059248971193415635,
+          "n": 20,
+          "sd": 0.0033707559276501893
+        }
+      }
+    },
+    "2025": {
+      "archivedRowsIdenticalExcludingTimings": true,
+      "historical": {
+        "double": 1.5936213991769548,
+        "gdp": 0.6423868312757202,
+        "hbp": 0.39670781893004115,
+        "hits": 8.258847736625514,
+        "homeRuns": 1.162551440329218,
+        "pa": 37.63909465020576,
+        "runs": 4.447325102880659,
+        "strikeouts": 8.363168724279836,
+        "triple": 0.12921810699588476,
+        "walks": 3.16440329218107
+      },
+      "historicalDistribution": {
+        "beyondTen": 0.030864197530864196,
+        "extras": 0.0860082304526749,
+        "meanInnings": 9.118930041152263,
+        "runSD": 3.2467792462105702,
+        "shutouts": 0.06810699588477366,
+        "tenPlus": 0.07921810699588477
+      },
+      "hitDifference": {
+        "rate": 0.18546624072816675,
+        "total": 0.4683333333333337,
+        "volume": 0.2828670926051678
+      },
+      "simulated": {
+        "double": {
+          "mc95HalfWidth": 0.005846256114258178,
+          "mean": 1.6698868312757202,
+          "n": 20,
+          "sd": 0.01333941437281129
+        },
+        "gdp": {
+          "mc95HalfWidth": 0.004425868773159813,
+          "mean": 0.8913374485596708,
+          "n": 20,
+          "sd": 0.010098513710488713
+        },
+        "hbp": {
+          "mc95HalfWidth": 0.004118031116959771,
+          "mean": 0.40810699588477367,
+          "n": 20,
+          "sd": 0.009396119909164731
+        },
+        "hits": {
+          "mc95HalfWidth": 0.019775193308606196,
+          "mean": 8.727181069958847,
+          "n": 20,
+          "sd": 0.045121098475757584
+        },
+        "homeRuns": {
+          "mc95HalfWidth": 0.0076862821207589384,
+          "mean": 1.2603909465020575,
+          "n": 20,
+          "sd": 0.017537805424753302
+        },
+        "pa": {
+          "mc95HalfWidth": 0.028679879636926836,
+          "mean": 38.92824074074074,
+          "n": 20,
+          "sd": 0.06543893923946979
+        },
+        "runs": {
+          "mc95HalfWidth": 0.014468820856465153,
+          "mean": 4.419074074074074,
+          "n": 20,
+          "sd": 0.03301353774420695
+        },
+        "strikeouts": {
+          "mc95HalfWidth": 0.019623788275807998,
+          "mean": 8.559135802469136,
+          "n": 20,
+          "sd": 0.04477563730690824
+        },
+        "triple": {
+          "mc95HalfWidth": 0.0018728420761351336,
+          "mean": 0.14198559670781893,
+          "n": 20,
+          "sd": 0.004273267544244894
+        },
+        "walks": {
+          "mc95HalfWidth": 0.008176178717782914,
+          "mean": 3.3589609053497944,
+          "n": 20,
+          "sd": 0.018655603478724147
+        }
+      },
+      "simulatedContactRates": {
+        "fieldersChoices": {
+          "mc95HalfWidth": 0.005314740199033301,
+          "mean": 0.7591872427983539,
+          "n": 20,
+          "sd": 0.012126653436519617
+        },
+        "reachedOnError": {
+          "mc95HalfWidth": 0.0026446081919741554,
+          "mean": 0.22811728395061728,
+          "n": 20,
+          "sd": 0.006034207848068393
+        }
+      },
+      "simulatedDistribution": {
+        "extras": {
+          "mc95HalfWidth": 0.0019700578087684614,
+          "mean": 0.09853909465020576,
+          "n": 20,
+          "sd": 0.004495084877561797
+        },
+        "runSD": {
+          "mc95HalfWidth": 0.015093666749522902,
+          "mean": 3.032494148394111,
+          "n": 20,
+          "sd": 0.03443924987924643
+        },
+        "shutouts": {
+          "mc95HalfWidth": 0.0011750239603921853,
+          "mean": 0.06335390946502058,
+          "n": 20,
+          "sd": 0.002681054541457089
+        },
+        "tenPlus": {
+          "mc95HalfWidth": 0.001369592734888663,
+          "mean": 0.06447530864197532,
+          "n": 20,
+          "sd": 0.0031250025068376513
+        }
+      }
+    }
+  },
+  "devArchiveSha256": "a3e8c08876ddf70e1ffb0b20486c2873cf4aae19e0acc8002096e9056107615b",
+  "inputs": {
+    "data\\pipeline\\src\\draftory_data\\resources\\retrosheet-defense-dev.lock.json": "8d01d2eb91502b75fabfdec2a72bbf3a5c90a9222606bfc916d8c158fd51d030",
+    "data\\pipeline\\src\\draftory_data\\resources\\retrosheet-m4.lock.json": "e4c4fd3f760c72585582571d6001263b67b3b051a41b6289dd21be34e468b2d4",
+    "data\\processed\\m9a\\nine-opponent-inputs.json": "31b182d039e3874946613c6718d4f1a1ef55b9ed79962d746a094275ca4abdfc",
+    "data\\publications\\opponents-2024-v1.json": "9d4976986d15e9fecd164ddddcf426b32a525c84ee529c3d97c88e028ba32561"
+  },
+  "preparationByteParity": {
+    "context-2022.json": true,
+    "context-2023.json": true,
+    "context-2024.json": true,
+    "context-2025.json": true,
+    "example-season-2022.json": true,
+    "example-season-2023.json": true,
+    "example-season-2024.json": true,
+    "example-season-2025.json": true,
+    "inputs-2022.json": true,
+    "inputs-2023.json": true,
+    "inputs-2024.json": true,
+    "inputs-2025.json": true,
+    "lineups.json": false,
+    "manifest.json": true,
+    "targets.json": true,
+    "transitions-audit.json": true,
+    "transitions.json": true
+  },
+  "preparationDiagnosticNameDifferences": {
+    "lineups.json": [
+      {
+        "archived": "Ronald AcuÃƒÂ±a",
+        "path": "/2/profiles/0/basePreparation/historicalProfile/displayName",
+        "regenerated": "Ronald Acuña"
+      },
+      {
+        "archived": "Jeremy PeÃƒÂ±a",
+        "path": "/11/profiles/6/basePreparation/historicalProfile/displayName",
+        "regenerated": "Jeremy Peña"
+      },
+      {
+        "archived": "Ronald AcuÃƒÂ±a",
+        "path": "/32/profiles/0/basePreparation/historicalProfile/displayName",
+        "regenerated": "Ronald Acuña"
+      },
+      {
+        "archived": "Jeremy PeÃƒÂ±a",
+        "path": "/41/profiles/5/basePreparation/historicalProfile/displayName",
+        "regenerated": "Jeremy Peña"
+      },
+      {
+        "archived": "Endy RodrÃƒÂ­guez",
+        "path": "/51/profiles/4/basePreparation/historicalProfile/displayName",
+        "regenerated": "Endy Rodríguez"
+      },
+      {
+        "archived": "JosÃƒÂ© Caballero",
+        "path": "/53/profiles/8/basePreparation/historicalProfile/displayName",
+        "regenerated": "José Caballero"
+      },
+      {
+        "archived": "Ronald AcuÃƒÂ±a",
+        "path": "/62/profiles/0/basePreparation/historicalProfile/displayName",
+        "regenerated": "Ronald Acuña"
+      },
+      {
+        "archived": "Jeremy PeÃƒÂ±a",
+        "path": "/71/profiles/5/basePreparation/historicalProfile/displayName",
+        "regenerated": "Jeremy Peña"
+      },
+      {
+        "archived": "Carlos NarvÃƒÂ¡ez",
+        "path": "/95/profiles/8/basePreparation/historicalProfile/displayName",
+        "regenerated": "Carlos Narváez"
+      },
+      {
+        "archived": "Angel MartÃƒÂ­nez",
+        "path": "/99/profiles/1/basePreparation/historicalProfile/displayName",
+        "regenerated": "Angel Martínez"
+      },
+      {
+        "archived": "Wenceel PÃƒÂ©rez",
+        "path": "/101/profiles/5/basePreparation/historicalProfile/displayName",
+        "regenerated": "Wenceel Pérez"
+      },
+      {
+        "archived": "Jeremy PeÃƒÂ±a",
+        "path": "/102/profiles/0/basePreparation/historicalProfile/displayName",
+        "regenerated": "Jeremy Peña"
+      },
+      {
+        "archived": "AgustÃƒÂ­n RamÃƒÂ­rez",
+        "path": "/105/profiles/3/basePreparation/historicalProfile/displayName",
+        "regenerated": "Agustín Ramírez"
+      },
+      {
+        "archived": "Jasson DomÃƒÂ­nguez",
+        "path": "/108/profiles/5/basePreparation/historicalProfile/displayName",
+        "regenerated": "Jasson Domínguez"
+      },
+      {
+        "archived": "Pedro PagÃƒÂ©s",
+        "path": "/115/profiles/7/basePreparation/historicalProfile/displayName",
+        "regenerated": "Pedro Pagés"
+      },
+      {
+        "archived": "JosÃƒÂ© Tena",
+        "path": "/119/profiles/7/basePreparation/historicalProfile/displayName",
+        "regenerated": "José Tena"
+      }
+    ]
+  },
+  "reproducibility": {
+    "baseSeed": "20261029",
+    "checkedSeasons": 6,
+    "repetitions": 200,
+    "runnerConservationAllGames": true,
+    "summaryEventsIdentical": true,
+    "traceRepetitions": 20,
+    "twoNativeRunsByteIdentical": true
+  },
+  "retrosheet": {
+    "lockSha256": "1f725399cff54a7c924f4d71cd1dedbdc393f025b4a6ef3b3dded2ea3fe7a017",
+    "source": "Retrosheet official modern calibration snapshot"
+  },
+  "rosterRates": {
+    "2022": {
+      "equalSlotRawConditionalHitRate": 0.22310547430962502,
+      "equalSlotRawUnconditionalHitRate": 0.22110299575516554,
+      "equalSlotSacrificeMass": 0.0091138702322288,
+      "equalSlotSmoothedHitRate": 0.22334045772832622,
+      "selectedPA": 121068
+    },
+    "2023": {
+      "equalSlotRawConditionalHitRate": 0.22657804202136766,
+      "equalSlotRawUnconditionalHitRate": 0.2246500560080646,
+      "equalSlotSacrificeMass": 0.008562583768695536,
+      "equalSlotSmoothedHitRate": 0.2269034600247107,
+      "selectedPA": 125383
+    },
+    "2024": {
+      "equalSlotRawConditionalHitRate": 0.221229238582041,
+      "equalSlotRawUnconditionalHitRate": 0.21913780597219462,
+      "equalSlotSacrificeMass": 0.009581462395998762,
+      "equalSlotSmoothedHitRate": 0.22281976581366197,
+      "selectedPA": 123626
+    }
+  },
+  "runnerSha256": "e1cf9652eab6fde4aa0051ff73bfff19e575bc8547da5153dd9ba53a379906bd",
+  "schemaVersion": "1.0.0",
+  "seasonInputSha256": "31b182d039e3874946613c6718d4f1a1ef55b9ed79962d746a094275ca4abdfc",
+  "seasonRowsSha256": "ba2db6b9ecf934419ff200f9d5b73aa3b705c3b6d6d5d657bf04fc2407cda896",
+  "seasons": {
+    "audit:2024:CHA": {
+      "expectedOutcomesPerGame": {
+        "double": 1.550693638302469,
+        "hitByPitch": 0.3186829824382716,
+        "homeRun": 1.0732781925617283,
+        "otherContact": 17.752506782623456,
+        "single": 5.567357387808642,
+        "strikeout": 8.93292311271605,
+        "triple": 0.10013109290123456,
+        "walk": 2.6647971810185185
+      },
+      "extraBeyondTen": 0.0587962962962963,
+      "extras": 0.10160493827160494,
+      "firstSecondHalfResidualCovariance": -1.747236180904523,
+      "gameRunSD": 2.7313720232894125,
+      "lobPerGame": 7.054382716049383,
+      "meanInnings": 9.244382716049383,
+      "outsPerGame": 27.178364197530865,
+      "outsideTwoBaselineSD": 0.04,
+      "playedUserHalvesPerGame": 9.08462962962963,
+      "poissonBinomialSD": 6.234304916263298,
+      "ra": {
+        "mc95HalfWidth": 4.8479547316783,
+        "mean": 752.675,
+        "n": 200,
+        "sd": 34.97981291484832
+      },
+      "rd": {
+        "mc95HalfWidth": 6.624019590678189,
+        "mean": -148.8,
+        "n": 200,
+        "sd": 47.7947874620519
+      },
+      "rs": {
+        "mc95HalfWidth": 4.643862211153654,
+        "mean": 603.875,
+        "n": 200,
+        "sd": 33.507208779619425
+      },
+      "samplingResidualPerGame": {
+        "double": {
+          "mc95HalfWidth": 0.013001275255715285,
+          "mean": -0.0009405518827160438,
+          "n": 200,
+          "sd": 0.09380908058560351
+        },
+        "hitByPitch": {
+          "mc95HalfWidth": 0.005686485182771464,
+          "mean": 0.0027676348456790096,
+          "n": 200,
+          "sd": 0.04103012483525027
+        },
+        "homeRun": {
+          "mc95HalfWidth": 0.010921532970740914,
+          "mean": 0.0019995852160493805,
+          "n": 200,
+          "sd": 0.07880295943432
+        },
+        "strikeout": {
+          "mc95HalfWidth": 0.027134388826281927,
+          "mean": -0.009435458395061672,
+          "n": 200,
+          "sd": 0.1957847994124126
+        },
+        "triple": {
+          "mc95HalfWidth": 0.003472456760423101,
+          "mean": -0.0012422040123456787,
+          "n": 200,
+          "sd": 0.025055078802778016
+        },
+        "walk": {
+          "mc95HalfWidth": 0.016054509156116458,
+          "mean": 0.00832010293209877,
+          "n": 200,
+          "sd": 0.11583930911134148
+        }
+      },
+      "scoreHistogram": {
+        "0": 2925,
+        "1": 4412,
+        "2": 4930,
+        "3": 4930,
+        "4": 4292,
+        "5": 3442,
+        "6": 2604,
+        "7": 1776,
+        "8": 1205,
+        "9": 760,
+        "10": 458,
+        "11": 276,
+        "12": 173,
+        "13": 90,
+        "14": 61,
+        "15": 23,
+        "16": 21,
+        "17": 10,
+        "18": 6,
+        "19": 2,
+        "20": 2,
+        "22": 1,
+        "24": 1
+      },
+      "seeds": 200,
+      "shutouts": 0.09027777777777778,
+      "tenPlus": 0.03469135802469136,
+      "totalsPerGame": {
+        "doubles": 1.549753086419753,
+        "groundedIntoDoublePlays": 0.8247222222222222,
+        "hitByPitch": 0.32145061728395063,
+        "hits": 8.298981481481482,
+        "homeRuns": 1.0752777777777778,
+        "plateAppearances": 37.96037037037037,
+        "runs": 3.7276234567901234,
+        "strikeouts": 8.923487654320988,
+        "triples": 0.09888888888888889,
+        "walks": 2.673117283950617
+      },
+      "trace": {
+        "cells": [
+          [
+            27026, 6358, 1345, 1524, 82, 448, 244, 406, 19805, 8237, 2079, 2776,
+            436, 1148, 603, 830, 15430, 8833, 2881, 3659, 839, 1719, 791, 1061
+          ],
+          [
+            12711, 2968, 606, 714, 43, 212, 122, 190, 9320, 3918, 1003, 1325,
+            209, 522, 289, 379, 7302, 4078, 1344, 1663, 398, 785, 374, 518
+          ],
+          [
+            0, 665, 0, 145, 0, 58, 0, 58, 0, 868, 0, 318, 0, 165, 0, 118, 0, 0,
+            0, 0, 0, 0, 0, 0
+          ]
+        ],
+        "expectedGDP": 2370.0837760000113,
+        "factors": {
+          "contact": 50993,
+          "contactPerPA": 0.4697218128224024,
+          "eligible": 10228,
+          "eligiblePerContact": 0.20057654972251093,
+          "gdp": 2395,
+          "gdpPerEligible": 0.23416112631990613,
+          "gdpPerPA": 0.02206153279292557,
+          "pa": 108560,
+          "stateEligiblePerPA": 0.20013817243920412
+        },
+        "inningPA": {
+          "3": 9975,
+          "4": 7701,
+          "5": 4428,
+          "6": 2180,
+          "7": 953,
+          "8": 398,
+          "9": 165,
+          "10": 73,
+          "11": 31,
+          "12": 10,
+          "13": 4,
+          "14": 2
+        },
+        "paPerHalf": 4.188271604938271,
+        "tenPlusPAHalfRate": 0.004629629629629629
+      },
+      "winEmpirical95": [56, 77],
+      "winMinMax": [50, 86],
+      "winVarianceRatio": 0.8192436561382233,
+      "wins": {
+        "mc95HalfWidth": 0.782052046103116,
+        "mean": 65.695,
+        "n": 200,
+        "sd": 5.6427990310237535
+      },
+      "wins70OrBelow": 0.83,
+      "wins93OrAbove": 0
+    },
+    "audit:2024:HOU": {
+      "expectedOutcomesPerGame": {
+        "double": 1.7639485836728397,
+        "hitByPitch": 0.41043275774691357,
+        "homeRun": 1.2974416803703703,
+        "otherContact": 18.80013942351852,
+        "single": 6.265331577777777,
+        "strikeout": 7.497279782901234,
+        "triple": 0.1154134388271605,
+        "walk": 3.0745806564197533
+      },
+      "extraBeyondTen": 0.05280864197530864,
+      "extras": 0.09493827160493827,
+      "firstSecondHalfResidualCovariance": 0.23276381909547725,
+      "gameRunSD": 3.116751438614067,
+      "lobPerGame": 7.571358024691358,
+      "meanInnings": 9.212746913580247,
+      "outsPerGame": 26.92990740740741,
+      "outsideTwoBaselineSD": 0.025,
+      "playedUserHalvesPerGame": 9.006882716049383,
+      "poissonBinomialSD": 6.344480844476531,
+      "ra": {
+        "mc95HalfWidth": 5.523369647335358,
+        "mean": 751.005,
+        "n": 200,
+        "sd": 39.85318502684471
+      },
+      "rd": {
+        "mc95HalfWidth": 7.30231098883692,
+        "mean": 14.17,
+        "n": 200,
+        "sd": 52.68891447489418
+      },
+      "rs": {
+        "mc95HalfWidth": 5.469932728587837,
+        "mean": 765.175,
+        "n": 200,
+        "sd": 39.46761760223158
+      },
+      "samplingResidualPerGame": {
+        "double": {
+          "mc95HalfWidth": 0.013881408065502457,
+          "mean": -0.014967102191358023,
+          "n": 200,
+          "sd": 0.10015956913810635
+        },
+        "hitByPitch": {
+          "mc95HalfWidth": 0.006899267846788558,
+          "mean": 0.005061069413580246,
+          "n": 200,
+          "sd": 0.04978080693557654
+        },
+        "homeRun": {
+          "mc95HalfWidth": 0.012344044359719185,
+          "mean": 0.0006138751851851896,
+          "n": 200,
+          "sd": 0.08906691300025502
+        },
+        "strikeout": {
+          "mc95HalfWidth": 0.02901231459549564,
+          "mean": 0.011578241790123405,
+          "n": 200,
+          "sd": 0.20933473865706548
+        },
+        "triple": {
+          "mc95HalfWidth": 0.0035965700202973973,
+          "mean": 0.0012840920370370361,
+          "n": 200,
+          "sd": 0.025950602554740087
+        },
+        "walk": {
+          "mc95HalfWidth": 0.01808116147795383,
+          "mean": -0.01325349592592595,
+          "n": 200,
+          "sd": 0.13046236625296054
+        }
+      },
+      "scoreHistogram": {
+        "0": 1708,
+        "1": 2908,
+        "2": 3946,
+        "3": 4220,
+        "4": 4388,
+        "5": 3822,
+        "6": 3187,
+        "7": 2508,
+        "8": 1813,
+        "9": 1349,
+        "10": 914,
+        "11": 642,
+        "12": 368,
+        "13": 276,
+        "14": 141,
+        "15": 92,
+        "16": 50,
+        "17": 27,
+        "18": 22,
+        "19": 9,
+        "20": 8,
+        "21": 1,
+        "23": 1
+      },
+      "seeds": 200,
+      "shutouts": 0.05271604938271605,
+      "tenPlus": 0.07873456790123456,
+      "totalsPerGame": {
+        "doubles": 1.7489814814814815,
+        "groundedIntoDoublePlays": 0.9628703703703704,
+        "hitByPitch": 0.4154938271604938,
+        "hits": 9.444228395061728,
+        "homeRuns": 1.2980555555555555,
+        "plateAppearances": 39.224567901234565,
+        "runs": 4.7233024691358025,
+        "strikeouts": 7.508858024691358,
+        "triples": 0.11669753086419753,
+        "walks": 3.061327160493827
+      },
+      "trace": {
+        "cells": [
+          [
+            27230, 7021, 1459, 1860, 124, 598, 353, 607, 19214, 8883, 2257,
+            3311, 541, 1442, 786, 1266, 14835, 9046, 3102, 4077, 925, 2094, 960,
+            1389
+          ],
+          [
+            12864, 3331, 741, 853, 65, 286, 185, 264, 9326, 4254, 1085, 1621,
+            268, 706, 367, 593, 7097, 4375, 1503, 1973, 452, 1019, 444, 659
+          ],
+          [
+            0, 758, 0, 162, 0, 62, 0, 63, 0, 979, 0, 348, 0, 239, 0, 167, 0, 0,
+            0, 0, 0, 0, 0, 0
+          ]
+        ],
+        "expectedGDP": 2783.063277000009,
+        "factors": {
+          "contact": 54331,
+          "contactPerPA": 0.47919386135120834,
+          "eligible": 11908,
+          "eligiblePerContact": 0.2191750565975226,
+          "gdp": 2778,
+          "gdpPerEligible": 0.23328854551561976,
+          "gdpPerPA": 0.024501675780560946,
+          "pa": 113380,
+          "stateEligiblePerPA": 0.2203916034573999
+        },
+        "inningPA": {
+          "3": 8836,
+          "4": 7608,
+          "5": 4665,
+          "6": 2474,
+          "7": 1264,
+          "8": 586,
+          "9": 278,
+          "10": 126,
+          "11": 47,
+          "12": 21,
+          "13": 9,
+          "14": 4,
+          "15": 1,
+          "16": 1
+        },
+        "paPerHalf": 4.374228395061729,
+        "tenPlusPAHalfRate": 0.008063271604938272
+      },
+      "winEmpirical95": [72, 94],
+      "winMinMax": [68, 107],
+      "winVarianceRatio": 0.9484309761199267,
+      "wins": {
+        "mc95HalfWidth": 0.8563277716285461,
+        "mean": 82.565,
+        "n": 200,
+        "sd": 6.178726267723574
+      },
+      "wins70OrBelow": 0.025,
+      "wins93OrAbove": 0.055
+    },
+    "audit:2024:NYA": {
+      "expectedOutcomesPerGame": {
+        "double": 1.675059897345679,
+        "hitByPitch": 0.3509607320061729,
+        "homeRun": 1.4458363754320989,
+        "otherContact": 17.78036187265432,
+        "single": 5.598023341265431,
+        "strikeout": 8.518781150740741,
+        "triple": 0.11730549339506173,
+        "walk": 4.033516816172839
+      },
+      "extraBeyondTen": 0.05280864197530864,
+      "extras": 0.0933641975308642,
+      "firstSecondHalfResidualCovariance": -0.9266834170854272,
+      "gameRunSD": 3.1810201323274256,
+      "lobPerGame": 7.746419753086419,
+      "meanInnings": 9.20966049382716,
+      "outsPerGame": 26.910987654320987,
+      "outsideTwoBaselineSD": 0.025,
+      "playedUserHalvesPerGame": 8.999722222222223,
+      "poissonBinomialSD": 6.336872633552717,
+      "ra": {
+        "mc95HalfWidth": 5.911837675673917,
+        "mean": 753.45,
+        "n": 200,
+        "sd": 42.65612765044025
+      },
+      "rd": {
+        "mc95HalfWidth": 7.78094653904119,
+        "mean": 34.265,
+        "n": 200,
+        "sd": 56.142449610265544
+      },
+      "rs": {
+        "mc95HalfWidth": 5.473301025044554,
+        "mean": 787.715,
+        "n": 200,
+        "sd": 39.491921125349855
+      },
+      "samplingResidualPerGame": {
+        "double": {
+          "mc95HalfWidth": 0.013282726799775001,
+          "mean": -0.011572243024691356,
+          "n": 200,
+          "sd": 0.09583985910988972
+        },
+        "hitByPitch": {
+          "mc95HalfWidth": 0.006431577206357917,
+          "mean": -0.005374312253086431,
+          "n": 200,
+          "sd": 0.046406243432046065
+        },
+        "homeRun": {
+          "mc95HalfWidth": 0.01210827139600386,
+          "mean": 0.006756217160493823,
+          "n": 200,
+          "sd": 0.0873657225771575
+        },
+        "strikeout": {
+          "mc95HalfWidth": 0.029498107472807,
+          "mean": 0.01964477518518518,
+          "n": 200,
+          "sd": 0.21283991659378984
+        },
+        "triple": {
+          "mc95HalfWidth": 0.003850858465518312,
+          "mean": -0.0032005551234567916,
+          "n": 200,
+          "sd": 0.027785389126098174
+        },
+        "walk": {
+          "mc95HalfWidth": 0.02238564550667521,
+          "mean": -0.0040723717283950266,
+          "n": 200,
+          "sd": 0.16152083407151235
+        }
+      },
+      "scoreHistogram": {
+        "0": 1581,
+        "1": 2789,
+        "2": 3746,
+        "3": 4246,
+        "4": 4186,
+        "5": 3821,
+        "6": 3275,
+        "7": 2590,
+        "8": 2025,
+        "9": 1384,
+        "10": 1010,
+        "11": 617,
+        "12": 430,
+        "13": 275,
+        "14": 166,
+        "15": 105,
+        "16": 57,
+        "17": 39,
+        "18": 21,
+        "19": 17,
+        "20": 7,
+        "21": 4,
+        "22": 2,
+        "23": 1,
+        "24": 2,
+        "25": 1,
+        "26": 3
+      },
+      "seeds": 200,
+      "shutouts": 0.048796296296296296,
+      "tenPlus": 0.0850925925925926,
+      "totalsPerGame": {
+        "doubles": 1.6634876543209876,
+        "groundedIntoDoublePlays": 0.9299691358024691,
+        "hitByPitch": 0.3455864197530864,
+        "hits": 8.842746913580246,
+        "homeRuns": 1.4525925925925927,
+        "plateAppearances": 39.51984567901235,
+        "runs": 4.862438271604939,
+        "strikeouts": 8.538425925925926,
+        "triples": 0.11410493827160494,
+        "walks": 4.029444444444445
+      },
+      "trace": {
+        "cells": [
+          [
+            27390, 7310, 1430, 2032, 113, 482, 350, 645, 19286, 9081, 2126,
+            3426, 473, 1274, 798, 1450, 14666, 9156, 3003, 4270, 850, 1938,
+            1002, 1669
+          ],
+          [
+            12452, 3192, 598, 900, 50, 213, 164, 312, 8618, 4059, 976, 1626,
+            217, 589, 370, 666, 6639, 4131, 1377, 1868, 366, 873, 479, 734
+          ],
+          [
+            0, 745, 0, 183, 0, 53, 0, 65, 0, 892, 0, 365, 0, 195, 0, 198, 0, 0,
+            0, 0, 0, 0, 0, 0
+          ]
+        ],
+        "expectedGDP": 2698.9817080000093,
+        "factors": {
+          "contact": 51469,
+          "contactPerPA": 0.45061285239012433,
+          "eligible": 11557,
+          "eligiblePerContact": 0.2245429287532301,
+          "gdp": 2696,
+          "gdpPerEligible": 0.23327853249113092,
+          "gdpPerPA": 0.02360357205393101,
+          "pa": 114220,
+          "stateEligiblePerPA": 0.2250043775170723
+        },
+        "inningPA": {
+          "3": 8572,
+          "4": 7521,
+          "5": 4853,
+          "6": 2584,
+          "7": 1268,
+          "8": 638,
+          "9": 290,
+          "10": 123,
+          "11": 38,
+          "12": 20,
+          "13": 9,
+          "14": 4
+        },
+        "paPerHalf": 4.406635802469136,
+        "tenPlusPAHalfRate": 0.007484567901234568
+      },
+      "winEmpirical95": [75, 96],
+      "winMinMax": [66, 104],
+      "winVarianceRatio": 0.9033316710538748,
+      "wins": {
+        "mc95HalfWidth": 0.8347177913257743,
+        "mean": 84.335,
+        "n": 200,
+        "sd": 6.022802149219515
+      },
+      "wins70OrBelow": 0.01,
+      "wins93OrAbove": 0.09
+    }
+  },
+  "source": {
+    "lockSha256": "8f4cfb56f0726ebe7c900f8d8748232a3c8b326b2fc0d44a387512442e58a22c",
+    "release": "2025 (CSV folder, observed 2026-10-25; includes February 2026 BOM revisions)",
+    "source": "SABR Lahman"
+  },
+  "sourceCommit": "6f6b63a3bad2bac71bfaab1d794dcfcd78cec8fc",
+  "sourcePlays": {
+    "2022": {
+      "cells": [
+        [
+          40546, 8664, 2607, 2140, 292, 619, 487, 499, 29813, 10941, 4326, 3880,
+          1089, 1402, 1153, 1102, 23906, 11085, 5777, 4862, 2179, 2128, 1514,
+          1605
+        ],
+        [
+          19255, 4101, 1215, 1029, 106, 258, 190, 185, 14015, 5151, 1922, 1811,
+          352, 583, 415, 475, 10762, 5277, 2574, 2247, 950, 1013, 620, 716
+        ],
+        [
+          0, 927, 0, 230, 0, 60, 0, 35, 0, 1107, 0, 405, 0, 194, 0, 154, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ]
+      ],
+      "counts": {
+        "bk": 106,
+        "cs2": 663,
+        "cs3": 75,
+        "csh": 21,
+        "dpopp": 6860,
+        "eligibleGround": 9120,
+        "eligibleResidualGround": 6836,
+        "k_safe": 62,
+        "nonPAOuts": 842,
+        "othdp": 487,
+        "paIncludingSacrifices": 163997,
+        "pb": 200,
+        "pko1": 186,
+        "pko2": 54,
+        "pko3": 16,
+        "roe": 1036,
+        "rows": 168883,
+        "runnerOutsOnPA": 883,
+        "sb2": 1955,
+        "sb3": 254,
+        "sbh": 10,
+        "sf": 1070,
+        "sh": 311,
+        "tp": 6,
+        "wp": 1399
+      },
+      "dpoppResidualGroundMismatches": { "flag1:otherContact:L": 24 },
+      "expectedGDP": 3135.606995,
+      "factors": {
+        "contact": 75222,
+        "contactPerPA": 0.46257440842229547,
+        "eligible": 13593,
+        "eligiblePerContact": 0.1807051128659169,
+        "gdp": 3112,
+        "gdpPerEligible": 0.22894136688001177,
+        "gdpPerPA": 0.01913710827962808,
+        "pa": 162616,
+        "stateEligiblePerPA": 0.17985315098145324
+      },
+      "hitTypes": {
+        "BG": 571,
+        "BL": 10,
+        "BP": 68,
+        "F": 23841,
+        "G": 48156,
+        "L": 25980,
+        "P": 7814
+      },
+      "hitTypesByEvent": {
+        "BG:double": 1,
+        "BG:otherContact": 231,
+        "BG:single": 339,
+        "BL:otherContact": 9,
+        "BL:single": 1,
+        "BP:otherContact": 63,
+        "BP:single": 5,
+        "F:double": 1573,
+        "F:otherContact": 20687,
+        "F:otherPA": 207,
+        "F:single": 1374,
+        "G:double": 996,
+        "G:otherContact": 36821,
+        "G:otherPA": 43,
+        "G:single": 10296,
+        "L:double": 4674,
+        "L:otherContact": 9735,
+        "L:otherPA": 344,
+        "L:single": 11227,
+        "P:double": 17,
+        "P:otherContact": 7676,
+        "P:single": 121
+      },
+      "inningPA": {
+        "3": 15083,
+        "4": 11074,
+        "5": 6538,
+        "6": 3356,
+        "7": 1565,
+        "8": 737,
+        "9": 295,
+        "10": 109,
+        "11": 51,
+        "12": 29,
+        "13": 6,
+        "14": 2,
+        "15": 1
+      },
+      "paPerHalf": 4.221721670184833,
+      "playedHalves": 38846,
+      "reasons": {
+        "batter-extra-advance-proxy": 668,
+        "ground-double-play": 3112,
+        "observed-error": 1025,
+        "observed-fieldersChoice": 2736,
+        "observed-safe-transition": 73604,
+        "running-out-on-hit-proxy": 542,
+        "third-out-or-unsupported-contact-proxy": 24158,
+        "unsupported-contact-reach-proxy": 1
+      }
+    },
+    "2023": {
+      "cells": [
+        [
+          40876, 8900, 2820, 2190, 349, 646, 547, 563, 29668, 10806, 4629, 3949,
+          1230, 1458, 1205, 1183, 23813, 10745, 5974, 4811, 2370, 2233, 1722,
+          1813
+        ],
+        [
+          18813, 4160, 1224, 1016, 118, 231, 210, 237, 13537, 4975, 2034, 1881,
+          402, 565, 401, 449, 10636, 4955, 2579, 2145, 999, 992, 716, 822
+        ],
+        [
+          0, 927, 0, 204, 0, 48, 0, 59, 0, 1150, 0, 435, 0, 179, 0, 136, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ]
+      ],
+      "counts": {
+        "bk": 183,
+        "cs2": 691,
+        "cs3": 88,
+        "csh": 25,
+        "dpopp": 6682,
+        "eligibleGround": 8955,
+        "eligibleResidualGround": 6661,
+        "k_safe": 65,
+        "nonPAOuts": 934,
+        "othdp": 465,
+        "paIncludingSacrifices": 165934,
+        "pb": 202,
+        "pko1": 212,
+        "pko2": 49,
+        "pko3": 16,
+        "roe": 950,
+        "rows": 171752,
+        "runnerOutsOnPA": 869,
+        "sb2": 2665,
+        "sb3": 445,
+        "sbh": 22,
+        "sf": 1099,
+        "sh": 335,
+        "tp": 1,
+        "wp": 1405
+      },
+      "dpoppResidualGroundMismatches": { "flag1:otherContact:L": 21 },
+      "expectedGDP": 3114.397803,
+      "factors": {
+        "contact": 74097,
+        "contactPerPA": 0.45043768996960487,
+        "eligible": 13514,
+        "eligiblePerContact": 0.1823825525999703,
+        "gdp": 3138,
+        "gdpPerEligible": 0.23220364066893592,
+        "gdpPerPA": 0.01907598784194529,
+        "pa": 164500,
+        "stateEligiblePerPA": 0.18051671732522798
+      },
+      "hitTypes": {
+        "BG": 513,
+        "BL": 9,
+        "BP": 80,
+        "F": 23894,
+        "G": 47612,
+        "L": 26143,
+        "P": 7569
+      },
+      "hitTypesByEvent": {
+        "BG:double": 1,
+        "BG:otherContact": 203,
+        "BG:single": 309,
+        "BL:otherContact": 9,
+        "BP:otherContact": 73,
+        "BP:single": 7,
+        "F:double": 1478,
+        "F:otherContact": 20876,
+        "F:otherPA": 235,
+        "F:single": 1305,
+        "G:double": 1090,
+        "G:otherContact": 36008,
+        "G:otherPA": 68,
+        "G:single": 10446,
+        "L:double": 4928,
+        "L:otherContact": 9455,
+        "L:otherPA": 362,
+        "L:single": 11398,
+        "P:double": 20,
+        "P:otherContact": 7473,
+        "P:otherPA": 1,
+        "P:single": 75
+      },
+      "inningPA": {
+        "3": 14747,
+        "4": 10931,
+        "5": 6590,
+        "6": 3509,
+        "7": 1738,
+        "8": 803,
+        "9": 312,
+        "10": 152,
+        "11": 41,
+        "12": 25,
+        "13": 15,
+        "14": 5,
+        "15": 1,
+        "16": 1
+      },
+      "paPerHalf": 4.268947774633394,
+      "playedHalves": 38870,
+      "reasons": {
+        "batter-extra-advance-proxy": 670,
+        "ground-double-play": 3138,
+        "observed-error": 943,
+        "observed-fieldersChoice": 2584,
+        "observed-safe-transition": 73417,
+        "running-out-on-hit-proxy": 544,
+        "third-out-or-unsupported-contact-proxy": 23858
+      }
+    },
+    "2024": {
+      "cells": [
+        [
+          40645, 8689, 2619, 2140, 319, 637, 489, 484, 29894, 10683, 4450, 3809,
+          1225, 1374, 1182, 1051, 23991, 10785, 5959, 4726, 2323, 2031, 1742,
+          1630
+        ],
+        [
+          19148, 4107, 1206, 967, 116, 227, 187, 209, 13917, 4967, 1976, 1823,
+          402, 528, 397, 424, 11005, 5034, 2536, 2124, 1050, 938, 710, 772
+        ],
+        [
+          0, 921, 0, 198, 0, 42, 0, 56, 0, 1015, 0, 399, 0, 157, 0, 126, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ]
+      ],
+      "counts": {
+        "bk": 175,
+        "cs2": 766,
+        "cs3": 95,
+        "csh": 37,
+        "dpopp": 6506,
+        "eligibleGround": 8785,
+        "eligibleResidualGround": 6486,
+        "k_safe": 43,
+        "nonPAOuts": 1018,
+        "othdp": 415,
+        "paIncludingSacrifices": 164326,
+        "pb": 217,
+        "pko1": 227,
+        "pko2": 75,
+        "pko3": 18,
+        "roe": 1018,
+        "rows": 170251,
+        "runnerOutsOnPA": 808,
+        "sb2": 2835,
+        "sb3": 416,
+        "sbh": 25,
+        "sf": 1096,
+        "sh": 353,
+        "tp": 1,
+        "wp": 1250
+      },
+      "dpoppResidualGroundMismatches": {
+        "flag0:otherContact:G": 1,
+        "flag1:otherContact:L": 21
+      },
+      "expectedGDP": 3050.136342,
+      "factors": {
+        "contact": 74770,
+        "contactPerPA": 0.45905806221872947,
+        "eligible": 13252,
+        "eligiblePerContact": 0.17723685970308947,
+        "gdp": 2914,
+        "gdpPerEligible": 0.2198913371566556,
+        "gdpPerPA": 0.017890801033909023,
+        "pa": 162877,
+        "stateEligiblePerPA": 0.17723189891758812
+      },
+      "hitTypes": {
+        "BG": 580,
+        "BL": 5,
+        "BP": 81,
+        "F": 24418,
+        "G": 46913,
+        "L": 25978,
+        "P": 7854
+      },
+      "hitTypesByEvent": {
+        "BG:otherContact": 246,
+        "BG:single": 334,
+        "BL:otherContact": 5,
+        "BP:otherContact": 79,
+        "BP:single": 2,
+        "F:double": 1377,
+        "F:otherContact": 21499,
+        "F:otherPA": 223,
+        "F:single": 1319,
+        "G:double": 1048,
+        "G:otherContact": 35477,
+        "G:otherPA": 61,
+        "G:single": 10327,
+        "L:double": 4649,
+        "L:otherContact": 9719,
+        "L:otherPA": 348,
+        "L:single": 11262,
+        "P:double": 18,
+        "P:otherContact": 7745,
+        "P:otherPA": 2,
+        "P:single": 89
+      },
+      "inningPA": {
+        "3": 15012,
+        "4": 11032,
+        "5": 6575,
+        "6": 3433,
+        "7": 1591,
+        "8": 701,
+        "9": 313,
+        "10": 112,
+        "11": 51,
+        "12": 23,
+        "13": 6,
+        "14": 2,
+        "15": 2,
+        "16": 1,
+        "18": 1
+      },
+      "paPerHalf": 4.229211169733625,
+      "playedHalves": 38855,
+      "reasons": {
+        "batter-extra-advance-proxy": 671,
+        "ground-double-play": 2914,
+        "observed-error": 1014,
+        "observed-fieldersChoice": 2582,
+        "observed-safe-transition": 73387,
+        "running-out-on-hit-proxy": 505,
+        "third-out-or-unsupported-contact-proxy": 24122
+      }
+    }
+  },
+  "split": {
+    "development": [2024],
+    "newConfirmation": null,
+    "previouslyInspectedDiagnosticOnly": [2025],
+    "training": [2022, 2023]
+  }
+}

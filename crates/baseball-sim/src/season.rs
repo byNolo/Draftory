@@ -131,7 +131,12 @@ impl SeasonInput {
 
     pub fn validate(&self) -> Result<(), SeasonError> {
         let invalid = |s: &str| SeasonError::InvalidInput(s.into());
-        if !(self.schema_version == "1.0.0" && self.config.defense.is_none()
+        if !(self.schema_version == "1.0.0"
+            && self.config.defense.is_none()
+            && self.game_schema_version != crate::RUNNER_INPUT_VERSION
+            || self.schema_version == "1.2.0"
+                && self.config.defense.is_none()
+                && self.game_schema_version == crate::RUNNER_INPUT_VERSION
             || self.schema_version == "1.1.0"
                 && self.config.defense.is_some()
                 && self.game_schema_version == crate::DEFENSE_INPUT_VERSION)
@@ -302,7 +307,9 @@ pub fn simulate_season(input: SeasonInput) -> Result<SeasonResult, SeasonError> 
         });
     }
     Ok(SeasonResult {
-        schema_version: if input.config.defense.is_some() {
+        schema_version: if input.game_schema_version == crate::RUNNER_INPUT_VERSION {
+            "1.2.0"
+        } else if input.config.defense.is_some() {
             "1.1.0"
         } else {
             "1.0.0"

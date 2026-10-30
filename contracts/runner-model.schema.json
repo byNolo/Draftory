@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://draftory.example/contracts/runner-model.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "modelVersion", "sourceId", "cells"],
+  "properties": {
+    "id": {
+      "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/id"
+    },
+    "modelVersion": {
+      "const": "retrosheet-runner-transitions-v1"
+    },
+    "sourceId": {
+      "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/id"
+    },
+    "cells": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "event",
+          "outs",
+          "baseMask",
+          "observations",
+          "fallback",
+          "choices"
+        ],
+        "properties": {
+          "event": {
+            "enum": ["single", "double", "otherContact"]
+          },
+          "outs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+          },
+          "baseMask": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 7
+          },
+          "observations": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "fallback": {
+            "type": "boolean"
+          },
+          "choices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["weight", "destinations", "rbi"],
+              "properties": {
+                "weight": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1000000
+                },
+                "destinations": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 5
+                  },
+                  "minItems": 4,
+                  "maxItems": 4
+                },
+                "rbi": {
+                  "type": "array",
+                  "items": {
+                    "type": "boolean"
+                  },
+                  "minItems": 4,
+                  "maxItems": 4
+                },
+                "reach": {
+                  "enum": ["error", "fieldersChoice"]
+                },
+                "runnerPlay": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["outKinds", "outBases", "runsBeforeOuts"],
+                  "properties": {
+                    "outKinds": {
+                      "type": "array",
+                      "minItems": 4,
+                      "maxItems": 4,
+                      "items": {
+                        "enum": ["none", "tag", "force", "batterBeforeFirst"]
+                      }
+                    },
+                    "outBases": {
+                      "type": "array",
+                      "minItems": 4,
+                      "maxItems": 4,
+                      "items": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 4
+                      }
+                    },
+                    "runsBeforeOuts": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "minItems": 1,
+            "maxItems": 128
+          }
+        }
+      },
+      "minItems": 72,
+      "maxItems": 72
+    }
+  },
+  "description": "M9B.1 opt-in joint transitions. Absent runnerPlay retains the documented conservative v1 choice. Engine checks geometry, identity presence, out types, attempted bases, hit credit, and proven timing; old rules reject this model."
+}

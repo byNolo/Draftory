@@ -1,0 +1,441 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://draftory.example/contracts/runner-game-result.schema.json",
+  "title": "Draftory M9B.1 runner result v1.2.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "engineVersion",
+    "input",
+    "winner",
+    "score",
+    "lineScore",
+    "teams",
+    "finalState"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.2.0"
+    },
+    "engineVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "input": {
+      "$ref": "https://draftory.example/contracts/runner-game-input.schema.json"
+    },
+    "winner": {
+      "$ref": "simulation-input.schema.json#/$defs/side"
+    },
+    "score": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "lineScore": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["inning", "away", "home"],
+        "properties": {
+          "inning": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          },
+          "away": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "home": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967295
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "minItems": 9,
+      "maxItems": 65535
+    },
+    "teams": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/teamBox"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "finalState": {
+      "$ref": "#/$defs/state"
+    },
+    "eventLog": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/play"
+      },
+      "maxItems": 1000000,
+      "minItems": 1
+    }
+  },
+  "$defs": {
+    "stats": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plateAppearances",
+        "atBats",
+        "hits",
+        "singles",
+        "doubles",
+        "triples",
+        "homeRuns",
+        "walks",
+        "intentionalWalks",
+        "hitByPitch",
+        "strikeouts",
+        "runs",
+        "runsBattedIn"
+      ],
+      "properties": {
+        "plateAppearances": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "atBats": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "hits": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "singles": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "doubles": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "triples": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "homeRuns": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "walks": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "intentionalWalks": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "hitByPitch": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "strikeouts": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "runs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "runsBattedIn": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "groundedIntoDoublePlays": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "reachedOnError": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "fieldersChoices": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inning",
+        "half",
+        "outs",
+        "bases",
+        "nextBatter",
+        "score",
+        "plateAppearances",
+        "status",
+        "abortReason"
+      ],
+      "properties": {
+        "inning": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "half": {
+          "enum": ["top", "bottom"]
+        },
+        "outs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "bases": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["batterId"],
+                "properties": {
+                  "batterId": {
+                    "$ref": "simulation-input.schema.json#/$defs/id"
+                  }
+                }
+              }
+            ]
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "nextBatter": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 8
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "score": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "plateAppearances": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        "status": {
+          "enum": ["inProgress", "final", "aborted"]
+        },
+        "abortReason": {
+          "enum": [null, "maxInnings", "maxPlateAppearances"]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "inProgress"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "outs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2
+              },
+              "abortReason": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "teamBox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["teamId", "totals", "outsRecorded", "leftOnBase", "batters"],
+      "properties": {
+        "teamId": {
+          "$ref": "simulation-input.schema.json#/$defs/id"
+        },
+        "totals": {
+          "$ref": "#/$defs/stats"
+        },
+        "outsRecorded": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "leftOnBase": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "batters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["batterId", "stats"],
+            "properties": {
+              "batterId": {
+                "$ref": "simulation-input.schema.json#/$defs/id"
+              },
+              "stats": {
+                "$ref": "#/$defs/stats"
+              }
+            }
+          },
+          "minItems": 9,
+          "maxItems": 9
+        }
+      }
+    },
+    "play": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eventIndex",
+        "inning",
+        "half",
+        "batterId",
+        "suppliedEvent",
+        "creditedEvent",
+        "outsOnPlay",
+        "scoredBatterIds",
+        "stateAfter"
+      ],
+      "properties": {
+        "eventIndex": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "inning": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "half": {
+          "enum": ["top", "bottom"]
+        },
+        "batterId": {
+          "$ref": "simulation-input.schema.json#/$defs/id"
+        },
+        "suppliedEvent": {
+          "$ref": "simulation-input.schema.json#/$defs/plateAppearance"
+        },
+        "creditedEvent": {
+          "$ref": "simulation-input.schema.json#/$defs/plateAppearance"
+        },
+        "outsOnPlay": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "scoredBatterIds": {
+          "type": "array",
+          "items": {
+            "$ref": "simulation-input.schema.json#/$defs/id"
+          },
+          "maxItems": 4
+        },
+        "stateAfter": {
+          "$ref": "#/$defs/state"
+        },
+        "transitionIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 127
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "properties": {
+        "finalState": {
+          "properties": {
+            "status": {
+              "const": "final"
+            },
+            "abortReason": {
+              "type": "null"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "input": {
+            "properties": {
+              "detail": {
+                "const": "events"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": ["eventLog"]
+      },
+      "else": {
+        "not": {
+          "required": ["eventLog"]
+        }
+      }
+    }
+  ]
+}

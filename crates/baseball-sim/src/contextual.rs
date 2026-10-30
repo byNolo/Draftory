@@ -4,6 +4,28 @@ use serde::{Deserialize, Serialize};
 
 pub const CONTEXT_RULES_VERSION: &str = "contextual-nine-inning-v1";
 pub const CONTEXT_INPUT_SCHEMA_VERSION: &str = "1.2.0";
+pub const RUNNER_INPUT_VERSION: &str = "1.4.0";
+pub const RUNNER_RULES_VERSION: &str = "runner-outs-nine-inning-v1";
+pub const RUNNER_MODEL_VERSION: &str = "retrosheet-runner-transitions-v1";
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub enum RunnerOutKind {
+    None,
+    Tag,
+    Force,
+    BatterBeforeFirst,
+}
+
+/// A bounded joint outcome, never independent retirement coins. Timing is explicit.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct RunnerPlay {
+    pub out_kinds: [RunnerOutKind; 4],
+    /// Attempted base, 1..4 (home); zero for a runner not retired.
+    pub out_bases: [u8; 4],
+    pub runs_before_outs: bool,
+}
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -44,6 +66,12 @@ pub struct RunnerTransition {
         skip_serializing_if = "Option::is_none"
     )]
     pub reach: Option<ContactReach>,
+    #[serde(
+        default,
+        deserialize_with = "crate::contract::present",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub runner_play: Option<RunnerPlay>,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -83,7 +111,8 @@ impl ContextualModel {
     }
     pub fn validate(&self) -> Result<(), EngineError> {
         let invalid = || EngineError::InvalidInput("Invalid contextual transition model".into());
-        if self.model_version != "retrosheet-contact-transitions-v1"
+        if !["retrosheet-contact-transitions-v1", RUNNER_MODEL_VERSION]
+            .contains(&self.model_version.as_str())
             || !crate::contract::valid_id(&self.id)
             || !crate::contract::valid_id(&self.source_id)
             || self.cells.len() != 72
@@ -106,6 +135,9 @@ impl ContextualModel {
                 return Err(invalid());
             }
             for (index, choice) in cell.choices.iter().enumerate() {
+                if self.model_version != RUNNER_MODEL_VERSION && choice.runner_play.is_some() {
+                    return Err(invalid());
+                }
                 validate_transition(cell.event, cell.outs, cell.base_mask, choice).map_err(
                     |e| {
                         EngineError::InvalidInput(format!(
@@ -128,6 +160,9 @@ fn validate_transition(
     let invalid = || EngineError::InvalidInput("Illegal runner transition".into());
     if outs > 2 || mask > 7 || t.weight == 0 {
         return Err(invalid());
+    }
+    if let Some(play) = t.runner_play {
+        return validate_runner_play(event, outs, mask, t, play);
     }
     let mut occupied = 0_u8;
     let mut retired = 0;
@@ -197,6 +232,122 @@ fn validate_transition(
     Ok(())
 }
 
+fn validate_runner_play(
+    event: ContextEvent,
+    outs: u8,
+    mask: u8,
+    t: &RunnerTransition,
+    play: RunnerPlay,
+) -> Result<(), EngineError> {
+    use RunnerOutKind::{BatterBeforeFirst, Force, None as NoOut, Tag};
+    let invalid = || EngineError::InvalidInput("Illegal runner-play transition".into());
+    let mut retired = 0;
+    let mut last = 0;
+    let mut occupied = 0_u8;
+    for (i, (&d, &kind)) in t.destinations.iter().zip(&play.out_kinds).enumerate() {
+        let out_base = play.out_bases[i];
+        if (kind == NoOut && out_base != 0)
+            || (kind != NoOut && !(1..=4).contains(&out_base))
+            || (kind == Tag && out_base <= i as u8)
+            || (kind == Force && out_base != i as u8 + 1)
+        {
+            return Err(invalid());
+        }
+        let present = i == 0 || mask & (1 << (i - 1)) != 0;
+        if !present {
+            if d != 5 || kind != NoOut || t.rbi[i] {
+                return Err(invalid());
+            }
+            continue;
+        }
+        if d > 4 || (d == 0) != (kind != NoOut) || (t.rbi[i] && d != 4) {
+            return Err(invalid());
+        }
+        if kind == BatterBeforeFirst && i != 0 {
+            return Err(invalid());
+        }
+        if kind == Force && (i == 0 || mask & ((1 << i) - 1) != (1 << i) - 1) {
+            return Err(invalid());
+        }
+        if d == 0 {
+            retired += 1;
+            continue;
+        }
+        if (i > 0 && d < i as u8) || d < last {
+            return Err(invalid());
+        }
+        last = d;
+        if d < 4 {
+            if occupied & (1 << d) != 0 {
+                return Err(invalid());
+            }
+            occupied |= 1 << d;
+        }
+    }
+    // Promoted source cases contain at most one retirement. Multiple-out v1 GDP
+    // choices retain their original representation and interpretation.
+    if retired > 1 || retired + outs > 3 {
+        return Err(invalid());
+    }
+    match event {
+        ContextEvent::Single | ContextEvent::Double => {
+            let hit = if event == ContextEvent::Single { 1 } else { 2 };
+            if t.reach.is_some()
+                || (t.destinations[0] != 0 && t.destinations[0] < hit)
+                || play
+                    .out_kinds
+                    .iter()
+                    .any(|k| matches!(k, Force | BatterBeforeFirst))
+            {
+                return Err(invalid());
+            }
+            if play.out_kinds[0] == Tag && play.out_bases[0] <= hit {
+                return Err(invalid());
+            }
+        }
+        ContextEvent::OtherContact => {
+            if t.reach != Some(ContactReach::FieldersChoice)
+                || t.destinations[0] != 1
+                || retired != 1
+                || !play.out_kinds.contains(&Force)
+            {
+                return Err(invalid());
+            }
+        }
+    }
+    if t.destinations.contains(&4) && retired > 0 {
+        let suppress = outs + retired == 3
+            && play
+                .out_kinds
+                .iter()
+                .any(|k| matches!(k, Force | BatterBeforeFirst));
+        if !(suppress
+            || play.runs_before_outs && outs + retired == 3 && play.out_kinds.contains(&Tag))
+        {
+            return Err(invalid());
+        }
+        if suppress && play.runs_before_outs {
+            return Err(invalid());
+        }
+    } else if play.runs_before_outs {
+        return Err(invalid());
+    }
+    if play.runs_before_outs {
+        let retired_origin = play
+            .out_kinds
+            .iter()
+            .position(|&kind| kind == Tag)
+            .ok_or_else(invalid)?;
+        // A trailing runner cannot score before a still-live lead runner's tag
+        // retirement without passing that runner. The source-supported timing
+        // runs must all belong to runners ahead of the later retirement.
+        if t.destinations[..=retired_origin].contains(&4) {
+            return Err(invalid());
+        }
+    }
+    Ok(())
+}
+
 pub fn resolve_transition(
     bases: &Bases,
     outs: u8,
@@ -239,6 +390,16 @@ pub fn resolve_transition(
                 }),
                 dest => play.bases[usize::from(dest - 1)] = Some(runner),
             }
+        }
+    }
+    if let Some(metadata) = t.runner_play {
+        if outs + play.outs_on_play == 3
+            && metadata
+                .out_kinds
+                .iter()
+                .any(|k| matches!(k, RunnerOutKind::Force | RunnerOutKind::BatterBeforeFirst))
+        {
+            play.scorers.clear();
         }
     }
     Ok(play)

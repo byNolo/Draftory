@@ -1,5 +1,9 @@
 # Rust simulation foundation — contract decision and implementation scope
 
+M9B.1 adds a separate opt-in [runner-transition ruleset](RUNNER_TRANSITIONS.md)
+for source-supported hit running outs, batter extra advances and force/timing
+accounting. The legacy behavior documented below remains available and unchanged.
+
 M8C.5: the playable game now uses nine verified representative opponents and a
 compact season dashboard. The single-opponent descriptions below retain the
 legacy pilot/history. See [current selection, contracts and gameplay](SEASON_DASHBOARD.md).

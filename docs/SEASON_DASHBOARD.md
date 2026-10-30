@@ -1,5 +1,9 @@
 # Season dashboard and representative opponents (M8C.5)
 
+M9B.1's opt-in [runner-transition mode](RUNNER_TRANSITIONS.md) reuses this compact
+projection under result version 1.2.0. It requires an explicit new input/model;
+default gameplay, publications and the legacy diagnostic paths below are unchanged.
+
 The playable game now uses nine representative 2024 opponents and a **synthetic
 Draftory schedule**. The original single-CHA pilot, fixtures, diagnostic harness
 and goldens remain available. No baseball probabilities, pricing, draft budget,

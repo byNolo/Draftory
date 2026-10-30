@@ -54,7 +54,7 @@ pub fn resolve_bases(
     }
     match policy {
         AdvancementPolicy::ConservativeOutsV1 => {}
-        AdvancementPolicy::RetrosheetContextualV1 => {
+        AdvancementPolicy::RetrosheetContextualV1 | AdvancementPolicy::RetrosheetRunnerOutsV1 => {
             return Err(EngineError::InvalidInput(
                 "Contextual advancement requires a transition model".into(),
             ));

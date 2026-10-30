@@ -8,6 +8,92 @@ import {
 } from './helpers';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
+test('runner transitions opt-in native/WASM parity and measured season costs', async ({
+  page,
+}, info) => {
+  test.setTimeout(120_000);
+  const experimental = JSON.parse(
+    readFileSync('data/fixtures/runner-season-2024-v1.json', 'utf8'),
+  );
+  const nine = JSON.parse(
+    readFileSync('data/fixtures/dashboard-season-2024-v1.json', 'utf8'),
+  );
+  const runnerNine = {
+    ...nine,
+    schemaVersion: '1.2.0',
+    gameSchemaVersion: '1.4.0',
+    rulesVersion: 'runner-outs-nine-inning-v1',
+    config: {
+      ...nine.config,
+      advancementPolicy: 'retrosheet-runner-outs-v1',
+      contextualModel: experimental.config.contextualModel,
+    },
+  };
+  const measurements = [];
+  await page.goto('/__bench.html');
+  for (const [mode, base] of [
+    ['legacy', fixture],
+    ['runner', experimental],
+    ['legacy-nine', nine],
+    ['runner-nine', runnerNine],
+  ] as const) {
+    const worker = await session(page);
+    const runs = [];
+    for (let i = 0; i < 6; i++) {
+      const response = await worker.evaluate((w, request) => w.send(request), {
+        type: 'simulate' as const,
+        requestId: `bench-${i}`,
+        inputJson: JSON.stringify(base),
+        output: 'dashboard' as const,
+      });
+      expect(response.type).toBe('result');
+      if (response.type !== 'result') throw new Error(JSON.stringify(response));
+      const native = nativeDashboard(base);
+      expect(response.summary).toEqual(
+        Object.fromEntries(
+          Object.entries(native).filter(
+            ([key]) => !['batting', 'dashboard'].includes(key),
+          ),
+        ),
+      );
+      expect(response.batting).toEqual(native.batting);
+      expect(response.dashboard).toEqual(native.dashboard);
+      expect(response).not.toHaveProperty('resultJson');
+      runs.push(response.timings);
+    }
+    for (const seed of ['0', '18446744073709551615']) {
+      const input = { ...base, seed, detail: 'events' };
+      const expected = nativeResult(input);
+      for (let repeat = 0; repeat < 2; repeat++) {
+        const response = await worker.evaluate(
+          (w, request) => w.send(request),
+          {
+            type: 'simulate' as const,
+            requestId: `${seed}-${repeat}`,
+            inputJson: JSON.stringify(input),
+            output: 'full' as const,
+          },
+        );
+        expect(response.type).toBe('result');
+        if (response.type !== 'result')
+          throw new Error(JSON.stringify(response));
+        expect(JSON.parse(response.resultJson!)).toEqual(expected);
+      }
+    }
+    measurements.push({
+      mode,
+      inputBytes: Buffer.byteLength(JSON.stringify(base)),
+      runs,
+    });
+    await worker.evaluate((w) => w.terminate());
+  }
+  mkdirSync('target/m9b1', { recursive: true });
+  writeFileSync(
+    `target/m9b1/browser-${info.project.name}.json`,
+    JSON.stringify(measurements, null, 2),
+  );
+});
+
 test('dashboard v1 multiple opponents exact native parity, details and measured costs', async ({
   page,
 }, info) => {

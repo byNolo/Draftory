@@ -235,3 +235,13 @@ The playable season now includes nine representative 2024 opponents, a synthetic
 162-game schedule, expanded batting statistics, game details and opponent/trend
 views. See [season dashboard and reproduction](docs/SEASON_DASHBOARD.md) and
 [local validation](data/validation/season-dashboard-v1.md).
+
+M9A audits the unchanged simulator with reproduced historical calibration,
+GDP opportunities and repeated fixed-roster seasons. See the
+[accuracy audit and M9B proposal](data/validation/simulation-accuracy-v1.md) and
+[compact measurements](data/validation/simulation-accuracy-v1.json).
+
+M9B.1 adds opt-in, versioned runner-out and advancement corrections while preserving
+legacy gameplay, batting weights and publications. See
+[runner-transition rules and reproduction](docs/RUNNER_TRANSITIONS.md) and
+[measured results](data/validation/runner-transitions-v1.md).

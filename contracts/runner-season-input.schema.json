@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://draftory.example/contracts/runner-season-input.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "modelVersion",
+    "seedDerivationVersion",
+    "seed",
+    "detail",
+    "gameSchemaVersion",
+    "rulesVersion",
+    "config",
+    "pitchingEnvironment",
+    "sampling",
+    "userTeam",
+    "opponents",
+    "profiles",
+    "userLineupKind",
+    "opponentSetKind"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.2.0"
+    },
+    "modelVersion": {
+      "const": "round-robin-season-v1"
+    },
+    "seedDerivationVersion": {
+      "const": "splitmix64-index-v1"
+    },
+    "seed": {
+      "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/properties/seed"
+    },
+    "games": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000,
+      "default": 162
+    },
+    "detail": {
+      "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/properties/detail"
+    },
+    "gameSchemaVersion": {
+      "const": "1.4.0"
+    },
+    "rulesVersion": {
+      "$ref": "https://draftory.example/contracts/runner-game-input.schema.json#/properties/rulesVersion"
+    },
+    "config": {
+      "$ref": "https://draftory.example/contracts/runner-game-input.schema.json#/properties/config"
+    },
+    "pitchingEnvironment": {
+      "$ref": "https://draftory.example/contracts/runner-game-input.schema.json#/properties/pitchingEnvironment"
+    },
+    "sampling": {
+      "$ref": "https://draftory.example/contracts/runner-game-input.schema.json#/properties/sampling"
+    },
+    "userTeam": {
+      "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/team"
+    },
+    "opponents": {
+      "type": "array",
+      "items": {
+        "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/team"
+      },
+      "minItems": 1,
+      "maxItems": 30
+    },
+    "profiles": {
+      "type": "array",
+      "items": {
+        "$ref": "https://draftory.example/contracts/simulation-input.schema.json#/$defs/profile"
+      },
+      "minItems": 1,
+      "maxItems": 279
+    },
+    "userLineupKind": {
+      "enum": ["observedFixedLineups", "reconstructedFixedLineups", "synthetic"]
+    },
+    "opponentSetKind": {
+      "enum": ["observedFixedLineups", "reconstructedFixedLineups", "synthetic"]
+    }
+  },
+  "description": "Sampled games only. Engine validates rules/policy pairing, all opponent matchups, identity/reference uniqueness and schedule bounds."
+}

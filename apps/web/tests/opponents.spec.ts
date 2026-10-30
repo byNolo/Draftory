@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { parseOpponents, withOpponents } from '../src/mlb/opponents';
 import { parsePilot } from '../src/mlb/season-input';
 import { nativeResult } from './helpers';
+import { assembleRunnerSeason } from '../src/mlb/runner-transitions';
 
 const publication = JSON.parse(
   readFileSync('data/publications/opponents-2024-v1.json', 'utf8'),
@@ -122,4 +123,29 @@ test('verified cached opponents are private frozen snapshots and conflicts still
       verified.datasetId,
     ),
   ).rejects.toThrow(/mismatch/);
+});
+test('runner transition assembly is explicit, preserves profiles and rejects defense or tampering', async () => {
+  const experimental = JSON.parse(
+    readFileSync('data/fixtures/runner-season-2024-v1.json', 'utf8'),
+  );
+  const assembled = await assembleRunnerSeason(
+    fixture,
+    experimental.config.contextualModel,
+  );
+  expect(assembled.schemaVersion).toBe('1.2.0');
+  expect(assembled.profiles).toEqual(fixture.profiles);
+  expect(assembled.opponents).toEqual(fixture.opponents);
+  expect(fixture.gameSchemaVersion).toBe('1.2.0');
+  await expect(
+    assembleRunnerSeason(fixture, {
+      ...experimental.config.contextualModel,
+      id: 'altered',
+    }),
+  ).rejects.toThrow();
+  const defensive = JSON.parse(
+    readFileSync('data/fixtures/defense-season-2024-v1.json', 'utf8'),
+  );
+  await expect(
+    assembleRunnerSeason(defensive, experimental.config.contextualModel),
+  ).rejects.toThrow();
 });

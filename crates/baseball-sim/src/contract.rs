@@ -71,6 +71,8 @@ pub enum AdvancementPolicy {
     ConservativeOutsV1,
     #[serde(rename = "retrosheet-contextual-v1")]
     RetrosheetContextualV1,
+    #[serde(rename = "retrosheet-runner-outs-v1")]
+    RetrosheetRunnerOutsV1,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -252,13 +254,16 @@ impl GameInput {
             SAMPLED_INPUT_SCHEMA_VERSION,
             crate::CONTEXT_INPUT_SCHEMA_VERSION,
             crate::DEFENSE_INPUT_VERSION,
+            crate::RUNNER_INPUT_VERSION,
         ]
         .contains(&self.schema_version.as_str())
         {
             return Err(invalid("Unsupported input schema or rules version"));
         }
         let defensive = self.schema_version == crate::DEFENSE_INPUT_VERSION;
-        let contextual = defensive || self.schema_version == crate::CONTEXT_INPUT_SCHEMA_VERSION;
+        let runner = self.schema_version == crate::RUNNER_INPUT_VERSION;
+        let contextual =
+            runner || defensive || self.schema_version == crate::CONTEXT_INPUT_SCHEMA_VERSION;
         if !defensive && self.config.defense.is_some() {
             return Err(invalid("Legacy input cannot enable defense"));
         }
@@ -266,10 +271,17 @@ impl GameInput {
             if self.rules_version
                 != if defensive {
                     crate::DEFENSE_RULES_VERSION
+                } else if runner {
+                    crate::RUNNER_RULES_VERSION
                 } else {
                     crate::CONTEXT_RULES_VERSION
                 }
-                || self.config.advancement_policy != AdvancementPolicy::RetrosheetContextualV1
+                || self.config.advancement_policy
+                    != if runner {
+                        AdvancementPolicy::RetrosheetRunnerOutsV1
+                    } else {
+                        AdvancementPolicy::RetrosheetContextualV1
+                    }
             {
                 return Err(invalid(
                     "Contextual inputs require contextual rules and advancement policy",
@@ -280,6 +292,23 @@ impl GameInput {
                 .as_ref()
                 .ok_or_else(|| invalid("Missing contextual model"))?
                 .validate()?;
+            let version = &self
+                .config
+                .contextual_model
+                .as_ref()
+                .expect("checked model")
+                .model_version;
+            if version
+                != if runner {
+                    crate::RUNNER_MODEL_VERSION
+                } else {
+                    "retrosheet-contact-transitions-v1"
+                }
+            {
+                return Err(invalid(
+                    "Transition model and rules version are incompatible",
+                ));
+            }
             if defensive {
                 self.config
                     .defense

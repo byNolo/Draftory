@@ -125,6 +125,7 @@ pub(crate) fn simulate_game_prepared(
         SAMPLED_INPUT_SCHEMA_VERSION,
         crate::CONTEXT_INPUT_SCHEMA_VERSION,
         crate::DEFENSE_INPUT_VERSION,
+        crate::RUNNER_INPUT_VERSION,
     ]
     .contains(&input.schema_version.as_str())
     {

@@ -14,7 +14,7 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
-    "pytest>=8.3,<9",
+    "pytest>=8.3,<10",
     "ruff>=0.14,<0.15",
     "jsonschema>=4.23,<5",
     # Enables jsonschema's optional date-time FormatChecker.
